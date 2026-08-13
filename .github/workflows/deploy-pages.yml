@@ -1,0 +1,107 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [master]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Rewrite paths and push to gh-pages branch
+        run: |
+          BASE="/piramicasa"
+          cp -r . /tmp/gh-pages
+          cd /tmp/gh-pages
+          rm -rf .git .github node_modules .netlify
+          touch .nojekyll
+
+          # Rewrite HTML files
+          find . -name '*.html' -not -path './_next/*' | while read f; do
+            sed -i "s|href=\"/_next/|href=\"$BASE/_next/|g" "$f"
+            sed -i "s|src=\"/_next/|src=\"$BASE/_next/|g" "$f"
+            sed -i "s|href=\"/assets/|href=\"$BASE/assets/|g" "$f"
+            sed -i "s|src=\"/assets/|src=\"$BASE/assets/|g" "$f"
+            sed -i "s|\"/_next/|\"$BASE/_next/|g" "$f"
+            sed -i "s|href=\"/salud|href=\"$BASE/salud|g" "$f"
+            sed -i "s|href=\"/enfermedades|href=\"$BASE/enfermedades|g" "$f"
+            sed -i "s|href=\"/historia|href=\"$BASE/historia|g" "$f"
+            sed -i "s|href=\"/presentacion|href=\"$BASE/presentacion|g" "$f"
+            sed -i "s|href=\"/conferencias|href=\"$BASE/conferencias|g" "$f"
+            sed -i "s|href=\"/libros|href=\"$BASE/libros|g" "$f"
+            sed -i "s|href=\"/videos|href=\"$BASE/videos|g" "$f"
+            sed -i "s|href=\"/testimonios|href=\"$BASE/testimonios|g" "$f"
+            sed -i "s|href=\"/centros-terapia|href=\"$BASE/centros-terapia|g" "$f"
+            sed -i "s|href=\"/viaje-egipto|href=\"$BASE/viaje-egipto|g" "$f"
+            sed -i "s|href=\"/menu-principal|href=\"$BASE/menu-principal|g" "$f"
+            sed -i "s|href=\"/documento-critico|href=\"$BASE/documento-critico|g" "$f"
+            sed -i "s|href=\"/acceso|href=\"$BASE/acceso|g" "$f"
+            sed -i "s|href=\"/gracias|href=\"$BASE/gracias|g" "$f"
+            sed -i "s|href=\"/dossier-basico-piramicasa|href=\"$BASE/dossier-basico-piramicasa|g" "$f"
+            sed -i "s|href=\"/joyas-exclusivas|href=\"$BASE/joyas-exclusivas|g" "$f"
+            sed -i "s|href=\"/anillos|href=\"$BASE/anillos|g" "$f"
+            sed -i "s|href=\"/404|href=\"$BASE/404|g" "$f"
+            sed -i "s|href=\"/#|href=\"$BASE/#|g" "$f"
+            sed -i "s|href=\"/\"|href=\"$BASE/\"|g" "$f"
+            sed -i "s|action=\"/gracias|action=\"$BASE/gracias|g" "$f"
+            sed -i "s|href=\"/piramides/|href=\"$BASE/piramides/|g" "$f"
+            sed -i "s|href=\"/construccion/|href=\"$BASE/construccion/|g" "$f"
+            sed -i "s|href=\"/es/|href=\"$BASE/es/|g" "$f"
+            sed -i "s|href=\"/geobiologia/|href=\"$BASE/geobiologia/|g" "$f"
+            sed -i "s|href=\"/joyas/|href=\"$BASE/joyas/|g" "$f"
+            sed -i "s|href=\"/egipto/|href=\"$BASE/egipto/|g" "$f"
+          done
+
+          # Rewrite JS files - webpack publicPath and absolute paths
+          find ./_next -name '*.js' | while read f; do
+            sed -i 's|r\.p="/_next/"|r.p="/piramicasa/_next/"|g' "$f"
+            sed -i "s|\"/_next/|\"$BASE/_next/|g" "$f"
+            # Rewrite window.location redirects
+            sed -i 's|window\.location\.href="/"|window.location.href="/piramicasa/"|g' "$f"
+            sed -i 's|window\.location\.href="/acceso|window.location.href="/piramicasa/acceso|g' "$f"
+            sed -i 's|window\.location\.href="/salud|window.location.href="/piramicasa/salud|g' "$f"
+            sed -i 's|location\.href="/"|location.href="/piramicasa/"|g' "$f"
+            # Rewrite cookie path
+            sed -i 's|path=/;|path=/piramicasa/;|g' "$f"
+          done
+          find ./assets -name '*.js' | while read f; do
+            sed -i "s|\"/_next/|\"$BASE/_next/|g" "$f"
+            sed -i "s|\"/assets/|\"$BASE/assets/|g" "$f"
+          done
+
+          # Rewrite CSS files
+          find ./_next -name '*.css' | while read f; do
+            sed -i "s|url(/_next/|url($BASE/_next/|g" "$f"
+            sed -i "s|url(/assets/|url($BASE/assets/|g" "$f"
+          done
+
+          # Patch HTML files: replace loading triangle with empty div to prevent hydration mismatch
+          find . -name '*.html' -not -path './_next/*' -not -name '404.html' | while read f; do
+            sed -i 's|<div style="min-height:100vh;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg, #3d4a30, #5a6b4a)"><div style="font-size:2rem;color:#f7f4f0">△</div></div>|<div id="__next-loading"></div>|g' "$f"
+          done
+
+          # Patch layout JS: completely remove ALL auth logic, just render children
+          LAYOUT=$(find ./_next -name 'layout-*.js' -path '*/app/*' | head -1)
+          if [ -n "$LAYOUT" ]; then
+            cat > "$LAYOUT" << 'LAYOUTEOF'
+(self.webpackChunk_N_E=self.webpackChunk_N_E||[]).push([[7177],{63:(e,t,s)=>{"use strict";var n=s(7260);s.o(n,"usePathname")&&s.d(t,{usePathname:function(){return n.usePathname}}),s.o(n,"useRouter")&&s.d(t,{useRouter:function(){return n.useRouter}})},3673:()=>{},3839:()=>{},4358:(e,t,s)=>{"use strict";s.d(t,{default:()=>a});var n=s(5155);function a(e){let{children:t}=e;return(0,n.jsx)(n.Fragment,{children:t})}},7834:(e,t,s)=>{Promise.resolve().then(s.bind(s,4358)),Promise.resolve().then(s.t.bind(s,3673,23)),Promise.resolve().then(s.t.bind(s,3839,23))}},e=>{e.O(0,[2978,4288,8441,1255,7358],()=>e(e.s=7834)),_N_E=e.O()}]);
+LAYOUTEOF
+          fi
+
+          # Push to gh-pages branch
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git init
+          git checkout -b gh-pages
+          git add -A
+          git commit -m "Auto-deploy from master (rewritten paths for GitHub Pages)"
+          git remote add origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
+          git push -f origin gh-pages

@@ -1,0 +1,29 @@
+/* Sacred Grid Background Animation */
+.pm-sacred-bg,
+.pm-hero,
+.pm-section-dark,
+.pm-cta,
+.pm-subpage-hero {
+  position: relative;
+  overflow: hidden;
+}
+
+.pm-sacred-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.15;
+}
+
+.pm-sacred-bg > *:not(.pm-sacred-canvas),
+.pm-hero > *:not(.pm-sacred-canvas),
+.pm-section-dark > *:not(.pm-sacred-canvas),
+.pm-cta > *:not(.pm-sacred-canvas),
+.pm-subpage-hero > *:not(.pm-sacred-canvas) {
+  position: relative;
+  z-index: 1;
+}

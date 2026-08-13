@@ -1,0 +1,29 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Piramicasa - Redirigiendo...</title>
+<script>
+var path = window.location.pathname;
+if (path.indexOf('/piramicasa/') === -1) {
+  var page = path.replace(/^\//, '');
+  if (page === '' || page === '/') {
+    window.location.href = '/piramicasa/';
+  } else if (page.indexOf('.') === -1) {
+    window.location.href = '/piramicasa/' + page + '.html';
+  } else {
+    window.location.href = '/piramicasa/' + page;
+  }
+}
+</script>
+<meta http-equiv="refresh" content="0;url=/piramicasa/">
+</head>
+<body style="background:linear-gradient(135deg,#3D4A30,#5A6B4A);display:flex;align-items:center;justify-content:center;min-height:100vh;margin:0;font-family:sans-serif">
+<div style="text-align:center;color:#f7f4f0">
+<div style="font-size:3rem;margin-bottom:16px">△</div>
+<p>Redirigiendo a Piramicasa...</p>
+<p style="font-size:0.85rem;opacity:0.7">Si no se redirige, <a href="/piramicasa/" style="color:#C69C6D">haz clic aqui</a></p>
+</div>
+</body>
+</html>

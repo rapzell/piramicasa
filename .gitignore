@@ -1,0 +1,32 @@
+# Dependencies
+node_modules/
+
+# Build output (we deploy the static files directly)
+out/
+.next/
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+
+# Logs
+*.log
+npm-debug.log*
+
+# Local Netlify folder
+.netlify
+
+# Temp scripts and analysis files
+_*.js
+_*.txt
+_salud_dump.txt
+_decoded_home.js
