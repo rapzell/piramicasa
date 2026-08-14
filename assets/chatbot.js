@@ -7,7 +7,7 @@
 
   var WHATSAPP = '34639284787';
   var PHONE = '+34 639 284 787';
-  var LOGO_URL = '/assets/piramicasa/logo-dorado.png';
+  var LOGO_URL = '/piramicasa/assets/piramicasa/logo-dorado.png';
 
   // === Knowledge base with categories and weighted matching ===
   var knowledge = [
