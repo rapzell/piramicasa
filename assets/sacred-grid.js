@@ -2,34 +2,10 @@
 (function () {
   'use strict';
 
-  // Auto-detect dark green sections by class name
-  var AUTO_CLASSES = [
-    '.pm-hero',
-    '.pm-section-dark',
-    '.pm-cta',
-    '.pm-subpage-hero'
-  ];
-
-  var initialized = new WeakSet();
-
-  function getTargetSections() {
-    var selectors = '.pm-sacred-bg, ' + AUTO_CLASSES.join(', ');
-    return document.querySelectorAll(selectors);
-  }
-
-  function initSection(section) {
-    if (initialized.has(section)) return;
-    if (section.querySelector('.pm-sacred-canvas')) return;
-    initialized.add(section);
-
-    // Ensure position relative for canvas positioning
-    if (getComputedStyle(section).position === 'static') {
-      section.style.position = 'relative';
-    }
-    // Ensure overflow hidden so canvas doesn't spill
-    if (getComputedStyle(section).overflow === 'visible') {
-      section.style.overflow = 'hidden';
-    }
+  function initSacredGrid() {
+    var sections = document.querySelectorAll('.pm-sacred-bg');
+    sections.forEach(function (section) {
+      if (section.querySelector('.pm-sacred-canvas')) return;
 
       var canvas = document.createElement('canvas');
       canvas.className = 'pm-sacred-canvas';
@@ -180,47 +156,12 @@
         clearTimeout(canvas._resizeTimer);
         canvas._resizeTimer = setTimeout(resize, 200);
       });
-    }
-
-  function initSacredGrid() {
-    var sections = getTargetSections();
-    sections.forEach(function (section) {
-      initSection(section);
     });
-  }
-
-  // Re-scan after React hydration adds new sections
-  function scheduleReScan() {
-    setTimeout(function () {
-      initSacredGrid();
-    }, 500);
   }
 
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', function () {
-      initSacredGrid();
-      scheduleReScan();
-    });
+    document.addEventListener('DOMContentLoaded', initSacredGrid);
   } else {
     initSacredGrid();
-    scheduleReScan();
-  }
-
-  // MutationObserver to catch React-hydrated content
-  if ('MutationObserver' in window) {
-    var mo = new MutationObserver(function (mutations) {
-      var needsReScan = false;
-      for (var i = 0; i < mutations.length; i++) {
-        if (mutations[i].addedNodes.length > 0) {
-          needsReScan = true;
-          break;
-        }
-      }
-      if (needsReScan) {
-        clearTimeout(window._sacredGridReScan);
-        window._sacredGridReScan = setTimeout(initSacredGrid, 300);
-      }
-    });
-    mo.observe(document.body, { childList: true, subtree: true });
   }
 })();
