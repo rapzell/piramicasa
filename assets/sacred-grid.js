@@ -3,7 +3,7 @@
   'use strict';
 
   function initSacredGrid() {
-    var sections = document.querySelectorAll('.pm-sacred-bg');
+    var sections = document.querySelectorAll('.pm-sacred-bg, .pm-section-full.pm-section-dark');
     sections.forEach(function (section) {
       if (section.querySelector('.pm-sacred-canvas')) return;
 
@@ -14,11 +14,27 @@
       var ctx = canvas.getContext('2d');
       var w, h, dpr;
       var t = 0;
-      var gridCols = 6;
-      var gridRows = 6;
-      var sides = 3; // triangle
       var rafId = null;
       var running = true;
+      var motifs = [];
+
+      function randomBetween(min, max) {
+        return min + Math.random() * (max - min);
+      }
+
+      function createMotif() {
+        var size = randomBetween(14, 34);
+        return {
+          x: randomBetween(0, w),
+          y: randomBetween(0, h),
+          vy: randomBetween(-0.2, -0.06),
+          drift: randomBetween(-0.12, 0.12),
+          size: size,
+          opacity: randomBetween(0.12, 0.32),
+          pulse: randomBetween(0, Math.PI * 2),
+          kind: Math.random() > 0.5 ? 'pyramid' : 'flower'
+        };
+      }
 
       function resize() {
         dpr = window.devicePixelRatio || 1;
@@ -30,95 +46,86 @@
         canvas.style.width = w + 'px';
         canvas.style.height = h + 'px';
         ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+        var targetCount = Math.max(14, Math.min(34, Math.floor((w * h) / 42000)));
+        motifs = [];
+        for (var i = 0; i < targetCount; i++) {
+          motifs.push(createMotif());
+        }
       }
 
-      function drawPolygon(cx, cy, radius, rotation, sidesNum) {
+      function drawPyramid(x, y, size, rot, alpha) {
+        var hTri = size * 0.95;
+        var half = size * 0.58;
+
+        ctx.save();
+        ctx.translate(x, y);
+        ctx.rotate(rot);
+
         ctx.beginPath();
-        for (var i = 0; i <= sidesNum; i++) {
-          var angle = rotation + (i / sidesNum) * Math.PI * 2;
-          var x = cx + Math.cos(angle) * radius;
-          var y = cy + Math.sin(angle) * radius;
-          if (i === 0) ctx.moveTo(x, y);
-          else ctx.lineTo(x, y);
-        }
+        ctx.moveTo(0, -hTri * 0.64);
+        ctx.lineTo(-half, hTri * 0.5);
+        ctx.lineTo(half, hTri * 0.5);
         ctx.closePath();
+        ctx.strokeStyle = 'rgba(198, 156, 109, ' + alpha + ')';
+        ctx.lineWidth = 1.1;
+        ctx.stroke();
+
+        ctx.beginPath();
+        ctx.moveTo(0, -hTri * 0.64);
+        ctx.lineTo(0, hTri * 0.5);
+        ctx.moveTo(-half, hTri * 0.5);
+        ctx.lineTo(half, hTri * 0.5);
+        ctx.strokeStyle = 'rgba(212, 184, 150, ' + (alpha * 0.75) + ')';
+        ctx.lineWidth = 0.9;
+        ctx.stroke();
+
+        ctx.restore();
+      }
+
+      function drawFlower(x, y, size, phase, alpha) {
+        var ring = size * 0.46;
+        ctx.strokeStyle = 'rgba(198, 156, 109, ' + alpha + ')';
+        ctx.lineWidth = 0.9;
+
+        ctx.beginPath();
+        ctx.arc(x, y, ring, 0, Math.PI * 2);
+        ctx.stroke();
+
+        for (var i = 0; i < 6; i++) {
+          var a = (i / 6) * Math.PI * 2 + phase;
+          var cx = x + Math.cos(a) * ring;
+          var cy = y + Math.sin(a) * ring;
+          ctx.beginPath();
+          ctx.arc(cx, cy, ring, 0, Math.PI * 2);
+          ctx.stroke();
+        }
       }
 
       function draw() {
         if (!running) return;
         ctx.clearRect(0, 0, w, h);
 
-        var cellW = w / gridCols;
-        var cellH = h / gridRows;
-        var baseRadius = Math.min(cellW, cellH) * 0.38;
+        for (var i = 0; i < motifs.length; i++) {
+          var m = motifs[i];
+          m.y += m.vy;
+          m.x += Math.sin(t * 0.009 + i) * m.drift;
+          m.pulse += 0.012;
 
-        for (var row = 0; row < gridRows; row++) {
-          for (var col = 0; col < gridCols; col++) {
-            var cx = col * cellW + cellW / 2;
-            var cy = row * cellH + cellH / 2;
-
-            var distFromCenter = Math.sqrt(
-              Math.pow((col + 0.5) / gridCols - 0.5, 2) +
-              Math.pow((row + 0.5) / gridRows - 0.5, 2)
-            );
-
-            var pulse = Math.sin(t * 0.015 + distFromCenter * 6) * 0.5 + 0.5;
-            var radius = baseRadius * (0.5 + pulse * 0.5);
-            var rotation = t * 0.008 + (col + row) * 0.3;
-
-            // Outer triangle
-            drawPolygon(cx, cy, radius, rotation, sides);
-            ctx.strokeStyle = 'rgba(198, 156, 109, ' + (0.3 + pulse * 0.4) + ')';
-            ctx.lineWidth = 1;
-            ctx.stroke();
-
-            // Inner triangle (counter-rotating)
-            drawPolygon(cx, cy, radius * 0.5, -rotation * 1.3, sides);
-            ctx.strokeStyle = 'rgba(198, 156, 109, ' + (0.15 + pulse * 0.25) + ')';
-            ctx.lineWidth = 0.8;
-            ctx.stroke();
-
-            // Center dot
-            ctx.beginPath();
-            ctx.arc(cx, cy, 1.5 + pulse * 1, 0, Math.PI * 2);
-            ctx.fillStyle = 'rgba(198, 156, 109, ' + (0.2 + pulse * 0.3) + ')';
-            ctx.fill();
-
-            // Connecting lines to center of grid
-            if (col === Math.floor(gridCols / 2) && row === Math.floor(gridRows / 2)) {
-              // center cell - draw flower of life pattern
-              for (var k = 0; k < 6; k++) {
-                var a = (k / 6) * Math.PI * 2 + t * 0.005;
-                var r2 = radius * 0.6;
-                drawPolygon(
-                  cx + Math.cos(a) * r2,
-                  cy + Math.sin(a) * r2,
-                  radius * 0.35,
-                  rotation + a,
-                  sides
-                );
-                ctx.strokeStyle = 'rgba(198, 156, 109, ' + (0.1 + pulse * 0.15) + ')';
-                ctx.lineWidth = 0.5;
-                ctx.stroke();
-              }
-            }
+          if (m.y < -80) {
+            m.y = h + randomBetween(20, 120);
+            m.x = randomBetween(0, w);
           }
-        }
 
-        // Draw connecting grid lines
-        ctx.strokeStyle = 'rgba(198, 156, 109, 0.05)';
-        ctx.lineWidth = 0.5;
-        for (var c2 = 0; c2 <= gridCols; c2++) {
-          ctx.beginPath();
-          ctx.moveTo(c2 * cellW, 0);
-          ctx.lineTo(c2 * cellW, h);
-          ctx.stroke();
-        }
-        for (var r2 = 0; r2 <= gridRows; r2++) {
-          ctx.beginPath();
-          ctx.moveTo(0, r2 * cellH);
-          ctx.lineTo(w, r2 * cellH);
-          ctx.stroke();
+          var pulse = 0.9 + Math.sin(m.pulse) * 0.12;
+          var size = m.size * pulse;
+          var alpha = m.opacity * (0.9 + Math.sin(m.pulse * 0.7) * 0.15);
+
+          if (m.kind === 'pyramid') {
+            drawPyramid(m.x, m.y, size, Math.sin(m.pulse * 0.25) * 0.15, alpha);
+          } else {
+            drawFlower(m.x, m.y, size, m.pulse * 0.15, alpha * 0.9);
+          }
         }
 
         t++;
