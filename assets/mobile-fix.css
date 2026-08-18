@@ -149,4 +149,13 @@ body{padding-top:50px!important}
 /* Particles only on light zones; dark sections use sacred geometry canvas */
 .pm-section-full.pm-section-dark .pm-particles-bg{display:none!important}
 
+/* Videos: robust fallback card if embed is blocked/unavailable */
+.pm-video-link-card{display:block;position:relative;border-radius:14px;overflow:hidden;background:#1f1f1f;text-decoration:none;box-shadow:0 8px 28px rgba(0,0,0,.18)}
+.pm-video-fallback-thumb{display:block;width:100%;aspect-ratio:16/9;object-fit:cover}
+.pm-video-fallback-cta{position:absolute;right:12px;bottom:12px;background:rgba(198,156,109,.95);color:#2b2b2b;font-weight:700;font-size:.82rem;padding:7px 11px;border-radius:999px;letter-spacing:.01em}
+
+/* Match dark-section CTA outlines with the yellow primary look */
+.pm-section-dark .pm-btn-outline.pm-btn-more-info{background:linear-gradient(135deg,#C69C6D,#D4B896)!important;color:#3D4A30!important;border:1px solid #D4B896!important;box-shadow:0 8px 20px rgba(198,156,109,.25)}
+.pm-section-dark .pm-btn-outline.pm-btn-more-info:hover{transform:translateY(-2px);filter:brightness(1.03)}
+
 /* ===== END MOBILE FIX ===== */
