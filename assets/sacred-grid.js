@@ -30,7 +30,7 @@
           vy: randomBetween(-0.2, -0.06),
           drift: randomBetween(-0.12, 0.12),
           size: size,
-          opacity: randomBetween(0.2, 0.42),
+          opacity: randomBetween(0.28, 0.56),
           pulse: randomBetween(0, Math.PI * 2),
           kind: Math.random() > 0.5 ? 'pyramid' : 'flower'
         };

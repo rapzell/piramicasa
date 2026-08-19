@@ -22,7 +22,7 @@
   height: 100%;
   pointer-events: none;
   z-index: 0;
-  opacity: 0.24;
+  opacity: 0.32;
 }
 
 .pm-sacred-bg > *:not(.pm-sacred-canvas) {
