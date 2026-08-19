@@ -136,7 +136,8 @@ body{padding-top:50px!important}
 .pm-product-image img{display:block;width:100%;height:100%;object-fit:cover;object-position:center center;will-change:transform;animation:pmModelFloat 8s ease-in-out infinite}
 .pm-product-image:hover img{animation-play-state:paused;transform:scale(1.03)}
 
-.pm-aval-main img,.pm-aval-thumb img,.pm-aval-doc img{display:block;width:100%;height:100%;object-fit:cover;object-position:center}
+.pm-aval-main img,.pm-aval-doc img{display:block;width:100%;height:100%;object-fit:contain;object-position:center;background:rgba(247,244,240,.65)}
+.pm-aval-thumb img{display:block;width:100%;height:100%;object-fit:cover;object-position:center}
 
 @keyframes pmModelFloat{
 0%{transform:translate3d(0,0,0) scale(1)}

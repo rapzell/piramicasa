@@ -30,7 +30,7 @@
           vy: randomBetween(-0.2, -0.06),
           drift: randomBetween(-0.12, 0.12),
           size: size,
-          opacity: randomBetween(0.12, 0.32),
+          opacity: randomBetween(0.2, 0.42),
           pulse: randomBetween(0, Math.PI * 2),
           kind: Math.random() > 0.5 ? 'pyramid' : 'flower'
         };
@@ -166,9 +166,31 @@
     });
   }
 
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initSacredGrid);
-  } else {
+  function bootSacredGrid() {
     initSacredGrid();
+
+    var tries = 0;
+    var timer = setInterval(function () {
+      initSacredGrid();
+      tries++;
+      if (tries > 40) clearInterval(timer);
+    }, 500);
+
+    if ('MutationObserver' in window && document.body) {
+      var mo = new MutationObserver(function () {
+        initSacredGrid();
+      });
+      mo.observe(document.body, { childList: true, subtree: true });
+    }
+
+    window.addEventListener('load', initSacredGrid);
+    window.addEventListener('hashchange', initSacredGrid);
+    window.addEventListener('pageshow', initSacredGrid);
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', bootSacredGrid);
+  } else {
+    bootSacredGrid();
   }
 })();
