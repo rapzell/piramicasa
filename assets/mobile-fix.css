@@ -83,12 +83,12 @@ body{padding-top:50px!important}
 
 /* ===== CHATBOT WIDGET ===== */
 .pm-chat-widget{position:fixed;bottom:20px;right:20px;z-index:10002;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif}
-.pm-chat-toggle{width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,#3D4A30,#5A6B4A);border:2px solid #C69C6D;cursor:pointer;color:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(61,74,48,.4);transition:transform .3s ease;position:relative;overflow:hidden;padding:0}
-.pm-chat-toggle img{width:100%;height:100%;border-radius:50%;object-fit:cover;transition:transform .3s}
+.pm-chat-toggle{width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,#3D4A30,#5A6B4A);border:2px solid #C69C6D;cursor:pointer;color:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(61,74,48,.4);transition:transform .3s ease;position:relative;overflow:visible;padding:2px;box-sizing:border-box}
+.pm-chat-toggle img{display:block;width:100%;height:100%;border-radius:50%;object-fit:cover;object-position:center center;transition:transform .3s}
 .pm-chat-toggle:hover{transform:scale(1.08)}
 .pm-chat-toggle:hover img{transform:scale(1.05)}
 .pm-chat-toggle.pm-chat-active{transform:rotate(360deg)}
-.pm-chat-badge{position:absolute;top:-2px;right:-2px;background:#C69C6D;color:#fff;font-size:11px;font-weight:700;width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;border:2px solid #F7F4F0}
+.pm-chat-badge{position:absolute;top:-5px;right:-5px;background:#C69C6D;color:#fff;font-size:11px;font-weight:700;width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;border:2px solid #F7F4F0;z-index:3;box-shadow:0 2px 8px rgba(0,0,0,.25)}
 .pm-chat-panel{position:absolute;bottom:70px;right:0;width:360px;max-width:calc(100vw - 40px);height:480px;max-height:calc(100vh - 180px);background:#F7F4F0;border-radius:16px;box-shadow:0 12px 48px rgba(0,0,0,.18);display:none;flex-direction:column;overflow:hidden;border:1px solid #E0D9D0}
 .pm-chat-panel.pm-chat-open{display:flex}
 .pm-chat-header{background:linear-gradient(135deg,#3D4A30,#5A6B4A);color:#fff;padding:14px 16px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
