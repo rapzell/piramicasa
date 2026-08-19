@@ -158,4 +158,19 @@ body{padding-top:50px!important}
 .pm-section-dark .pm-btn-outline.pm-btn-more-info{background:linear-gradient(135deg,#C69C6D,#D4B896)!important;color:#3D4A30!important;border:1px solid #D4B896!important;box-shadow:0 8px 20px rgba(198,156,109,.25)}
 .pm-section-dark .pm-btn-outline.pm-btn-more-info:hover{transform:translateY(-2px);filter:brightness(1.03)}
 
+/* Improve visibility for the health benefits CTA button */
+a.pm-btn.pm-btn-outline[href="/salud"],
+a.pm-btn.pm-btn-outline[href="/piramicasa/salud"]{
+background:linear-gradient(135deg,#E8D8BF,#DDBE95)!important;
+color:#6E4D24!important;
+border:2px solid #C69C6D!important;
+box-shadow:0 8px 24px rgba(198,156,109,.28);
+font-weight:700;
+}
+a.pm-btn.pm-btn-outline[href="/salud"]:hover,
+a.pm-btn.pm-btn-outline[href="/piramicasa/salud"]:hover{
+transform:translateY(-2px);
+filter:brightness(1.03);
+}
+
 /* ===== END MOBILE FIX ===== */

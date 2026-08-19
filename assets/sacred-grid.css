@@ -9,6 +9,11 @@
   overflow: hidden;
 }
 
+.pm-section.pm-section-dark {
+  position: relative;
+  overflow: hidden;
+}
+
 .pm-sacred-canvas {
   position: absolute;
   top: 0;
@@ -26,6 +31,11 @@
 }
 
 .pm-section-full.pm-section-dark > *:not(.pm-sacred-canvas) {
+  position: relative;
+  z-index: 1;
+}
+
+.pm-section.pm-section-dark > *:not(.pm-sacred-canvas) {
   position: relative;
   z-index: 1;
 }

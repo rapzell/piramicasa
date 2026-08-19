@@ -3,7 +3,7 @@
   'use strict';
 
   function initSacredGrid() {
-    var sections = document.querySelectorAll('.pm-sacred-bg, .pm-section-full.pm-section-dark');
+    var sections = document.querySelectorAll('.pm-sacred-bg, .pm-section-full.pm-section-dark, .pm-section.pm-section-dark');
     sections.forEach(function (section) {
       if (section.querySelector('.pm-sacred-canvas')) return;
 
