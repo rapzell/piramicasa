@@ -37,6 +37,11 @@
     .pm-viewer-content p{margin:0 0 10px}
     .pm-viewer-content ul{margin:0 0 12px;padding-left:20px}
     .pm-viewer-content li{margin-bottom:6px}
+    .pm-article-block{padding:14px 0;border-bottom:1px solid #eee}
+    .pm-article-block:last-child{border-bottom:none;padding-bottom:0}
+    .pm-article-block h4{margin:0 0 10px 0;font-family:'Playfair Display',serif;color:#2f3a27}
+    .pm-article-gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px;margin:12px 0 14px}
+    .pm-article-gallery img{width:100%;height:140px;object-fit:cover;border-radius:10px;border:1px solid #ddd;background:#fff}
     .pm-viewer-muted{color:#7b7268;font-style:italic}
     .pm-viewer-hidden{display:none}
     .pm-loading{display:inline-flex;align-items:center;gap:10px;color:#6a6259}
@@ -205,56 +210,68 @@
   <script src="/piramicasa/assets/sacred-grid.js?v=20260820d" defer></script>
   <script>
     (function(){
-      var articleHtmlByTitle = {
-        "Borreliasis":"<h3>Tratamiento de la borreliasis</h3><p><strong>Sobre borreliasis:</strong> La enfermedad de Lyme no es la única manifestación posible de estas bacterias. Aunque la Borrelia fue aislada en 1982, existen registros clínicos compatibles desde 1910.</p><p>En los últimos años se han reportado más casos en Europa, Centroamérica y Norteamérica. En la experiencia clínica recogida por Piramicasa, varios cuadros inicialmente clasificados como reuma resultaron compatibles con borreliasis y evolucionaron favorablemente con uso piramidal continuado.</p><h4>Pirámide y antipirámide</h4><p>La terapia puede aplicarse con pirámide y antipirámide, pero por la estrategia invasora de la Borrelia se prioriza la exposición estable en estructura piramidal (especialmente formato tipo Piramicama).</p><p>La hipótesis funcional es que el entorno piramidal inhibe la alimentación y reproducción de bacterias saprofitas, reduciendo su capacidad de proliferación en ciclos largos.</p><h4>Factores biológicos relevantes</h4><ul><li>La mitosis de muchas especies de Borrelia puede durar entre 14 y 18 horas.</li><li>Pueden permanecer durante meses o años en estado inactivo en zonas de difícil acceso inmunitario.</li><li>Algunas especies invaden células, alteran la función mitocondrial y se protegen dentro del propio entorno celular.</li><li>Por su tamaño y morfología espiral, pueden alcanzar tejidos muy diversos.</li></ul><h4>Complejidad diagnóstica</h4><p>Los síntomas pueden confundirse con gripe, cansancio crónico, dolor articular y múltiples cuadros reumatológicos, por lo que la detección temprana no siempre es sencilla.</p><p>Los antibióticos muestran mayor eficacia en fases iniciales y como preventivo inmediato tras picadura, pero su rendimiento puede disminuir en fases avanzadas.</p><h4>Síntesis terapéutica</h4><p>El enfoque piramidal se orienta a frenar procesos de descomposición desordenada, favorecer limpieza biológica sostenida y evitar aprovechamiento oportunista de material celular alterado. En protocolos prolongados (por ejemplo, exposiciones diarias de varias horas), se busca apoyo integral al equilibrio del terreno biológico.</p>",
-        "Candidiasis":"<h3>Candidiasis y entorno piramidal</h3><p>Este artículo aborda el uso complementario del efecto piramidal en cuadros de candidiasis recurrente, especialmente cuando hay fatiga, malestar digestivo y recaídas frecuentes.</p><ul><li>Aplicación diaria con seguimiento de síntomas.</li><li>Apoyo con higiene digestiva y control de azúcares fermentables.</li><li>Control evolutivo por fases: inflamación, descanso y vitalidad.</li></ul><p>La propuesta es integrativa y no sustituye evaluación médica ni tratamiento profesional.</p>",
-        "Dolencias tratadas":"<h3>Dolencias tratadas con pirámides</h3><p>Compendio de afecciones reportadas en la práctica de terapia piramidal: dolor articular, inflamación recurrente, fatiga, trastornos de descanso y cuadros funcionales crónicos.</p><p>El objetivo principal es mejorar el terreno fisiológico para favorecer recuperación progresiva y estabilidad de síntomas.</p>",
-        "Fibromialgia":"<h3>Fibromialgia</h3><p>Se documentan mejoras en descanso, rigidez matinal y sensación de cansancio en pacientes con fibromialgia que mantienen exposición piramidal regular.</p><ul><li>Rutina nocturna estable.</li><li>Registro de dolor, sueño y energía.</li><li>Ajuste progresivo de intensidad y duración.</li></ul>",
-        "Hidradenitis":"<h3>Hidradenitis</h3><p>En procesos inflamatorios de piel, el uso piramidal se ha orientado a reducir recurrencia y favorecer estabilización general del organismo.</p><p>Se recomienda seguimiento continuado y coordinación con dermatología para evaluación objetiva.</p>",
-        "Meditación en pirámides":"<h3>Meditación en pirámides</h3><p>La práctica dentro de estructura piramidal se utiliza para facilitar silencio mental, relajación profunda y regulación del estrés.</p><ul><li>Sesiones de 20 a 40 minutos.</li><li>Respiración lenta y postura estable.</li><li>Uso constante para consolidar resultados.</li></ul>",
-        "Próstata":"<h3>Próstata</h3><p>Se recogen experiencias de apoyo en molestias prostáticas funcionales, con foco en confort nocturno y bienestar general.</p><p>Como en el resto de artículos, se plantea como complemento y con control médico paralelo.</p>",
-        "Riñón y recuperación":"<h3>Riñón y recuperación</h3><p>Artículo orientado a recuperación orgánica global en procesos renales complejos, priorizando descanso y reducción de sobrecarga inflamatoria.</p><p>Se aconseja prudencia clínica y seguimiento profesional durante todo el proceso.</p>",
-        "Efecto piramidal":"<h3>Efecto piramidal</h3><p>Describe principios históricos y observacionales del efecto piramidal: conservación, orden estructural y posible influencia sobre procesos biológicos de degradación.</p><p>Se resumen líneas de investigación y aplicaciones terapéuticas desarrolladas por Piramicasa desde 1972.</p>",
-        "Energía piramidal":"<h3>Energía piramidal</h3><p>Este contenido explica la relación entre geometría, proporción y orientación en la generación del entorno piramidal.</p><ul><li>Importancia del norte magnético.</li><li>Influencia de materiales y proporciones.</li><li>Efecto sobre descanso, vitalidad y recuperación.</li></ul><p>La sección integra observaciones prácticas, hipótesis de trabajo y recomendaciones de uso responsable.</p>",
-        "Experiencias":"<h3>Experiencias</h3><p>Recopilación de casos de usuarios y terapeutas en distintos países. Incluye mejoras reportadas en sueño, dolor, estrés y recuperación funcional.</p><p>Los testimonios se presentan como experiencia observacional, no como promesa universal de resultado.</p>",
-        "Experimentos científicos":"<h3>Experimentos científicos</h3><p>Propuestas de experimentación con controles comparativos, variables medibles y tiempos definidos para validar hipótesis del efecto piramidal.</p><ul><li>Diseños reproducibles.</li><li>Registros con método.</li><li>Análisis de sesgos y repetibilidad.</li></ul>",
-        "Experimentos caseros":"<h3>Experimentos caseros</h3><p>Guía práctica para observación doméstica: conservación, germinación, descanso y comparación de entornos.</p><p>Recomendación clave: documentar resultados con fechas, condiciones y fotografías para extraer conclusiones útiles.</p>",
-        "Función magnética":"<h3>Función magnética</h3><p>Se examina el papel de la orientación magnética en el rendimiento de la estructura piramidal y su coherencia con resultados repetidos en campo.</p><p>El texto desarrolla hipótesis de interacción forma-orientación-entorno.</p>",
-        "Orientación con brújula":"<h3>Orientación con brújula</h3><p>Procedimiento para orientar correctamente la pirámide al norte magnético y evitar errores frecuentes de montaje.</p><ul><li>Nivelar base y fijar eje.</li><li>Corregir desviación local.</li><li>Verificar orientación final tras instalación.</li></ul>",
-        "Avales oficiales":"<h3>Avales oficiales</h3><p>Compilación de documentación, informes y referencias institucionales relacionadas con la trayectoria y uso de la terapia piramidal.</p><p>Esta sección se presenta como archivo histórico y de respaldo documental.</p>",
-        "Testimonios escritos":"<h3>Testimonios escritos</h3><p>Historias de usuarios con evolución favorable en diferentes dolencias y situaciones de desgaste físico.</p><p>Incluye contexto inicial, tiempos aproximados de mejora y condiciones de uso de la estructura.</p>",
-        "Arcones Faraday":"<h3>Arcones Faraday</h3><p>Aplicación piramidal en conservación y protección de elementos sensibles. Se detallan criterios de diseño, materiales y casos de uso práctico.</p>",
-        "Bungalow piramidal":"<h3>Bungalow piramidal</h3><p>Concepto arquitectónico habitable con proporción piramidal, pensado para descanso profundo y estabilidad ambiental.</p><p>Incluye consideraciones de distribución, ventilación y uso terapéutico residencial.</p>",
-        "Hygia / Horus":"<h3>Modelos Hygia y Horus</h3><p>Estructuras terapéuticas para uso personal/familiar con diferentes dimensiones y potencia de trabajo según necesidad.</p>",
-        "Piramascota":"<h3>Piramascota</h3><p>Diseño adaptado para animales domésticos, orientado a descanso, adaptación progresiva y bienestar general.</p>",
-        "Piramicama":"<h3>Piramicama</h3><p>Modelo orientado al uso nocturno continuado. La exposición prolongada busca consolidar mejoras en descanso, dolor y recuperación.</p>",
-        "Piramicama transparente":"<h3>Piramicama transparente</h3><p>Variante de integración estética en dormitorio, manteniendo criterios geométricos de funcionamiento piramidal.</p>",
-        "Piramicama Luxor":"<h3>Piramicama Luxor</h3><p>Versión premium con acabados de alta gama y opciones de personalización en materiales y presencia visual.</p>",
-        "Piramicasa Vital":"<h3>Piramicasa Vital</h3><p>Unidad de uso flexible para sesiones personales, con foco en practicidad y continuidad de uso en entornos domésticos.</p>",
-        "Pirámides jardín":"<h3>Pirámides jardín</h3><p>Estructuras para exterior orientadas a relax, meditación y uso familiar. Se detallan anclajes, materiales y mantenimiento básico.</p>",
-        "Refugios":"<h3>Refugios piramidales</h3><p>Propuestas de espacios de protección y estabilidad estructural con criterio piramidal para contextos de larga permanencia.</p>",
-        "Planos piramidales":"<h3>Planos piramidales</h3><p>Asesoría técnica en proporciones, cálculo y adaptación a terreno para construcción de estructuras funcionales.</p>",
-        "Representantes":"<h3>Representantes</h3><p>Red de colaboradores para información, orientación y apoyo local en distintas zonas geográficas.</p>",
-        "Centros de terapia":"<h3>Centros de terapia</h3><p>Listado de centros y profesionales que aplican terapia piramidal, con enfoque en acompañamiento responsable.</p>",
-        "FAQ Pirámides":"<h3>Preguntas frecuentes</h3><p>Respuestas a dudas sobre montaje, tiempo de uso, mantenimiento, expectativas realistas y criterios de seguridad.</p>",
-        "Piramidología histórica":"<h3>Piramidología histórica</h3><p>Recorrido por antecedentes, autores y líneas históricas de estudio sobre geometría piramidal y su influencia funcional.</p>",
-        "Viaje a Egipto":"<h3>Viaje a Egipto</h3><p>Programa de viaje temático para estudio histórico, simbólico y técnico de las grandes pirámides en su contexto original.</p>",
-        "Manual Su-Jok":"<h3>Manual Su-Jok</h3><p>Recurso formativo introductorio de terapia complementaria, integrado como material de consulta en la biblioteca.</p>",
-        "Manual Dr. Hammer":"<h3>Manual Dr. Hammer</h3><p>Documento histórico de referencia dentro de la sección de materiales de estudio complementarios.</p>",
-        "Trampa para mosquitos":"<h3>Trampa para mosquitos</h3><p>Guía práctica para control ambiental doméstico con materiales accesibles y montaje sencillo.</p>",
-        "Trampa para cucarachas":"<h3>Trampa para cucarachas</h3><p>Método doméstico de apoyo para prevención y control, con pautas de colocación y mantenimiento periódico.</p>"
-      };
-
       function loadingHtml(){
         return '<div class="pm-loading"><span class="pm-loading-dot"></span><span class="pm-loading-dot"></span><span class="pm-loading-dot"></span><span>Cargando artículo completo...</span></div>';
       }
 
-      function articleHtml(title){
-        var body = articleHtmlByTitle[title];
-        if (!body) {
-          return '<h3>'+title+'</h3><p class="pm-viewer-muted">Este contenido está en proceso de ampliación editorial interna.</p>';
+      function esc(s){
+        return String(s || '').replace(/[&<>"']/g, function(ch){
+          return ch === '&' ? '&amp;' : ch === '<' ? '&lt;' : ch === '>' ? '&gt;' : ch === '"' ? '&quot;' : '&#39;';
+        });
+      }
+
+      function paragraphKeep(p){
+        if (!p) return false;
+        var t = p.trim();
+        if (t.length < 20) return false;
+        if (/^Argentina, Canadá, México/i.test(t)) return false;
+        if (/Si sigue navegando/i.test(t)) return false;
+        if (/Aviso Legal \| Copyright/i.test(t)) return false;
+        if (/VIAJE A EGIPTO CON GABRIEL SILVA/i.test(t)) return false;
+        return true;
+      }
+
+      function renderSections(title, payload){
+        if (!payload || !payload.sections || !payload.sections.length) {
+          return '<h3>'+esc(title)+'</h3><p class="pm-viewer-muted">Este contenido está en proceso de ampliación editorial interna.</p>';
         }
-        return body;
+
+        var html = '';
+        payload.sections.forEach(function(section){
+          var block = '<article class="pm-article-block">';
+          var subtitle = (section.sourceTitle || '').replace(/\s*-\s*Piramicasa\s*$/i, '').trim();
+          if (subtitle) block += '<h4>'+esc(subtitle)+'</h4>';
+
+          var imgs = Array.isArray(section.images) ? section.images : [];
+          if (imgs.length) {
+            block += '<div class="pm-article-gallery">';
+            imgs.slice(0, 4).forEach(function(src){
+              block += '<img src="'+esc(src)+'" alt="Imagen relacionada con '+esc(title)+'" loading="lazy" />';
+            });
+            block += '</div>';
+          }
+
+          var paragraphs = (section.paragraphs || []).filter(paragraphKeep);
+          paragraphs.forEach(function(p){ block += '<p>'+esc(p)+'</p>'; });
+
+          if (!paragraphs.length) {
+            block += '<p class="pm-viewer-muted">No se ha encontrado texto ampliado para este bloque.</p>';
+          }
+
+          block += '</article>';
+          html += block;
+        });
+
+        return html;
+      }
+
+      var articlesCache = null;
+      async function getArticlesData(){
+        if (articlesCache) return articlesCache;
+        var r = await fetch('/piramicasa/assets/articulos-content.json', { cache: 'no-store' });
+        if (!r.ok) throw new Error('No se pudo cargar articulos-content.json');
+        articlesCache = await r.json();
+        return articlesCache;
       }
 
       var viewer = document.getElementById('pm-article-viewer');
@@ -276,7 +293,7 @@
           ev.preventDefault();
           var titleNode = card.querySelector('.pm-card-title');
           var title = titleNode ? titleNode.textContent.trim() : 'Artículo';
-          var bodyHtml = articleHtml(title);
+          var bodyHtml = '';
 
           if (activeTitle === title && !viewer.classList.contains('pm-viewer-hidden')) {
             viewer.classList.add('pm-viewer-hidden');
@@ -294,7 +311,14 @@
           viewerContent.innerHTML = loadingHtml();
           document.getElementById('biblioteca-contenido').scrollIntoView({behavior:'smooth', block:'start'});
 
-          viewerContent.innerHTML = bodyHtml;
+          try {
+            var data = await getArticlesData();
+            if (activeTitle !== title) return;
+            bodyHtml = renderSections(title, data[title]);
+            viewerContent.innerHTML = bodyHtml;
+          } catch (err) {
+            viewerContent.innerHTML = '<h3>'+esc(title)+'</h3><p class="pm-viewer-muted">No se pudo cargar el contenido completo en este momento.</p>';
+          }
         });
       });
     })();
