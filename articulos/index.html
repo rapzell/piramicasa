@@ -10,8 +10,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="/piramicasa/_next/static/css/b1c84f528cf3d505.css" />
   <link rel="stylesheet" href="/piramicasa/_next/static/css/591bfc4a40e67df4.css" />
-  <link rel="stylesheet" href="/piramicasa/assets/mobile-fix.css?v=20260820h" />
-  <link rel="stylesheet" href="/piramicasa/assets/sacred-grid.css?v=20260820h" />
+  <link rel="stylesheet" href="/piramicasa/assets/mobile-fix.css?v=20260820i" />
+  <link rel="stylesheet" href="/piramicasa/assets/sacred-grid.css?v=20260820i" />
   <style>
     .pm-header{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(247,244,240,.97)!important;backdrop-filter:blur(8px)!important;-webkit-backdrop-filter:blur(8px)!important;border-bottom:1px solid #E0D9D0!important;box-shadow:0 2px 12px rgba(0,0,0,.06)!important;transition:all .3s ease}
     .pm-page .pm-header.pm-at-top{background:transparent!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important;border-bottom:1px solid transparent!important;box-shadow:none!important}
@@ -60,6 +60,23 @@
     .pm-article-list{margin:4px 0 12px;padding:0;list-style:none;display:grid;gap:8px}
     .pm-article-list li{position:relative;padding:10px 12px 10px 30px;background:#faf6f1;border:1px solid #eadfce;border-radius:10px;line-height:1.55;color:#3f3a33}
     .pm-article-list li::before{content:'✓';position:absolute;left:10px;top:10px;color:#b88b55;font-weight:700}
+    .pm-article-flow{display:grid;grid-template-columns:1fr;gap:12px;align-items:start}
+    .pm-flow-heading{grid-column:1 / -1;margin:2px 0 0;padding:8px 10px;border-left:3px solid #d2b38b;background:linear-gradient(90deg,#f7efe4 0%,rgba(247,239,228,.25) 100%);border-radius:8px}
+    .pm-flow-text{background:#fff;border:1px solid #eee3d7;border-radius:10px;padding:12px 13px}
+    .pm-flow-text.pm-flow-lead{grid-column:1 / -1;background:linear-gradient(135deg,#fdf8f2,#f7efe4);border-color:#e6d6c1}
+    .pm-flow-text.pm-flow-accent{background:#fcf7f0}
+    .pm-flow-text p{margin:0}
+    .pm-flow-list{grid-column:1 / -1}
+    .pm-inline-media{margin:0;background:#fff;border:1px solid #e8dccb;border-radius:12px;overflow:hidden;box-shadow:0 10px 22px rgba(42,48,33,.12)}
+    .pm-inline-media img{display:block;width:100%;height:220px;object-fit:cover}
+    .pm-inline-media figcaption{padding:8px 10px;font-size:.76rem;color:#7d6f5f;background:#faf5ee;border-top:1px solid #ecdfce}
+    @media(min-width:980px){
+      .pm-article-flow{grid-template-columns:minmax(0,1.2fr) minmax(0,.95fr);gap:14px}
+      .pm-flow-heading{grid-column:1 / -1}
+      .pm-inline-media.pm-media-left{grid-column:1}
+      .pm-inline-media.pm-media-right{grid-column:2}
+      .pm-flow-text.pm-flow-lead{grid-column:1 / -1}
+    }
     .pm-viewer-muted{color:#7b7268;font-style:italic}
     .pm-viewer-hidden{display:none}
     .pm-loading{display:inline-flex;align-items:center;gap:10px;color:#6a6259}
@@ -239,8 +256,8 @@
   </div>
 
   <script src="/piramicasa/assets/mobile-menu.js" defer></script>
-  <script src="/piramicasa/assets/chatbot.js?v=20260820h" defer></script>
-  <script src="/piramicasa/assets/sacred-grid.js?v=20260820h" defer></script>
+  <script src="/piramicasa/assets/chatbot.js?v=20260820i" defer></script>
+  <script src="/piramicasa/assets/sacred-grid.js?v=20260820i" defer></script>
   <script>
     (function(){
       function loadingHtml(){
@@ -323,13 +340,6 @@
           if (subtitle) block += '<h4>'+esc(subtitle)+'</h4>';
 
           var imgs = Array.isArray(section.images) ? section.images : [];
-          if (imgs.length) {
-            block += '<div class="pm-article-gallery">';
-            imgs.slice(0, 4).forEach(function(src){
-              block += '<img src="'+esc(src)+'" alt="Imagen relacionada con '+esc(title)+'" loading="lazy" />';
-            });
-            block += '</div>';
-          }
 
           var seen = new Set();
           var paragraphs = (section.paragraphs || [])
@@ -341,31 +351,72 @@
               return true;
             });
 
-          block += '<div class="pm-article-prose">';
+          var items = [];
           var firstBodyParagraph = true;
           paragraphs.forEach(function(p){
             if (isHeadingLike(p)) {
-              block += '<h5 class="pm-article-subhead">'+esc(p)+'</h5>';
+              items.push({ type: 'heading', value: p });
               return;
             }
 
             var listItems = maybeListItems(p);
             if (listItems) {
-              block += '<ul class="pm-article-list">';
-              listItems.forEach(function(item){
-                block += '<li>'+esc(item)+'</li>';
-              });
-              block += '</ul>';
+              items.push({ type: 'list', value: listItems });
               firstBodyParagraph = false;
               return;
             }
 
             splitLongParagraph(p).forEach(function(chunk){
-              var leadClass = firstBodyParagraph ? ' class="pm-article-lead"' : '';
-              block += '<p'+leadClass+'>'+esc(chunk)+'</p>';
+              items.push({ type: 'paragraph', value: chunk, lead: firstBodyParagraph });
               firstBodyParagraph = false;
             });
           });
+
+          block += '<div class="pm-article-prose pm-article-flow">';
+
+          var imageIdx = 0;
+          if (imgs.length) {
+            block += '<figure class="pm-inline-media pm-media-right"><img src="'+esc(imgs[0])+'" alt="Imagen relacionada con '+esc(title)+'" loading="lazy" /><figcaption>Imagen relacionada con el bloque</figcaption></figure>';
+            imageIdx = 1;
+          }
+
+          var textBlocks = 0;
+          items.forEach(function(item){
+            if (item.type === 'heading') {
+              block += '<h5 class="pm-article-subhead pm-flow-heading">'+esc(item.value)+'</h5>';
+              return;
+            }
+
+            if (item.type === 'list') {
+              block += '<div class="pm-flow-list"><ul class="pm-article-list">';
+              item.value.forEach(function(row){
+                block += '<li>'+esc(row)+'</li>';
+              });
+              block += '</ul></div>';
+              textBlocks++;
+            } else {
+              var className = 'pm-flow-text';
+              if (item.lead) className += ' pm-flow-lead';
+              else if (textBlocks % 3 === 1) className += ' pm-flow-accent';
+              block += '<div class="'+className+'"><p'+(item.lead ? ' class="pm-article-lead"' : '')+'>'+esc(item.value)+'</p></div>';
+              textBlocks++;
+            }
+
+            if (imageIdx < imgs.length && textBlocks > 0 && textBlocks % 2 === 0) {
+              var mediaClass = (imageIdx % 2 === 0) ? 'pm-inline-media pm-media-left' : 'pm-inline-media pm-media-right';
+              block += '<figure class="'+mediaClass+'"><img src="'+esc(imgs[imageIdx])+'" alt="Imagen relacionada con '+esc(title)+'" loading="lazy" /><figcaption>Detalle visual del artículo</figcaption></figure>';
+              imageIdx++;
+            }
+          });
+
+          if (imageIdx < imgs.length) {
+            block += '<div class="pm-article-gallery">';
+            imgs.slice(imageIdx).forEach(function(src){
+              block += '<img src="'+esc(src)+'" alt="Imagen relacionada con '+esc(title)+'" loading="lazy" />';
+            });
+            block += '</div>';
+          }
+
           block += '</div>';
 
           if (!paragraphs.length) {
