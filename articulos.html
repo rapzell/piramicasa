@@ -27,6 +27,7 @@
     .pm-section-dark .pm-icon{background:rgba(255,255,255,.12);color:#F8D7A9}
     .pm-article-card .pm-card-cta{margin-left:auto;font-size:.82rem;font-weight:700;color:#8A817A;white-space:nowrap}
     .pm-article-viewer{margin-top:26px;border:1px solid #E0D9D0;border-radius:14px;background:#fff;overflow:hidden;box-shadow:0 10px 30px rgba(35,44,27,.08)}
+    .pm-inline-viewer{grid-column:1 / -1;margin:8px 0 2px}
     .pm-viewer-head{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 18px;background:linear-gradient(135deg,#f4eee7,#efe6dc);border-bottom:1px solid #E0D9D0}
     .pm-viewer-title{margin:0;font-size:1.08rem}
     .pm-viewer-close{appearance:none;border:1px solid #D6C7B6;background:#fff;color:#6f6459;border-radius:999px;padding:6px 12px;font-size:.82rem;font-weight:700;cursor:pointer}
@@ -182,23 +183,6 @@
       </div>
     </section>
 
-    <section class="pm-section pm-section-cream pm-articles-section" id="biblioteca-contenido">
-      <div class="pm-articles-wrap">
-        <div class="pm-label">Contenido integrado</div>
-        <h2>Contenido completo de cada artículo</h2>
-        <p class="pm-lead">Pulsa cualquier botón y verás aquí el artículo completo. Al abrir otro, se reemplaza automáticamente el anterior en este mismo panel desplegable.</p>
-
-        <div id="pm-article-viewer" class="pm-article-viewer pm-viewer-hidden" aria-live="polite">
-          <div class="pm-viewer-head">
-            <h3 id="pm-viewer-title" class="pm-viewer-title">Artículo</h3>
-            <button id="pm-viewer-close" class="pm-viewer-close" type="button">Replegar</button>
-          </div>
-          <div id="pm-viewer-content" class="pm-viewer-content"></div>
-        </div>
-
-      </div>
-    </section>
-
     <section class="pm-section pm-section-dark pm-sacred-bg">
       <div class="pm-articles-wrap" style="text-align:center;padding:8px 20px 46px;">
         <a href="/piramicasa/" class="pm-btn pm-btn-primary">Volver al inicio</a>
@@ -308,18 +292,27 @@
         return articlesCache;
       }
 
-      var viewer = document.getElementById('pm-article-viewer');
-      var viewerTitle = document.getElementById('pm-viewer-title');
-      var viewerContent = document.getElementById('pm-viewer-content');
-      var closeBtn = document.getElementById('pm-viewer-close');
       var cards = Array.prototype.slice.call(document.querySelectorAll('.pm-article-card'));
+      var viewer = document.createElement('div');
+      viewer.className = 'pm-article-viewer pm-inline-viewer pm-viewer-hidden';
+      viewer.setAttribute('aria-live', 'polite');
+      viewer.innerHTML = '<div class="pm-viewer-head"><h3 class="pm-viewer-title">Artículo</h3><button class="pm-viewer-close" type="button">Replegar</button></div><div class="pm-viewer-content"></div>';
+      var viewerTitle = viewer.querySelector('.pm-viewer-title');
+      var viewerContent = viewer.querySelector('.pm-viewer-content');
+      var closeBtn = viewer.querySelector('.pm-viewer-close');
 
       var activeTitle = null;
+      var activeCard = null;
 
-      closeBtn.addEventListener('click', function(){
+      function collapseViewer(){
         viewer.classList.add('pm-viewer-hidden');
         cards.forEach(function(c){ c.classList.remove('pm-active'); });
         activeTitle = null;
+        activeCard = null;
+      }
+
+      closeBtn.addEventListener('click', function(){
+        collapseViewer();
       });
 
       cards.forEach(function(card){
@@ -329,25 +322,25 @@
           var title = titleNode ? titleNode.textContent.trim() : 'Artículo';
           var bodyHtml = '';
 
-          if (activeTitle === title && !viewer.classList.contains('pm-viewer-hidden')) {
-            viewer.classList.add('pm-viewer-hidden');
-            cards.forEach(function(c){ c.classList.remove('pm-active'); });
-            activeTitle = null;
+          if (activeTitle === title && activeCard === card && !viewer.classList.contains('pm-viewer-hidden')) {
+            collapseViewer();
             return;
           }
 
           cards.forEach(function(c){ c.classList.remove('pm-active'); });
           card.classList.add('pm-active');
           activeTitle = title;
+          activeCard = card;
+
+          card.insertAdjacentElement('afterend', viewer);
 
           viewerTitle.textContent = title;
           viewer.classList.remove('pm-viewer-hidden');
           viewerContent.innerHTML = loadingHtml();
-          document.getElementById('biblioteca-contenido').scrollIntoView({behavior:'smooth', block:'start'});
 
           try {
             var data = await getArticlesData();
-            if (activeTitle !== title) return;
+            if (activeTitle !== title || activeCard !== card) return;
             bodyHtml = renderSections(title, data[title]);
             viewerContent.innerHTML = bodyHtml;
           } catch (err) {
