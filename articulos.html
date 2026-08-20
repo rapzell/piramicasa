@@ -59,10 +59,12 @@
 <body>
   <div class="pm-page">
     <header class="pm-header">
-      <a href="/piramicasa/" class="pm-logo" style="text-decoration:none">
-        <span class="pm-logo-main">PIRAMICASA</span>
-        <span class="pm-logo-sub">Ciencia y Técnica de las Pirámides</span>
-      </a>
+      <div class="pm-header-left">
+        <div>
+          <a href="/piramicasa/" class="pm-logo">Pirami<span>casa</span></a>
+          <div class="pm-tagline">Ciencia y Técnica de las Pirámides</div>
+        </div>
+      </div>
       <nav class="pm-nav" aria-label="Navegación principal">
         <div class="pm-nav-item"><a href="/piramicasa/">Inicio</a></div>
 
@@ -107,8 +109,8 @@
       <div class="pm-header-right">
         <a href="tel:+34681087539" class="pm-phone">+34 681 087 539</a>
         <div class="pm-lang">
-          <span>ES</span>
-          <a href="/piramicasa/en" rel="nofollow">EN</a>
+          <a href="#" class="pm-active">ES</a>
+          <a href="#">EN</a>
         </div>
       </div>
     </header>
@@ -302,6 +304,16 @@
         articlesCache = await r.json();
         return articlesCache;
       }
+
+      var header = document.querySelector('.pm-header');
+      function syncHeaderScrolled(){
+        if (!header) return;
+        if ((window.scrollY || window.pageYOffset || 0) > 60) header.classList.add('pm-scrolled');
+        else header.classList.remove('pm-scrolled');
+      }
+      window.addEventListener('scroll', syncHeaderScrolled, { passive: true });
+      window.addEventListener('load', syncHeaderScrolled);
+      syncHeaderScrolled();
 
       var cards = Array.prototype.slice.call(document.querySelectorAll('.pm-article-card'));
       var viewer = document.createElement('div');
