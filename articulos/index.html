@@ -10,11 +10,16 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="/piramicasa/_next/static/css/b1c84f528cf3d505.css" />
   <link rel="stylesheet" href="/piramicasa/_next/static/css/591bfc4a40e67df4.css" />
-  <link rel="stylesheet" href="/piramicasa/assets/mobile-fix.css?v=20260820f" />
-  <link rel="stylesheet" href="/piramicasa/assets/sacred-grid.css?v=20260820f" />
+  <link rel="stylesheet" href="/piramicasa/assets/mobile-fix.css?v=20260820g" />
+  <link rel="stylesheet" href="/piramicasa/assets/sacred-grid.css?v=20260820g" />
   <style>
-    .pm-header{position:fixed;top:0;left:0;right:0;z-index:1000;background:transparent;border-bottom:1px solid transparent;transition:all .3s ease}
-    .pm-page .pm-header.pm-scrolled{background:rgba(247,244,240,.97);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-bottom:1px solid #E0D9D0;box-shadow:0 2px 12px rgba(0,0,0,.06)}
+    .pm-header{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(247,244,240,.97)!important;backdrop-filter:blur(8px)!important;-webkit-backdrop-filter:blur(8px)!important;border-bottom:1px solid #E0D9D0!important;box-shadow:0 2px 12px rgba(0,0,0,.06)!important;transition:all .3s ease}
+    .pm-page .pm-header.pm-at-top{background:transparent!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important;border-bottom:1px solid transparent!important;box-shadow:none!important}
+    .pm-page .pm-header.pm-scrolled{background:rgba(247,244,240,.97)!important;backdrop-filter:blur(8px)!important;-webkit-backdrop-filter:blur(8px)!important;border-bottom:1px solid #E0D9D0!important;box-shadow:0 2px 12px rgba(0,0,0,.06)!important}
+    .pm-logo-main{display:block;font-family:'Playfair Display',serif;font-size:1.9rem;line-height:1;color:#3D4A30;letter-spacing:-.01em;font-weight:700}
+    .pm-logo-main::first-letter{color:#3D4A30}
+    .pm-logo-main span{color:#C69C6D}
+    .pm-logo-sub{display:block;margin-top:2px;font-size:.62rem;letter-spacing:.15em;text-transform:uppercase;color:#8A817A;line-height:1.25}
     .pm-articles-wrap{max-width:1160px;margin:0 auto}
     .pm-articles-hero{padding:110px 20px 58px;text-align:center}
     .pm-articles-section{padding:34px 20px}
@@ -115,6 +120,26 @@
       </div>
     </header>
 
+    <script>
+      (function(){
+        var header = document.querySelector('.pm-header');
+        if (!header) return;
+        function syncHeader(){
+          var y = window.scrollY || window.pageYOffset || 0;
+          if (y > 60) {
+            header.classList.add('pm-scrolled');
+            header.classList.remove('pm-at-top');
+          } else {
+            header.classList.add('pm-at-top');
+            header.classList.remove('pm-scrolled');
+          }
+        }
+        window.addEventListener('scroll', syncHeader, { passive: true });
+        window.addEventListener('load', syncHeader);
+        syncHeader();
+      })();
+    </script>
+
     <section class="pm-subpage-hero pm-articles-hero pm-sacred-bg">
       <div class="pm-articles-wrap">
         <div class="pm-label">Biblioteca temática integrada</div>
@@ -204,8 +229,8 @@
   </div>
 
   <script src="/piramicasa/assets/mobile-menu.js" defer></script>
-  <script src="/piramicasa/assets/chatbot.js?v=20260820f" defer></script>
-  <script src="/piramicasa/assets/sacred-grid.js?v=20260820f" defer></script>
+  <script src="/piramicasa/assets/chatbot.js?v=20260820g" defer></script>
+  <script src="/piramicasa/assets/sacred-grid.js?v=20260820g" defer></script>
   <script>
     (function(){
       function loadingHtml(){
@@ -304,16 +329,6 @@
         articlesCache = await r.json();
         return articlesCache;
       }
-
-      var header = document.querySelector('.pm-header');
-      function syncHeaderScrolled(){
-        if (!header) return;
-        if ((window.scrollY || window.pageYOffset || 0) > 60) header.classList.add('pm-scrolled');
-        else header.classList.remove('pm-scrolled');
-      }
-      window.addEventListener('scroll', syncHeaderScrolled, { passive: true });
-      window.addEventListener('load', syncHeaderScrolled);
-      syncHeaderScrolled();
 
       var cards = Array.prototype.slice.call(document.querySelectorAll('.pm-article-card'));
       var viewer = document.createElement('div');
