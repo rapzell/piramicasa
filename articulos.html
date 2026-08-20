@@ -3,47 +3,87 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Artículos, Información y Experimentos | Piramicasa</title>
-  <meta name="description" content="Biblioteca temática de artículos, información y experimentos sobre piramidología, salud, ciencia y productos Piramicasa." />
+  <title>Artículos | Piramicasa</title>
+  <meta name="description" content="Biblioteca temática de artículos Piramicasa integrada en el nuevo sitio, con contenidos internos por temática." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="/piramicasa/_next/static/css/b1c84f528cf3d505.css" />
   <link rel="stylesheet" href="/piramicasa/_next/static/css/591bfc4a40e67df4.css" />
-  <link rel="stylesheet" href="/piramicasa/assets/mobile-fix.css?v=20260819g" />
-  <link rel="stylesheet" href="/piramicasa/assets/sacred-grid.css?v=20260819g" />
+  <link rel="stylesheet" href="/piramicasa/assets/mobile-fix.css?v=20260820a" />
+  <link rel="stylesheet" href="/piramicasa/assets/sacred-grid.css?v=20260820a" />
   <style>
-    .pm-articles-hero { padding: 110px 20px 56px; text-align: center; }
-    .pm-articles-wrap { max-width: 1160px; margin: 0 auto; }
-    .pm-articles-section { padding: 40px 20px; }
-    .pm-articles-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; margin-top: 20px; }
-    .pm-article-link { display: block; text-decoration: none; padding: 12px 14px; border: 1px solid rgba(198,156,109,.4); border-radius: 10px; color: var(--pm-ink); background: rgba(255,255,255,.72); font-size: .95rem; font-weight: 500; transition: all .2s ease; }
-    .pm-section-dark .pm-article-link { background: rgba(255,255,255,.07); color: var(--pm-crema); border-color: rgba(212,184,150,.4); }
-    .pm-article-link:hover { transform: translateY(-2px); border-color: #C69C6D; box-shadow: 0 8px 20px rgba(61,74,48,.12); }
-    .pm-articles-note { margin-top: 18px; font-size: .92rem; color: #7f7368; }
+    .pm-articles-wrap{max-width:1160px;margin:0 auto}
+    .pm-articles-hero{padding:110px 20px 58px;text-align:center}
+    .pm-articles-section{padding:34px 20px}
+    .pm-articles-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px;margin-top:18px}
+    .pm-article-card{display:flex;align-items:center;gap:12px;padding:12px 14px;border:1px solid rgba(198,156,109,.35);background:rgba(255,255,255,.78);border-radius:12px;text-decoration:none;color:var(--pm-ink);transition:all .2s ease}
+    .pm-article-card:hover{transform:translateY(-2px);border-color:#C69C6D;box-shadow:0 10px 22px rgba(61,74,48,.12)}
+    .pm-icon{width:34px;height:34px;display:inline-flex;align-items:center;justify-content:center;border-radius:50%;font-size:1rem;background:#EDE7DE;border:1px solid rgba(198,156,109,.45);flex:0 0 auto}
+    .pm-card-title{font-weight:600;line-height:1.25;font-size:.95rem}
+    .pm-section-dark .pm-article-card{background:rgba(255,255,255,.07);color:var(--pm-crema);border-color:rgba(212,184,150,.35)}
+    .pm-section-dark .pm-icon{background:rgba(255,255,255,.12);color:#F8D7A9}
+    .pm-article-card .pm-card-cta{margin-left:auto;font-size:.82rem;font-weight:700;color:#8A817A;white-space:nowrap}
+    .pm-article-detail{border:1px solid #E0D9D0;border-radius:14px;background:#fff;padding:20px 20px 16px}
+    .pm-article-detail h3{margin:0 0 8px 0}
+    .pm-article-detail p{margin:0 0 10px 0;color:#5a5450;line-height:1.6}
+    .pm-article-detail ul{margin:0;padding-left:20px;color:#4A4A4A}
+    .pm-article-detail-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+    .pm-article-anchor{scroll-margin-top:110px}
+    .pm-note-box{margin-top:16px;padding:12px 14px;border-left:4px solid #C69C6D;background:#F4EEE7;color:#5f564e;border-radius:0 8px 8px 0}
+    @media(max-width:768px){.pm-articles-hero{padding-top:86px}.pm-article-detail{padding:16px}}
   </style>
 </head>
 <body>
   <div class="pm-page">
-    <header class="pm-header" style="position:sticky;top:0;z-index:1000;">
+    <header class="pm-header">
       <a href="/piramicasa/" class="pm-logo" style="text-decoration:none">
         <span class="pm-logo-main">PIRAMICASA</span>
         <span class="pm-logo-sub">Ciencia y Técnica de las Pirámides</span>
       </a>
       <nav class="pm-nav" aria-label="Navegación principal">
-        <a href="/piramicasa/" class="pm-nav-link">Inicio</a>
-        <a href="/piramicasa/salud" class="pm-nav-link">Salud</a>
-        <a href="/piramicasa/videos" class="pm-nav-link">Vídeos</a>
-        <a href="/piramicasa/conferencias" class="pm-nav-link">Conferencias</a>
-        <a href="/piramicasa/#contacto" class="pm-nav-link">Contacto</a>
+        <div class="pm-nav-item"><a href="/piramicasa/">Inicio</a></div>
+
+        <div class="pm-nav-item">
+          <a href="/piramicasa/#piramides">Pirámides <span class="pm-nav-arrow">▼</span></a>
+          <div class="pm-dropdown">
+            <a href="/piramicasa/#modelos">Modelos</a>
+            <a href="/piramicasa/libros">Libros</a>
+            <a href="/piramicasa/viaje-egipto">Viaje a Egipto</a>
+          </div>
+        </div>
+
+        <div class="pm-nav-item">
+          <a href="/piramicasa/#ciencia">Ciencia <span class="pm-nav-arrow">▼</span></a>
+          <div class="pm-dropdown">
+            <a href="/piramicasa/#beneficios">13 Beneficios</a>
+            <a href="/piramicasa/salud">Salud y Terapias</a>
+            <a href="/piramicasa/enfermedades">Enfermedades tratadas</a>
+            <a href="/piramicasa/articulos" style="font-weight:700">Artículos</a>
+          </div>
+        </div>
+
+        <div class="pm-nav-item">
+          <a href="/piramicasa/#nosotros">Nosotros <span class="pm-nav-arrow">▼</span></a>
+          <div class="pm-dropdown">
+            <a href="/piramicasa/historia">Historia</a>
+            <a href="/piramicasa/presentacion">Presentación</a>
+            <a href="/piramicasa/conferencias">Conferencias</a>
+            <a href="/piramicasa/videos">Videos</a>
+          </div>
+        </div>
+
+        <div class="pm-nav-item"><a href="/piramicasa/libros">Libros</a></div>
+        <div class="pm-nav-item pm-nav-egipto"><a href="/piramicasa/viaje-egipto">Viaje a Egipto</a></div>
+        <div class="pm-nav-item"><a href="/piramicasa/#contacto">Contacto</a></div>
       </nav>
     </header>
 
-    <section class="pm-subpage-hero pm-articles-hero">
+    <section class="pm-subpage-hero pm-articles-hero pm-sacred-bg">
       <div class="pm-articles-wrap">
-        <div class="pm-label">Biblioteca temática</div>
+        <div class="pm-label">Biblioteca temática integrada</div>
         <h1>Artículos, información y experimentos</h1>
-        <p class="pm-lead">Hemos integrado y organizado la sección de artículos en bloques temáticos para facilitar la consulta profesional de contenidos sobre salud, ciencia, productos y temas complementarios.</p>
+        <p class="pm-lead">Ahora toda la biblioteca se consulta dentro de esta web: mismo estilo visual, navegación unificada y fichas internas por temática.</p>
       </div>
     </section>
 
@@ -52,32 +92,32 @@
         <div class="pm-label">Salud</div>
         <h2>El efecto piramidal en la salud</h2>
         <div class="pm-articles-grid">
-          <a class="pm-article-link" href="https://www.piramicasa.es/es/tratamiento-borreliasis-con-piramides.html" target="_blank" rel="noopener">Borreliasis</a>
-          <a class="pm-article-link" href="https://www.piramicasa.es/es/tratamiento-de-la-candidiasis-candida-albicans-y-otras.html" target="_blank" rel="noopener">Candidiasis</a>
-          <a class="pm-article-link" href="https://www.piramicasa.es/es/enfermedades_y_dolencias_tratadas_con_piramides.html" target="_blank" rel="noopener">Dolencias tratadas con pirámides</a>
-          <a class="pm-article-link" href="https://www.piramicasa.es/es/fibromialgia.htm" target="_blank" rel="noopener">Fibromialgia</a>
-          <a class="pm-article-link" href="https://www.piramicasa.es/es/hidradenitis.htm" target="_blank" rel="noopener">Hidradenitis</a>
-          <a class="pm-article-link" href="https://www.piramicasa.es/es/meditacion-en-piramides.html" target="_blank" rel="noopener">Meditación en pirámides</a>
-          <a class="pm-article-link" href="https://www.piramicasa.es/es/prostata.htm" target="_blank" rel="noopener">Problemas de próstata</a>
-          <a class="pm-article-link" href="https://www.piramicasa.es/es/renales.htm" target="_blank" rel="noopener">Transplante de riñón</a>
+          <a class="pm-article-card" href="#art-borreliasis"><span class="pm-icon">🦠</span><span class="pm-card-title">Borreliasis</span><span class="pm-card-cta">Ver</span></a>
+          <a class="pm-article-card" href="#art-candidiasis"><span class="pm-icon">🧫</span><span class="pm-card-title">Candidiasis</span><span class="pm-card-cta">Ver</span></a>
+          <a class="pm-article-card" href="#art-dolencias"><span class="pm-icon">🩺</span><span class="pm-card-title">Dolencias tratadas</span><span class="pm-card-cta">Ver</span></a>
+          <a class="pm-article-card" href="#art-fibromialgia"><span class="pm-icon">💪</span><span class="pm-card-title">Fibromialgia</span><span class="pm-card-cta">Ver</span></a>
+          <a class="pm-article-card" href="#art-hidradenitis"><span class="pm-icon">🧬</span><span class="pm-card-title">Hidradenitis</span><span class="pm-card-cta">Ver</span></a>
+          <a class="pm-article-card" href="#art-meditacion"><span class="pm-icon">🧘</span><span class="pm-card-title">Meditación en pirámides</span><span class="pm-card-cta">Ver</span></a>
+          <a class="pm-article-card" href="#art-prostata"><span class="pm-icon">🫀</span><span class="pm-card-title">Próstata</span><span class="pm-card-cta">Ver</span></a>
+          <a class="pm-article-card" href="#art-renales"><span class="pm-icon">💧</span><span class="pm-card-title">Riñón y recuperación</span><span class="pm-card-cta">Ver</span></a>
         </div>
       </div>
     </section>
 
-    <section class="pm-section pm-section-dark pm-articles-section">
+    <section class="pm-section pm-section-dark pm-articles-section pm-sacred-bg">
       <div class="pm-articles-wrap">
         <div class="pm-label" style="color:var(--pm-oro)">Ciencia</div>
         <h2 style="color:var(--pm-crema)">Ciencia y pirámides</h2>
         <div class="pm-articles-grid">
-          <a class="pm-article-link" href="https://www.piramicasa.es/es/efecto-piramidal.html" target="_blank" rel="noopener">Efecto piramidal</a>
-          <a class="pm-article-link" href="https://www.piramicasa.es/es/energia-piramidal.html" target="_blank" rel="noopener">Energía piramidal</a>
-          <a class="pm-article-link" href="https://www.piramicasa.es/es/experiencias-piramidales.html" target="_blank" rel="noopener">Experiencias piramidales</a>
-          <a class="pm-article-link" href="https://www.piramicasa.es/es/experimentos_piramides_para_cientificos.html" target="_blank" rel="noopener">Experimentos científicos</a>
-          <a class="pm-article-link" href="https://www.piramicasa.es/es/experimentos_caseros.htm" target="_blank" rel="noopener">Experimentos caseros</a>
-          <a class="pm-article-link" href="https://www.piramicasa.es/es/funcionamiento_magnetico_de_las_piramides.html" target="_blank" rel="noopener">Función magnética</a>
-          <a class="pm-article-link" href="https://www.piramicasa.es/es/como_orientar_una_piramide_con_brujula.html" target="_blank" rel="noopener">Orientación con brújula</a>
-          <a class="pm-article-link" href="https://www.piramicasa.es/es/avales_terapia_piramidal_oficial.html" target="_blank" rel="noopener">Terapia piramidal oficial</a>
-          <a class="pm-article-link" href="https://www.piramicasa.es/es/testimonios_energia_piramidal.html" target="_blank" rel="noopener">Testimonios escritos</a>
+          <a class="pm-article-card" href="#art-efecto"><span class="pm-icon">🔺</span><span class="pm-card-title">Efecto piramidal</span><span class="pm-card-cta">Ver</span></a>
+          <a class="pm-article-card" href="#art-energia"><span class="pm-icon">⚡</span><span class="pm-card-title">Energía piramidal</span><span class="pm-card-cta">Ver</span></a>
+          <a class="pm-article-card" href="#art-experiencias"><span class="pm-icon">🧑‍🔬</span><span class="pm-card-title">Experiencias</span><span class="pm-card-cta">Ver</span></a>
+          <a class="pm-article-card" href="#art-exp-cientificos"><span class="pm-icon">🔬</span><span class="pm-card-title">Experimentos científicos</span><span class="pm-card-cta">Ver</span></a>
+          <a class="pm-article-card" href="#art-exp-caseros"><span class="pm-icon">🧪</span><span class="pm-card-title">Experimentos caseros</span><span class="pm-card-cta">Ver</span></a>
+          <a class="pm-article-card" href="#art-magnetico"><span class="pm-icon">🧲</span><span class="pm-card-title">Función magnética</span><span class="pm-card-cta">Ver</span></a>
+          <a class="pm-article-card" href="#art-orientacion"><span class="pm-icon">🧭</span><span class="pm-card-title">Orientación con brújula</span><span class="pm-card-cta">Ver</span></a>
+          <a class="pm-article-card" href="#art-avales"><span class="pm-icon">📜</span><span class="pm-card-title">Avales oficiales</span><span class="pm-card-cta">Ver</span></a>
+          <a class="pm-article-card" href="#art-testimonios"><span class="pm-icon">🎥</span><span class="pm-card-title">Testimonios escritos</span><span class="pm-card-cta">Ver</span></a>
         </div>
       </div>
     </section>
@@ -85,49 +125,98 @@
     <section class="pm-section pm-section-cream pm-articles-section">
       <div class="pm-articles-wrap">
         <div class="pm-label">Modelos y productos</div>
-        <h2>Pirámides y más productos</h2>
+        <h2>Pirámides y productos especializados</h2>
         <div class="pm-articles-grid">
-          <a class="pm-article-link" href="https://www.piramicasa.es/PIRAMIDES/arcones-faraday.html" target="_blank" rel="noopener">Arcones Faraday</a>
-          <a class="pm-article-link" href="https://www.piramicasa.es/PIRAMIDES/Piramide.htm" target="_blank" rel="noopener">Bungalow piramidal</a>
-          <a class="pm-article-link" href="https://www.piramicasa.es/PIRAMIDES/estructura_hygia.htm" target="_blank" rel="noopener">Hygia - Horus</a>
-          <a class="pm-article-link" href="https://www.piramicasa.es/PIRAMIDES/mascotas.html" target="_blank" rel="noopener">Piramascota</a>
-          <a class="pm-article-link" href="https://www.piramicasa.es/PIRAMIDES/estructura_piramicama.htm" target="_blank" rel="noopener">Piramicama</a>
-          <a class="pm-article-link" href="https://www.piramicasa.es/PIRAMIDES/piramicama_transparente.html" target="_blank" rel="noopener">Piramicama transparente</a>
-          <a class="pm-article-link" href="https://www.piramicasa.es/PIRAMIDES/piramicamas_lujo_luxor.html" target="_blank" rel="noopener">Piramicamas de lujo</a>
-          <a class="pm-article-link" href="https://www.piramicasa.es/PIRAMIDES/piramicasa_vital.html" target="_blank" rel="noopener">Piramicasa Vital</a>
-          <a class="pm-article-link" href="https://www.piramicasa.es/PIRAMIDES/estructura_pirajardin.htm" target="_blank" rel="noopener">Pirámides jardín</a>
-          <a class="pm-article-link" href="https://www.piramicasa.es/PIRAMIDES/bunkers-y-refugios-seguros-contra-catastrofes.html" target="_blank" rel="noopener">Refugios</a>
-          <a class="pm-article-link" href="https://www.piramicasa.es/PIRAMIDES/asesoria_planos_casas_piramidales.html" target="_blank" rel="noopener">Planos piramidales</a>
-          <a class="pm-article-link" href="https://www.piramicasa.es/es/vendedores-piramicasa.html" target="_blank" rel="noopener">Representantes</a>
+          <a class="pm-article-card" href="#art-faraday"><span class="pm-icon">🛡️</span><span class="pm-card-title">Arcones Faraday</span><span class="pm-card-cta">Ver</span></a>
+          <a class="pm-article-card" href="#art-bungalow"><span class="pm-icon">🏠</span><span class="pm-card-title">Bungalow piramidal</span><span class="pm-card-cta">Ver</span></a>
+          <a class="pm-article-card" href="#art-hygia"><span class="pm-icon">🛌</span><span class="pm-card-title">Hygia / Horus</span><span class="pm-card-cta">Ver</span></a>
+          <a class="pm-article-card" href="#art-piramascota"><span class="pm-icon">🐾</span><span class="pm-card-title">Piramascota</span><span class="pm-card-cta">Ver</span></a>
+          <a class="pm-article-card" href="#art-piramicama"><span class="pm-icon">🛏️</span><span class="pm-card-title">Piramicama</span><span class="pm-card-cta">Ver</span></a>
+          <a class="pm-article-card" href="#art-transparente"><span class="pm-icon">🪟</span><span class="pm-card-title">Piramicama transparente</span><span class="pm-card-cta">Ver</span></a>
+          <a class="pm-article-card" href="#art-luxor"><span class="pm-icon">✨</span><span class="pm-card-title">Piramicama Luxor</span><span class="pm-card-cta">Ver</span></a>
+          <a class="pm-article-card" href="#art-vital"><span class="pm-icon">🌿</span><span class="pm-card-title">Piramicasa Vital</span><span class="pm-card-cta">Ver</span></a>
+          <a class="pm-article-card" href="#art-jardin"><span class="pm-icon">🌳</span><span class="pm-card-title">Pirámides jardín</span><span class="pm-card-cta">Ver</span></a>
+          <a class="pm-article-card" href="#art-refugios"><span class="pm-icon">🧱</span><span class="pm-card-title">Refugios</span><span class="pm-card-cta">Ver</span></a>
+          <a class="pm-article-card" href="#art-planos"><span class="pm-icon">📐</span><span class="pm-card-title">Planos piramidales</span><span class="pm-card-cta">Ver</span></a>
+          <a class="pm-article-card" href="#art-vendedores"><span class="pm-icon">🤝</span><span class="pm-card-title">Representantes</span><span class="pm-card-cta">Ver</span></a>
         </div>
       </div>
     </section>
 
-    <section class="pm-section pm-section-dark pm-articles-section">
+    <section class="pm-section pm-section-dark pm-articles-section pm-sacred-bg">
       <div class="pm-articles-wrap">
         <div class="pm-label" style="color:var(--pm-oro)">Complementario</div>
-        <h2 style="color:var(--pm-crema)">Otros temas y recursos gratuitos</h2>
+        <h2 style="color:var(--pm-crema)">Recursos y temas adicionales</h2>
         <div class="pm-articles-grid">
-          <a class="pm-article-link" href="https://www.piramicasa.es/es/centros_terapia_piramidal.html" target="_blank" rel="noopener">Centros de terapia piramidal</a>
-          <a class="pm-article-link" href="https://www.piramicasa.es/es/faq_piramides.htm" target="_blank" rel="noopener">FAQ Pirámides</a>
-          <a class="pm-article-link" href="https://www.piramicasa.es/es/piramidologia-historica.html" target="_blank" rel="noopener">Piramidología histórica</a>
-          <a class="pm-article-link" href="https://www.piramicasa.es/EGIPTO/nuestros-viajes-a-egipto.html" target="_blank" rel="noopener">Viaje a Egipto</a>
-          <a class="pm-article-link" href="https://www.piramicasa.es/GRATIS/manual-diagnostico-tratamiento-su-jok.htm" target="_blank" rel="noopener">Manual Su-Jok gratis</a>
-          <a class="pm-article-link" href="https://www.piramicasa.es/es/archivos/mgh.pdf" target="_blank" rel="noopener">Manual gratuito Dr. Hammer</a>
-          <a class="pm-article-link" href="https://www.piramicasa.es/GRATIS/trampamosquitos.htm" target="_blank" rel="noopener">Trampa casera para mosquitos</a>
-          <a class="pm-article-link" href="https://www.piramicasa.es/GRATIS/trampa-para-cucarachas.htm" target="_blank" rel="noopener">Trampa casera para cucarachas</a>
+          <a class="pm-article-card" href="#art-centros"><span class="pm-icon">🏥</span><span class="pm-card-title">Centros de terapia</span><span class="pm-card-cta">Ver</span></a>
+          <a class="pm-article-card" href="#art-faq"><span class="pm-icon">❓</span><span class="pm-card-title">FAQ Pirámides</span><span class="pm-card-cta">Ver</span></a>
+          <a class="pm-article-card" href="#art-historica"><span class="pm-icon">📚</span><span class="pm-card-title">Piramidología histórica</span><span class="pm-card-cta">Ver</span></a>
+          <a class="pm-article-card" href="#art-egipto"><span class="pm-icon">🗺️</span><span class="pm-card-title">Viaje a Egipto</span><span class="pm-card-cta">Ver</span></a>
+          <a class="pm-article-card" href="#art-sujok"><span class="pm-icon">🖐️</span><span class="pm-card-title">Manual Su-Jok</span><span class="pm-card-cta">Ver</span></a>
+          <a class="pm-article-card" href="#art-hammer"><span class="pm-icon">📘</span><span class="pm-card-title">Manual Dr. Hammer</span><span class="pm-card-cta">Ver</span></a>
+          <a class="pm-article-card" href="#art-mosquitos"><span class="pm-icon">🦟</span><span class="pm-card-title">Trampa para mosquitos</span><span class="pm-card-cta">Ver</span></a>
+          <a class="pm-article-card" href="#art-cucarachas"><span class="pm-icon">🪳</span><span class="pm-card-title">Trampa para cucarachas</span><span class="pm-card-cta">Ver</span></a>
         </div>
-        <p class="pm-articles-note">Estos enlaces forman parte de la biblioteca temática original de Piramicasa y se abren en pestaña nueva para mantener tu navegación en esta web.</p>
-        <div style="margin-top:26px;display:flex;gap:14px;flex-wrap:wrap;justify-content:center;">
-          <a href="/piramicasa/" class="pm-btn pm-btn-primary">Volver al inicio</a>
-          <a href="https://www.piramicasa.es/es/articulos.htm" target="_blank" rel="noopener" class="pm-btn pm-btn-outline pm-btn-more-info">Ver fuente completa de artículos</a>
+      </div>
+    </section>
+
+    <section class="pm-section pm-section-cream pm-articles-section">
+      <div class="pm-articles-wrap">
+        <div class="pm-label">Contenido integrado</div>
+        <h2>Fichas internas de la biblioteca</h2>
+        <div class="pm-article-detail-grid">
+          <article id="art-borreliasis" class="pm-article-detail pm-article-anchor"><h3>Borreliasis</h3><p>Se documenta el uso de exposición piramidal en protocolos de apoyo a procesos infecciosos crónicos.</p><ul><li>Contexto clínico y evolución de síntomas.</li><li>Frecuencia y tiempo de uso reportados.</li><li>Recomendaciones de seguimiento terapéutico.</li></ul></article>
+          <article id="art-candidiasis" class="pm-article-detail pm-article-anchor"><h3>Candidiasis</h3><p>Contenido centrado en casos de candidiasis y observaciones durante tratamientos integrados.</p><ul><li>Combinación con hábitos de higiene y alimentación.</li><li>Registro de respuesta progresiva.</li><li>Observación de recaídas y control.</li></ul></article>
+          <article id="art-dolencias" class="pm-article-detail pm-article-anchor"><h3>Dolencias tratadas</h3><p>Recopilación de dolencias frecuentes descritas por usuarios y terapeutas.</p><ul><li>Clasificación por sistemas corporales.</li><li>Protocolos orientativos de exposición.</li><li>Notas de prevención y límites del método.</li></ul></article>
+          <article id="art-fibromialgia" class="pm-article-detail pm-article-anchor"><h3>Fibromialgia</h3><p>Testimonios enfocados en descanso, dolor muscular y recuperación funcional.</p><ul><li>Indicadores de calidad de sueño.</li><li>Niveles de dolor y fatiga.</li><li>Recomendación de constancia.</li></ul></article>
+          <article id="art-hidradenitis" class="pm-article-detail pm-article-anchor"><h3>Hidradenitis</h3><p>Información sobre experiencias en procesos inflamatorios de piel.</p><ul><li>Reducción de episodios reportados.</li><li>Cuidados complementarios.</li><li>Evolución en periodos prolongados.</li></ul></article>
+          <article id="art-meditacion" class="pm-article-detail pm-article-anchor"><h3>Meditación en pirámides</h3><p>Prácticas orientadas a relajación profunda y mayor claridad mental.</p><ul><li>Preparación del entorno.</li><li>Duración sugerida de sesiones.</li><li>Beneficios percibidos por usuarios.</li></ul></article>
+          <article id="art-prostata" class="pm-article-detail pm-article-anchor"><h3>Próstata</h3><p>Casos y notas sobre molestias prostáticas en contexto terapéutico natural.</p><ul><li>Seguimiento de síntomas urinarios.</li><li>Descanso nocturno y confort.</li><li>Coordinación con evaluación médica.</li></ul></article>
+          <article id="art-renales" class="pm-article-detail pm-article-anchor"><h3>Riñón y recuperación</h3><p>Experiencias de apoyo durante procesos renales complejos.</p><ul><li>Monitoreo del estado general.</li><li>Observación de energía y descanso.</li><li>Acompañamiento clínico continuo.</li></ul></article>
+          <article id="art-efecto" class="pm-article-detail pm-article-anchor"><h3>Efecto piramidal</h3><p>Fundamentos generales del efecto, su marco histórico y aplicación práctica.</p><ul><li>Bases conceptuales.</li><li>Ámbitos de uso investigados.</li><li>Líneas de trabajo abiertas.</li></ul></article>
+          <article id="art-energia" class="pm-article-detail pm-article-anchor"><h3>Energía piramidal</h3><p>Exposición sobre dinámica energética asociada a geometría y orientación.</p><ul><li>Estructura y materiales.</li><li>Interacción con el entorno.</li><li>Variables de eficacia.</li></ul></article>
+          <article id="art-experiencias" class="pm-article-detail pm-article-anchor"><h3>Experiencias</h3><p>Compendio de experiencias prácticas reportadas en distintos contextos.</p><ul><li>Casos domésticos y profesionales.</li><li>Observaciones repetidas.</li><li>Factores que alteran resultados.</li></ul></article>
+          <article id="art-exp-cientificos" class="pm-article-detail pm-article-anchor"><h3>Experimentos científicos</h3><p>Listado de pruebas reproducibles propuestas para validación técnica.</p><ul><li>Diseños con control.</li><li>Variables medibles.</li><li>Documentación de resultados.</li></ul></article>
+          <article id="art-exp-caseros" class="pm-article-detail pm-article-anchor"><h3>Experimentos caseros</h3><p>Propuestas simples para observar efectos de conservación y vitalidad.</p><ul><li>Materiales fáciles de conseguir.</li><li>Pasos de montaje.</li><li>Registro de cambios.</li></ul></article>
+          <article id="art-magnetico" class="pm-article-detail pm-article-anchor"><h3>Función magnética</h3><p>Análisis de hipótesis magnéticas ligadas a la forma piramidal.</p><ul><li>Relación con orientación cardinal.</li><li>Interacción campo-estructura.</li><li>Interpretación experimental.</li></ul></article>
+          <article id="art-orientacion" class="pm-article-detail pm-article-anchor"><h3>Orientación con brújula</h3><p>Guía para orientar correctamente estructuras piramidales en campo real.</p><ul><li>Ajuste fino por grados.</li><li>Errores comunes de montaje.</li><li>Comprobaciones finales.</li></ul></article>
+          <article id="art-avales" class="pm-article-detail pm-article-anchor"><h3>Avales oficiales</h3><p>Compilación de avales, cartas y referencias documentales institucionales.</p><ul><li>Contexto de cada aval.</li><li>Alcance del documento.</li><li>Marco legal y de uso.</li></ul></article>
+          <article id="art-testimonios" class="pm-article-detail pm-article-anchor"><h3>Testimonios escritos</h3><p>Casos de usuarios con evolución reportada en salud y bienestar.</p><ul><li>Narrativas completas.</li><li>Tiempos de mejora.</li><li>Resultados subjetivos y funcionales.</li></ul></article>
+          <article id="art-faraday" class="pm-article-detail pm-article-anchor"><h3>Arcones Faraday</h3><p>Aplicación de blindaje y conservación en dispositivos y objetos sensibles.</p><ul><li>Diseño y materiales.</li><li>Escenarios de uso.</li><li>Recomendaciones de instalación.</li></ul></article>
+          <article id="art-bungalow" class="pm-article-detail pm-article-anchor"><h3>Bungalow piramidal</h3><p>Concepto arquitectónico habitable basado en proporciones piramidales.</p><ul><li>Distribución interior.</li><li>Confort y bioclimática.</li><li>Ventajas de diseño.</li></ul></article>
+          <article id="art-hygia" class="pm-article-detail pm-article-anchor"><h3>Hygia / Horus</h3><p>Modelos terapéuticos orientados a uso personal y familiar.</p><ul><li>Dimensiones y potencia.</li><li>Aplicaciones recomendadas.</li><li>Consejos de uso continuado.</li></ul></article>
+          <article id="art-piramascota" class="pm-article-detail pm-article-anchor"><h3>Piramascota</h3><p>Estructura adaptada para bienestar y descanso de animales.</p><ul><li>Ajuste por tamaño de mascota.</li><li>Hábitos de adaptación.</li><li>Mantenimiento básico.</li></ul></article>
+          <article id="art-piramicama" class="pm-article-detail pm-article-anchor"><h3>Piramicama</h3><p>Modelo orientado al descanso nocturno y recuperación diaria.</p><ul><li>Montaje en dormitorio.</li><li>Rutina de exposición nocturna.</li><li>Casos de mejora del descanso.</li></ul></article>
+          <article id="art-transparente" class="pm-article-detail pm-article-anchor"><h3>Piramicama transparente</h3><p>Variante visualmente ligera con funcionalidad terapéutica equivalente.</p><ul><li>Ventajas estéticas.</li><li>Materiales y resistencia.</li><li>Integración en vivienda.</li></ul></article>
+          <article id="art-luxor" class="pm-article-detail pm-article-anchor"><h3>Piramicama Luxor</h3><p>Versión premium con acabados de alta gama y personalización.</p><ul><li>Opciones de diseño.</li><li>Calidad de materiales.</li><li>Posicionamiento de uso.</li></ul></article>
+          <article id="art-vital" class="pm-article-detail pm-article-anchor"><h3>Piramicasa Vital</h3><p>Proyecto integral de hábitat piramidal para estancias prolongadas.</p><ul><li>Arquitectura energética.</li><li>Aplicación residencial.</li><li>Planificación por fases.</li></ul></article>
+          <article id="art-jardin" class="pm-article-detail pm-article-anchor"><h3>Pirámides jardín</h3><p>Soluciones exteriores para ocio, relajación y uso terapéutico.</p><ul><li>Estructuras para exterior.</li><li>Protección y anclaje.</li><li>Usos recomendados.</li></ul></article>
+          <article id="art-refugios" class="pm-article-detail pm-article-anchor"><h3>Refugios</h3><p>Desarrollo de espacios protegidos con enfoque estructural seguro.</p><ul><li>Capas de protección.</li><li>Usabilidad real.</li><li>Escenarios de contingencia.</li></ul></article>
+          <article id="art-planos" class="pm-article-detail pm-article-anchor"><h3>Planos piramidales</h3><p>Servicio técnico para diseño, medidas y ejecución de proyectos.</p><ul><li>Asesoría geométrica.</li><li>Adaptación a terreno.</li><li>Optimización de recursos.</li></ul></article>
+          <article id="art-vendedores" class="pm-article-detail pm-article-anchor"><h3>Representantes</h3><p>Red de colaboradores para difusión y atención local de productos.</p><ul><li>Contacto por región.</li><li>Soporte comercial.</li><li>Derivación técnica.</li></ul></article>
+          <article id="art-centros" class="pm-article-detail pm-article-anchor"><h3>Centros de terapia</h3><p>Listado y alcance de centros que aplican terapia piramidal.</p><ul><li>Perfil de profesionales.</li><li>Servicios disponibles.</li><li>Cobertura geográfica.</li></ul></article>
+          <article id="art-faq" class="pm-article-detail pm-article-anchor"><h3>FAQ Pirámides</h3><p>Preguntas frecuentes sobre montaje, uso y expectativas.</p><ul><li>Dudas iniciales comunes.</li><li>Recomendaciones prácticas.</li><li>Buenas prácticas de seguridad.</li></ul></article>
+          <article id="art-historica" class="pm-article-detail pm-article-anchor"><h3>Piramidología histórica</h3><p>Revisión histórica de corrientes, hallazgos y autores de referencia.</p><ul><li>Línea temporal resumida.</li><li>Contribuciones principales.</li><li>Relación con investigación actual.</li></ul></article>
+          <article id="art-egipto" class="pm-article-detail pm-article-anchor"><h3>Viaje a Egipto</h3><p>Programa de viaje técnico e iniciático vinculado a estudio de pirámides.</p><ul><li>Objetivos del viaje.</li><li>Itinerario base.</li><li>Perfil de participantes.</li></ul></article>
+          <article id="art-sujok" class="pm-article-detail pm-article-anchor"><h3>Manual Su-Jok</h3><p>Material de estudio gratuito para terapias complementarias.</p><ul><li>Contenido introductorio.</li><li>Aplicación básica.</li><li>Formación autodidacta.</li></ul></article>
+          <article id="art-hammer" class="pm-article-detail pm-article-anchor"><h3>Manual Dr. Hammer</h3><p>Documento divulgativo integrado como recurso histórico de consulta.</p><ul><li>Contexto del texto.</li><li>Ejes temáticos principales.</li><li>Consulta crítica recomendada.</li></ul></article>
+          <article id="art-mosquitos" class="pm-article-detail pm-article-anchor"><h3>Trampa para mosquitos</h3><p>Guía práctica doméstica para control ambiental en verano.</p><ul><li>Materiales simples.</li><li>Montaje paso a paso.</li><li>Ubicación recomendada.</li></ul></article>
+          <article id="art-cucarachas" class="pm-article-detail pm-article-anchor"><h3>Trampa para cucarachas</h3><p>Método casero de apoyo para prevención y control en hogar.</p><ul><li>Preparación rápida.</li><li>Puntos de colocación.</li><li>Mantenimiento periódico.</li></ul></article>
         </div>
+        <div class="pm-note-box">Esta biblioteca está integrada en el nuevo sitio para evitar redirecciones a la web antigua y mantener una navegación única dentro de Piramicasa.</div>
+      </div>
+    </section>
+
+    <section class="pm-section pm-section-dark pm-sacred-bg">
+      <div class="pm-articles-wrap" style="text-align:center;padding:8px 20px 46px;">
+        <a href="/piramicasa/" class="pm-btn pm-btn-primary">Volver al inicio</a>
       </div>
     </section>
   </div>
 
   <script src="/piramicasa/assets/mobile-menu.js" defer></script>
-  <script src="/piramicasa/assets/chatbot.js?v=20260819g" defer></script>
-  <script src="/piramicasa/assets/sacred-grid.js?v=20260819g" defer></script>
-<script id="pm-hash-scroll">(function(){function s(){var h=decodeURIComponent(location.hash||"");if(!h||h.length<2)return;var id=h.slice(1),n=0,m=120;var t=setInterval(function(){var el=document.getElementById(id);if(el){clearInterval(t);setTimeout(function(){try{el.scrollIntoView({behavior:"smooth",block:"start"})}catch(e){el.scrollIntoView(true)}},80)}else if(++n>=m){clearInterval(t)}},50)}window.addEventListener("hashchange",s);window.addEventListener("load",function(){if(location.hash)setTimeout(s,160)});if(location.hash)setTimeout(s,360)})();</script></body>
+  <script src="/piramicasa/assets/chatbot.js?v=20260820a" defer></script>
+  <script src="/piramicasa/assets/sacred-grid.js?v=20260820a" defer></script>
+  <script id="pm-hash-scroll">(function(){function s(){var h=decodeURIComponent(location.hash||"");if(!h||h.length<2)return;var id=h.slice(1),n=0,m=120;var t=setInterval(function(){var el=document.getElementById(id);if(el){clearInterval(t);setTimeout(function(){try{el.scrollIntoView({behavior:"smooth",block:"start"})}catch(e){el.scrollIntoView(true)}},80)}else if(++n>=m){clearInterval(t)}},50)}window.addEventListener("hashchange",s);window.addEventListener("load",function(){if(location.hash)setTimeout(s,160)});if(location.hash)setTimeout(s,360)})();</script>
+</body>
 </html>
