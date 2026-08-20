@@ -10,10 +10,11 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="/piramicasa/_next/static/css/b1c84f528cf3d505.css" />
   <link rel="stylesheet" href="/piramicasa/_next/static/css/591bfc4a40e67df4.css" />
-  <link rel="stylesheet" href="/piramicasa/assets/mobile-fix.css?v=20260820e" />
-  <link rel="stylesheet" href="/piramicasa/assets/sacred-grid.css?v=20260820e" />
+  <link rel="stylesheet" href="/piramicasa/assets/mobile-fix.css?v=20260820f" />
+  <link rel="stylesheet" href="/piramicasa/assets/sacred-grid.css?v=20260820f" />
   <style>
-    .pm-header,.pm-page .pm-header,.pm-header.pm-scrolled{position:sticky;top:0;z-index:1000;background:#F7F4F0!important;opacity:1!important;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-bottom:1px solid #E0D9D0;box-shadow:0 2px 12px rgba(0,0,0,.06)}
+    .pm-header{position:fixed;top:0;left:0;right:0;z-index:1000;background:transparent;border-bottom:1px solid transparent;transition:all .3s ease}
+    .pm-page .pm-header.pm-scrolled{background:rgba(247,244,240,.97);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-bottom:1px solid #E0D9D0;box-shadow:0 2px 12px rgba(0,0,0,.06)}
     .pm-articles-wrap{max-width:1160px;margin:0 auto}
     .pm-articles-hero{padding:110px 20px 58px;text-align:center}
     .pm-articles-section{padding:34px 20px}
@@ -87,10 +88,13 @@
         <div class="pm-nav-item">
           <a href="/piramicasa/#nosotros">Nosotros <span class="pm-nav-arrow">▼</span></a>
           <div class="pm-dropdown">
-            <a href="/piramicasa/historia">Historia</a>
-            <a href="/piramicasa/presentacion">Presentación</a>
-            <a href="/piramicasa/conferencias">Conferencias</a>
+            <a href="/piramicasa/historia">Historia de Piramicasa</a>
+            <a href="/piramicasa/presentacion">Presentación del Director</a>
+            <a href="/piramicasa/documento-critico">Documento Crítico</a>
+            <a href="/piramicasa/conferencias">Conferencias y Talleres</a>
             <a href="/piramicasa/videos">Videos</a>
+            <a href="/piramicasa/centros-terapia">Centros de Terapia</a>
+            <a href="/piramicasa/testimonios">Testimonios</a>
           </div>
         </div>
 
@@ -100,6 +104,13 @@
         <div class="pm-nav-item pm-nav-egipto"><a href="/piramicasa/viaje-egipto">Viaje a Egipto</a></div>
         <div class="pm-nav-item"><a href="/piramicasa/#contacto">Contacto</a></div>
       </nav>
+      <div class="pm-header-right">
+        <a href="tel:+34681087539" class="pm-phone">+34 681 087 539</a>
+        <div class="pm-lang">
+          <span>ES</span>
+          <a href="/piramicasa/en" rel="nofollow">EN</a>
+        </div>
+      </div>
     </header>
 
     <section class="pm-subpage-hero pm-articles-hero pm-sacred-bg">
@@ -191,8 +202,8 @@
   </div>
 
   <script src="/piramicasa/assets/mobile-menu.js" defer></script>
-  <script src="/piramicasa/assets/chatbot.js?v=20260820e" defer></script>
-  <script src="/piramicasa/assets/sacred-grid.js?v=20260820e" defer></script>
+  <script src="/piramicasa/assets/chatbot.js?v=20260820f" defer></script>
+  <script src="/piramicasa/assets/sacred-grid.js?v=20260820f" defer></script>
   <script>
     (function(){
       function loadingHtml(){
