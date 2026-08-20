@@ -10,10 +10,10 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="/piramicasa/_next/static/css/b1c84f528cf3d505.css" />
   <link rel="stylesheet" href="/piramicasa/_next/static/css/591bfc4a40e67df4.css" />
-  <link rel="stylesheet" href="/piramicasa/assets/mobile-fix.css?v=20260820a" />
-  <link rel="stylesheet" href="/piramicasa/assets/sacred-grid.css?v=20260820a" />
+  <link rel="stylesheet" href="/piramicasa/assets/mobile-fix.css?v=20260820b" />
+  <link rel="stylesheet" href="/piramicasa/assets/sacred-grid.css?v=20260820b" />
   <style>
-    .pm-header{position:sticky;top:0;z-index:1000;background:rgba(247,244,240,.97)!important;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid #E0D9D0;box-shadow:0 2px 12px rgba(0,0,0,.06)}
+    .pm-header,.pm-page .pm-header,.pm-header.pm-scrolled{position:sticky;top:0;z-index:1000;background:#F7F4F0!important;opacity:1!important;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-bottom:1px solid #E0D9D0;box-shadow:0 2px 12px rgba(0,0,0,.06)}
     .pm-articles-wrap{max-width:1160px;margin:0 auto}
     .pm-articles-hero{padding:110px 20px 58px;text-align:center}
     .pm-articles-section{padding:34px 20px}
@@ -32,6 +32,7 @@
     .pm-viewer-close{appearance:none;border:1px solid #D6C7B6;background:#fff;color:#6f6459;border-radius:999px;padding:6px 12px;font-size:.82rem;font-weight:700;cursor:pointer}
     .pm-viewer-close:hover{background:#f7f1ea}
     .pm-viewer-content{padding:18px;max-height:560px;overflow:auto;line-height:1.65;color:#433f3a}
+    .pm-viewer-frame{width:100%;height:72vh;min-height:520px;border:1px solid #ddd;border-radius:10px;background:#fff}
     .pm-viewer-content h1,.pm-viewer-content h2,.pm-viewer-content h3{font-family:'Playfair Display',serif;color:#2f3a27;line-height:1.22;margin:20px 0 10px}
     .pm-viewer-content p{margin:0 0 10px}
     .pm-viewer-content ul{margin:0 0 12px;padding-left:20px}
@@ -44,7 +45,7 @@
     .pm-loading-dot:nth-child(3){animation-delay:.3s}
     @keyframes pmPulse{0%,100%{opacity:.35;transform:scale(.8)}50%{opacity:1;transform:scale(1)}}
     .pm-note-box{margin-top:16px;padding:12px 14px;border-left:4px solid #C69C6D;background:#F4EEE7;color:#5f564e;border-radius:0 8px 8px 0}
-    @media(max-width:768px){.pm-articles-hero{padding-top:86px}.pm-viewer-content{padding:14px;max-height:66vh}.pm-viewer-head{padding:12px 14px}}
+    @media(max-width:768px){.pm-articles-hero{padding-top:86px}.pm-viewer-content{padding:14px;max-height:66vh}.pm-viewer-frame{height:65vh;min-height:420px}.pm-viewer-head{padding:12px 14px}}
   </style>
 </head>
 <body>
@@ -86,6 +87,8 @@
           </div>
         </div>
 
+        <div class="pm-nav-item"><a href="/piramicasa/videos">Videos</a></div>
+        <div class="pm-nav-item"><a href="/piramicasa/centros-terapia">Centros</a></div>
         <div class="pm-nav-item"><a href="/piramicasa/libros">Libros</a></div>
         <div class="pm-nav-item pm-nav-egipto"><a href="/piramicasa/viaje-egipto">Viaje a Egipto</a></div>
         <div class="pm-nav-item"><a href="/piramicasa/#contacto">Contacto</a></div>
@@ -177,7 +180,7 @@
       <div class="pm-articles-wrap">
         <div class="pm-label">Contenido integrado</div>
         <h2>Contenido completo de cada artículo</h2>
-        <p class="pm-lead">Pulsa cualquier botón de las secciones superiores para desplegar aquí su información completa. Al abrir otro artículo, el anterior se repliega automáticamente.</p>
+        <p class="pm-lead">Pulsa cualquier botón y verás aquí el artículo completo. Al abrir otro, se reemplaza automáticamente el anterior en este mismo panel desplegable.</p>
 
         <div id="pm-article-viewer" class="pm-article-viewer pm-viewer-hidden" aria-live="polite">
           <div class="pm-viewer-head">
@@ -199,8 +202,8 @@
   </div>
 
   <script src="/piramicasa/assets/mobile-menu.js" defer></script>
-  <script src="/piramicasa/assets/chatbot.js?v=20260820a" defer></script>
-  <script src="/piramicasa/assets/sacred-grid.js?v=20260820a" defer></script>
+  <script src="/piramicasa/assets/chatbot.js?v=20260820b" defer></script>
+  <script src="/piramicasa/assets/sacred-grid.js?v=20260820b" defer></script>
   <script>
     (function(){
       var sourceByTitle = {
@@ -243,69 +246,14 @@
         "Trampa para cucarachas":"https://www.piramicasa.es/GRATIS/trampa-para-cucarachas.htm"
       };
 
-      function toCandidates(sourceUrl){
-        var u = new URL(sourceUrl);
-        var base = '/piramicasa';
-        var pRaw = u.pathname;
-        var pLow = u.pathname.toLowerCase();
-        var extRaw = /\.(html?|pdf)$/i.test(pRaw);
-        var extLow = /\.(html?|pdf)$/i.test(pLow);
-
-        var list = [
-          base + pRaw,
-          base + pLow,
-          base + (extRaw ? pRaw + '.html' : pRaw + '.html'),
-          base + (extLow ? pLow + '.html' : pLow + '.html')
-        ];
-
-        var uniq = [];
-        for (var i=0;i<list.length;i++) if (uniq.indexOf(list[i]) === -1) uniq.push(list[i]);
-        return uniq;
-      }
-
-      function extractHtmlContent(html){
-        var doc = new DOMParser().parseFromString(html, 'text/html');
-        ['script','style','noscript','header','footer','nav','form'].forEach(function(sel){
-          doc.querySelectorAll(sel).forEach(function(n){ n.remove(); });
-        });
-        var root = doc.querySelector('main') || doc.querySelector('article') || doc.body;
-        var blocks = root.querySelectorAll('h1,h2,h3,h4,p,li');
-        var out = [];
-        blocks.forEach(function(n){
-          var t = (n.textContent || '').replace(/\s+/g,' ').trim();
-          if (!t) return;
-          if (t.length < 3) return;
-          if (/copyright|aviso legal|social media/i.test(t)) return;
-          if (/^inicio\b/i.test(t)) return;
-          if (/^piramicasa\b/i.test(t) && t.length < 35) return;
-          var tag = n.tagName.toLowerCase();
-          if (tag === 'li') out.push('<li>'+t+'</li>');
-          else if (/^h[1-4]$/.test(tag)) out.push('<'+tag+'>'+t+'</'+tag+'>');
-          else out.push('<p>'+t+'</p>');
-        });
-
-        if (!out.length) {
-          return '<p class="pm-viewer-muted">No se ha podido extraer contenido textual estructurado de esta fuente.</p>';
-        }
-
-        var normalized = [];
-        var inList = false;
-        out.forEach(function(item){
-          if (item.indexOf('<li>') === 0 && !inList) { normalized.push('<ul>'); inList = true; }
-          if (item.indexOf('<li>') !== 0 && inList) { normalized.push('</ul>'); inList = false; }
-          normalized.push(item);
-        });
-        if (inList) normalized.push('</ul>');
-        return normalized.join('');
-      }
-
       function loadingHtml(){
-        return '<div class="pm-loading"><span class="pm-loading-dot"></span><span class="pm-loading-dot"></span><span class="pm-loading-dot"></span><span>Cargando contenido completo...</span></div>';
+        return '<div class="pm-loading"><span class="pm-loading-dot"></span><span class="pm-loading-dot"></span><span class="pm-loading-dot"></span><span>Cargando artículo completo...</span></div>';
       }
 
-      function errorHtml(sourceUrl){
-        return '<p class="pm-viewer-muted">No se pudo cargar automáticamente este artículo desde el espejo interno.</p>'+
-               '<p><a class="pm-btn pm-btn-outline pm-btn-more-info" href="'+sourceUrl+'" target="_blank" rel="noopener">Abrir fuente original</a></p>';
+      function frameHtml(sourceUrl, title){
+        var safeTitle = (title || 'Artículo').replace(/"/g,'&quot;');
+        return '<iframe class="pm-viewer-frame" src="'+sourceUrl+'" title="'+safeTitle+'" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>'+
+               '<p style="margin-top:10px"><a class="pm-btn pm-btn-outline pm-btn-more-info" href="'+sourceUrl+'" target="_blank" rel="noopener">Abrir en pestaña nueva</a></p>';
       }
 
       var viewer = document.getElementById('pm-article-viewer');
@@ -314,9 +262,12 @@
       var closeBtn = document.getElementById('pm-viewer-close');
       var cards = Array.prototype.slice.call(document.querySelectorAll('.pm-article-card'));
 
+      var activeTitle = null;
+
       closeBtn.addEventListener('click', function(){
         viewer.classList.add('pm-viewer-hidden');
         cards.forEach(function(c){ c.classList.remove('pm-active'); });
+        activeTitle = null;
       });
 
       cards.forEach(function(card){
@@ -326,8 +277,16 @@
           var title = titleNode ? titleNode.textContent.trim() : 'Artículo';
           var sourceUrl = sourceByTitle[title];
 
+          if (activeTitle === title && !viewer.classList.contains('pm-viewer-hidden')) {
+            viewer.classList.add('pm-viewer-hidden');
+            cards.forEach(function(c){ c.classList.remove('pm-active'); });
+            activeTitle = null;
+            return;
+          }
+
           cards.forEach(function(c){ c.classList.remove('pm-active'); });
           card.classList.add('pm-active');
+          activeTitle = title;
 
           viewerTitle.textContent = title;
           viewer.classList.remove('pm-viewer-hidden');
@@ -339,27 +298,11 @@
             return;
           }
 
-          if (/\.pdf$/i.test(sourceUrl)) {
-            var pdfUrl = '/piramicasa' + new URL(sourceUrl).pathname.toLowerCase();
-            viewerContent.innerHTML = '<iframe src="'+pdfUrl+'" title="'+title+'" style="width:100%;height:72vh;border:1px solid #ddd;border-radius:8px;background:#fff"></iframe>';
-            return;
-          }
-
-          var candidates = toCandidates(sourceUrl);
-          var loaded = null;
-
-          for (var i=0;i<candidates.length;i++) {
-            try {
-              var res = await fetch(candidates[i], { cache: 'no-store' });
-              if (!res.ok) continue;
-              var html = await res.text();
-              if (!html || html.length < 120) continue;
-              loaded = extractHtmlContent(html);
-              if (loaded) break;
-            } catch(e) {}
-          }
-
-          viewerContent.innerHTML = loaded || errorHtml(sourceUrl);
+          setTimeout(function(){
+            if (activeTitle === title) {
+              viewerContent.innerHTML = frameHtml(sourceUrl, title);
+            }
+          }, 120);
         });
       });
     })();
