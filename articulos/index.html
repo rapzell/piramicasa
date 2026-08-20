@@ -10,8 +10,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="/piramicasa/_next/static/css/b1c84f528cf3d505.css" />
   <link rel="stylesheet" href="/piramicasa/_next/static/css/591bfc4a40e67df4.css" />
-  <link rel="stylesheet" href="/piramicasa/assets/mobile-fix.css?v=20260820g" />
-  <link rel="stylesheet" href="/piramicasa/assets/sacred-grid.css?v=20260820g" />
+  <link rel="stylesheet" href="/piramicasa/assets/mobile-fix.css?v=20260820h" />
+  <link rel="stylesheet" href="/piramicasa/assets/sacred-grid.css?v=20260820h" />
   <style>
     .pm-header{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(247,244,240,.97)!important;backdrop-filter:blur(8px)!important;-webkit-backdrop-filter:blur(8px)!important;border-bottom:1px solid #E0D9D0!important;box-shadow:0 2px 12px rgba(0,0,0,.06)!important;transition:all .3s ease}
     .pm-page .pm-header.pm-at-top{background:transparent!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important;border-bottom:1px solid transparent!important;box-shadow:none!important}
@@ -38,18 +38,28 @@
     .pm-viewer-title{margin:0;font-size:1.08rem}
     .pm-viewer-close{appearance:none;border:1px solid #D6C7B6;background:#fff;color:#6f6459;border-radius:999px;padding:6px 12px;font-size:.82rem;font-weight:700;cursor:pointer}
     .pm-viewer-close:hover{background:#f7f1ea}
-    .pm-viewer-content{padding:18px;max-height:560px;overflow:auto;line-height:1.65;color:#433f3a}
+    .pm-viewer-content{padding:20px;max-height:560px;overflow:auto;line-height:1.72;color:#433f3a;background:linear-gradient(180deg,#fff 0%,#fcfaf7 100%)}
     .pm-viewer-frame{width:100%;height:72vh;min-height:520px;border:1px solid #ddd;border-radius:10px;background:#fff}
     .pm-viewer-content h1,.pm-viewer-content h2,.pm-viewer-content h3{font-family:'Playfair Display',serif;color:#2f3a27;line-height:1.22;margin:20px 0 10px}
     .pm-viewer-content p{margin:0 0 10px}
     .pm-viewer-content ul{margin:0 0 12px;padding-left:20px}
     .pm-viewer-content li{margin-bottom:6px}
-    .pm-article-block{padding:14px 0;border-bottom:1px solid #eee}
-    .pm-article-block:last-child{border-bottom:none;padding-bottom:0}
-    .pm-article-block h4{margin:0 0 10px 0;font-family:'Playfair Display',serif;color:#2f3a27}
+    .pm-article-block{padding:18px 18px 16px;margin:0 0 14px;background:#fff;border:1px solid #ece5dc;border-radius:14px;box-shadow:0 8px 20px rgba(46,53,33,.06)}
+    .pm-article-block:last-child{margin-bottom:0}
+    .pm-article-block h4{margin:0 0 10px 0;font-family:'Playfair Display',serif;color:#2f3a27;font-size:1.12rem;line-height:1.25}
+    .pm-article-meta{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:0 0 8px}
+    .pm-article-chip{display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border-radius:999px;background:#f4eee7;border:1px solid #e7dacb;color:#6f6152;font-size:.72rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase}
+    .pm-article-source{font-size:.75rem;color:#958879}
     .pm-article-subhead{margin:12px 0 8px 0;font-size:1rem;line-height:1.3;color:#38442f;font-weight:700}
     .pm-article-gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px;margin:12px 0 14px}
-    .pm-article-gallery img{width:100%;height:140px;object-fit:cover;border-radius:10px;border:1px solid #ddd;background:#fff}
+    .pm-article-gallery img{width:100%;height:160px;object-fit:cover;border-radius:10px;border:1px solid #ddd;background:#fff;transition:transform .25s ease,box-shadow .25s ease}
+    .pm-article-gallery img:hover{transform:translateY(-2px);box-shadow:0 10px 18px rgba(45,52,33,.16)}
+    .pm-article-prose{max-width:84ch}
+    .pm-article-prose p{margin:0 0 12px;font-size:.98rem;line-height:1.74;color:#47423b}
+    .pm-article-prose p.pm-article-lead{font-size:1.04rem;line-height:1.78;color:#2f3a27}
+    .pm-article-list{margin:4px 0 12px;padding:0;list-style:none;display:grid;gap:8px}
+    .pm-article-list li{position:relative;padding:10px 12px 10px 30px;background:#faf6f1;border:1px solid #eadfce;border-radius:10px;line-height:1.55;color:#3f3a33}
+    .pm-article-list li::before{content:'✓';position:absolute;left:10px;top:10px;color:#b88b55;font-weight:700}
     .pm-viewer-muted{color:#7b7268;font-style:italic}
     .pm-viewer-hidden{display:none}
     .pm-loading{display:inline-flex;align-items:center;gap:10px;color:#6a6259}
@@ -229,8 +239,8 @@
   </div>
 
   <script src="/piramicasa/assets/mobile-menu.js" defer></script>
-  <script src="/piramicasa/assets/chatbot.js?v=20260820g" defer></script>
-  <script src="/piramicasa/assets/sacred-grid.js?v=20260820g" defer></script>
+  <script src="/piramicasa/assets/chatbot.js?v=20260820h" defer></script>
+  <script src="/piramicasa/assets/sacred-grid.js?v=20260820h" defer></script>
   <script>
     (function(){
       function loadingHtml(){
@@ -275,15 +285,41 @@
         return ratio > 0.75;
       }
 
+      function splitLongParagraph(p){
+        var text = String(p || '').replace(/\s+/g, ' ').trim();
+        if (text.length < 360) return [text];
+        var sentences = text.match(/[^.!?]+[.!?]+|[^.!?]+$/g) || [text];
+        if (sentences.length < 3) return [text];
+        var pivot = Math.ceil(sentences.length / 2);
+        var first = sentences.slice(0, pivot).join(' ').trim();
+        var second = sentences.slice(pivot).join(' ').trim();
+        return second ? [first, second] : [first];
+      }
+
+      function maybeListItems(p){
+        var text = String(p || '').trim();
+        if (text.length < 60 || text.length > 420) return null;
+        if (isHeadingLike(text)) return null;
+        var parts = text.split(';').map(function(x){ return x.trim(); }).filter(function(x){ return x.length > 6; });
+        if (parts.length < 3 || parts.length > 7) return null;
+        var valid = parts.every(function(item){ return item.length < 130; });
+        return valid ? parts : null;
+      }
+
       function renderSections(title, payload){
         if (!payload || !payload.sections || !payload.sections.length) {
           return '<h3>'+esc(title)+'</h3><p class="pm-viewer-muted">Este contenido está en proceso de ampliación editorial interna.</p>';
         }
 
         var html = '';
-        payload.sections.forEach(function(section){
+        payload.sections.forEach(function(section, idx){
           var block = '<article class="pm-article-block">';
           var subtitle = (section.sourceTitle || '').replace(/\s*-\s*Piramicasa\s*$/i, '').trim();
+          block += '<div class="pm-article-meta"><span class="pm-article-chip">Bloque '+esc(String(idx + 1))+'</span>';
+          if (section.sourceUrl) {
+            block += '<span class="pm-article-source">Fuente integrada</span>';
+          }
+          block += '</div>';
           if (subtitle) block += '<h4>'+esc(subtitle)+'</h4>';
 
           var imgs = Array.isArray(section.images) ? section.images : [];
@@ -305,10 +341,32 @@
               return true;
             });
 
+          block += '<div class="pm-article-prose">';
+          var firstBodyParagraph = true;
           paragraphs.forEach(function(p){
-            if (isHeadingLike(p)) block += '<h5 class="pm-article-subhead">'+esc(p)+'</h5>';
-            else block += '<p>'+esc(p)+'</p>';
+            if (isHeadingLike(p)) {
+              block += '<h5 class="pm-article-subhead">'+esc(p)+'</h5>';
+              return;
+            }
+
+            var listItems = maybeListItems(p);
+            if (listItems) {
+              block += '<ul class="pm-article-list">';
+              listItems.forEach(function(item){
+                block += '<li>'+esc(item)+'</li>';
+              });
+              block += '</ul>';
+              firstBodyParagraph = false;
+              return;
+            }
+
+            splitLongParagraph(p).forEach(function(chunk){
+              var leadClass = firstBodyParagraph ? ' class="pm-article-lead"' : '';
+              block += '<p'+leadClass+'>'+esc(chunk)+'</p>';
+              firstBodyParagraph = false;
+            });
           });
+          block += '</div>';
 
           if (!paragraphs.length) {
             block += '<p class="pm-viewer-muted">No se ha encontrado texto ampliado para este bloque.</p>';
