@@ -13,25 +13,38 @@
   <link rel="stylesheet" href="/piramicasa/assets/mobile-fix.css?v=20260820a" />
   <link rel="stylesheet" href="/piramicasa/assets/sacred-grid.css?v=20260820a" />
   <style>
+    .pm-header{position:sticky;top:0;z-index:1000;background:rgba(247,244,240,.97)!important;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid #E0D9D0;box-shadow:0 2px 12px rgba(0,0,0,.06)}
     .pm-articles-wrap{max-width:1160px;margin:0 auto}
     .pm-articles-hero{padding:110px 20px 58px;text-align:center}
     .pm-articles-section{padding:34px 20px}
     .pm-articles-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px;margin-top:18px}
     .pm-article-card{display:flex;align-items:center;gap:12px;padding:12px 14px;border:1px solid rgba(198,156,109,.35);background:rgba(255,255,255,.78);border-radius:12px;text-decoration:none;color:var(--pm-ink);transition:all .2s ease}
+    .pm-article-card.pm-active{border-color:#C69C6D;box-shadow:0 0 0 2px rgba(198,156,109,.22),0 10px 20px rgba(61,74,48,.12)}
     .pm-article-card:hover{transform:translateY(-2px);border-color:#C69C6D;box-shadow:0 10px 22px rgba(61,74,48,.12)}
     .pm-icon{width:34px;height:34px;display:inline-flex;align-items:center;justify-content:center;border-radius:50%;font-size:1rem;background:#EDE7DE;border:1px solid rgba(198,156,109,.45);flex:0 0 auto}
     .pm-card-title{font-weight:600;line-height:1.25;font-size:.95rem}
     .pm-section-dark .pm-article-card{background:rgba(255,255,255,.07);color:var(--pm-crema);border-color:rgba(212,184,150,.35)}
     .pm-section-dark .pm-icon{background:rgba(255,255,255,.12);color:#F8D7A9}
     .pm-article-card .pm-card-cta{margin-left:auto;font-size:.82rem;font-weight:700;color:#8A817A;white-space:nowrap}
-    .pm-article-detail{border:1px solid #E0D9D0;border-radius:14px;background:#fff;padding:20px 20px 16px}
-    .pm-article-detail h3{margin:0 0 8px 0}
-    .pm-article-detail p{margin:0 0 10px 0;color:#5a5450;line-height:1.6}
-    .pm-article-detail ul{margin:0;padding-left:20px;color:#4A4A4A}
-    .pm-article-detail-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
-    .pm-article-anchor{scroll-margin-top:110px}
+    .pm-article-viewer{margin-top:26px;border:1px solid #E0D9D0;border-radius:14px;background:#fff;overflow:hidden;box-shadow:0 10px 30px rgba(35,44,27,.08)}
+    .pm-viewer-head{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 18px;background:linear-gradient(135deg,#f4eee7,#efe6dc);border-bottom:1px solid #E0D9D0}
+    .pm-viewer-title{margin:0;font-size:1.08rem}
+    .pm-viewer-close{appearance:none;border:1px solid #D6C7B6;background:#fff;color:#6f6459;border-radius:999px;padding:6px 12px;font-size:.82rem;font-weight:700;cursor:pointer}
+    .pm-viewer-close:hover{background:#f7f1ea}
+    .pm-viewer-content{padding:18px;max-height:560px;overflow:auto;line-height:1.65;color:#433f3a}
+    .pm-viewer-content h1,.pm-viewer-content h2,.pm-viewer-content h3{font-family:'Playfair Display',serif;color:#2f3a27;line-height:1.22;margin:20px 0 10px}
+    .pm-viewer-content p{margin:0 0 10px}
+    .pm-viewer-content ul{margin:0 0 12px;padding-left:20px}
+    .pm-viewer-content li{margin-bottom:6px}
+    .pm-viewer-muted{color:#7b7268;font-style:italic}
+    .pm-viewer-hidden{display:none}
+    .pm-loading{display:inline-flex;align-items:center;gap:10px;color:#6a6259}
+    .pm-loading-dot{width:8px;height:8px;border-radius:50%;background:#C69C6D;animation:pmPulse 1.1s ease-in-out infinite}
+    .pm-loading-dot:nth-child(2){animation-delay:.15s}
+    .pm-loading-dot:nth-child(3){animation-delay:.3s}
+    @keyframes pmPulse{0%,100%{opacity:.35;transform:scale(.8)}50%{opacity:1;transform:scale(1)}}
     .pm-note-box{margin-top:16px;padding:12px 14px;border-left:4px solid #C69C6D;background:#F4EEE7;color:#5f564e;border-radius:0 8px 8px 0}
-    @media(max-width:768px){.pm-articles-hero{padding-top:86px}.pm-article-detail{padding:16px}}
+    @media(max-width:768px){.pm-articles-hero{padding-top:86px}.pm-viewer-content{padding:14px;max-height:66vh}.pm-viewer-head{padding:12px 14px}}
   </style>
 </head>
 <body>
@@ -160,50 +173,21 @@
       </div>
     </section>
 
-    <section class="pm-section pm-section-cream pm-articles-section">
+    <section class="pm-section pm-section-cream pm-articles-section" id="biblioteca-contenido">
       <div class="pm-articles-wrap">
         <div class="pm-label">Contenido integrado</div>
-        <h2>Fichas internas de la biblioteca</h2>
-        <div class="pm-article-detail-grid">
-          <article id="art-borreliasis" class="pm-article-detail pm-article-anchor"><h3>Borreliasis</h3><p>Se documenta el uso de exposición piramidal en protocolos de apoyo a procesos infecciosos crónicos.</p><ul><li>Contexto clínico y evolución de síntomas.</li><li>Frecuencia y tiempo de uso reportados.</li><li>Recomendaciones de seguimiento terapéutico.</li></ul></article>
-          <article id="art-candidiasis" class="pm-article-detail pm-article-anchor"><h3>Candidiasis</h3><p>Contenido centrado en casos de candidiasis y observaciones durante tratamientos integrados.</p><ul><li>Combinación con hábitos de higiene y alimentación.</li><li>Registro de respuesta progresiva.</li><li>Observación de recaídas y control.</li></ul></article>
-          <article id="art-dolencias" class="pm-article-detail pm-article-anchor"><h3>Dolencias tratadas</h3><p>Recopilación de dolencias frecuentes descritas por usuarios y terapeutas.</p><ul><li>Clasificación por sistemas corporales.</li><li>Protocolos orientativos de exposición.</li><li>Notas de prevención y límites del método.</li></ul></article>
-          <article id="art-fibromialgia" class="pm-article-detail pm-article-anchor"><h3>Fibromialgia</h3><p>Testimonios enfocados en descanso, dolor muscular y recuperación funcional.</p><ul><li>Indicadores de calidad de sueño.</li><li>Niveles de dolor y fatiga.</li><li>Recomendación de constancia.</li></ul></article>
-          <article id="art-hidradenitis" class="pm-article-detail pm-article-anchor"><h3>Hidradenitis</h3><p>Información sobre experiencias en procesos inflamatorios de piel.</p><ul><li>Reducción de episodios reportados.</li><li>Cuidados complementarios.</li><li>Evolución en periodos prolongados.</li></ul></article>
-          <article id="art-meditacion" class="pm-article-detail pm-article-anchor"><h3>Meditación en pirámides</h3><p>Prácticas orientadas a relajación profunda y mayor claridad mental.</p><ul><li>Preparación del entorno.</li><li>Duración sugerida de sesiones.</li><li>Beneficios percibidos por usuarios.</li></ul></article>
-          <article id="art-prostata" class="pm-article-detail pm-article-anchor"><h3>Próstata</h3><p>Casos y notas sobre molestias prostáticas en contexto terapéutico natural.</p><ul><li>Seguimiento de síntomas urinarios.</li><li>Descanso nocturno y confort.</li><li>Coordinación con evaluación médica.</li></ul></article>
-          <article id="art-renales" class="pm-article-detail pm-article-anchor"><h3>Riñón y recuperación</h3><p>Experiencias de apoyo durante procesos renales complejos.</p><ul><li>Monitoreo del estado general.</li><li>Observación de energía y descanso.</li><li>Acompañamiento clínico continuo.</li></ul></article>
-          <article id="art-efecto" class="pm-article-detail pm-article-anchor"><h3>Efecto piramidal</h3><p>Fundamentos generales del efecto, su marco histórico y aplicación práctica.</p><ul><li>Bases conceptuales.</li><li>Ámbitos de uso investigados.</li><li>Líneas de trabajo abiertas.</li></ul></article>
-          <article id="art-energia" class="pm-article-detail pm-article-anchor"><h3>Energía piramidal</h3><p>Exposición sobre dinámica energética asociada a geometría y orientación.</p><ul><li>Estructura y materiales.</li><li>Interacción con el entorno.</li><li>Variables de eficacia.</li></ul></article>
-          <article id="art-experiencias" class="pm-article-detail pm-article-anchor"><h3>Experiencias</h3><p>Compendio de experiencias prácticas reportadas en distintos contextos.</p><ul><li>Casos domésticos y profesionales.</li><li>Observaciones repetidas.</li><li>Factores que alteran resultados.</li></ul></article>
-          <article id="art-exp-cientificos" class="pm-article-detail pm-article-anchor"><h3>Experimentos científicos</h3><p>Listado de pruebas reproducibles propuestas para validación técnica.</p><ul><li>Diseños con control.</li><li>Variables medibles.</li><li>Documentación de resultados.</li></ul></article>
-          <article id="art-exp-caseros" class="pm-article-detail pm-article-anchor"><h3>Experimentos caseros</h3><p>Propuestas simples para observar efectos de conservación y vitalidad.</p><ul><li>Materiales fáciles de conseguir.</li><li>Pasos de montaje.</li><li>Registro de cambios.</li></ul></article>
-          <article id="art-magnetico" class="pm-article-detail pm-article-anchor"><h3>Función magnética</h3><p>Análisis de hipótesis magnéticas ligadas a la forma piramidal.</p><ul><li>Relación con orientación cardinal.</li><li>Interacción campo-estructura.</li><li>Interpretación experimental.</li></ul></article>
-          <article id="art-orientacion" class="pm-article-detail pm-article-anchor"><h3>Orientación con brújula</h3><p>Guía para orientar correctamente estructuras piramidales en campo real.</p><ul><li>Ajuste fino por grados.</li><li>Errores comunes de montaje.</li><li>Comprobaciones finales.</li></ul></article>
-          <article id="art-avales" class="pm-article-detail pm-article-anchor"><h3>Avales oficiales</h3><p>Compilación de avales, cartas y referencias documentales institucionales.</p><ul><li>Contexto de cada aval.</li><li>Alcance del documento.</li><li>Marco legal y de uso.</li></ul></article>
-          <article id="art-testimonios" class="pm-article-detail pm-article-anchor"><h3>Testimonios escritos</h3><p>Casos de usuarios con evolución reportada en salud y bienestar.</p><ul><li>Narrativas completas.</li><li>Tiempos de mejora.</li><li>Resultados subjetivos y funcionales.</li></ul></article>
-          <article id="art-faraday" class="pm-article-detail pm-article-anchor"><h3>Arcones Faraday</h3><p>Aplicación de blindaje y conservación en dispositivos y objetos sensibles.</p><ul><li>Diseño y materiales.</li><li>Escenarios de uso.</li><li>Recomendaciones de instalación.</li></ul></article>
-          <article id="art-bungalow" class="pm-article-detail pm-article-anchor"><h3>Bungalow piramidal</h3><p>Concepto arquitectónico habitable basado en proporciones piramidales.</p><ul><li>Distribución interior.</li><li>Confort y bioclimática.</li><li>Ventajas de diseño.</li></ul></article>
-          <article id="art-hygia" class="pm-article-detail pm-article-anchor"><h3>Hygia / Horus</h3><p>Modelos terapéuticos orientados a uso personal y familiar.</p><ul><li>Dimensiones y potencia.</li><li>Aplicaciones recomendadas.</li><li>Consejos de uso continuado.</li></ul></article>
-          <article id="art-piramascota" class="pm-article-detail pm-article-anchor"><h3>Piramascota</h3><p>Estructura adaptada para bienestar y descanso de animales.</p><ul><li>Ajuste por tamaño de mascota.</li><li>Hábitos de adaptación.</li><li>Mantenimiento básico.</li></ul></article>
-          <article id="art-piramicama" class="pm-article-detail pm-article-anchor"><h3>Piramicama</h3><p>Modelo orientado al descanso nocturno y recuperación diaria.</p><ul><li>Montaje en dormitorio.</li><li>Rutina de exposición nocturna.</li><li>Casos de mejora del descanso.</li></ul></article>
-          <article id="art-transparente" class="pm-article-detail pm-article-anchor"><h3>Piramicama transparente</h3><p>Variante visualmente ligera con funcionalidad terapéutica equivalente.</p><ul><li>Ventajas estéticas.</li><li>Materiales y resistencia.</li><li>Integración en vivienda.</li></ul></article>
-          <article id="art-luxor" class="pm-article-detail pm-article-anchor"><h3>Piramicama Luxor</h3><p>Versión premium con acabados de alta gama y personalización.</p><ul><li>Opciones de diseño.</li><li>Calidad de materiales.</li><li>Posicionamiento de uso.</li></ul></article>
-          <article id="art-vital" class="pm-article-detail pm-article-anchor"><h3>Piramicasa Vital</h3><p>Proyecto integral de hábitat piramidal para estancias prolongadas.</p><ul><li>Arquitectura energética.</li><li>Aplicación residencial.</li><li>Planificación por fases.</li></ul></article>
-          <article id="art-jardin" class="pm-article-detail pm-article-anchor"><h3>Pirámides jardín</h3><p>Soluciones exteriores para ocio, relajación y uso terapéutico.</p><ul><li>Estructuras para exterior.</li><li>Protección y anclaje.</li><li>Usos recomendados.</li></ul></article>
-          <article id="art-refugios" class="pm-article-detail pm-article-anchor"><h3>Refugios</h3><p>Desarrollo de espacios protegidos con enfoque estructural seguro.</p><ul><li>Capas de protección.</li><li>Usabilidad real.</li><li>Escenarios de contingencia.</li></ul></article>
-          <article id="art-planos" class="pm-article-detail pm-article-anchor"><h3>Planos piramidales</h3><p>Servicio técnico para diseño, medidas y ejecución de proyectos.</p><ul><li>Asesoría geométrica.</li><li>Adaptación a terreno.</li><li>Optimización de recursos.</li></ul></article>
-          <article id="art-vendedores" class="pm-article-detail pm-article-anchor"><h3>Representantes</h3><p>Red de colaboradores para difusión y atención local de productos.</p><ul><li>Contacto por región.</li><li>Soporte comercial.</li><li>Derivación técnica.</li></ul></article>
-          <article id="art-centros" class="pm-article-detail pm-article-anchor"><h3>Centros de terapia</h3><p>Listado y alcance de centros que aplican terapia piramidal.</p><ul><li>Perfil de profesionales.</li><li>Servicios disponibles.</li><li>Cobertura geográfica.</li></ul></article>
-          <article id="art-faq" class="pm-article-detail pm-article-anchor"><h3>FAQ Pirámides</h3><p>Preguntas frecuentes sobre montaje, uso y expectativas.</p><ul><li>Dudas iniciales comunes.</li><li>Recomendaciones prácticas.</li><li>Buenas prácticas de seguridad.</li></ul></article>
-          <article id="art-historica" class="pm-article-detail pm-article-anchor"><h3>Piramidología histórica</h3><p>Revisión histórica de corrientes, hallazgos y autores de referencia.</p><ul><li>Línea temporal resumida.</li><li>Contribuciones principales.</li><li>Relación con investigación actual.</li></ul></article>
-          <article id="art-egipto" class="pm-article-detail pm-article-anchor"><h3>Viaje a Egipto</h3><p>Programa de viaje técnico e iniciático vinculado a estudio de pirámides.</p><ul><li>Objetivos del viaje.</li><li>Itinerario base.</li><li>Perfil de participantes.</li></ul></article>
-          <article id="art-sujok" class="pm-article-detail pm-article-anchor"><h3>Manual Su-Jok</h3><p>Material de estudio gratuito para terapias complementarias.</p><ul><li>Contenido introductorio.</li><li>Aplicación básica.</li><li>Formación autodidacta.</li></ul></article>
-          <article id="art-hammer" class="pm-article-detail pm-article-anchor"><h3>Manual Dr. Hammer</h3><p>Documento divulgativo integrado como recurso histórico de consulta.</p><ul><li>Contexto del texto.</li><li>Ejes temáticos principales.</li><li>Consulta crítica recomendada.</li></ul></article>
-          <article id="art-mosquitos" class="pm-article-detail pm-article-anchor"><h3>Trampa para mosquitos</h3><p>Guía práctica doméstica para control ambiental en verano.</p><ul><li>Materiales simples.</li><li>Montaje paso a paso.</li><li>Ubicación recomendada.</li></ul></article>
-          <article id="art-cucarachas" class="pm-article-detail pm-article-anchor"><h3>Trampa para cucarachas</h3><p>Método casero de apoyo para prevención y control en hogar.</p><ul><li>Preparación rápida.</li><li>Puntos de colocación.</li><li>Mantenimiento periódico.</li></ul></article>
+        <h2>Contenido completo de cada artículo</h2>
+        <p class="pm-lead">Pulsa cualquier botón de las secciones superiores para desplegar aquí su información completa. Al abrir otro artículo, el anterior se repliega automáticamente.</p>
+
+        <div id="pm-article-viewer" class="pm-article-viewer pm-viewer-hidden" aria-live="polite">
+          <div class="pm-viewer-head">
+            <h3 id="pm-viewer-title" class="pm-viewer-title">Artículo</h3>
+            <button id="pm-viewer-close" class="pm-viewer-close" type="button">Replegar</button>
+          </div>
+          <div id="pm-viewer-content" class="pm-viewer-content"></div>
         </div>
-        <div class="pm-note-box">Esta biblioteca está integrada en el nuevo sitio para evitar redirecciones a la web antigua y mantener una navegación única dentro de Piramicasa.</div>
+
+        <div class="pm-note-box">Este panel muestra el contenido extraído de la biblioteca original y adaptado para su consulta dentro de la nueva web, sin redirecciones externas.</div>
       </div>
     </section>
 
@@ -217,6 +201,169 @@
   <script src="/piramicasa/assets/mobile-menu.js" defer></script>
   <script src="/piramicasa/assets/chatbot.js?v=20260820a" defer></script>
   <script src="/piramicasa/assets/sacred-grid.js?v=20260820a" defer></script>
+  <script>
+    (function(){
+      var sourceByTitle = {
+        "Borreliasis":"https://www.piramicasa.es/es/tratamiento-borreliasis-con-piramides.html",
+        "Candidiasis":"https://www.piramicasa.es/es/tratamiento-de-la-candidiasis-candida-albicans-y-otras.html",
+        "Dolencias tratadas":"https://www.piramicasa.es/es/enfermedades_y_dolencias_tratadas_con_piramides.html",
+        "Fibromialgia":"https://www.piramicasa.es/es/fibromialgia.htm",
+        "Hidradenitis":"https://www.piramicasa.es/es/hidradenitis.htm",
+        "Meditación en pirámides":"https://www.piramicasa.es/es/meditacion-en-piramides.html",
+        "Próstata":"https://www.piramicasa.es/es/prostata.htm",
+        "Riñón y recuperación":"https://www.piramicasa.es/es/renales.htm",
+        "Efecto piramidal":"https://www.piramicasa.es/es/efecto-piramidal.html",
+        "Energía piramidal":"https://www.piramicasa.es/es/energia-piramidal.html",
+        "Experiencias":"https://www.piramicasa.es/es/experiencias-piramidales.html",
+        "Experimentos científicos":"https://www.piramicasa.es/es/experimentos_piramides_para_cientificos.html",
+        "Experimentos caseros":"https://www.piramicasa.es/es/experimentos_caseros.htm",
+        "Función magnética":"https://www.piramicasa.es/es/funcionamiento_magnetico_de_las_piramides.html",
+        "Orientación con brújula":"https://www.piramicasa.es/es/como_orientar_una_piramide_con_brujula.html",
+        "Avales oficiales":"https://www.piramicasa.es/es/avales_terapia_piramidal_oficial.html",
+        "Testimonios escritos":"https://www.piramicasa.es/es/testimonios_energia_piramidal.html",
+        "Arcones Faraday":"https://www.piramicasa.es/PIRAMIDES/arcones-faraday.html",
+        "Bungalow piramidal":"https://www.piramicasa.es/PIRAMIDES/Piramide.htm",
+        "Hygia / Horus":"https://www.piramicasa.es/PIRAMIDES/estructura_hygia.htm",
+        "Piramascota":"https://www.piramicasa.es/PIRAMIDES/mascotas.html",
+        "Piramicama":"https://www.piramicasa.es/PIRAMIDES/estructura_piramicama.htm",
+        "Piramicama transparente":"https://www.piramicasa.es/PIRAMIDES/piramicama_transparente.html",
+        "Piramicama Luxor":"https://www.piramicasa.es/PIRAMIDES/piramicamas_lujo_luxor.html",
+        "Piramicasa Vital":"https://www.piramicasa.es/PIRAMIDES/piramicasa_vital.html",
+        "Pirámides jardín":"https://www.piramicasa.es/PIRAMIDES/estructura_pirajardin.htm",
+        "Refugios":"https://www.piramicasa.es/PIRAMIDES/bunkers-y-refugios-seguros-contra-catastrofes.html",
+        "Planos piramidales":"https://www.piramicasa.es/PIRAMIDES/asesoria_planos_casas_piramidales.html",
+        "Representantes":"https://www.piramicasa.es/es/vendedores-piramicasa.html",
+        "Centros de terapia":"https://www.piramicasa.es/es/centros_terapia_piramidal.html",
+        "FAQ Pirámides":"https://www.piramicasa.es/es/faq_piramides.htm",
+        "Piramidología histórica":"https://www.piramicasa.es/es/piramidologia-historica.html",
+        "Viaje a Egipto":"https://www.piramicasa.es/EGIPTO/nuestros-viajes-a-egipto.html",
+        "Manual Su-Jok":"https://www.piramicasa.es/GRATIS/manual-diagnostico-tratamiento-su-jok.htm",
+        "Manual Dr. Hammer":"https://www.piramicasa.es/es/archivos/mgh.pdf",
+        "Trampa para mosquitos":"https://www.piramicasa.es/GRATIS/trampamosquitos.htm",
+        "Trampa para cucarachas":"https://www.piramicasa.es/GRATIS/trampa-para-cucarachas.htm"
+      };
+
+      function toCandidates(sourceUrl){
+        var u = new URL(sourceUrl);
+        var base = '/piramicasa';
+        var pRaw = u.pathname;
+        var pLow = u.pathname.toLowerCase();
+        var extRaw = /\.(html?|pdf)$/i.test(pRaw);
+        var extLow = /\.(html?|pdf)$/i.test(pLow);
+
+        var list = [
+          base + pRaw,
+          base + pLow,
+          base + (extRaw ? pRaw + '.html' : pRaw + '.html'),
+          base + (extLow ? pLow + '.html' : pLow + '.html')
+        ];
+
+        var uniq = [];
+        for (var i=0;i<list.length;i++) if (uniq.indexOf(list[i]) === -1) uniq.push(list[i]);
+        return uniq;
+      }
+
+      function extractHtmlContent(html){
+        var doc = new DOMParser().parseFromString(html, 'text/html');
+        ['script','style','noscript','header','footer','nav','form'].forEach(function(sel){
+          doc.querySelectorAll(sel).forEach(function(n){ n.remove(); });
+        });
+        var root = doc.querySelector('main') || doc.querySelector('article') || doc.body;
+        var blocks = root.querySelectorAll('h1,h2,h3,h4,p,li');
+        var out = [];
+        blocks.forEach(function(n){
+          var t = (n.textContent || '').replace(/\s+/g,' ').trim();
+          if (!t) return;
+          if (t.length < 3) return;
+          if (/copyright|aviso legal|social media/i.test(t)) return;
+          if (/^inicio\b/i.test(t)) return;
+          if (/^piramicasa\b/i.test(t) && t.length < 35) return;
+          var tag = n.tagName.toLowerCase();
+          if (tag === 'li') out.push('<li>'+t+'</li>');
+          else if (/^h[1-4]$/.test(tag)) out.push('<'+tag+'>'+t+'</'+tag+'>');
+          else out.push('<p>'+t+'</p>');
+        });
+
+        if (!out.length) {
+          return '<p class="pm-viewer-muted">No se ha podido extraer contenido textual estructurado de esta fuente.</p>';
+        }
+
+        var normalized = [];
+        var inList = false;
+        out.forEach(function(item){
+          if (item.indexOf('<li>') === 0 && !inList) { normalized.push('<ul>'); inList = true; }
+          if (item.indexOf('<li>') !== 0 && inList) { normalized.push('</ul>'); inList = false; }
+          normalized.push(item);
+        });
+        if (inList) normalized.push('</ul>');
+        return normalized.join('');
+      }
+
+      function loadingHtml(){
+        return '<div class="pm-loading"><span class="pm-loading-dot"></span><span class="pm-loading-dot"></span><span class="pm-loading-dot"></span><span>Cargando contenido completo...</span></div>';
+      }
+
+      function errorHtml(sourceUrl){
+        return '<p class="pm-viewer-muted">No se pudo cargar automáticamente este artículo desde el espejo interno.</p>'+
+               '<p><a class="pm-btn pm-btn-outline pm-btn-more-info" href="'+sourceUrl+'" target="_blank" rel="noopener">Abrir fuente original</a></p>';
+      }
+
+      var viewer = document.getElementById('pm-article-viewer');
+      var viewerTitle = document.getElementById('pm-viewer-title');
+      var viewerContent = document.getElementById('pm-viewer-content');
+      var closeBtn = document.getElementById('pm-viewer-close');
+      var cards = Array.prototype.slice.call(document.querySelectorAll('.pm-article-card'));
+
+      closeBtn.addEventListener('click', function(){
+        viewer.classList.add('pm-viewer-hidden');
+        cards.forEach(function(c){ c.classList.remove('pm-active'); });
+      });
+
+      cards.forEach(function(card){
+        card.addEventListener('click', async function(ev){
+          ev.preventDefault();
+          var titleNode = card.querySelector('.pm-card-title');
+          var title = titleNode ? titleNode.textContent.trim() : 'Artículo';
+          var sourceUrl = sourceByTitle[title];
+
+          cards.forEach(function(c){ c.classList.remove('pm-active'); });
+          card.classList.add('pm-active');
+
+          viewerTitle.textContent = title;
+          viewer.classList.remove('pm-viewer-hidden');
+          viewerContent.innerHTML = loadingHtml();
+          document.getElementById('biblioteca-contenido').scrollIntoView({behavior:'smooth', block:'start'});
+
+          if (!sourceUrl) {
+            viewerContent.innerHTML = '<p class="pm-viewer-muted">No se encontró la fuente asociada para este botón.</p>';
+            return;
+          }
+
+          if (/\.pdf$/i.test(sourceUrl)) {
+            var pdfUrl = '/piramicasa' + new URL(sourceUrl).pathname.toLowerCase();
+            viewerContent.innerHTML = '<iframe src="'+pdfUrl+'" title="'+title+'" style="width:100%;height:72vh;border:1px solid #ddd;border-radius:8px;background:#fff"></iframe>';
+            return;
+          }
+
+          var candidates = toCandidates(sourceUrl);
+          var loaded = null;
+
+          for (var i=0;i<candidates.length;i++) {
+            try {
+              var res = await fetch(candidates[i], { cache: 'no-store' });
+              if (!res.ok) continue;
+              var html = await res.text();
+              if (!html || html.length < 120) continue;
+              loaded = extractHtmlContent(html);
+              if (loaded) break;
+            } catch(e) {}
+          }
+
+          viewerContent.innerHTML = loaded || errorHtml(sourceUrl);
+        });
+      });
+    })();
+  </script>
   <script id="pm-hash-scroll">(function(){function s(){var h=decodeURIComponent(location.hash||"");if(!h||h.length<2)return;var id=h.slice(1),n=0,m=120;var t=setInterval(function(){var el=document.getElementById(id);if(el){clearInterval(t);setTimeout(function(){try{el.scrollIntoView({behavior:"smooth",block:"start"})}catch(e){el.scrollIntoView(true)}},80)}else if(++n>=m){clearInterval(t)}},50)}window.addEventListener("hashchange",s);window.addEventListener("load",function(){if(location.hash)setTimeout(s,160)});if(location.hash)setTimeout(s,360)})();</script>
 </body>
 </html>
