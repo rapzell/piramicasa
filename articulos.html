@@ -10,8 +10,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="/piramicasa/_next/static/css/b1c84f528cf3d505.css" />
   <link rel="stylesheet" href="/piramicasa/_next/static/css/591bfc4a40e67df4.css" />
-  <link rel="stylesheet" href="/piramicasa/assets/mobile-fix.css?v=20260820i" />
-  <link rel="stylesheet" href="/piramicasa/assets/sacred-grid.css?v=20260820i" />
+  <link rel="stylesheet" href="/piramicasa/assets/mobile-fix.css?v=20260824a" />
+  <link rel="stylesheet" href="/piramicasa/assets/sacred-grid.css?v=20260824a" />
   <style>
     .pm-header{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(247,244,240,.97)!important;backdrop-filter:blur(8px)!important;-webkit-backdrop-filter:blur(8px)!important;border-bottom:1px solid #E0D9D0!important;box-shadow:0 2px 12px rgba(0,0,0,.06)!important;transition:all .3s ease}
     .pm-page .pm-header.pm-at-top{background:transparent!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important;border-bottom:1px solid transparent!important;box-shadow:none!important}
@@ -52,8 +52,8 @@
     .pm-article-source{font-size:.75rem;color:#958879}
     .pm-article-subhead{margin:12px 0 8px 0;font-size:1rem;line-height:1.3;color:#38442f;font-weight:700}
     .pm-article-gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px;margin:12px 0 14px}
-    .pm-article-gallery img{width:100%;height:160px;object-fit:cover;border-radius:10px;border:1px solid #ddd;background:#fff;transition:transform .25s ease,box-shadow .25s ease}
-    .pm-article-gallery img:hover{transform:translateY(-2px);box-shadow:0 10px 18px rgba(45,52,33,.16)}
+    .pm-article-gallery img{width:100%;height:160px;object-fit:cover;border-radius:10px;border:1px solid #ddd;background:#fff;transition:transform .32s ease,box-shadow .32s ease;cursor:zoom-in;transform-origin:center center}
+    .pm-article-gallery img:hover{transform:translateY(-2px) scale(1.08);box-shadow:0 14px 22px rgba(45,52,33,.2);z-index:2}
     .pm-article-prose{max-width:84ch}
     .pm-article-prose p{margin:0 0 12px;font-size:.98rem;line-height:1.74;color:#47423b}
     .pm-article-prose p.pm-article-lead{font-size:1.04rem;line-height:1.78;color:#2f3a27}
@@ -68,8 +68,15 @@
     .pm-flow-text p{margin:0}
     .pm-flow-list{grid-column:1 / -1}
     .pm-inline-media{margin:0;background:#fff;border:1px solid #e8dccb;border-radius:12px;overflow:hidden;box-shadow:0 10px 22px rgba(42,48,33,.12)}
-    .pm-inline-media img{display:block;width:100%;height:220px;object-fit:cover}
+    .pm-inline-media img{display:block;width:100%;height:220px;object-fit:cover;cursor:zoom-in;transition:transform .36s ease,filter .36s ease}
+    .pm-inline-media:hover img{transform:scale(1.06);filter:saturate(1.05)}
     .pm-inline-media figcaption{padding:8px 10px;font-size:.76rem;color:#7d6f5f;background:#faf5ee;border-top:1px solid #ecdfce}
+    .pm-lightbox{position:fixed;inset:0;z-index:2200;background:rgba(14,17,11,.82);display:flex;align-items:center;justify-content:center;padding:22px;opacity:0;pointer-events:none;transition:opacity .22s ease}
+    .pm-lightbox.pm-open{opacity:1;pointer-events:auto}
+    .pm-lightbox-panel{position:relative;max-width:min(1100px,96vw);max-height:92vh;display:flex;flex-direction:column;gap:8px}
+    .pm-lightbox-img{max-width:100%;max-height:84vh;width:auto;height:auto;object-fit:contain;border-radius:10px;border:1px solid rgba(255,255,255,.32);box-shadow:0 18px 40px rgba(0,0,0,.35);background:#141a10}
+    .pm-lightbox-caption{font-size:.84rem;color:#e9e1d8;text-align:center}
+    .pm-lightbox-close{position:absolute;top:-12px;right:-12px;width:36px;height:36px;border:none;border-radius:50%;background:#f7f4f0;color:#2f3a27;font-size:1.1rem;font-weight:700;cursor:pointer;box-shadow:0 6px 18px rgba(0,0,0,.35)}
     @media(min-width:980px){
       .pm-article-flow{grid-template-columns:minmax(0,1.2fr) minmax(0,.95fr);gap:14px}
       .pm-flow-heading{grid-column:1 / -1}
@@ -139,7 +146,7 @@
         <div class="pm-nav-item"><a href="/piramicasa/#contacto">Contacto</a></div>
       </nav>
       <div class="pm-header-right">
-        <a href="tel:+34681087539" class="pm-phone">+34 681 087 539</a>
+        <a href="tel:+34639284787" class="pm-phone">+34 639 284 787</a>
         <div class="pm-lang">
           <a href="#" class="pm-active">ES</a>
           <a href="#">EN</a>
@@ -256,8 +263,8 @@
   </div>
 
   <script src="/piramicasa/assets/mobile-menu.js" defer></script>
-  <script src="/piramicasa/assets/chatbot.js?v=20260820i" defer></script>
-  <script src="/piramicasa/assets/sacred-grid.js?v=20260820i" defer></script>
+  <script src="/piramicasa/assets/chatbot.js?v=20260824a" defer></script>
+  <script src="/piramicasa/assets/sacred-grid.js?v=20260824a" defer></script>
   <script>
     (function(){
       function loadingHtml(){
@@ -447,6 +454,45 @@
       var viewerTitle = viewer.querySelector('.pm-viewer-title');
       var viewerContent = viewer.querySelector('.pm-viewer-content');
       var closeBtn = viewer.querySelector('.pm-viewer-close');
+
+      var lightbox = document.createElement('div');
+      lightbox.className = 'pm-lightbox';
+      lightbox.innerHTML = '<div class="pm-lightbox-panel"><button class="pm-lightbox-close" type="button" aria-label="Cerrar imagen">×</button><img class="pm-lightbox-img" alt="" /><div class="pm-lightbox-caption"></div></div>';
+      document.body.appendChild(lightbox);
+
+      var lightboxImg = lightbox.querySelector('.pm-lightbox-img');
+      var lightboxCaption = lightbox.querySelector('.pm-lightbox-caption');
+      var lightboxClose = lightbox.querySelector('.pm-lightbox-close');
+
+      function openLightbox(src, alt){
+        if (!src) return;
+        lightboxImg.src = src;
+        lightboxImg.alt = alt || 'Imagen del artículo';
+        lightboxCaption.textContent = alt || 'Imagen del artículo';
+        lightbox.classList.add('pm-open');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeLightbox(){
+        lightbox.classList.remove('pm-open');
+        lightboxImg.removeAttribute('src');
+        document.body.style.overflow = '';
+      }
+
+      lightbox.addEventListener('click', function(ev){
+        if (ev.target === lightbox || ev.target === lightboxClose) closeLightbox();
+      });
+
+      document.addEventListener('keydown', function(ev){
+        if (ev.key === 'Escape' && lightbox.classList.contains('pm-open')) closeLightbox();
+      });
+
+      viewerContent.addEventListener('click', function(ev){
+        var img = ev.target && ev.target.closest ? ev.target.closest('.pm-inline-media img, .pm-article-gallery img') : null;
+        if (!img) return;
+        ev.preventDefault();
+        openLightbox(img.getAttribute('src'), img.getAttribute('alt') || 'Imagen del artículo');
+      });
 
       var activeTitle = null;
       var activeCard = null;
