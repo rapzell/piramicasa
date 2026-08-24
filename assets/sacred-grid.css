@@ -39,3 +39,4 @@
   position: relative;
   z-index: 1;
 }
+.pm-stat-num{white-space:pre-line;text-align:center;line-height:1.02;display:inline-block}

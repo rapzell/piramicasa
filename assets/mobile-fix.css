@@ -177,3 +177,4 @@ filter:brightness(1.03);
 }
 
 /* ===== END MOBILE FIX ===== */
+.pm-stat-num{white-space:pre-line;text-align:center;line-height:1.02;display:inline-block}
