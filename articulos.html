@@ -92,7 +92,25 @@
     .pm-loading-dot:nth-child(3){animation-delay:.3s}
     @keyframes pmPulse{0%,100%{opacity:.35;transform:scale(.8)}50%{opacity:1;transform:scale(1)}}
     .pm-note-box{margin-top:16px;padding:12px 14px;border-left:4px solid #C69C6D;background:#F4EEE7;color:#5f564e;border-radius:0 8px 8px 0}
+    .pm-articles-tools{padding:0 20px 22px}
+    .pm-tools-panel{max-width:1160px;margin:0 auto;display:grid;gap:10px;padding:14px;border:1px solid #e3d6c6;border-radius:14px;background:linear-gradient(135deg,#fffaf3,#f7efe4)}
+    .pm-tools-row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+    .pm-search-wrap{position:relative;flex:1 1 320px;min-width:240px}
+    .pm-search-input{width:100%;height:44px;border:1px solid #d8c8b5;border-radius:10px;padding:0 44px 0 14px;font-size:.95rem;color:#3f3a33;background:#fff;outline:none;transition:border-color .2s ease,box-shadow .2s ease}
+    .pm-search-input:focus{border-color:#c69c6d;box-shadow:0 0 0 3px rgba(198,156,109,.18)}
+    .pm-search-icon{position:absolute;right:12px;top:50%;transform:translateY(-50%);font-size:.9rem;color:#9a8e81;pointer-events:none}
+    .pm-tools-btn{height:44px;padding:0 14px;border:1px solid #d8c8b5;border-radius:10px;background:#fff;color:#4f463d;font-weight:600;cursor:pointer}
+    .pm-tools-btn:hover{background:#f8f1e8}
+    .pm-search-meta{font-size:.84rem;color:#786d61}
+    .pm-search-empty{display:none;padding:14px;border:1px dashed #d9c8b5;border-radius:10px;background:#fff;color:#6d6155;font-size:.9rem}
+    .pm-search-empty.pm-show{display:block}
+    .pm-card-hidden{display:none!important}
+    .pm-section-hidden{display:none!important}
+    .pm-backtop{position:fixed;right:20px;bottom:88px;z-index:1200;width:46px;height:46px;border:none;border-radius:50%;background:linear-gradient(135deg,#3d4a30,#5a6b4a);color:#fff;font-size:1.1rem;cursor:pointer;box-shadow:0 10px 24px rgba(32,40,26,.35);opacity:0;pointer-events:none;transform:translateY(10px);transition:all .24s ease}
+    .pm-backtop.pm-show{opacity:1;pointer-events:auto;transform:translateY(0)}
+    .pm-backtop:hover{transform:translateY(-2px)}
     @media(max-width:768px){.pm-articles-hero{padding-top:86px}.pm-viewer-content{padding:14px;max-height:66vh}.pm-viewer-frame{height:65vh;min-height:420px}.pm-viewer-head{padding:12px 14px}}
+    @media(max-width:768px){.pm-articles-tools{padding:0 16px 20px}.pm-tools-panel{padding:12px}.pm-tools-row{gap:8px}.pm-search-input,.pm-tools-btn{height:40px}.pm-backtop{right:14px;bottom:80px;width:42px;height:42px}}
   </style>
 </head>
 <body>
@@ -182,6 +200,20 @@
       </div>
     </section>
 
+    <section class="pm-articles-tools" aria-label="Herramientas de búsqueda">
+      <div class="pm-tools-panel">
+        <div class="pm-tools-row">
+          <label class="pm-search-wrap" for="pm-articles-search">
+            <input id="pm-articles-search" class="pm-search-input" type="search" placeholder="Buscar por tema, enfermedad o producto..." autocomplete="off" />
+            <span class="pm-search-icon">🔎</span>
+          </label>
+          <button type="button" class="pm-tools-btn" id="pm-search-clear">Limpiar</button>
+        </div>
+        <div class="pm-search-meta" id="pm-search-meta">Mostrando todos los artículos.</div>
+        <div class="pm-search-empty" id="pm-search-empty">No hay resultados con ese término. Prueba con otra palabra clave.</div>
+      </div>
+    </section>
+
     <section class="pm-section pm-section-cream pm-articles-section">
       <div class="pm-articles-wrap">
         <div class="pm-label">Salud</div>
@@ -261,6 +293,8 @@
       </div>
     </section>
   </div>
+
+  <button type="button" class="pm-backtop" id="pm-backtop" aria-label="Volver arriba">↑</button>
 
   <script src="/piramicasa/assets/mobile-menu.js" defer></script>
   <script src="/piramicasa/assets/chatbot.js?v=20260824b" defer></script>
@@ -447,6 +481,11 @@
       }
 
       var cards = Array.prototype.slice.call(document.querySelectorAll('.pm-article-card'));
+      var sections = Array.prototype.slice.call(document.querySelectorAll('.pm-articles-section'));
+      var searchInput = document.getElementById('pm-articles-search');
+      var clearSearchBtn = document.getElementById('pm-search-clear');
+      var searchMeta = document.getElementById('pm-search-meta');
+      var searchEmpty = document.getElementById('pm-search-empty');
       var viewer = document.createElement('div');
       viewer.className = 'pm-article-viewer pm-inline-viewer pm-viewer-hidden';
       viewer.setAttribute('aria-live', 'polite');
@@ -497,6 +536,23 @@
       var activeTitle = null;
       var activeCard = null;
 
+      var backTopBtn = document.getElementById('pm-backtop');
+      function syncBackTop(){
+        if (!backTopBtn) return;
+        var y = window.scrollY || window.pageYOffset || 0;
+        if (y > 520) backTopBtn.classList.add('pm-show');
+        else backTopBtn.classList.remove('pm-show');
+      }
+      if (backTopBtn) {
+        backTopBtn.addEventListener('click', function(){
+          try { window.scrollTo({ top: 0, behavior: 'smooth' }); }
+          catch (e) { window.scrollTo(0, 0); }
+        });
+      }
+      window.addEventListener('scroll', syncBackTop, { passive: true });
+      window.addEventListener('load', syncBackTop);
+      syncBackTop();
+
       function collapseViewer(){
         viewer.classList.add('pm-viewer-hidden');
         cards.forEach(function(c){ c.classList.remove('pm-active'); });
@@ -507,6 +563,63 @@
       closeBtn.addEventListener('click', function(){
         collapseViewer();
       });
+
+      function setSearchMeta(visible, total, term){
+        if (!searchMeta) return;
+        if (!term) {
+          searchMeta.textContent = 'Mostrando todos los artículos.';
+          return;
+        }
+        searchMeta.textContent = 'Resultados para "' + term + '": ' + visible + ' de ' + total + ' artículos.';
+      }
+
+      function applySearch(term){
+        var query = String(term || '').trim().toLowerCase();
+        var visibleCount = 0;
+
+        cards.forEach(function(card){
+          var tNode = card.querySelector('.pm-card-title');
+          var text = tNode ? tNode.textContent.toLowerCase() : '';
+          var match = !query || text.indexOf(query) > -1;
+          card.classList.toggle('pm-card-hidden', !match);
+          if (match) visibleCount++;
+        });
+
+        sections.forEach(function(section){
+          var visibleInSection = section.querySelectorAll('.pm-article-card:not(.pm-card-hidden)').length;
+          section.classList.toggle('pm-section-hidden', visibleInSection === 0);
+        });
+
+        if (activeCard && activeCard.classList.contains('pm-card-hidden')) {
+          collapseViewer();
+        }
+
+        if (searchEmpty) searchEmpty.classList.toggle('pm-show', !!query && visibleCount === 0);
+        setSearchMeta(visibleCount, cards.length, query);
+      }
+
+      if (searchInput) {
+        searchInput.addEventListener('input', function(){
+          applySearch(searchInput.value);
+        });
+      }
+
+      if (clearSearchBtn) {
+        clearSearchBtn.addEventListener('click', function(){
+          if (searchInput) searchInput.value = '';
+          applySearch('');
+          if (searchInput) searchInput.focus();
+        });
+      }
+
+      document.addEventListener('keydown', function(ev){
+        if (ev.key === '/' && searchInput && document.activeElement !== searchInput) {
+          ev.preventDefault();
+          searchInput.focus();
+        }
+      });
+
+      applySearch('');
 
       cards.forEach(function(card){
         card.addEventListener('click', async function(ev){
