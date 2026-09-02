@@ -90,6 +90,14 @@
     .pm-lightbox-img{max-width:100%;max-height:84vh;width:auto;height:auto;object-fit:contain;border-radius:10px;border:1px solid rgba(255,255,255,.32);box-shadow:0 18px 40px rgba(0,0,0,.35);background:#141a10}
     .pm-lightbox-caption{font-size:.84rem;color:#e9e1d8;text-align:center}
     .pm-lightbox-close{position:absolute;top:-12px;right:-12px;width:36px;height:36px;border:none;border-radius:50%;background:#f7f4f0;color:#2f3a27;font-size:1.1rem;font-weight:700;cursor:pointer;box-shadow:0 6px 18px rgba(0,0,0,.35)}
+    .pm-article-viewer.pm-reading-mode .pm-viewer-head{background:#fff;border-bottom-color:#ece4d8}
+    .pm-article-viewer.pm-reading-mode .pm-viewer-category,.pm-article-viewer.pm-reading-mode .pm-viewer-meta{display:none}
+    .pm-article-viewer.pm-reading-mode .pm-viewer-content{max-height:72vh;background:#fffdfb;padding:26px 28px 30px}
+    .pm-article-viewer.pm-reading-mode .pm-article-block{box-shadow:none;border-color:#f0e7dc;padding:22px 24px}
+    .pm-article-viewer.pm-reading-mode .pm-article-meta,.pm-article-viewer.pm-reading-mode .pm-inline-media figcaption{display:none}
+    .pm-article-viewer.pm-reading-mode .pm-article-prose{max-width:72ch;padding-left:0}
+    .pm-article-viewer.pm-reading-mode .pm-article-prose::before{display:none}
+    .pm-article-viewer.pm-reading-mode .pm-article-prose p{font-size:1.06rem;line-height:1.9;color:#39342e}
     @media(min-width:980px){
       .pm-article-block{padding:26px 30px}
     }
@@ -118,7 +126,7 @@
     .pm-backtop{position:fixed;right:20px;bottom:88px;z-index:1200;width:46px;height:46px;border:none;border-radius:50%;background:linear-gradient(135deg,#3d4a30,#5a6b4a);color:#fff;font-size:1.1rem;cursor:pointer;box-shadow:0 10px 24px rgba(32,40,26,.35);opacity:0;pointer-events:none;transform:translateY(10px);transition:all .24s ease}
     .pm-backtop.pm-show{opacity:1;pointer-events:auto;transform:translateY(0)}
     .pm-backtop:hover{transform:translateY(-2px)}
-    @media(max-width:768px){.pm-articles-hero{padding-top:86px}.pm-viewer-content{padding:16px 14px 18px;max-height:66vh}.pm-viewer-frame{height:65vh;min-height:420px}.pm-viewer-head{padding:12px 14px;align-items:flex-start;flex-direction:column}.pm-viewer-tools{width:100%;justify-content:flex-start}.pm-article-block{padding:16px 14px}.pm-article-prose{padding-left:10px}.pm-article-prose p{font-size:.97rem;line-height:1.72}.pm-article-prose p.pm-article-lead{font-size:1.03rem;line-height:1.76}.pm-article-dropcap::first-letter{font-size:2.05em}.pm-inline-media img{height:220px}.pm-flow-heading{font-size:1.08rem;margin:18px 0 8px}}
+    @media(max-width:768px){.pm-articles-hero{padding-top:86px}.pm-viewer-content{padding:16px 14px 18px;max-height:66vh}.pm-viewer-frame{height:65vh;min-height:420px}.pm-viewer-head{padding:12px 14px;align-items:flex-start;flex-direction:column}.pm-viewer-tools{width:100%;justify-content:flex-start}.pm-article-block{padding:16px 14px}.pm-article-prose{padding-left:10px}.pm-article-prose p{font-size:.97rem;line-height:1.72}.pm-article-prose p.pm-article-lead{font-size:1.03rem;line-height:1.76}.pm-article-dropcap::first-letter{font-size:2.05em}.pm-inline-media img{height:220px}.pm-flow-heading{font-size:1.08rem;margin:18px 0 8px}.pm-article-viewer.pm-reading-mode .pm-viewer-content{padding:16px 14px 18px;max-height:70vh}.pm-article-viewer.pm-reading-mode .pm-article-prose p{font-size:1rem;line-height:1.8}.pm-article-viewer.pm-reading-mode .pm-article-block{padding:15px 13px}}
     @keyframes pmArticleReveal{0%{opacity:0;transform:translateY(6px)}100%{opacity:1;transform:translateY(0)}}
     @media(max-width:768px){.pm-articles-tools{padding:0 16px 20px}.pm-tools-panel{padding:12px}.pm-tools-row{gap:8px}.pm-search-input,.pm-tools-btn{height:40px}.pm-backtop{right:14px;bottom:80px;width:42px;height:42px}}
   </style>
@@ -497,16 +505,34 @@
       var viewer = document.createElement('div');
       viewer.className = 'pm-article-viewer pm-inline-viewer pm-viewer-hidden';
       viewer.setAttribute('aria-live', 'polite');
-      viewer.innerHTML = '<div class="pm-viewer-head"><div class="pm-viewer-heading"><h3 class="pm-viewer-title">Artículo</h3><span class="pm-viewer-category" data-pm-category>Categoría</span></div><div class="pm-viewer-tools"><span class="pm-viewer-meta" data-pm-meta>—</span><button class="pm-viewer-nav-btn" type="button" data-pm-prev>← Anterior</button><button class="pm-viewer-nav-btn" type="button" data-pm-next>Siguiente →</button><button class="pm-viewer-nav-btn" type="button" data-pm-share>Copiar enlace</button><button class="pm-viewer-close" type="button">Replegar</button></div></div><div class="pm-viewer-progress"><span class="pm-viewer-progress-bar" data-pm-progress></span></div><div class="pm-viewer-content"></div>';
+      viewer.innerHTML = '<div class="pm-viewer-head"><div class="pm-viewer-heading"><h3 class="pm-viewer-title">Artículo</h3><span class="pm-viewer-category" data-pm-category>Categoría</span></div><div class="pm-viewer-tools"><span class="pm-viewer-meta" data-pm-meta>—</span><button class="pm-viewer-nav-btn" type="button" data-pm-prev>← Anterior</button><button class="pm-viewer-nav-btn" type="button" data-pm-next>Siguiente →</button><button class="pm-viewer-nav-btn" type="button" data-pm-reading aria-pressed="false">Modo lectura</button><button class="pm-viewer-nav-btn" type="button" data-pm-share>Copiar enlace</button><button class="pm-viewer-close" type="button">Replegar</button></div></div><div class="pm-viewer-progress"><span class="pm-viewer-progress-bar" data-pm-progress></span></div><div class="pm-viewer-content"></div>';
       var viewerTitle = viewer.querySelector('.pm-viewer-title');
       var viewerContent = viewer.querySelector('.pm-viewer-content');
       var closeBtn = viewer.querySelector('.pm-viewer-close');
       var prevBtn = viewer.querySelector('[data-pm-prev]');
       var nextBtn = viewer.querySelector('[data-pm-next]');
+      var readingBtn = viewer.querySelector('[data-pm-reading]');
       var shareBtn = viewer.querySelector('[data-pm-share]');
       var viewerCategory = viewer.querySelector('[data-pm-category]');
       var viewerMeta = viewer.querySelector('[data-pm-meta]');
       var viewerProgressBar = viewer.querySelector('[data-pm-progress]');
+      var readingMode = false;
+
+      function setReadingMode(enabled){
+        readingMode = !!enabled;
+        viewer.classList.toggle('pm-reading-mode', readingMode);
+        if (readingBtn) {
+          readingBtn.textContent = readingMode ? 'Modo normal' : 'Modo lectura';
+          readingBtn.setAttribute('aria-pressed', readingMode ? 'true' : 'false');
+        }
+        try { localStorage.setItem('pm-reading-mode', readingMode ? '1' : '0'); } catch (e) {}
+      }
+
+      try {
+        setReadingMode(localStorage.getItem('pm-reading-mode') === '1');
+      } catch (e) {
+        setReadingMode(false);
+      }
 
       var lightbox = document.createElement('div');
       lightbox.className = 'pm-lightbox';
@@ -762,6 +788,9 @@
         } else if (ev.key === 'ArrowRight') {
           ev.preventDefault();
           goRelative(1);
+        } else if (ev.key === 'm' || ev.key === 'M') {
+          ev.preventDefault();
+          setReadingMode(!readingMode);
         }
       });
 
@@ -774,6 +803,12 @@
       if (nextBtn) {
         nextBtn.addEventListener('click', function(){
           goRelative(1);
+        });
+      }
+
+      if (readingBtn) {
+        readingBtn.addEventListener('click', function(){
+          setReadingMode(!readingMode);
         });
       }
 
