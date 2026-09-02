@@ -37,11 +37,14 @@
     .pm-viewer-head{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 18px;background:linear-gradient(135deg,#f4eee7,#efe6dc);border-bottom:1px solid #E0D9D0}
     .pm-viewer-title{margin:0;font-size:1.08rem}
     .pm-viewer-tools{display:flex;align-items:center;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+    .pm-viewer-meta{font-size:.78rem;color:#7d705f;font-weight:600}
     .pm-viewer-nav-btn{appearance:none;border:1px solid #d6c7b6;background:#fff;color:#5f5449;border-radius:999px;padding:6px 10px;font-size:.8rem;font-weight:700;cursor:pointer;transition:background .2s ease,color .2s ease,opacity .2s ease}
     .pm-viewer-nav-btn:hover{background:#f7f1ea}
     .pm-viewer-nav-btn:disabled{opacity:.45;cursor:not-allowed}
     .pm-viewer-close{appearance:none;border:1px solid #D6C7B6;background:#fff;color:#6f6459;border-radius:999px;padding:6px 12px;font-size:.82rem;font-weight:700;cursor:pointer}
     .pm-viewer-close:hover{background:#f7f1ea}
+    .pm-viewer-progress{position:relative;height:4px;background:#e8ddcf}
+    .pm-viewer-progress-bar{position:absolute;left:0;top:0;bottom:0;width:0;background:linear-gradient(90deg,#c69c6d,#9f784a);transition:width .18s ease}
     .pm-viewer-content{padding:20px;max-height:560px;overflow:auto;line-height:1.72;color:#433f3a;background:linear-gradient(180deg,#fff 0%,#fcfaf7 100%)}
     .pm-viewer-frame{width:100%;height:72vh;min-height:520px;border:1px solid #ddd;border-radius:10px;background:#fff}
     .pm-viewer-content h1,.pm-viewer-content h2,.pm-viewer-content h3{font-family:'Playfair Display',serif;color:#2f3a27;line-height:1.22;margin:20px 0 10px}
@@ -493,13 +496,15 @@
       var viewer = document.createElement('div');
       viewer.className = 'pm-article-viewer pm-inline-viewer pm-viewer-hidden';
       viewer.setAttribute('aria-live', 'polite');
-      viewer.innerHTML = '<div class="pm-viewer-head"><h3 class="pm-viewer-title">Artículo</h3><div class="pm-viewer-tools"><button class="pm-viewer-nav-btn" type="button" data-pm-prev>← Anterior</button><button class="pm-viewer-nav-btn" type="button" data-pm-next>Siguiente →</button><button class="pm-viewer-nav-btn" type="button" data-pm-share>Copiar enlace</button><button class="pm-viewer-close" type="button">Replegar</button></div></div><div class="pm-viewer-content"></div>';
+      viewer.innerHTML = '<div class="pm-viewer-head"><h3 class="pm-viewer-title">Artículo</h3><div class="pm-viewer-tools"><span class="pm-viewer-meta" data-pm-meta>—</span><button class="pm-viewer-nav-btn" type="button" data-pm-prev>← Anterior</button><button class="pm-viewer-nav-btn" type="button" data-pm-next>Siguiente →</button><button class="pm-viewer-nav-btn" type="button" data-pm-share>Copiar enlace</button><button class="pm-viewer-close" type="button">Replegar</button></div></div><div class="pm-viewer-progress"><span class="pm-viewer-progress-bar" data-pm-progress></span></div><div class="pm-viewer-content"></div>';
       var viewerTitle = viewer.querySelector('.pm-viewer-title');
       var viewerContent = viewer.querySelector('.pm-viewer-content');
       var closeBtn = viewer.querySelector('.pm-viewer-close');
       var prevBtn = viewer.querySelector('[data-pm-prev]');
       var nextBtn = viewer.querySelector('[data-pm-next]');
       var shareBtn = viewer.querySelector('[data-pm-share]');
+      var viewerMeta = viewer.querySelector('[data-pm-meta]');
+      var viewerProgressBar = viewer.querySelector('[data-pm-progress]');
 
       var lightbox = document.createElement('div');
       lightbox.className = 'pm-lightbox';
@@ -584,6 +589,34 @@
         nextBtn.disabled = idx < 0 || idx >= cards.length - 1;
       }
 
+      function getWordsCount(text){
+        var t = String(text || '').trim();
+        if (!t) return 0;
+        return t.split(/\s+/).length;
+      }
+
+      function estimateReadMinutes(words){
+        return Math.max(1, Math.ceil(words / 210));
+      }
+
+      function updateViewerProgress(){
+        if (!viewerContent || !viewerProgressBar) return;
+        var total = viewerContent.scrollHeight - viewerContent.clientHeight;
+        var pct = total > 0 ? Math.min(100, Math.max(0, Math.round((viewerContent.scrollTop / total) * 100))) : 100;
+        viewerProgressBar.style.width = pct + '%';
+        if (viewerMeta && activeTitle) {
+          var words = getWordsCount(viewerContent.textContent);
+          viewerMeta.textContent = estimateReadMinutes(words) + ' min · ' + pct + '% leído';
+        }
+      }
+
+      function resetViewerProgress(){
+        if (viewerContent) viewerContent.scrollTop = 0;
+        if (viewerProgressBar) viewerProgressBar.style.width = '0%';
+      }
+
+      viewerContent.addEventListener('scroll', updateViewerProgress, { passive: true });
+
       async function openCard(card, fromHash){
         if (!card) return;
         var titleNode = card.querySelector('.pm-card-title');
@@ -607,6 +640,8 @@
         viewerTitle.textContent = title;
         viewer.classList.remove('pm-viewer-hidden');
         viewerContent.innerHTML = loadingHtml();
+        if (viewerMeta) viewerMeta.textContent = 'Cargando…';
+        resetViewerProgress();
         updateViewerNavState();
 
         if (hash && location.hash !== hash && history && history.replaceState) {
@@ -625,9 +660,19 @@
           if (activeTitle !== title || activeCard !== card) return;
           bodyHtml = renderSections(title, data[title]);
           viewerContent.innerHTML = bodyHtml;
+          updateViewerProgress();
         } catch (err) {
           viewerContent.innerHTML = '<h3>'+esc(title)+'</h3><p class="pm-viewer-muted">No se pudo cargar el contenido completo en este momento.</p>';
+          updateViewerProgress();
         }
+      }
+
+      function goRelative(step){
+        if (!activeCard) return;
+        var idx = cards.indexOf(activeCard);
+        var nextIdx = idx + step;
+        if (nextIdx < 0 || nextIdx >= cards.length) return;
+        openCard(cards[nextIdx], false);
       }
 
       function setSearchMeta(visible, total, term){
@@ -683,21 +728,29 @@
           ev.preventDefault();
           searchInput.focus();
         }
+
+        var tag = document.activeElement && document.activeElement.tagName ? document.activeElement.tagName.toLowerCase() : '';
+        var typing = tag === 'input' || tag === 'textarea' || (document.activeElement && document.activeElement.isContentEditable);
+        if (typing || viewer.classList.contains('pm-viewer-hidden')) return;
+
+        if (ev.key === 'ArrowLeft') {
+          ev.preventDefault();
+          goRelative(-1);
+        } else if (ev.key === 'ArrowRight') {
+          ev.preventDefault();
+          goRelative(1);
+        }
       });
 
       if (prevBtn) {
         prevBtn.addEventListener('click', function(){
-          if (!activeCard) return;
-          var idx = cards.indexOf(activeCard);
-          if (idx > 0) openCard(cards[idx - 1], false);
+          goRelative(-1);
         });
       }
 
       if (nextBtn) {
         nextBtn.addEventListener('click', function(){
-          if (!activeCard) return;
-          var idx = cards.indexOf(activeCard);
-          if (idx > -1 && idx < cards.length - 1) openCard(cards[idx + 1], false);
+          goRelative(1);
         });
       }
 
