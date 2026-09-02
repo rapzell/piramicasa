@@ -52,6 +52,7 @@
     .pm-viewer-progress{position:relative;height:4px;background:#e8ddcf}
     .pm-viewer-progress-bar{position:absolute;left:0;top:0;bottom:0;width:0;background:linear-gradient(90deg,var(--pm-accent),color-mix(in srgb, var(--pm-accent) 70%, #3d4a30));transition:width .18s ease}
     .pm-viewer-content{padding:24px 24px 28px;max-height:560px;overflow:auto;line-height:1.75;color:#3f3a34;background:radial-gradient(circle at 12% -10%,#fffdf9 0,#fdfaf6 44%,#fbf7f1 100%)}
+    .pm-viewer-content.pm-switching{opacity:.38;transform:translateY(4px);filter:saturate(.88);transition:opacity .2s ease,transform .2s ease,filter .2s ease}
     .pm-viewer-frame{width:100%;height:72vh;min-height:520px;border:1px solid #ddd;border-radius:10px;background:#fff}
     .pm-viewer-content h1,.pm-viewer-content h2,.pm-viewer-content h3{font-family:'Playfair Display',serif;color:#2f3a27;line-height:1.22;margin:20px 0 10px}
     .pm-viewer-content p{margin:0 0 10px}
@@ -129,6 +130,7 @@
     @media(max-width:768px){.pm-articles-hero{padding-top:86px}.pm-viewer-content{padding:12px 10px 14px;max-height:66vh}.pm-viewer-frame{height:65vh;min-height:420px}.pm-viewer-head{padding:12px 14px;align-items:flex-start;flex-direction:column}.pm-viewer-tools{width:100%;justify-content:flex-start}.pm-article-block{padding:14px 10px;border-radius:10px}.pm-article-prose{padding-left:0;max-width:none}.pm-article-prose::before{display:none}.pm-article-prose p{font-size:.99rem;line-height:1.76}.pm-article-prose p.pm-article-lead{font-size:1.05rem;line-height:1.8}.pm-article-dropcap::first-letter{font-size:2.05em}.pm-inline-media img{height:220px}.pm-flow-heading{font-size:1.08rem;margin:18px 0 8px}.pm-article-viewer.pm-reading-mode .pm-viewer-content{padding:12px 10px 14px;max-height:70vh}.pm-article-viewer.pm-reading-mode .pm-article-prose p{font-size:1rem;line-height:1.82}.pm-article-viewer.pm-reading-mode .pm-article-block{padding:13px 9px}}
     @keyframes pmArticleReveal{0%{opacity:0;transform:translateY(6px)}100%{opacity:1;transform:translateY(0)}}
     @media(max-width:768px){.pm-articles-tools{padding:0 16px 20px}.pm-tools-panel{padding:12px}.pm-tools-row{gap:8px}.pm-search-input,.pm-tools-btn{height:40px}.pm-backtop{right:14px;bottom:80px;width:42px;height:42px}}
+    @media (prefers-reduced-motion: reduce){.pm-viewer-content.pm-switching{opacity:1;transform:none;filter:none;transition:none}}
   </style>
 </head>
 <body>
@@ -603,6 +605,7 @@
 
       function collapseViewer(){
         viewer.classList.add('pm-viewer-hidden');
+        if (viewerContent) viewerContent.classList.remove('pm-switching');
         cards.forEach(function(c){ c.classList.remove('pm-active'); });
         if (activeHash && location.hash === activeHash) {
           if (history && history.replaceState) history.replaceState(null, '', location.pathname + location.search);
@@ -667,6 +670,20 @@
         if (viewerProgressBar) viewerProgressBar.style.width = '0%';
       }
 
+      function beginViewerSwitch(){
+        if (!viewerContent) return;
+        viewerContent.classList.add('pm-switching');
+      }
+
+      function endViewerSwitch(){
+        if (!viewerContent) return;
+        requestAnimationFrame(function(){
+          requestAnimationFrame(function(){
+            viewerContent.classList.remove('pm-switching');
+          });
+        });
+      }
+
       viewerContent.addEventListener('scroll', updateViewerProgress, { passive: true });
 
       async function openCard(card, fromHash){
@@ -695,6 +712,7 @@
 
         viewerTitle.textContent = title;
         viewer.classList.remove('pm-viewer-hidden');
+        beginViewerSwitch();
         viewerContent.innerHTML = loadingHtml();
         if (viewerMeta) viewerMeta.textContent = 'Cargando…';
         resetViewerProgress();
@@ -716,9 +734,11 @@
           if (activeTitle !== title || activeCard !== card) return;
           bodyHtml = renderSections(title, data[title]);
           viewerContent.innerHTML = bodyHtml;
+          endViewerSwitch();
           updateViewerProgress();
         } catch (err) {
           viewerContent.innerHTML = '<h3>'+esc(title)+'</h3><p class="pm-viewer-muted">No se pudo cargar el contenido completo en este momento.</p>';
+          endViewerSwitch();
           updateViewerProgress();
         }
       }
