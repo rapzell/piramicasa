@@ -581,6 +581,7 @@
       var activeTitle = null;
       var activeCard = null;
       var activeHash = null;
+      var lastArticleKey = 'pm-last-article-hash';
 
       var backTopBtn = document.getElementById('pm-backtop');
       function syncBackTop(){
@@ -703,6 +704,9 @@
         activeTitle = title;
         activeCard = card;
         activeHash = hash || null;
+        if (activeHash) {
+          try { localStorage.setItem(lastArticleKey, activeHash); } catch (e) {}
+        }
 
         var category = resolveCategory(card);
         applyViewerTheme(category.theme);
@@ -858,9 +862,15 @@
 
       function openFromHash(){
         var h = location.hash || '';
+        if (!h) {
+          try { h = localStorage.getItem(lastArticleKey) || ''; } catch (e) { h = ''; }
+        }
         if (!h) return;
         var match = cards.find(function(card){ return card.getAttribute('href') === h; });
         if (match) openCard(match, true);
+        else {
+          try { localStorage.removeItem(lastArticleKey); } catch (e) {}
+        }
       }
 
       window.addEventListener('hashchange', openFromHash);
