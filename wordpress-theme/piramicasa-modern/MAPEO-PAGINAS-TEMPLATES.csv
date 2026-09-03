@@ -1,0 +1,30 @@
+pagina,slug_sugerido,template,patrones_principales,estado
+Inicio,inicio,front-page,"hero-piramicasa|intro-cientifica|menu-cientifico|contacto-directo|aviso-legal-resumen",listo
+Menu principal,menu-principal,page-menu-principal,"enlaces-principales|horario-llamadas|contacto-directo|aviso-legal-resumen",listo
+Joyas,joyas,page-joyas,"joyas-destacadas|joyas-texto-base|contacto-directo|aviso-legal-resumen",listo
+Pagina generica,pagina,page,"aviso-legal-resumen",listo
+Construccion de piramides y formulas,construccion-de-piramides,page,"enlaces-principales|contacto-directo",clonado-nextjs-pendiente-wp
+Geobiologia,geobiologia,page,"enlaces-principales|contacto-directo",clonado-nextjs-pendiente-wp
+Biografia Wilhelm Reich,biografia-wilhelm-reich,page,"enlaces-principales|contacto-directo",clonado-nextjs-pendiente-wp
+Biones,biones,page,"enlaces-principales|contacto-directo",clonado-nextjs-pendiente-wp
+Libros de piramides,libros-piramides,page,"enlaces-principales|contacto-directo",clonado-nextjs-pendiente-wp
+Dossier basico piramicasa,dossier-basico-piramicasa,page,"enlaces-principales|contacto-directo",clonado-nextjs-pendiente-wp
+Proporciones piramidales,proporciones-piramidales,page,"enlaces-principales|contacto-directo",clonado-nextjs-pendiente-wp
+Materiales de construccion,materiales-de-construccion,page,"enlaces-principales|contacto-directo",clonado-nextjs-pendiente-wp
+Montaje y orientacion,montaje-y-orientacion,page,"enlaces-principales|contacto-directo",clonado-nextjs-pendiente-wp
+Seguridad y uso,seguridad-y-uso,page,"enlaces-principales|contacto-directo",clonado-nextjs-pendiente-wp
+Introduccion a la piramidologia,introduccion-piramidologia,page,"enlaces-principales|contacto-directo",clonado-nextjs-pendiente-wp
+Manual de terapia piramidal,manual-terapia-piramidal,page,"enlaces-principales|contacto-directo",clonado-nextjs-pendiente-wp
+Historia de las piramides,historia-de-las-piramides,page,"enlaces-principales|contacto-directo",clonado-nextjs-pendiente-wp
+Geobiologia aplicada,geobiologia-aplicada,page,"enlaces-principales|contacto-directo",clonado-nextjs-pendiente-wp
+Bibliografia tecnica,bibliografia-tecnica,page,"enlaces-principales|contacto-directo",clonado-nextjs-pendiente-wp
+Piramide jardin,estructura-pirajardin,page,"enlaces-principales|contacto-directo",clonado-nextjs-pendiente-wp
+Viaje a Egipto,viaje-egipto,page,"enlaces-principales|contacto-directo",clonado-nextjs-pendiente-wp
+Anillos personalizados,anillos,page,"joyas-texto-base|contacto-directo",clonado-nextjs-pendiente-wp
+Joyas exclusivas,joyas-exclusivas,page,"joyas-texto-base|contacto-directo",clonado-nextjs-pendiente-wp
+Terminos y garantias legales,terminos-y-condiciones,page,"aviso-legal-resumen",clonado-nextjs-pendiente-wp
+Datos de contacto,datos-de-contacto,page,"contacto-directo|aviso-legal-resumen",clonado-nextjs-pendiente-wp
+Centros de terapia piramidal,centros-terapia-piramidal,page,"contacto-directo|enlaces-principales",clonado-nextjs-pendiente-wp
+Avales terapia piramidal oficial,avales-terapia-piramidal-oficial,page,"aviso-legal-resumen|enlaces-principales",clonado-nextjs-pendiente-wp
+Envio de piramides a todo el mundo,envio-piramides-mundo,page,"contacto-directo|enlaces-principales",clonado-nextjs-pendiente-wp
+Centro terapeutico tipi,centro-terapeutico-tipi,page,"contacto-directo|enlaces-principales",clonado-nextjs-pendiente-wp

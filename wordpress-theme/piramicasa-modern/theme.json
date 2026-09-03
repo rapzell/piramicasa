@@ -1,0 +1,126 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/theme.json",
+  "version": 3,
+  "settings": {
+    "appearanceTools": true,
+    "layout": {
+      "contentSize": "860px",
+      "wideSize": "1200px"
+    },
+    "color": {
+      "palette": [
+        { "name": "Crema", "slug": "bg", "color": "#F7F4F0" },
+        { "name": "Blanco", "slug": "surface", "color": "#FFFFFF" },
+        { "name": "Carbón", "slug": "ink", "color": "#2B2B2B" },
+        { "name": "Verde Musgo", "slug": "primary", "color": "#5A6B4A" },
+        { "name": "Verde Profundo", "slug": "deep", "color": "#3D4A30" },
+        { "name": "Oro Arena", "slug": "secondary", "color": "#C69C6D" },
+        { "name": "Terracota", "slug": "accent", "color": "#D88A5E" },
+        { "name": "Borde Suave", "slug": "border", "color": "#E0D9D0" },
+        { "name": "Gris Medio", "slug": "muted", "color": "#8A817A" }
+      ]
+    },
+    "typography": {
+      "fluid": true,
+      "fontFamilies": [
+        {
+          "fontFamily": "\"Playfair Display\", Georgia, \"Times New Roman\", serif",
+          "name": "Playfair Display",
+          "slug": "display"
+        },
+        {
+          "fontFamily": "\"Inter\", -apple-system, BlinkMacSystemFont, \"Segoe UI\", system-ui, sans-serif",
+          "name": "Inter",
+          "slug": "body"
+        }
+      ],
+      "fontSizes": [
+        { "name": "Pequeño", "slug": "small", "size": "14px" },
+        { "name": "Mediano", "slug": "medium", "size": "18px" },
+        { "name": "Grande", "slug": "large", "size": "28px" },
+        { "name": "Extra Grande", "slug": "x-large", "size": "40px" },
+        { "name": "Hero", "slug": "xx-large", "size": "clamp(3rem, 6vw, 6rem)" }
+      ]
+    }
+  },
+  "styles": {
+    "color": {
+      "background": "var:preset|color|bg",
+      "text": "var:preset|color|ink"
+    },
+    "typography": {
+      "fontFamily": "var:preset|font-family|body",
+      "fontSize": "16px",
+      "lineHeight": "1.7"
+    },
+    "elements": {
+      "heading": {
+        "typography": {
+          "fontFamily": "var:preset|font-family|display",
+          "lineHeight": "1.15",
+          "letterSpacing": "0.01em"
+        }
+      },
+      "h1": {
+        "typography": {
+          "fontSize": "clamp(3rem, 6vw, 6rem)",
+          "lineHeight": "1.05",
+          "letterSpacing": "-0.02em"
+        }
+      },
+      "h2": {
+        "typography": {
+          "fontSize": "clamp(2rem, 4vw, 3rem)"
+        }
+      },
+      "link": {
+        "color": {
+          "text": "var:preset|color|primary"
+        },
+        ":hover": {
+          "color": {
+            "text": "var:preset|color|deep"
+          }
+        }
+      },
+      "button": {
+        "color": {
+          "background": "var:preset|color|primary",
+          "text": "var:preset|color|bg"
+        },
+        "typography": {
+          "fontFamily": "var:preset|font-family|body",
+          "fontWeight": "600"
+        },
+        "spacing": {
+          "padding": {
+            "top": "14px",
+            "right": "28px",
+            "bottom": "14px",
+            "left": "28px"
+          }
+        },
+        "border": {
+          "radius": "8px"
+        },
+        ":hover": {
+          "color": {
+            "background": "var:preset|color|deep"
+          }
+        }
+      }
+    }
+  },
+  "templateParts": [
+    {
+      "area": "header",
+      "name": "header",
+      "title": "Header"
+    },
+    {
+      "area": "footer",
+      "name": "footer",
+      "title": "Footer"
+    }
+  ]
+}
