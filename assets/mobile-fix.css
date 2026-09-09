@@ -2,8 +2,14 @@
 /* Standalone mobile bar - outside React control */
 .pm-mobile-bar{display:none;position:fixed;top:0;left:0;right:0;z-index:10001;background:rgba(247,244,240,.97);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid #E0D9D0;box-shadow:0 2px 12px rgba(0,0,0,.06);padding:10px 16px;align-items:center;justify-content:space-between;min-height:56px;box-sizing:border-box}
 .pm-mobile-logo{font-family:'Playfair Display',serif;font-size:1.25rem;font-weight:700;color:#3D4A30;text-decoration:none;letter-spacing:-.02em}
-.pm-mobile-logo span{color:#C69C6D}
+.pm-mobile-logo span{color:#856036}
 .pm-mobile-tagline{font-size:.58rem;color:#8A817A;letter-spacing:.08em;text-transform:uppercase;margin-top:1px}
+
+/* Accessibility: improve contrast for light-section labels and logo accent */
+.pm-header.pm-scrolled .pm-logo span{color:#856036!important}
+.pm-section-cream .pm-label,
+.pm-section-alt .pm-label,
+.pm-section-white .pm-label{color:#856036!important}
 .pm-mobile-btn{width:40px;height:40px;background:none;border:none;cursor:pointer;padding:8px;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:5px;flex-shrink:0}
 .pm-mobile-btn span{display:block;width:24px;height:2.5px;background:#3D4A30;border-radius:2px;transition:all .3s ease}
 .pm-mobile-btn.pm-open span:nth-child(1){transform:translateY(7.5px) rotate(45deg)}
