@@ -1,0 +1,225 @@
+<!DOCTYPE html> 
+	<html itemscope itemtype="http://schema.org/website" lang="es">
+    
+        <head>
+        	<link rel="icon" href="es/imagenes/favicon.ico"/>
+            <link href='https://fonts.googleapis.com/css?family=Black+Ops+One' rel='stylesheet' type='text/css'/>
+            
+            <link rel="stylesheet" type="text/css" href="es/css/general.css"/>
+            <link rel="stylesheet" type="text/css" href="es/css/new-styles.css"/>
+        
+            <meta charset="utf-8"/>
+            <title>Error 404</title>
+            <meta name="viewport" content="width=device-width, initial-scale=1"/>
+            
+            <!-- META TAGS PARA FACEBOOK -->
+            <!-- ********************************** --> 
+                <!-- Test -->
+            
+            <meta property="og:title" content="Piramicasa"/>
+            <meta property="og:description" content="Fabricantes y Constructores de Pir&#225;mides Terap&#233;uticas - Espa&#241;a - Env&#237;os a todo el Mundo - Tel: 639.28.47.87 - piramicasa@protonmail.com"/>
+            <!--<meta property="og:image" content="http://www.piramicasa.es/es/imagenes/logodef.fw.png"/>
+            <meta property="og:url" content="http://www.piramicasa.es/es/piramides.htm"/>--><meta property="og:site_name" content="Piramicasa"/>               
+           
+            
+           	<!--[if lt IE 9]>
+            <script src="js/html5shiv.js"></script>
+            <script src="js/respond.min.js"></script>
+            <![endif]-->
+
+        </head>
+        
+        <!--/ FIN HEAD ------------>
+        
+        
+        <body class="bodygeneral">
+        	<div id="container"> 
+                   
+        		<header role="banner">
+            
+                    
+                    <nav class="col-sm-12 navbar navbar-default navbar-fixed-top" role="navigation">
+                    
+                    	<div class="navbar-header">
+                            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                              <span class="sr-only">Desplegar navegación</span>
+                              <span class="icon-bar"></span>
+                              <span class="icon-bar"></span>
+                              <span class="icon-bar"></span>
+                            </button>
+                      	</div>
+                    	
+                        <div class="collapse navbar-collapse navbar-ex1-collapse">
+                            <ul id="menu" class=" nav navbar-nav navbar-static-top">
+                                <li><a href="es/index.htm" title="Inicio"><img src="es/imagenes/logonav.png" alt=""/></a></li>
+                                <li class="negrita contactomargin"><a href="../es/datos-de-contacto.html" title="Contacto" target="_blank">Argentina, Canadá, México, España CONTACTO: +34 639284787  </a></li>
+                                <li class="dropdown">
+                                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" title="Información general Efecto Piramidal"><img id="imaginfo" src="es/imagenes/info.png" alt=""/>&nbsp;&nbsp;+ Info<span class="caret"></span></a>
+                                  <ul class="dropdown-menu pre-scrollable" role="menu">
+                                    <li><a href="es/articulos.htm" title="Artículos sobre el Efecto Piramidal y Cosas Gratis">+ Info Pirámides</a></li>
+                                    <li><a href="es/para_que_sirven_las_piramides.html" title="Por qué y para qué sirven las pirámides">Por qué y para qué sirven</a></li>
+                                    <li><a href="es/beneficios_salud_piramides.html" title="Efectos benéficos de la pirámide y antipirámide">Beneficios en la salud</a></li>
+                                    <li><a href="es/enfermedades_y_dolencias_tratadas_con_piramides.html" title="Dolencias tratadas con éxito">Enfermedades tratadas</a></li>
+                                    <li><a href="es/avales_terapia_piramidal_oficial.html" title="Organismos Oficiales nos avalan">Avales y Certificados</a></li>
+                                    <li><a href="es/faq_piramides.htm" title="Respuestas frecuentes sobre las pirámides y la Piramidoterapia">Preguntas Frecuentes</a></li>
+                                    <li class="divider"></li>
+                                    <li><a href="PIRAMIDES/exito_de_difusion_de_usos_piramidales.html" title="Miles de usuarios usan nuestras pirámides">Éxito de difusión</a></li>
+                                    <li><a href="es/envio_de_piramides_a_todo_el_mundo.html" title="Nuestras pirámides llegan a todas las casas">Envíos a todo el Mundo</a></li>
+                                    <li><a href="educacion/cursos_talleres_y_conferencias_sobre_las_piramides.html" title="Enseñamos a usar las pirámides">Cursos y Talleres</a></li>
+                                    <li><a href="es/videos_de_piramides.html" title="Vídeos informativos sobre las pirámides">Vídeos</a></li>
+                                    <li><a href="es/centros_terapia_piramidal.html" title="En estos centros pueden ayudaros con vuestras dolencias">Centros de Terapia Piramidal</a></li>
+                                    <li class="divider"></li>
+                                    <li><a href="EGIPTO/ViajeEgipto.htm" title="Cada año vamos a Egipto a enseñarlo de otra manera">Viaje a Egipto</a></li>
+                                  </ul>
+                                </li>
+                                <li><a href="es/piramides.htm" title="Piramicamas, piramicunas y muchos más aparatos piramidales"><img src="es/imagenes/cubes.png" alt=""/>&nbsp;&nbsp;Pirámides</a></li>
+                                <li><a id="menulibros" href="LIBROS/libros_piramides.htm" title="Libros informativos sobre la historia y beneficios de la piramidoterapia"><img src="es/imagenes/libros.png" alt=""/>&nbsp;&nbsp;Libros</a></li>
+                                <li id="busqueda" class="visible-sm visible-md visible-lg"><gcse:search></gcse:search></li>
+                            </ul>
+                        </div>
+                                                              
+                    </nav><!-- / nav-->
+                    
+                    <div class="row" id="h1index">
+                    
+                    	<div class="col-xs-10 col-xs-offset-1 col-sm-4 col-sm-offset-4">
+                        	<p><a href="es/index.htm"><img id="logo" class=" center-block img-responsive" title="INICIO - PIRAMICASA" src="es/imagenes/logodef.fw.png" alt="Logo Piramicasa"/></a></p>
+                        	<table width="300" border="0" align="center">
+                        	  <caption>&nbsp;
+                       	      </caption>
+                        	  <tr>
+                        	    <td bgcolor="#FFFFFF"><a href="terminos_y_condiciones_avisos_legales_derechos_de_autor.htm" title="Condiciones Generales" target="_blank" class="box-shadow-outset"><strong>Si sigue navegando, se comprende que acepta los Términos y Condiciones Legales</strong></a></td>
+                      	    </tr>
+                      	  </table>
+                        	<p><strong>AYUDA A HOMOLOGAR LA PIRAMIDOTERAPIA</strong></p>
+                        	<p><strong> FIRMA LA PETICIÓN PULSANDO LA IMAGEN</strong></p></p>
+                        	<p><a href="http://www.piramicasa.es/es/piramidologia-y-piramidoterapia.html" target="_blank"><img src="es/imagenes/centros_terapeuticos_piramidales/CAMILO/camilla-piramides.jpg" alt="Piramidología y Piramidoterapia" width="507" height="380" border="0"></a></p>
+                        	<p>&nbsp;</p>
+                        </div>
+                        	<p>&nbsp;</p>
+                        </div>
+                    	
+                        <div class="col-xs-10 col-xs-offset-1 col-md-8 col-md-offset-2 ">
+                            <h1>LO SENTIMOS - PÁGINA NO DISPONIBLE</h1>
+                        </div>	
+                        
+                    </div>
+            
+            	
+                
+                <main id="main" role="main">
+                    
+                    <div class="row" id="textogeneral">
+                    	<div class="col-xs-12 col-sm-10 col-sm-offset-1 col-lg-8 col-lg-offset-2" id="textogeneralcol"><br/>
+                        
+                        <p class="font24 letraweb azul centro">POR FAVOR, VISITE INICIO O CUALQUIER OPCIÓN DEL MENÚ SUPERIOR, CONOCERÁ EL PODER DE LAS <strong class="str">PIRÁMIDES</strong><br/>
+                        -PERDONE LAS MOLESTIAS-</p>
+                        
+                        <div class="centro">
+                            	<a id="tresbotones" href="es/index.htm"><button class="btn btn-default botonmovil letraweb" alt="">INICIO - <strong class="str">PIRAMICASA</strong></button></a>
+                        </div>
+                            
+                        <div class="centro margenvertical">
+                            	<a href="PIRAMIDES/piramicuna.htm"><img class="margen10" src="es/imagenes/servicios/piramicuna.jpg" alt=" Ir a pirámides para bebés - Piramicunas"/></a>
+                            	<a href="PIRAMIDES/estructura_piramicama.htm"><img class="margen10" src="es/imagenes/servicios/piramicama.jpg" alt="Ir a Piramicama"/></a>
+                                <a href="PIRAMIDES/Piramide.htm"><img class="margen10" src="es/imagenes/servicios/bungalow_piramidal.jpg" alt="Ir a Bungalows y casas de campo piramidales"/></a>
+                            </div>
+
+						<img class="center-block img-responsive margenvertical" src="es/imagenes/terror404.jpg" alt=""/>
+                        
+                            
+                            <div class="centro margenvertical">
+                            	<a href="EGIPTO/ViajeEgipto.htm"><img class="margenvertical20" src="es/imagenes/viaje_a_egipto_gabriel_silva.jpg" alt=""/></a>
+								<p class="font18 marron letraweb">VIAJE A EGIPTO CON GABRIEL SILVA - Viaje Científico e Iniciático para todas las edades</p>
+                            </div>
+                            
+                            
+                    	</div><!-- / col texto -->
+                    </div><!-- / row texto -->
+                              
+                
+                </main><!-- / main -->
+                
+                <footer role="contentinfo">
+                
+                	<div class="row">
+                  	  	<div class="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-lg-8 col-lg-offset-2">
+                            <div class="row" id="rowfooter">
+                                <div class="col-xs-12 col-sm-4 colfooter">
+                                	<h4>Social Media</h4>
+                                
+                                	<a rel="publisher" href="https://plus.google.com/106364911258511919875" target="_blank"><div id="google" alt="Mi Google +"></div></a>
+                                    <a href="https://www.facebook.com/Piramicasa.es?fref=ts" target="_blank"><div id="facebook" alt="Mi Facebook"></div></a>
+                                    <a href="https://twitter.com/piramicasa" target="_blank"><div id="twitter" alt="Mi Twitter"></div></a>
+                                    <a href="https://www.youtube.com/user/Piramicasa" target="_blank"><div id="youtube" alt="Mi Youtube"></div></a><br/>
+                                    
+                                     <a href="http://www.piramicasa.eu/" target="_blank"><img class="button wobble-bottom img-responsive center-block" src="es/imagenes/idiomas-piramicasa.png" alt="Idiomas Piramicasa"/></a>
+                                </div><!-- / col 1-->  
+                                
+                                <div class="col-xs-12 col-sm-4 colfooter2">
+                                	<h4>Nuestros Modelos</h4><br/>
+                                    <p><a href="PIRAMIDES/estructura_piramicama.htm"><span id="modelosindex">Piramicama</span></a></p>
+                                    <p><a href="PIRAMIDES/estructura_hercules.htm">Hércules</a></p>
+                                    <p><a href="PIRAMIDES/piramicuna.htm">Piramicuna</a></p>
+                                    <p><a href="PIRAMIDES/estructura_hygia.htm">Hygia - Horus</a></p>
+                                    <p><a href="PIRAMIDES/piramicasa_vital.html">Piramicasa</a></p>
+                                    <p><a href="PIRAMIDES/Piramide.htm">Bungalow Piramidal</a></p>
+                                    <p><a href="PIRAMIDES/estructura_pirajardin.htm">Pirámides Jardín</a></p>
+                                    <p><a href="PIRAMIDES/mascotas.html">Piramascota</a></p>
+                                </div><!-- / col 2-->  
+                                
+                                <div class="col-xs-12 col-sm-4 colfooter3">
+                                	<h4><h4><a href="../es/datos-de-contacto.html">Información de contacto</a></h4><br</h4><br/>
+                                    
+                                    <p><img class="img-responsive" src="es/imagenes/piramicama-templaria.jpg" alt="Piramicama Templaria"/></p>
+                                    
+                                    
+                                    
+                                    <a href="es/centros_terapia_piramidal.html"><p><span id="centros">Centros y Terapéutas Piramidales</span></p></a>
+                                    
+                                </div><!-- / col 3 -->  
+                                
+                                <div class="col-xs-12 col-sm-12" id="avisolegal">
+                                	<p><a href="es/terminos_y_condiciones_avisos_legales_derechos_de_autor.htm">Aviso Legal</a> <strong> | Copyright © 2001-2019 Piramicasa - Todos los derechos reservados</strong></p> 
+                                </div>
+                                                               
+                            </div><!-- / row secundario footer-->
+                            <img class="img-responsive button pulse" id="antiguos" src="es/imagenes/index/footer2.png" alt=""/>
+                		</div><!-- / col primario footer-->
+                    </div><!-- / row primario footer-->
+                    
+                </footer><!-- / footer-->
+            
+            
+            
+           <script>
+			  (function() {
+				var cx = '005855829893097673179:9schkk8hg8s';
+				var gcse = document.createElement('script');
+				gcse.type = 'text/javascript';
+				gcse.async = true;
+				gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+					'//cse.google.com/cse.js?cx=' + cx;
+				var s = document.getElementsByTagName('script')[0];
+				s.parentNode.insertBefore(gcse, s);
+			  })();
+			</script>
+            
+            <script>
+			  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+			  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+			  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+			
+			  ga('create', 'UA-33057797-1', 'auto');
+			  ga('send', 'pageview');
+            </script>
+        
+			<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+            
+            <script src="es/js/bootstrap.min.js"></script>
+            
+			<script src="es/js/main.js"></script>
+            
+        </body>
+	</html>
