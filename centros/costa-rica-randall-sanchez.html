@@ -60,13 +60,15 @@ img{max-width:100%;height:auto}
 .pm-treatment-list li{padding:10px 0 10px 28px;position:relative;border-bottom:1px solid var(--pm-border)}
 .pm-treatment-list li:last-child{border-bottom:none}
 .pm-treatment-list li::before{content:'△';position:absolute;left:0;color:var(--pm-oro);font-size:.9rem}
-/* Gallery */
-.pm-centro-gallery-section{max-width:1100px;margin:0 auto 32px;padding:0 24px}
-.pm-gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px}
-.pm-gallery-item{margin:0}
-.pm-gallery-item img{width:100%;height:240px;object-fit:cover;border-radius:10px;border:1px solid var(--pm-border);box-shadow:0 2px 8px rgba(0,0,0,.06);transition:var(--pm-transition)}
-.pm-gallery-item img:hover{transform:scale(1.02);box-shadow:var(--pm-shadow)}
-.pm-gallery-item figcaption{font-size:.8rem;color:var(--pm-muted);margin-top:6px;text-align:center}
+/* Gallery - integrated inside content card */
+.pm-centro-gallery{margin:-20px -36px 32px;overflow:hidden;background:var(--pm-crema-warm)}
+.pm-gallery-featured{margin:0;position:relative}
+.pm-gallery-featured img{width:100%;height:380px;object-fit:cover;display:block}
+.pm-gallery-featured::after{content:'';position:absolute;bottom:0;left:0;right:0;height:50px;background:linear-gradient(to top,rgba(237,231,222,1),transparent);pointer-events:none}
+.pm-gallery-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:6px;padding:6px;background:var(--pm-crema-warm)}
+.pm-gallery-thumb{margin:0}
+.pm-gallery-thumb img{width:100%;height:120px;object-fit:cover;border-radius:6px;display:block;transition:var(--pm-transition);cursor:pointer}
+.pm-gallery-thumb img:hover{transform:scale(1.03);box-shadow:var(--pm-shadow)}
 /* Contact */
 .pm-contact-section{max-width:900px;margin:0 auto 48px;padding:0 24px}
 .pm-contact-card{background:var(--pm-white);border-radius:12px;padding:36px 36px;border-top:4px solid var(--pm-oro);box-shadow:var(--pm-shadow)}
@@ -80,7 +82,7 @@ img{max-width:100%;height:auto}
 .pm-source-note p{font-size:.85rem;color:var(--pm-muted)}
 .pm-source-note a{color:var(--pm-verde-light)}
 /* Responsive */
-@media(max-width:768px){.pm-subpage-hero{padding:60px 20px 40px}.pm-subpage-hero h1{font-size:1.8rem}.pm-centro-wrap{padding:32px 16px}.pm-centro-content{padding:28px 20px}.pm-contact-card{padding:28px 20px}.pm-gallery{grid-template-columns:repeat(auto-fill,minmax(220px,1fr))}.pm-gallery-item img{height:180px}}
+@media(max-width:768px){.pm-subpage-hero{padding:60px 20px 40px}.pm-subpage-hero h1{font-size:1.8rem}.pm-centro-wrap{padding:32px 16px}.pm-centro-content{padding:28px 20px}.pm-contact-card{padding:28px 20px}.pm-centro-gallery{margin:-16px -20px 24px}.pm-gallery-featured img{height:240px}.pm-gallery-grid{grid-template-columns:repeat(auto-fill,minmax(120px,1fr))}.pm-gallery-thumb img{height:90px}}
 </style>
 </head>
 <body>
@@ -97,9 +99,9 @@ img{max-width:100%;height:auto}
 </div>
 </header>
 <main id="pm-main-content" role="main" aria-label="Detalle del centro terapéutico">
-<section class="pm-section pm-centro-gallery-section"><div class="pm-gallery"><figure class="pm-gallery-item"><img src="../assets/piramicasa/centros-detalle/costa-rica-randall-sanchez-1.jpg" alt="Centro costa-rica-randall-sanchez - imagen 1" loading="lazy" decoding="async" width="400" height="300" /><figcaption>Centro costa-rica-randall-sanchez - imagen 1</figcaption></figure> <figure class="pm-gallery-item"><img src="../assets/piramicasa/centros-detalle/costa-rica-randall-sanchez-2.jpg" alt="Centro costa-rica-randall-sanchez - imagen 2" loading="lazy" decoding="async" width="400" height="300" /><figcaption>Centro costa-rica-randall-sanchez - imagen 2</figcaption></figure> <figure class="pm-gallery-item"><img src="../assets/piramicasa/centros-detalle/costa-rica-randall-sanchez-3.jpg" alt="Centro costa-rica-randall-sanchez - imagen 3" loading="lazy" decoding="async" width="400" height="300" /><figcaption>Centro costa-rica-randall-sanchez - imagen 3</figcaption></figure> <figure class="pm-gallery-item"><img src="../assets/piramicasa/centros-detalle/costa-rica-randall-sanchez-4.jpg" alt="Centro costa-rica-randall-sanchez - imagen 4" loading="lazy" decoding="async" width="400" height="300" /><figcaption>Centro costa-rica-randall-sanchez - imagen 4</figcaption></figure> <figure class="pm-gallery-item"><img src="../assets/piramicasa/centros-detalle/costa-rica-randall-sanchez-5.jpg" alt="Centro costa-rica-randall-sanchez - imagen 5" loading="lazy" decoding="async" width="400" height="300" /><figcaption>Centro costa-rica-randall-sanchez - imagen 5</figcaption></figure></div></section>
 <div class="pm-centro-wrap">
 <div class="pm-centro-content">
+<div class="pm-centro-gallery"><figure class="pm-gallery-featured"><img src="../assets/piramicasa/centros-detalle/costa-rica-randall-sanchez-1.jpg" alt="Terapeuta Holístico Integral Randall Sánchez - imagen principal" loading="lazy" decoding="async" width="800" height="450" /></figure><div class="pm-gallery-grid"><figure class="pm-gallery-thumb"><img src="../assets/piramicasa/centros-detalle/costa-rica-randall-sanchez-2.jpg" alt="Terapeuta Holístico Integral Randall Sánchez - imagen 2" loading="lazy" decoding="async" width="300" height="200" /></figure><figure class="pm-gallery-thumb"><img src="../assets/piramicasa/centros-detalle/costa-rica-randall-sanchez-3.jpg" alt="Terapeuta Holístico Integral Randall Sánchez - imagen 3" loading="lazy" decoding="async" width="300" height="200" /></figure><figure class="pm-gallery-thumb"><img src="../assets/piramicasa/centros-detalle/costa-rica-randall-sanchez-4.jpg" alt="Terapeuta Holístico Integral Randall Sánchez - imagen 4" loading="lazy" decoding="async" width="300" height="200" /></figure><figure class="pm-gallery-thumb"><img src="../assets/piramicasa/centros-detalle/costa-rica-randall-sanchez-5.jpg" alt="Terapeuta Holístico Integral Randall Sánchez - imagen 5" loading="lazy" decoding="async" width="300" height="200" /></figure></div></div>
 <div class="pm-centro-content-block"><h2>Representante de Piramicasa en Costa Rica</h2><p>Terapia de integración Piramidal y Masaje Amma, liberación emocional - Investigador avanzado de terapias alternativas</p><p>Tel: (+506 8836 1560) - Calle 6, Avenida 15 - Heredia - Costa Rica terapiapiramidalcostarica@gmail.com  - PÁGINA WEB DE RANDALL - VÍDEOS Y TESTIMONIOS</p></div><div class="pm-centro-content-block"><h2>TRATAMIENTOS</h2><ul class="pm-treatment-list"><li>Seifukujutsu (Método de Terapia Restaurativa desarrollada por el Profesor Henry S. Okazaki)</li><li>Amma Restoration Therapy (Certificado por el Profesor Ramón Lono Ancho Jr., quien fue alumno directo del Profesor Henry S. Okazaki)</li><li>Sekkotsu Restoration Therapy</li><li>Profesional en Terapéutica de Energía Piramidal</li><li>Miembro del Grupo Científico Osiris</li></ul></div><div class="pm-centro-content-block"><h2>PIRAMIDOTERAPIA</h2><p>Este terapeuta ha demostrado una disciplina de trabajo impecable, que le ha permitido, en interacción con nuestro eguipo, ser el pionero en tratamientos con APS (AntiPirámide Superior).En interacción con otros colegas, también ha desarrollado formas de aplicación de la &quot;concatenación piramidal&quot; y su formación tan completa, así como la de entrenador en Artes Marciales, le proporcionan un conocimiento práctico de fisiología óptimo para las aplicaciones en consulta de piramidoterapia.</p></div><div class="pm-centro-content-block"><h2>OTROS RECURSOS</h2><p>Como ocurre con todos los piramidoterapeutas, que están &quot;un paso más allá&quot; (o unos cuantos) respecto a la mayoría de sus colegas, al integrar un avance tan importante, su experiencia como terapeuta le ha permitido viajar a países como México, Guatemala, Panamá, Chile, España, Portugal y Cuba. En dichos países ha brindado conferencias de Amma Restoration Therapy, Sekkotsu y Terapia de Energía Piramidal, métodos aplicados para la atención de lesiones en articulaciones especialmente en sacrolumbagias, esguinces de rodillas y tobillos. Actualmente atiende a atletas de alto rendimiento con extraordinarios resultados, demostrando así la efectividad de la Energía Piramidal en el tratamiento y rehabilitación de lesiones deportivas en tiempo récord.</p></div>
 </div>
 </div>
