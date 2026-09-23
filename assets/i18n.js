@@ -6,9 +6,10 @@
 (function(){
   'use strict';
 
-  var SUPPORTED = ['es','en','pt','fr','de','ru'];
+  var SUPPORTED = ['es','en','pt','fr','de','ru','ar'];
   var DEFAULT = 'es';
   var STORAGE_KEY = 'pm_lang';
+  var RTL = ['ar'];
   // Surrogate pairs for flag emojis (works in all browsers, no ES6 needed)
   var FLAGS = {
     es:'\uD83C\uDDEA\uD83C\uDDF8', // 🇪🇸
@@ -16,9 +17,10 @@
     pt:'\uD83C\uDDF5\uD83C\uDDF9', // 🇵🇹
     fr:'\uD83C\uDDEB\uD83C\uDDF7', // 🇫🇷
     de:'\uD83C\uDDE9\uD83C\uDDEA', // 🇩🇪
-    ru:'\uD83C\uDDF7\uD83C\uDDFA'  // 🇷🇺
+    ru:'\uD83C\uDDF7\uD83C\uDDFA', // 🇷🇺
+    ar:'\uD83C\uDDF8\uD83C\uDDE6'  // 🇸🇦 (Saudi Arabia — Arabic)
   };
-  var NAMES = {es:'Espa\u00f1ol',en:'English',pt:'Portugu\u00eas',fr:'Fran\u00e7ais',de:'Deutsch',ru:'\u0420\u0443\u0441\u0441\u043a\u0438\u0439'};
+  var NAMES = {es:'Espa\u00f1ol',en:'English',pt:'Portugu\u00eas',fr:'Fran\u00e7ais',de:'Deutsch',ru:'\u0420\u0443\u0441\u0441\u043a\u0438\u0439',ar:'\u0627\u0644\u0639\u0631\u0628\u064a\u0629'};
 
   function detect(){
     var stored = null;
@@ -160,18 +162,19 @@
       pt:'Esta p\u00e1gina est\u00e1 dispon\u00edvel em Portugu\u00eas. Mudar?',
       fr:'Cette page est disponible en Fran\u00e7ais. Changer?',
       de:'Diese Seite ist auf Deutsch verf\u00fcgbar. Wechseln?',
-      ru:'\u042d\u0442\u0430 \u0441\u0442\u0440\u0430\u043d\u0438\u0446\u0430 \u0434\u043e\u0441\u0442\u0443\u043f\u043d\u0430 \u043d\u0430 \u0440\u0443\u0441\u0441\u043a\u043e\u043c. \u041f\u0435\u0440\u0435\u043a\u043b\u044e\u0447\u0438\u0442\u044c?'
+      ru:'\u042d\u0442\u0430 \u0441\u0442\u0440\u0430\u043d\u0438\u0446\u0430 \u0434\u043e\u0441\u0442\u0443\u043f\u043d\u0430 \u043d\u0430 \u0440\u0443\u0441\u0441\u043a\u043e\u043c. \u041f\u0435\u0440\u0435\u043a\u043b\u044e\u0447\u0438\u0442\u044c?',
+      ar:'\u0647\u0630\u0647 \u0627\u0644\u0635\u0641\u062d\u0629 \u0645\u062a\u0627\u062d\u0629 \u0628\u0627\u0644\u0644\u063a\u0629 \u0627\u0644\u0639\u0631\u0628\u064a\u0629. \u062a\u0628\u062f\u064a\u0644\u061f'
     };
     banner.innerHTML = '<span>'+(msg[current]||msg.en)+'</span>';
     var btnYes = document.createElement('button');
-    btnYes.textContent = {en:'Yes',pt:'Sim',fr:'Oui',de:'Ja',ru:'\u0414\u0430'}[current]||'Yes';
+    btnYes.textContent = {en:'Yes',pt:'Sim',fr:'Oui',de:'Ja',ru:'\u0414\u0430',ar:'\u0646\u0639\u0645'}[current]||'Yes';
     btnYes.style.cssText = 'background:var(--pm-oro,#C69C6D);color:var(--pm-verde-deep,#3D4A30);border:none;padding:6px 14px;border-radius:6px;cursor:pointer;font-weight:600;font-size:0.85rem;';
     btnYes.addEventListener('click',function(){
       setLang(current);
       banner.remove();
     });
     var btnNo = document.createElement('button');
-    btnNo.textContent = {en:'No, stay in Spanish',pt:'N\u00e3o, ficar em espanhol',fr:'Non, rester en espagnol',de:'Nein, auf Spanisch bleiben',ru:'\u041d\u0435\u0442, \u043e\u0441\u0442\u0430\u0432\u0438\u0442\u044c \u043d\u0430 \u0438\u0441\u043f\u0430\u043d\u0441\u043a\u043e\u043c'}[current]||'No';
+    btnNo.textContent = {en:'No, stay in Spanish',pt:'N\u00e3o, ficar em espanhol',fr:'Non, rester en espagnol',de:'Nein, auf Spanisch bleiben',ru:'\u041d\u0435\u0442, \u043e\u0441\u0442\u0430\u0432\u0438\u0442\u044c \u043d\u0430 \u0438\u0441\u043f\u0430\u043d\u0441\u043a\u043e\u043c',ar:'\u0644\u0627\u060c \u0627\u0628\u0642 \u0628\u0627\u0644\u0625\u0633\u0628\u0627\u0646\u064a\u0629'}[current]||'No';
     btnNo.style.cssText = 'background:none;color:var(--pm-crema,#F7F4F0);border:1px solid rgba(255,255,255,.3);padding:6px 14px;border-radius:6px;cursor:pointer;font-size:0.85rem;';
     btnNo.addEventListener('click',function(){
       try{ localStorage.setItem(STORAGE_KEY,'es'); }catch(e){}
@@ -187,6 +190,10 @@
     if(SUPPORTED.indexOf(code)===-1) return;
     try{ localStorage.setItem(STORAGE_KEY,code); }catch(e){}
     current = code;
+    // Update document direction for RTL languages
+    var isRtl = RTL.indexOf(code)!==-1;
+    document.documentElement.setAttribute('dir', isRtl?'rtl':'ltr');
+    document.documentElement.setAttribute('lang', code);
     // Update switcher button
     var btn = document.getElementById('pm-lang-btn');
     if(btn) btn.innerHTML = FLAGS[code] + ' <span style="font-size:0.75rem">\u25bc</span>';
