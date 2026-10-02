@@ -80,6 +80,7 @@
     var node;
     var replaces = 0;
     var keys = Object.keys(T).sort(function(a,b){return b.length-a.length}); // longest first
+    var LETTER = /[A-Za-zÁÉÍÓÚÜÑáéíóúüñ]/;
     while(node = walker.nextNode()){
       var t = node.textContent;
       var trimmed = t.trim();
@@ -89,17 +90,50 @@
         replaces++;
         continue;
       }
-      // Substring replace for known Spanish strings inside longer text nodes
+      // Collect non-overlapping matches of phrase-length keys (>=12 chars)
+      // with word boundaries. Shorter keys only apply on exact match —
+      // replacing single words inside sentences produces mixed-language
+      // gibberish (e.g. "Las هرms" from "las pirámides").
+      var spans = [];
       for(var ki=0; ki<keys.length; ki++){
         var k = keys[ki];
-        if(k.length < 4) continue; // skip very short keys to avoid false matches
-        var pos = t.indexOf(k);
-        if(pos !== -1 && k !== T[k]){
-          node.textContent = t.substring(0,pos) + T[k] + t.substring(pos+k.length);
-          replaces++;
-          t = node.textContent; // update for next match in same node
+        if(k.length < 12 || k === T[k]) continue;
+        var pos = 0, found;
+        while((found = t.indexOf(k, pos)) !== -1){
+          var before = found>0 ? t.charAt(found-1) : ' ';
+          var after = found+k.length < t.length ? t.charAt(found+k.length) : ' ';
+          if(!LETTER.test(before) && !LETTER.test(after)){
+            spans.push([found, found+k.length, k]);
+            pos = found + k.length;
+          } else {
+            pos = found + 1;
+          }
         }
       }
+      if(!spans.length) continue;
+      // Sort, drop overlaps (keep longest = earliest in sorted order at same pos)
+      spans.sort(function(a,b){return a[0]-b[0] || (b[1]-b[0])-(a[1]-a[0])});
+      var keep = [], lastEnd = -1;
+      for(var si=0; si<spans.length; si++){
+        if(spans[si][0] >= lastEnd){ keep.push(spans[si]); lastEnd = spans[si][1]; }
+      }
+      // Coverage gate: only translate if matched phrases cover >=50% of the
+      // node's letters — otherwise leave the whole node in Spanish rather
+      // than emitting a half-translated sentence.
+      var totalLetters = 0, matchedLetters = 0;
+      for(var ci=0; ci<t.length; ci++){ if(LETTER.test(t.charAt(ci))) totalLetters++; }
+      for(var ci2=0; ci2<keep.length; ci2++){
+        var sp = keep[ci2];
+        for(var cj=sp[0]; cj<sp[1]; cj++){ if(LETTER.test(t.charAt(cj))) matchedLetters++; }
+      }
+      if(totalLetters === 0 || matchedLetters / totalLetters < 0.5) continue;
+      // Apply from the end backwards so positions stay valid
+      var nt = t;
+      for(var ri=keep.length-1; ri>=0; ri--){
+        var s2 = keep[ri];
+        nt = nt.substring(0,s2[0]) + T[s2[2]] + nt.substring(s2[1]);
+      }
+      if(nt !== t){ node.textContent = nt; replaces++; }
     }
     if(replaces>0) console.log('[i18n] applied',replaces,'translations for',current);
   }
@@ -127,15 +161,13 @@
     btn.id = 'pm-lang-btn';
     btn.setAttribute('aria-label','Select language');
     btn.setAttribute('aria-expanded','false');
-    btn.style.cssText = floating
-      ? 'background:var(--pm-verde-deep,#3D4A30);border:1px solid rgba(255,255,255,.25);border-radius:6px;padding:6px 10px;cursor:pointer;font-size:1.2rem;line-height:1;color:var(--pm-crema,#F7F4F0);display:flex;align-items:center;gap:4px;box-shadow:0 2px 8px rgba(0,0,0,.25);'
-      : 'background:none;border:1px solid rgba(255,255,255,.25);border-radius:6px;padding:4px 8px;cursor:pointer;font-size:1.2rem;line-height:1;color:var(--pm-crema);display:flex;align-items:center;gap:4px;';
+    btn.style.cssText = 'background:var(--pm-verde-deep,#3D4A30);border:1.5px solid var(--pm-oro,#C69C6D);border-radius:6px;padding:'+(floating?'7px 12px':'5px 10px')+';cursor:pointer;font-size:1.2rem;line-height:1;color:var(--pm-crema,#F7F4F0);display:flex;align-items:center;gap:4px;box-shadow:0 2px 8px rgba(0,0,0,.4);';
     btn.innerHTML = FLAGS[current] + ' <span style="font-size:0.75rem">\u25bc</span>';
 
     var menu = document.createElement('div');
     menu.id = 'pm-lang-menu';
     menu.setAttribute('role','menu');
-    menu.style.cssText = 'position:absolute;top:100%;right:0;margin-top:6px;background:var(--pm-verde-deep,#3D4A30);border:1px solid rgba(255,255,255,.15);border-radius:8px;box-shadow:0 8px 24px rgba(0,0,0,.3);display:none;min-width:160px;z-index:9999;padding:4px 0;';
+    menu.style.cssText = 'position:absolute;top:100%;right:0;margin-top:6px;background:var(--pm-verde-deep,#3D4A30);border:1.5px solid var(--pm-oro,#C69C6D);border-radius:8px;box-shadow:0 8px 24px rgba(0,0,0,.35);display:none;min-width:160px;z-index:9999;padding:4px 0;';
 
     SUPPORTED.forEach(function(code){
       var item = document.createElement('button');
