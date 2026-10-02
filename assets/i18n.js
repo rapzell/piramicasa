@@ -67,7 +67,7 @@
       if(parts.length===2 && T[parts[0]]) el.setAttribute(parts[1], T[parts[0]]);
     });
 
-    // Text-node walk for common patterns (exact match on trimmed text)
+    // Text-node walk: exact match first, then substring replace for known keys
     var skip = ['SCRIPT','STYLE','NOSCRIPT','CODE','PRE','TEXTAREA','INPUT'];
     var walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, {
       acceptNode: function(node){
@@ -79,32 +79,57 @@
     });
     var node;
     var replaces = 0;
+    var keys = Object.keys(T).sort(function(a,b){return b.length-a.length}); // longest first
     while(node = walker.nextNode()){
-      var t = node.textContent.trim();
-      if(T[t] && t !== T[t]){
-        node.textContent = node.textContent.replace(t, T[t]);
+      var t = node.textContent;
+      var trimmed = t.trim();
+      // Exact match (fast path)
+      if(T[trimmed] && trimmed !== T[trimmed]){
+        node.textContent = t.replace(trimmed, T[trimmed]);
         replaces++;
+        continue;
+      }
+      // Substring replace for known Spanish strings inside longer text nodes
+      for(var ki=0; ki<keys.length; ki++){
+        var k = keys[ki];
+        if(k.length < 4) continue; // skip very short keys to avoid false matches
+        var pos = t.indexOf(k);
+        if(pos !== -1 && k !== T[k]){
+          node.textContent = t.substring(0,pos) + T[k] + t.substring(pos+k.length);
+          replaces++;
+          t = node.textContent; // update for next match in same node
+        }
       }
     }
     if(replaces>0) console.log('[i18n] applied',replaces,'translations for',current);
   }
 
   /* ---- Language switcher UI ---- */
-  function buildSwitcher(){
-    var header = document.querySelector('.pm-header');
-    if(!header) return;
+  function buildSwitcher(allowFloating){
     // Avoid duplicates
     if(document.getElementById('pm-lang-switcher')) return;
+    var header = document.querySelector('.pm-header');
+    var floating = false;
+    if(!header){
+      // Pages without a nav header (centros, gracias, etc.) get a
+      // fixed-position switcher so the dropdown is always available.
+      if(!allowFloating || !document.body) return;
+      floating = true;
+    }
 
     var wrap = document.createElement('div');
     wrap.id = 'pm-lang-switcher';
-    wrap.style.cssText = 'position:relative;display:inline-flex;align-items:center;margin-left:12px;';
+    wrap.style.cssText = floating
+      ? 'position:fixed;top:12px;right:12px;z-index:10000;display:inline-flex;align-items:center;'
+      : 'position:relative;display:inline-flex;align-items:center;margin-left:12px;';
 
     var btn = document.createElement('button');
     btn.id = 'pm-lang-btn';
     btn.setAttribute('aria-label','Select language');
     btn.setAttribute('aria-expanded','false');
-    btn.style.cssText = 'background:none;border:1px solid rgba(255,255,255,.25);border-radius:6px;padding:4px 8px;cursor:pointer;font-size:1.2rem;line-height:1;color:var(--pm-crema);display:flex;align-items:center;gap:4px;';
+    btn.style.cssText = floating
+      ? 'background:var(--pm-verde-deep,#3D4A30);border:1px solid rgba(255,255,255,.25);border-radius:6px;padding:6px 10px;cursor:pointer;font-size:1.2rem;line-height:1;color:var(--pm-crema,#F7F4F0);display:flex;align-items:center;gap:4px;box-shadow:0 2px 8px rgba(0,0,0,.25);'
+      : 'background:none;border:1px solid rgba(255,255,255,.25);border-radius:6px;padding:4px 8px;cursor:pointer;font-size:1.2rem;line-height:1;color:var(--pm-crema);display:flex;align-items:center;gap:4px;';
     btn.innerHTML = FLAGS[current] + ' <span style="font-size:0.75rem">\u25bc</span>';
 
     var menu = document.createElement('div');
@@ -141,12 +166,16 @@
     wrap.appendChild(menu);
 
     // Insert after the nav, before the CTA button or at end of header-right
-    var headerRight = header.querySelector('.pm-header-right') || header;
-    var cta = headerRight.querySelector('.pm-cta, .pm-btn-primary, a[href*="contact"]');
-    if(cta && cta.parentNode){
-      cta.parentNode.insertBefore(wrap, cta);
+    if(floating){
+      document.body.appendChild(wrap);
     } else {
-      headerRight.appendChild(wrap);
+      var headerRight = header.querySelector('.pm-header-right') || header;
+      var cta = headerRight.querySelector('.pm-cta, .pm-btn-primary, a[href*="contact"]');
+      if(cta && cta.parentNode){
+        cta.parentNode.insertBefore(wrap, cta);
+      } else {
+        headerRight.appendChild(wrap);
+      }
     }
   }
 
@@ -191,34 +220,26 @@
   }
 
   function setLang(code){
-    if(SUPPORTED.indexOf(code)===-1) return;
+    if(SUPPORTED.indexOf(code)===-1 || code===current) return;
     try{ localStorage.setItem(STORAGE_KEY,code); }catch(e){}
-    current = code;
-    window.PM_lang = code;
-    // Update document direction for RTL languages
-    var isRtl = RTL.indexOf(code)!==-1;
-    document.documentElement.setAttribute('dir', isRtl?'rtl':'ltr');
-    document.documentElement.setAttribute('lang', code);
-    // Update switcher button
-    var btn = document.getElementById('pm-lang-btn');
-    if(btn) btn.innerHTML = FLAGS[code] + ' <span style="font-size:0.75rem">\u25bc</span>';
-    // Rebuild menu
-    var menu = document.getElementById('pm-lang-menu');
-    if(menu){
-      var items = menu.querySelectorAll('button');
-      items.forEach(function(it,i){
-        var c = SUPPORTED[i];
-        it.style.color = c===current?'var(--pm-oro,#C69C6D)':'var(--pm-crema,#F7F4F0)';
-        it.style.fontWeight = c===current?'600':'400';
-      });
-      menu.style.display='none';
-    }
-    applyTranslations();
+    // Reload so React re-renders in the source language and we can
+    // translate fresh — switching between two non-Spanish languages
+    // otherwise fails because the DOM no longer contains Spanish keys.
+    location.reload();
   }
 
   /* ---- Init ---- */
+  var switcherBuilt = false;
+  var tries = 0;
+  function tryBuild(){
+    if(switcherBuilt) return;
+    // After ~3s without a .pm-header, fall back to the floating switcher
+    buildSwitcher(tries > 6);
+    switcherBuilt = !!document.getElementById('pm-lang-switcher');
+  }
   function init(){
-    buildSwitcher();
+    buildSwitcher(false);
+    switcherBuilt = !!document.getElementById('pm-lang-switcher');
     applyTranslations();
     showBanner();
     // Re-apply after React hydration / mutations
@@ -226,10 +247,17 @@
     var observer = new MutationObserver(function(){
       clearTimeout(debounce);
       debounce = setTimeout(function(){
+        tryBuild();
         applyTranslations();
       }, 300);
     });
     observer.observe(document.body, {childList:true,subtree:true,characterData:true});
+    // Keep retrying for delayed React headers; allow floating after ~3s
+    var retry = setInterval(function(){
+      tries++;
+      if(switcherBuilt || tries > 20) { clearInterval(retry); return; }
+      tryBuild();
+    }, 500);
   }
 
   if(document.readyState==='loading'){
