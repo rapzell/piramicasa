@@ -36,6 +36,10 @@
 
   var current = detect();
 
+  // Expose for chatbot-i18n and other modules
+  window.PM_lang = current;
+  window.PM_setLang = setLang;
+
   /* ---- DOM translation engine ----
    * T[key] = translation for current language.
    * We walk text nodes and replace exact matches.
@@ -190,6 +194,7 @@
     if(SUPPORTED.indexOf(code)===-1) return;
     try{ localStorage.setItem(STORAGE_KEY,code); }catch(e){}
     current = code;
+    window.PM_lang = code;
     // Update document direction for RTL languages
     var isRtl = RTL.indexOf(code)!==-1;
     document.documentElement.setAttribute('dir', isRtl?'rtl':'ltr');
