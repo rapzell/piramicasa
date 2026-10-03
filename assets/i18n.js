@@ -74,6 +74,9 @@
         var p = node.parentNode;
         if(!p || skip.indexOf(p.tagName)!==-1) return NodeFilter.FILTER_REJECT;
         if(!node.textContent.trim()) return NodeFilter.FILTER_REJECT;
+        // Never translate brand names / explicitly excluded regions
+        // (e.g. logo "Pirami<span>casa</span>" must not become "PiramiHaus").
+        if(p.closest && p.closest('.pm-logo,[translate="no"],.notranslate')) return NodeFilter.FILTER_REJECT;
         return NodeFilter.FILTER_ACCEPT;
       }
     });
