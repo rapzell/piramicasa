@@ -342,85 +342,472 @@ var PM_CB_QUICK = {
   ],
 };
 
+// --- generated: full keyword + action + fallback i18n ---
 var PM_CB_KEYWORDS = {
   greeting: {
-    en: ['hello','hi','hey','good morning','good afternoon','help','menu'],
-    pt: ['olá','oi','bom dia','boa tarde','boa noite','ajuda','menu'],
-    fr: ['bonjour','salut','bonsoir','aide','menu'],
-    de: ['hallo','guten tag','guten morgen','guten abend','hilfe','menü'],
-    ru: ['привет','здравствуйте','добрый день','добрый вечер','помощь','меню'],
-    ar: ['مرحبا','أهلا','صباح الخير','مساء الخير','مساعدة','قائمة'],
+    en: ['hello','good','good morning','good afternoon','good night','greetings','hey','wave','how about','help','menu','options'],
+    pt: ['olá','bom','bom dia','boa tarde','boa noite','saudações','ei','onda','que tal','ajuda','cardápio','opções'],
+    fr: ['bonjour','bien','bonne nuit','salutations','hé','vague','que diriez-vous','aide','menus','choix'],
+    de: ['hallo','gut','guten morgen','guten tag','gute nacht','grüße','welle','wie wäre es mit','hilfe','menü','optionen'],
+    ru: ['привет','хорошо','доброе утро','добрый день','спокойной ночи','приветствия','эй','волна','как насчет','помочь','меню','варианты'],
+    ar: ['مرحبا','جيد','صباح الخير','مساء الخير','ليلة سعيدة','تحياتي','مهلا','موجة','ماذا عن','مساعدة','القائمة','خيارات'],
   },
   precios: {
-    en: ['price','prices','cost','costs','how much','quote','budget','fee'],
-    pt: ['preço','preços','custo','quanto custa','orçamento','valor'],
-    fr: ['prix','coût','combien','devis','budget','tarif'],
-    de: ['preis','preise','kosten','wie viel','angebot','budget','tarif'],
-    ru: ['цена','цены','стоимость','сколько','расчёт','бюджет','тариф'],
-    ar: ['سعر','أسعار','تكلفة','كم','عرض سعر','ميزانية','رسوم'],
+    en: ['price','prices','cost','costs','how much does it cost','how much is it worth','rate','rates','price list','how much','budget','how much do they charge','pay'],
+    pt: ['preço','preços','custo','custos','quanto custa','quanto vale','taxa','taxas','lista de preços','quanto','orçamento','quanto eles cobram','pagar'],
+    fr: ['prix','coût','les coûts','combien ça coûte','combien ça vaut','taux','tarifs','liste de prix','combien','budget','combien facturent-ils','payer'],
+    de: ['preis','preise','kosten','wie viel kostet es?','wie viel ist es wert?','rate','tarife','preisliste','wie viel','budget','wie viel verlangen sie?','zahlen'],
+    ru: ['цена','цены','стоимость','затраты','сколько это стоит','ставка','ставки','прайс-лист','сколько','бюджет','сколько они берут','платить'],
+    ar: ['السعر','الأسعار','التكلفة','التكاليف','كم يكلف','كم هو يستحق','معدل','معدلات','قائمة الأسعار','كم','الميزانية','كم يتقاضون','دفع'],
   },
   compra: {
-    en: ['buy','purchase','order','get','acquire'],
-    pt: ['comprar','adquirir','encomendar','obter'],
-    fr: ['acheter','commander','acquérir','obtenir'],
-    de: ['kaufen','bestellen','erwerben','bekommen'],
-    ru: ['купить','заказать','приобрести','получить'],
-    ar: ['شراء','طلب','اقتناء','حصول'],
+    en: ['buy','buy pyramid','acquire','where do i buy','request','order','i would like one','i want one','i need one','how do i buy','get'],
+    pt: ['comprar','comprar pirâmide','adquirir','onde eu compro','solicitação','ordem','eu gostaria de um','eu quero um','eu preciso de um','como faço para comprar','obter'],
+    fr: ['acheter','acheter une pyramide','acquérir','où puis-je acheter','demande','commande','j\'en voudrais un','j\'en veux un','j\'en ai besoin d\'un','comment puis-je acheter','obtenir'],
+    de: ['kaufen','pyramide kaufen','erwerben','wo kaufe ich','anfrage','bestellen','ich hätte gerne eins','ich will eins','ich brauche eins','wie kaufe ich','bekommen'],
+    ru: ['купить','купить пирамиду','приобретать','где мне купить','запрос','заказать','я бы хотел один','я хочу один','мне нужен один','как мне купить','получить'],
+    ar: ['شراء','شراء الهرم','الحصول على','أين أشتري','طلب','النظام','أريد واحدة','انا بحاجة الى واحدة','كيف يمكنني شراء','احصل على'],
   },
   envios: {
-    en: ['shipping','ship','delivery','international','send','transport'],
-    pt: ['envio','enviar','entrega','internacional','transporte'],
-    fr: ['envoi','expédition','livraison','international','transport'],
-    de: ['versand','lieferung','international','senden','transport'],
-    ru: ['доставка','отправка','международная','транспорт'],
-    ar: ['شحن','توصيل','دولي','إرسال','نقل'],
+    en: ['shipping','send','shipments','delivery','send to','international','another country','foreigner','outside of spain','how does it arrive','transportation','logistics','customs'],
+    pt: ['envio','enviar','remessas','entrega','enviar para','internacional','outro país','estrangeiro','fora da espanha','como chega','transporte','logística','costumes'],
+    fr: ['expédition','envoyer','expéditions','livraison','envoyer à','internationale','un autre pays','étranger','en dehors de l\'espagne','comment ça arrive','transport','logistique','douane'],
+    de: ['versand','senden','sendungen','lieferung','senden an','international','ein anderes land','ausländer','außerhalb spaniens','wie kommt es an','transport','logistik','zoll'],
+    ru: ['доставка','отправить','поставки','отправить в','международный','другая страна','иностранец','за пределами испании','как оно приходит','транспорт','логистика','таможня'],
+    ar: ['الشحن','إرسال','شحنات','تسليم','أرسل إلى','دولي','بلد آخر','أجنبي','خارج اسبانيا','كيف تصل','النقل','اللوجستية','الجمارك'],
+  },
+  piramicama: {
+    en: ['pyramidbed','pyramid bed','bed','sleep','i dream','dream','rest','insomnia','therapeutic bed','relaxation','deep sleep'],
+    pt: ['pirâmide','cama pirâmide','cama','dormir','eu sonho','sonho','descansar','insônia','cama terapêutica','relaxamento','sono profundo'],
+    fr: ['lit pyramidal','lit','dormir','je rêve','rêve','repos','insomnie','lit thérapeutique','détente','sommeil profond'],
+    de: ['pyramidenbett','bett','schlafen','ich träume','traum','ruhe','schlaflosigkeit','therapeutisches bett','entspannung','tiefer schlaf'],
+    ru: ['пирамидакровать','пирамидальная кровать','кровать','спать','я мечтаю','мечтать','отдых','бессонница','терапевтическая кровать','расслабление','глубокий сон'],
+    ar: ['معرف com لهذا التطبيق هو com.pyramidebed','سرير الهرم','سرير','نوم','أنا أحلم','حلم','راحة','الأرق','سرير علاجي','الاسترخاء','نوم عميق'],
+  },
+  hygia: {
+    en: ['hygia','hygienic pyramid','antipyramid','hygia horus','small pyramid','minor pyramid'],
+    pt: ['higia','pirâmide higiênica','antipirâmide','hígia hórus','pequena pirâmide','pirâmide menor'],
+    fr: ['hygie','pyramide hygiénique','antipyramide','hygie horus','petite pyramide','pyramide mineure'],
+    de: ['hygiene','hygienepyramide','antipyramide','hygie horus','kleine pyramide'],
+    ru: ['гигия','гигиеническая пирамида','антипирамида','гигия гор','маленькая пирамида','малая пирамида'],
+    ar: ['هيجيا','الهرم الصحي','مضاد الهرم','هيجيا حورس','هرم صغير','الهرم الصغير'],
+  },
+  hercules: {
+    en: ['hercules','immunological','immunity','immune booster','intensive therapy','powerful','big pyramid'],
+    pt: ['hércules','imunológico','imunidade','reforço imunológico','terapia intensiva','poderoso','grande pirâmide'],
+    fr: ['hercule','immunologique','immunité','booster immunitaire','thérapie intensive','puissant','grande pyramide'],
+    de: ['herkules','immunologisch','immunität','immunverstärker','intensivtherapie','mächtig','große pyramide'],
+    ru: ['геркулес','иммунологический','иммунитет','иммунный усилитель','интенсивная терапия','мощный','большая пирамида'],
+    ar: ['هرقل','المناعية','الحصانة','مقوي للمناعة','العلاج المكثف','قوية','الهرم الكبير'],
+  },
+  pirajardin: {
+    en: ['pirajardin','garden','agriculture','beekeeping','bees','plants','cultivation','orchard','ascospherosis','pyramid bees'],
+    pt: ['pirajardin','jardim','agricultura','apicultura','abelhas','plantas','cultivo','pomar','ascosferose','abelhas pirâmide'],
+    fr: ['pirajardin','jardin','agriculture','apiculture','les abeilles','plantes','culture','verger','ascosphérose','abeilles pyramidales'],
+    de: ['pirajardin','garten','landwirtschaft','bienenzucht','bienen','pflanzen','anbau','obstgarten','askospherose','pyramidenbienen'],
+    ru: ['пиражарден','сад','сельское хозяйство','пчеловодство','пчелы','растения','выращивание','фруктовый сад','аскосфероз','пирамидальные пчелы'],
+    ar: ['بيراجاردين','حديقة','الزراعة','تربية النحل','النحل','النباتات','زراعة','بستان','داء الاسكوسفير','النحل الهرم'],
+  },
+  faraday: {
+    en: ['faraday','chest','chests','electromagnetic','emf','electromagnetic radiation','wifi','5g','faraday cage','emf protection'],
+    pt: ['faraday','peito','baús','eletromagnético','fem','radiação eletromagnética','wi-fi','5g','gaiola de faraday','proteção fem'],
+    fr: ['faraday','poitrine','coffres','électromagnétique','fem','rayonnement électromagnétique','wi-fi','5g','cage de faraday','protection contre les champs électromagnétiques'],
+    de: ['faraday','brust','truhen','elektromagnetisch','emk','elektromagnetische strahlung','wlan','5g','faradayscher käfig','emf-schutz'],
+    ru: ['фарадей','грудь','сундуки','электромагнитный','эдс','электромагнитное излучение','wi-fi','5г','клетка фарадея','защита от эдс'],
+    ar: ['فاراداي','الصدر','الصناديق','الكهرومغناطيسي','emf','الإشعاع الكهرومغناطيسي','wifi','5 جرام','قفص فاراداي','حماية emf'],
+  },
+  mascotas: {
+    en: ['pet','pets','dog','dogs','cat','cats','animal','animals','veterinarian','pyramascotas','pet pyramid'],
+    pt: ['animal de estimação','animais de estimação','cachorro','cães','gato','gatos','animal','animais','veterinário','piramascotas','pirâmide de animais de estimação'],
+    fr: ['animal de compagnie','animaux de compagnie','chien','chiens','chat','chats','animal','animaux','vétérinaire','pyramascotas','pyramide pour animaux de compagnie'],
+    de: ['haustier','haustiere','hund','hunde','katze','katzen','tier','tiere','tierarzt','pyramascotas','haustierpyramide'],
+    ru: ['домашнее животное','домашние животные','собака','собаки','кот','кошки','животное','животные','ветеринар','пирамаскоты','пирамида для домашних животных'],
+    ar: ['حيوان أليف','الحيوانات الأليفة','كلب','كلاب','قطة','القطط','حيوان','الحيوانات','طبيب بيطري','بيراماسكوتاس','الهرم الحيوانات الأليفة'],
+  },
+  vital: {
+    en: ['vital','vital pyramid house','laptop','carry','travel','transportable','mobile'],
+    pt: ['essencial','casa pirâmide vital','computador portátil','carregar','viajar','transportável','celular'],
+    fr: ['vital','maison pyramidale vitale','ordinateur portable','porter','voyage','transportable','mobile'],
+    de: ['lebenswichtig','lebenswichtiges pyramidenhaus','laptop','tragen','reisen','transportabel','mobil'],
+    ru: ['жизненно важный','жизненно важный дом-пирамида','ноутбук','нести','путешествовать','транспортабельный','мобильный'],
+    ar: ['حيوي','بيت الهرم الحيوي','كمبيوتر محمول','حمل','سفر','قابلة للنقل','المحمول'],
+  },
+  piramide: {
+    en: ['standard pyramid','normal pyramid','basic pyramid','therapeutic pyramid','what a pyramid','what model','what pyramid did i buy?','types of pyramids','models','catalog','pyramid catalog'],
+    pt: ['pirâmide padrão','pirâmide normal','pirâmide básica','pirâmide terapêutica','que pirâmide','qual modelo','que pirâmide eu comprei?','tipos de pirâmides','modelos','catálogo','catálogo de pirâmide'],
+    fr: ['pyramide standard','pyramide normale','pyramide de base','pyramide thérapeutique','quelle pyramide','quel modèle','quelle pyramide ai-je achetée ?','types de pyramides','modèles','catalogue','catalogue pyramidal'],
+    de: ['standardpyramide','normale pyramide','grundpyramide','therapeutische pyramide','was für eine pyramide','welches modell','welche pyramide habe ich gekauft?','arten von pyramiden','modelle','katalog','pyramidenkatalog'],
+    ru: ['стандартная пирамида','обычная пирамида','основная пирамида','терапевтическая пирамида','что за пирамида','какая модель','какую пирамиду я купил?','виды пирамид','модели','каталог','каталог пирамид'],
+    ar: ['الهرم القياسي','الهرم العادي','الهرم الأساسي','الهرم العلاجي','يا له من هرم','ما النموذج','ما الهرم الذي اشتريته؟','أنواع الأهرامات','نماذج','كتالوج','كتالوج الهرم'],
+  },
+  efecto: {
+    en: ['what is','what is a pyramid','pyramid effect','how it works','it really works','pyramidotherapy','pyramidology','pyramid energy','antipyramid','antipyramids','what is pyramidotherapy?','what are they for?'],
+    pt: ['o que é','o que é uma pirâmide','efeito pirâmide','como funciona','realmente funciona','piramidaloterapia','piramidologia','energia da pirâmide','antipirâmide','antipirâmides','o que é piramidaloterapia?','para que servem?'],
+    fr: ['qu\'est-ce que c\'est','qu\'est-ce qu\'une pyramide','effet pyramidal','comment ça marche','ça marche vraiment','pyramidothérapie','pyramidologie','énergie pyramidale','antipyramide','antipyramides','qu’est-ce que la pyramidothérapie ?','a quoi servent-ils ?'],
+    de: ['was ist','was ist eine pyramide?','pyramideneffekt','wie es funktioniert','es funktioniert wirklich','pyramidotherapie','pyramidologie','pyramidenenergie','antipyramide','antipyramiden','was ist pyramidotherapie?','wozu dienen sie?'],
+    ru: ['что такое','что такое пирамида','эффект пирамиды','как это работает','это действительно работает','пирамидотерапия','пирамидология','энергия пирамиды','антипирамида','антипирамиды','что такое пирамидотерапия?','для чего они нужны?'],
+    ar: ['ما هو','ما هو الهرم','تأثير الهرم','كيف يعمل','إنه يعمل حقًا','العلاج الهرمي','علم الأهرامات','طاقة الهرم','مضاد الهرم','مضادات الأهرامات','ما هو العلاج الهرمي؟','لماذا هم؟'],
   },
   salud: {
-    en: ['health','benefit','disease','pain','symptom','relief','insomnia','stress','anxiety'],
-    pt: ['saúde','benefício','doença','dor','sintoma','alívio','insónia','stress','ansiedade'],
-    fr: ['santé','bénéfice','maladie','douleur','symptôme','soulagement','insomnie','stress','anxiété'],
-    de: ['gesundheit','vorteil','krankheit','schmerz','symptom','linderung','schlaflosigkeit','stress','angst'],
-    ru: ['здоровье','польза','болезнь','боль','симптом','облегчение','бессонница','стресс','тревожность'],
-    ar: ['صحة','فائدة','مرض','ألم','عرض','تخفيف','أرق','توتر','قلق'],
+    en: ['health','benefit','benefits','improvement','illness','diseases','treatment','cure','pain','pains','symptoms','relief','relieve','insomnia','stress','anxiety','fibromyalgia','osteoarthritis','arthritis','chronic pain'],
+    pt: ['saúde','benefício','benefícios','melhoria','doença','doenças','tratamento','cura','dor','dores','sintomas','alívio','aliviar','insônia','estresse','ansiedade','fibromialgia','osteoartrite','artrite','dor crônica'],
+    fr: ['santé','bénéfice','avantages','amélioration','maladie','maladies','traitement','guérir','douleur','douleurs','symptômes','soulagement','soulager','insomnie','stress','anxiété','fibromyalgie','arthrose','arthrite','douleur chronique'],
+    de: ['gesundheit','vorteil','vorteile','verbesserung','krankheit','krankheiten','behandlung','heilen','schmerz','schmerzen','symptome','erleichterung','entlasten','schlaflosigkeit','stress','angst','fibromyalgie','arthrose','arthritis','chronische schmerzen'],
+    ru: ['здоровье','выгода','преимущества','улучшение','болезнь','болезни','лечение','вылечить','боль','боли','симптомы','облегчение','облегчить','бессонница','стресс','тревога','фибромиалгия','остеоартрит','артрит','хроническая боль'],
+    ar: ['الصحة','فائدة','فوائد','تحسين','مرض','الأمراض','العلاج','علاج','ألم','آلام','الأعراض','إغاثة','تخفيف','الأرق','الإجهاد','القلق','فيبروميالجيا','هشاشة العظام','التهاب المفاصل','ألم مزمن'],
   },
-  centros: {
-    en: ['center','centers','therapy center','therapist','clinic'],
-    pt: ['centro','centros','centro de terapia','terapeuta','clínica'],
-    fr: ['centre','centres','centre de thérapie','thérapeute','clinique'],
-    de: ['zentrum','zentren','therapiezentrum','therapeut','klinik'],
-    ru: ['центр','центры','центр терапии','терапевт','клиника'],
-    ar: ['مركز','مراكز','مركز علاج','معالج','عيادة'],
+  testimonios: {
+    en: ['testimony','testimonials','opinion','opinions','review','experience','experiences','it really works','results','real cases','it works'],
+    pt: ['testemunho','depoimentos','opinião','opiniões','revisão','experiência','experiências','realmente funciona','resultados','casos reais','funciona'],
+    fr: ['témoignage','témoignages','avis','examen','expérience','expériences','ça marche vraiment','résultats','cas réels','ça marche'],
+    de: ['zeugnis','erfahrungsberichte','meinung','meinungen','rezension','erfahrung','erfahrungen','es funktioniert wirklich','ergebnisse','echte fälle','es funktioniert'],
+    ru: ['показания','отзывы','мнение','мнения','обзор','опыт','это действительно работает','результаты','реальные дела','это работает'],
+    ar: ['شهادة','شهادات','الرأي','الآراء','مراجعة','تجربة','الخبرات','إنه يعمل حقًا','النتائج','حالات حقيقية','إنه يعمل'],
+  },
+  historia: {
+    en: ['history','who','founder','osiris','gabriel','gabriel silva','since when','antiquity','when did it start','origin','when it was founded'],
+    pt: ['história','quem','fundador','osíris','gabriel','gabriel silva','desde quando','antiguidade','quando isso começou','origem','quando foi fundado'],
+    fr: ['histoire','qui','fondateur','osiris','gabriel','gabriel silva','depuis quand','antiquité','quand est-ce que ça a commencé','origine','quand il a été fondé'],
+    de: ['geschichte','wer','gründer','osiris','gabriel','gabriel silva','seit wann','antike','wann hat es angefangen','herkunft','als es gegründet wurde'],
+    ru: ['история','кто','основатель','осирис','габриэль','габриэль сильва','с каких это пор','древность','когда это началось','происхождение','когда он был основан'],
+    ar: ['التاريخ','من','مؤسس','أوزوريس','غابرييل','غابرييل سيلفا','منذ متى','العصور القديمة','متى بدأت','أصل','عندما تأسست'],
+  },
+  presentacion: {
+    en: ['presentation','team','who are you','who we are','virginia','hator','who works','who makes the pyramids','who is behind','gabriel osiris','scientific team'],
+    pt: ['apresentação','equipe','quem é você','quem somos','virgínia','odiador','quem trabalha','quem faz as pirâmides','quem está por trás','gabriel osíris','equipe científica'],
+    fr: ['présentation','équipe','qui es-tu','qui nous sommes','virginie','haineux','qui travaille','qui fait les pyramides','qui est derrière','gabriel osiris','équipe scientifique'],
+    de: ['präsentation','team','wer bist du?','wer wir sind','virginia','hasser','wer arbeitet','wer macht die pyramiden?','wer dahinter steckt','gabriel osiris','wissenschaftliches team'],
+    ru: ['презентация','команда','кто ты','кто мы','вирджиния','ненавистник','кто работает','кто делает пирамиды','кто позади','габриэль осирис','научная группа'],
+    ar: ['العرض التقديمي','فريق','من أنت','من نحن','فرجينيا','كاره','من يعمل','من يصنع الأهرامات','من هو وراء','غابرييل أوزوريس','الفريق العلمي'],
+  },
+  construccion: {
+    en: ['construction','build','materials','proportion','proportions','assembly','orientation','how to do it','how to build','manufacturing','make pyramid','pyramid materials'],
+    pt: ['construção','construir','materiais','proporção','proporções','montagem','orientação','como fazer','como construir','fabricação','fazer pirâmide','materiais de pirâmide'],
+    fr: ['bâtiment','construire','matériaux','proportion','proportions','assemblage','orientation','comment faire','comment construire','fabrication','faire une pyramide','matériaux pyramidaux'],
+    de: ['bau','bauen','materialien','anteil','proportionen','montage','orientierung','wie es geht','wie man baut','herstellung','pyramide machen','pyramidenmaterialien'],
+    ru: ['строительство','строить','материалы','пропорция','пропорции','сборка','ориентация','как это сделать','как построить','производство','сделать пирамиду','материалы пирамиды'],
+    ar: ['البناء','بناء','المواد','نسبة','النسب','التجميع','التوجه','كيفية القيام بذلك','كيفية البناء','التصنيع','اصنع الهرم','مواد الهرم'],
+  },
+  libros: {
+    en: ['book','books','read','publication','publications','bibliography','where to read','written information','documentation','pyramid books'],
+    pt: ['livro','livros','leia','publicação','publicações','bibliografia','onde ler','informação escrita','documentação','livros de pirâmide'],
+    fr: ['livre','livres','lire','publication','publications','bibliographie','où lire','informations écrites','documents','livres pyramidaux'],
+    de: ['buch','bücher','lesen','veröffentlichung','veröffentlichungen','bibliographie','wo man lesen kann','schriftliche informationen','dokumentation','pyramidenbücher'],
+    ru: ['книга','книги','читать','публикация','публикации','библиография','где читать','письменная информация','документация','книги-пирамиды'],
+    ar: ['كتاب','كتب','قراءة','النشر','المنشورات','ببليوغرافيا','أين تقرأ','معلومات مكتوبة','الوثائق','كتب الهرم'],
   },
   videos: {
-    en: ['video','videos','watch','documentary'],
-    pt: ['vídeo','vídeos','ver','documentário'],
-    fr: ['vidéo','vidéos','regarder','documentaire'],
-    de: ['video','videos','ansehen','dokumentation'],
-    ru: ['видео','смотреть','документальный'],
-    ar: ['فيديو','مشاهدة','وثائقي'],
+    en: ['video','videos','youtube','conference','talk','documentary','see explanation','tutorial','watch videos','pyramid videos'],
+    pt: ['vídeo','vídeos','youtube','conferência','falar','documentário','veja a explicação','tutorial','assistir vídeos','vídeos de pirâmide'],
+    fr: ['vidéo','vidéos','youtube','conférence','parler','documentaire','voir explication','tutoriel','regarder des vidéos','vidéos de pyramide'],
+    de: ['video','videos','youtube','konferenz','reden','dokumentarfilm','siehe erklärung','tutorial','videos ansehen','pyramidenvideos'],
+    ru: ['видео','ютуб','конференция','говорить','документальный фильм','см. объяснение','учебник','смотреть видео','видео пирамиды'],
+    ar: ['فيديو','أشرطة الفيديو','يوتيوب','مؤتمر','تحدث','وثائقي','انظر الشرح','تعليمي','مشاهدة أشرطة الفيديو','فيديوهات الهرم'],
+  },
+  egipto: {
+    en: ['egypt','trip','trip to egypt','egypt pyramids','cheops','cairo','giza','nile','temples','pyramids of egypt','pyramid trip'],
+    pt: ['egito','viagem','viagem ao egito','pirâmides do egito','quéops','cairo','gizé','nilo','templos','viagem pirâmide'],
+    fr: ['egypte','voyage','voyage en egypte','pyramides d\'egypte','bon marché','le caire','gizeh','nil','temples','voyage pyramidal'],
+    de: ['ägypten','reise','reise nach ägypten','ägypten pyramiden','cheops','kairo','gizeh','nil','tempel','pyramiden von ägypten','pyramidenfahrt'],
+    ru: ['египет','поездка','поездка в египет','египетские пирамиды','хеопс','каир','гиза','нил','храмы','пирамиды египта','путешествие по пирамиде'],
+    ar: ['مصر','رحلة','رحلة إلى مصر','أهرامات مصر','خوفو','القاهرة','الجيزة','النيل','المعابد','رحلة الهرم'],
+  },
+  centros: {
+    en: ['center','centers','therapy center','where to receive','treatment','professional therapy','therapeutic center','go to a center','therapist','therapists','where there are centers','centers directory','pyramid centers','pyramid therapy centers'],
+    pt: ['centro','centros','centro de terapia','onde receber','tratamento','terapia profissional','centro terapêutico','ir para um centro','terapeuta','terapeutas','onde existem centros','diretório de centros','centros de pirâmide','centros de terapia em pirâmide'],
+    fr: ['centre','centres','centre de thérapie','où recevoir','traitement','thérapie professionnelle','centre thérapeutique','aller dans un centre','thérapeute','thérapeutes','où il y a des centres','répertoire des centres','centres pyramidaux','centres de thérapie pyramidale'],
+    de: ['zentrum','zentren','therapiezentrum','wo zu empfangen','behandlung','professionelle therapie','therapeutisches zentrum','in ein zentrum gehen','therapeut','therapeuten','wo es zentren gibt','verzeichnis der zentren','pyramidenzentren','pyramidentherapiezentren'],
+    ru: ['центр','центры','терапевтический центр','где получить','лечение','профессиональная терапия','пойти в центр','терапевт','терапевты','где есть центры','каталог центров','центры пирамид','центры пирамидальной терапии'],
+    ar: ['مركز','مراكز','مركز العلاج','أين يمكن الحصول عليها','العلاج','العلاج المهني','مركز علاجي','اذهب إلى المركز','المعالج','المعالجين','حيث توجد مراكز','دليل المراكز','مراكز الهرم','مراكز العلاج الهرمي'],
+  },
+  centro_karl: {
+    en: ['karl','ania','karl and ania','barcelona center','barcelona therapist','barcelona pyramid','holistic barcelona'],
+    pt: ['carlos','ania','karl e ania','centro de barcelona','terapeuta barcelona','pirâmide de barcelona','barcelona holística'],
+    fr: ['karl','ania','karl et ania','centre de barcelone','thérapeute de barcelone','pyramide de barcelone','barcelone holistique'],
+    de: ['karl','ania','karl und ania','zentrum von barcelona','barcelona-therapeut','barcelona-pyramide','ganzheitliches barcelona'],
+    ru: ['карл','аня','карл и аня','центр барселоны','барселонский терапевт','пирамида барселоны','целостный барселона'],
+    ar: ['كارل','أنيا','كارل وأنيا','مركز برشلونة','المعالج برشلونة','الهرم برشلونة','برشلونة الشامل'],
+  },
+  centro_randall: {
+    en: ['randall','sanchez','costa rica','randall sanchez','pyramid therapy costa rica','pyramid costa rica','heredia'],
+    pt: ['randall','sanches','costa rica','randall sanchez','terapia pirâmide costa rica','pirâmide costa rica','heredia'],
+    fr: ['randall','sánchez','costa rica','randall sánchez','thérapie pyramidale costa rica','pyramide costa rica','héréditaire'],
+    de: ['randall','sánchez','costa rica','randall sánchez','pyramidentherapie costa rica','pyramide costa rica','heredia'],
+    ru: ['рэндалл','санчес','коста-рика','рэндалл санчес','пирамидная терапия, коста-рика','пирамида коста-рика','эредия'],
+    ar: ['راندال','سانشيز','كوستاريكا','راندال سانشيز','العلاج الهرمي في كوستاريكا','الهرم كوستاريكا','هيريديا'],
+  },
+  centro_alfredo: {
+    en: ['alfred','alfredo martin','kinesiology madrid','therapist madrid','madrid center','kinesiology'],
+    pt: ['alfredo','alfredo martins','cinesiologia madri','terapeuta madrid','centro de madri','cinesiologia'],
+    fr: ['alfred','alfred martin','kinésiologie madrid','thérapeute madrid','centre de madrid','kinésiologie'],
+    de: ['alfred','alfredo martin','kinesiologie madrid','therapeut madrid','madrid zentrum','kinesiologie'],
+    ru: ['альфред','альфредо мартин','кинезиология мадрид','терапевт мадрид','мадридский центр','кинезиология'],
+    ar: ['ألفريد','ألفريدو مارتن','علم الحركة مدريد','المعالج مدريد','مركز مدريد','علم الحركة'],
+  },
+  centro_antahkarana: {
+    en: ['antahkarana','protection','vilanova','valencia center','reiki valencia','acupuncture valencia','amparo vilanova'],
+    pt: ['antahkarana','proteção','vilanova','centro de valência','reiki valência','acupuntura valência','amparo vilanova'],
+    fr: ['antahkarana','protection','vilanova','centre de valence','reiki valence','acupuncture valence','amparo vilanova'],
+    de: ['antahkarana','schutz','vilanova','valencia zentrum','reiki valencia','akupunktur valencia','amparo vilanova'],
+    ru: ['антахкарана','защита','виланова','центр валенсии','рейки валенсия','иглоукалывание валенсия','ампаро виланова'],
+    ar: ['antahkarana','الحماية','فيلانوفا','مركز فالنسيا','الريكي فالنسيا','الوخز بالإبر فالنسيا','امبارو فيلانوفا'],
+  },
+  centro_jacob: {
+    en: ['jacob','jacob martin','leganes','leganés','psychobiotherapy','reiki leganes','leganes holistic center'],
+    pt: ['jacó','jacob martins','leganes','leganés','psicobioterapia','reiki leganes','centro holístico leganes'],
+    fr: ['jacob','jacob martin','léganes','leganés','psychobiothérapie','reiki léganes','centre holistique de leganes'],
+    de: ['jakob','jacob martin','leganes','leganés','psychobiotherapie','reiki leganes','ganzheitliches zentrum leganes'],
+    ru: ['джейкоб','джейкоб мартин','леганес','психобиотерапия','рейки леганес','леганес комплексный центр'],
+    ar: ['يعقوب','جاكوب مارتن','ليجانيس','com.leganés','العلاج النفسي','الريكي ليجانيس','مركز ليجانيس الشامل'],
+  },
+  centro_tipi: {
+    en: ['tipi','tipi center','center therapy','pyramid session','go to therapy','receive therapy','face-to-face session','vendrell','camilo candel','the vendrell'],
+    pt: ['tipi','centro tipi','terapia central','sessão de pirâmide','ir para terapia','receber terapia','sessão presencial','vendedor','camilo candel','o vendedor'],
+    fr: ['tipi','centre de tipis','centre de thérapie','séance pyramidale','aller en thérapie','recevoir une thérapie','séance en face à face','vendrell','bougie camilo','le vendrell'],
+    de: ['tipi','tipi-zentrum','zentrumstherapie','pyramidensitzung','zur therapie gehen','eine therapie erhalten','persönliche sitzung','vendrell','camilo candel','der vendrell'],
+    ru: ['типи','типи центр','центральная терапия','сессия пирамиды','пойти на терапию','получать терапию','очная сессия','вендрелл','камило кандел','вендрел'],
+    ar: ['تيبي','مركز تيبي','العلاج المركزي','جلسة الهرم','اذهب إلى العلاج','تلقي العلاج','جلسة وجها لوجه','فيندريل','شمعة كاميلو'],
+  },
+  centro_sebastian: {
+    en: ['sebastian','vile','lleida','sebastian viles','therapy','lleida pyramid'],
+    pt: ['sebastião','vil','léida','sebastian viles','terapia','pirâmide de léida'],
+    fr: ['sébastien','vil','lérida','sébastien viles','thérapie','pyramide de lérida'],
+    de: ['sebastian','abscheulich','leida','sebastian viles','therapie','leida-pyramide'],
+    ru: ['себастьян','мерзкий','лерида','себастьян вайлз','терапия','пирамида лериды'],
+    ar: ['سيباستيان','حقير','ليدا','حقير سيباستيان','العلاج','هرم ليدا'],
+  },
+  centro_juan: {
+    en: ['juan antonio','juan lopez','ithaca','ithaca center','bioenergetic therapy madrid','juan antonio lopez'],
+    pt: ['joão antonio','juan lopes','ítaca','centro de ithaca','terapia bioenergética madrid','juan antonio lopez'],
+    fr: ['juan-antonio','juan lópez','ithaque','centre d\'ithaque','thérapie bioénergétique madrid','juan antonio lópez'],
+    de: ['juan antonio','juan lopez','ithaka','ithaka-zentrum','bioenergetische therapie madrid','juan antonio lopez'],
+    ru: ['хуан антонио','хуан лопес','итака','центр итаки','биоэнергетическая терапия мадрид','хуан антонио лопес'],
+    ar: ['خوان أنطونيو','خوان لوبيز','إيثاكا','مركز إيثاكا','العلاج بالطاقة الحيوية مدريد','خوان أنطونيو لوبيز'],
+  },
+  geobiologia: {
+    en: ['geobiology','terrestrial radiation','hartmann','curry','lines','lines of force','subsoil radiation','geological fault','underground water','geo'],
+    pt: ['geobiologia','radiação terrestre','hartmann','caril','linhas','linhas de força','radiação do subsolo','falha geológica','água subterrânea','localização geográfica'],
+    fr: ['géobiologie','rayonnement terrestre','hartmann','curry','lignes','lignes de force','rayonnement souterrain','faille géologique','eau souterraine','géo'],
+    de: ['geobiologie','terrestrische strahlung','hartmann','curry','linien','kraftlinien','untergrundstrahlung','geologische verwerfung','grundwasser','geo'],
+    ru: ['геобиология','земная радиация','хартманн','карри','линии','силовые линии','подпочвенная радиация','геологический разлом','подземные воды','гео'],
+    ar: ['الجيولوجيا','الإشعاع الأرضي','هارتمان','كاري','خطوط','خطوط القوة','الإشعاع تحت الأرض','خطأ جيولوجي','المياه الجوفية','جغرافي'],
+  },
+  reich: {
+    en: ['reich','wilhelm reich','orgone','bions','orbs','orgone energy'],
+    pt: ['reich','guilherme reich','orgone','bíons','orbes','energia orgone'],
+    fr: ['reich','guillaume reich','orgone','biones','orbes','énergie orgonale'],
+    de: ['reich','wilhelm reich','orgon','bionen','kugeln','orgon-energie'],
+    ru: ['рейх','вильгельм райх','оргонный','бионы','сферы','оргонная энергия'],
+    ar: ['الرايخ','فيلهلم رايخ','أورجون','بيونات','الأجرام السماوية','طاقة أورجون'],
   },
   contacto: {
-    en: ['contact','phone','email','whatsapp','call'],
-    pt: ['contacto','telefone','email','whatsapp','ligar'],
-    fr: ['contact','téléphone','email','whatsapp','appeler'],
-    de: ['kontakt','telefon','e-mail','whatsapp','anrufen'],
-    ru: ['контакт','телефон','почта','whatsapp','звонок'],
-    ar: ['اتصال','هاتف','بريد','واتساب','اتصال'],
+    en: ['contact','phone','email','mail','whatsapp','call','number','as contact','where contact','contact phone','phone number'],
+    pt: ['contato','telefone','e-mail','correio','whatsapp','ligar','número','como contato','onde contato','telefone de contato','número de telefone'],
+    fr: ['contacter','téléphone','email','courrier','whatsapp','appeler','numéro','comme contact','où contacter','téléphone de contact','numéro de téléphone'],
+    de: ['kontakt','telefon','e-mail','post','whatsapp','anrufen','nummer','als kontakt','wo kontakt','kontakttelefon','telefonnummer'],
+    ru: ['контакт','телефон','электронная почта','почта','whatsapp','позвонить','номер','как контакт','где связаться','контактный телефон','номер телефона'],
+    ar: ['اتصال','هاتف','البريد الإلكتروني','بريد','واتس اب','اتصل','رقم','كجهة اتصال','حيث الاتصال','هاتف الاتصال','رقم الهاتف'],
   },
   cita: {
-    en: ['appointment','book','schedule','consultation','session'],
-    pt: ['consulta','marcar','agendar','sessão'],
-    fr: ['rendez-vous','réserver','planifier','consultation','séance'],
-    de: ['termin','buchen','beratung','sitzung','vereinbaren'],
-    ru: ['запись','приём','консультация','сеанс','запланировать'],
-    ar: ['موعد','حجز','جدولة','استشارة','جلسة'],
+    en: ['quote','schedule','schedule appointment','reserve','prior appointment','consultation','advice','meeting','make an appointment','request an appointment','ask for time'],
+    pt: ['citar','agendar','agendar consulta','reserva','marcação prévia','consulta','conselho','reunião','marque uma consulta','solicitar um agendamento','peça um tempo'],
+    fr: ['citation','calendrier','planifier un rendez-vous','réserve','rendez-vous préalable','consultation','conseils','réunion','prendre rendez-vous','demander un rendez-vous','demander du temps'],
+    de: ['zitat','zeitplan','termin vereinbaren','reservieren','vorherige terminvereinbarung','beratung','rat','treffen','vereinbaren sie einen termin','einen termin anfragen','bitte um zeit'],
+    ru: ['цитата','расписание','назначить встречу','резерв','предварительная встреча','консультация','совет','встреча','запросить встречу','попросить время'],
+    ar: ['اقتباس','الجدول الزمني','تحديد موعد','احتياطي','موعد مسبق','التشاور','نصيحة','اجتماع','طلب موعد','اسأل عن الوقت'],
   },
+  critica: {
+    en: ['criticize','critical','skeptical','it doesn\'t work','fraud','deception','deny','critical document','skepticism','it\'s a scam','i don\'t think'],
+    pt: ['criticar','crítico','cético','não funciona','fraude','engano','negar','documento crítico','ceticismo','é uma farsa','eu não acho'],
+    fr: ['critiquer','critique','sceptique','ça ne marche pas','fraude','tromperie','nier','document critique','scepticisme','c\'est une arnaque','je ne pense pas'],
+    de: ['kritisieren','kritisch','skeptisch','es funktioniert nicht','betrug','täuschung','leugnen','kritisches dokument','skepsis','es ist ein betrug','ich glaube nicht'],
+    ru: ['критиковать','критический','скептический','это не работает','мошенничество','обман','отрицать','критический документ','скептицизм','это мошенничество','я не думаю'],
+    ar: ['انتقد','حرجة','متشكك','لا يعمل','الاحتيال','الخداع','ينكر','وثيقة حرجة','الشك','إنها عملية احتيال','لا أعتقد'],
+  },
+  dossier: {
+    en: ['dossier','complete information','download info','documentation','pdf catalog','brochure','technical information','basic dossier'],
+    pt: ['dossiê','informações completas','baixar informações','documentação','catálogo em pdf','folheto','informações técnicas','dossiê básico'],
+    fr: ['dossier','informations complètes','informations sur le téléchargement','documents','catalogue pdf','dépliant','informations techniques','dossier de base'],
+    de: ['dossier','vollständige informationen','informationen herunterladen','dokumentation','pdf-katalog','broschüre','technische informationen','basisdossier'],
+    ru: ['досье','полная информация','скачать информацию','документация','pdf-каталог','брошюра','техническая информация','базовое досье'],
+    ar: ['ملف','معلومات كاملة','معلومات التحميل','الوثائق','كتالوج قوات الدفاع الشعبي','كتيب','المعلومات التقنية','الملف الأساسي'],
+  },
+  medico: {
+    en: ['doctor','medicine','replaces','medical treatment','recipe','cure','medical cure','traditional doctor','substitute medicine'],
+    pt: ['médico','remédio','substitui','tratamento médico','receita','cura','cura médica','médico tradicional','medicamento substituto'],
+    fr: ['docteur','médecine','remplace','traitement médical','recette','guérir','remède médical','médecin traditionnel','médecine de substitution'],
+    de: ['arzt','medizin','ersetzt','medizinische behandlung','rezept','heilen','medizinische heilung','traditioneller arzt','ersatzmedizin'],
+    ru: ['врач','медицина','заменяет','медицинское лечение','рецепт','вылечить','традиционный врач','заместительное лекарство'],
+    ar: ['طبيب','الطب','يستبدل','العلاج الطبي','وصفة','علاج','علاج طبي','الطبيب التقليدي','الطب البديل'],
+  },
+  thanks: {
+    en: ['thank you','thank you very much','perfect','great','excellent','very kind','thanks for'],
+    pt: ['obrigado','muito obrigado','perfeito','ótimo','excelente','muito gentil','obrigado por'],
+    fr: ['merci','merci beaucoup','parfait','super','excellent','très gentil','merci pour'],
+    de: ['danke','vielen dank','perfekt','großartig','ausgezeichnet','sehr nett','danke für'],
+    ru: ['спасибо','большое спасибо','идеальный','отлично','очень добрый','спасибо за'],
+    ar: ['شكرا لك','شكرا جزيلا لك','مثالي','عظيم','ممتاز','لطيف جدا','شكرا ل'],
+  },
+  identity: {
+    en: ['who are you','what are you','bot','chatbot','assistant','you are a robot','you are ia','you are artificial intelligence','what\'s your name'],
+    pt: ['quem é você','o que você é','robô','bot de bate-papo','assistente','você é um robô','você é eu','você é inteligência artificial','qual é o seu nome'],
+    fr: ['qui es-tu','qu\'est-ce que tu es','robot','chatbot','assistant','tu es un robot','tu es moi','tu es une intelligence artificielle','quel est ton nom'],
+    de: ['wer bist du?','was bist du?','bot','chatbot','assistent','du bist ein roboter','du bist ia','du bist künstliche intelligenz','wie heißt du?'],
+    ru: ['кто ты','что ты','бот','чат-бот','помощник','ты робот','ты есть','ты искусственный интеллект','как тебя зовут'],
+    ar: ['من أنت','ما أنت','بوت','chatbot','مساعد','أنت روبوت','أنت أنا','أنت الذكاء الاصطناعي','ما اسمك'],
+  },
+  joyas: {
+    en: ['jewel','jewelry','ring','rings','pyramidjewels','pyramid jewel'],
+    pt: ['joia','jóias','anel','anéis','pirâmidejóias','jóia da pirâmide'],
+    fr: ['bijou','bijoux','bague','anneaux','bijoux pyramidaux','bijou pyramidal'],
+    de: ['juwel','schmuck','klingeln','ringe','pyramidenjuwelen','pyramidenjuwel'],
+    ru: ['драгоценность','ювелирные изделия','кольцо','кольца','пирамидадрагоценности','пирамидальная жемчужина'],
+    ar: ['جوهرة','مجوهرات','حلقة','حلقات','جواهر الهرم','جوهرة الهرم'],
+  },
+  avales: {
+    en: ['endorsement','endorsements','certification','certifications','backup','official guarantee','recognition','scientist','scientific study','studies','research'],
+    pt: ['endosso','endossos','certificação','certificações','cópia de segurança','garantia oficial','reconhecimento','cientista','estudo científico','estudos','pesquisa'],
+    fr: ['approbation','mentions','attestation','attestations','sauvegarde','garantie officielle','reconnaissance','scientifique','étude scientifique','études','recherche'],
+    de: ['billigung','vermerke','zertifizierung','zertifizierungen','sicherung','offizielle garantie','anerkennung','wissenschaftler','wissenschaftliche studie','studien','forschung'],
+    ru: ['одобрение','одобрения','сертификация','сертификаты','резервное копирование','официальная гарантия','признание','учёный','научное исследование','исследования','исследование'],
+    ar: ['تأييد','موافقات','شهادة','الشهادات','نسخة احتياطية','الضمان الرسمي','الاعتراف','عالم','دراسة علمية','دراسات','بحث'],
+  },
+  conferencias: {
+    en: ['conference','conferences','event','events','talk','speaker','exhibition','live presentation','course','workshop','courses','workshops'],
+    pt: ['conferência','conferências','evento','eventos','falar','alto-falante','exposição','apresentação ao vivo','curso','oficina','cursos','oficinas'],
+    fr: ['conférence','conférences','événement','événements','parler','haut-parleur','exposition','présentation en direct','cours','atelier','ateliers'],
+    de: ['konferenz','konferenzen','ereignis','ereignisse','reden','sprecher','ausstellung','live-präsentation','natürlich','werkstatt','kurse','werkstätten'],
+    ru: ['конференция','конференции','событие','события','говорить','оратор','выставка','живая презентация','курс','мастерская','курсы','семинары'],
+    ar: ['مؤتمر','المؤتمرات','حدث','الأحداث','تحدث','المتكلم','معرض','عرض حي','بالطبع','ورشة عمل','الدورات','ورش العمل'],
+  },
+  datos_contacto: {
+    en: ['contact details','where are you','address','location','where are they','where are you located'],
+    pt: ['detalhes de contato','onde você está','endereço','localização','onde eles estão','onde você está localizado'],
+    fr: ['coordonnées','où es-tu','adresse','emplacement','où sont-ils','où es-tu situé'],
+    de: ['kontaktdaten','wo bist du?','adresse','standort','wo sind sie?','wo befinden sie sich?'],
+    ru: ['контактные данные','где ты','адрес','местоположение','где они','где вы находитесь'],
+    ar: ['تفاصيل الاتصال','أين أنت','عنوان','الموقع','أين هم','أين تتواجد'],
+  },
+  envio_info: {
+    en: ['shipping pyramids','send pyramid','how does it arrive','how does it get to me','transportation','logistics','customs','delivery time','how long does it take','shipping time'],
+    pt: ['pirâmides marítimas','enviar pirâmide','como chega','como isso chega até mim','transporte','logística','costumes','prazo de entrega','quanto tempo leva','tempo de envio'],
+    fr: ['pyramides d\'expédition','envoyer une pyramide','comment ça arrive','comment ça m\'arrive','transport','logistique','douane','délai de livraison','combien de temps ça prend','délai d\'expédition'],
+    de: ['versandpyramiden','pyramide senden','wie kommt es an','wie kommt es zu mir?','transport','logistik','zoll','lieferzeit','wie lange dauert es'],
+    ru: ['судоходные пирамиды','отправить пирамиду','как оно приходит','как это до меня дошло','транспорт','логистика','таможня','время доставки','сколько времени это займет'],
+    ar: ['أهرامات الشحن','إرسال الهرم','كيف تصل','كيف يحصل لي','النقل','اللوجستية','الجمارك','وقت التسليم','كم من الوقت يستغرق','وقت الشحن'],
+  },
+  legal: {
+    en: ['terms','conditions','legal notice','legal','copyright','privacy','politics','terms and conditions','privacy policy'],
+    pt: ['termos','condições','aviso legal','jurídico','direitos autorais','privacidade','política','termos e condições','política de privacidade'],
+    fr: ['termes','conditions','mentions légales','légal','droit d\'auteur','confidentialité','politique','termes et conditions','politique de confidentialité'],
+    de: ['begriffe','bedingungen','rechtlicher hinweis','legal','urheberrecht','privatsphäre','politik','allgemeine geschäftsbedingungen','datenschutzrichtlinie'],
+    ru: ['термины','условия','официальное уведомление','юридический','авторское право','конфиденциальность','политика','условия использования','политика конфиденциальности'],
+    ar: ['الشروط','الظروف','إشعار قانوني','قانوني','حقوق الطبع والنشر','الخصوصية','السياسة','الشروط والأحكام','سياسة الخصوصية'],
+  },
+};
+var PM_CB_Q = {
+  precios: {en:'Request quote',pt:'Solicitar orçamento',fr:'Demander un devis',de:'Angebot anfordern',ru:'Запросить цену',ar:'طلب الاقتباس'},
+  compra: {en:'Start purchase via WhatsApp',pt:'Inicie a compra pelo WhatsApp',fr:'Commencer l\'achat via WhatsApp',de:'Kauf über WhatsApp starten',ru:'Начать покупку через WhatsApp',ar:'ابدأ الشراء عبر الواتساب'},
+  envios: {en:'Check shipping by WhatsApp',pt:'Consulte frete pelo WhatsApp',fr:'Vérifiez l\'expédition par WhatsApp',de:'Überprüfen Sie den Versand per WhatsApp',ru:'Проверить доставку по WhatsApp',ar:'التحقق من الشحن عن طريق الواتساب'},
+  piramicama: {en:'See health benefits',pt:'Veja os benefícios para a saúde',fr:'Voir les bienfaits pour la santé',de:'Siehe gesundheitliche Vorteile',ru:'Посмотрите преимущества для здоровья',ar:'انظر الفوائد الصحية'},
+  hygia: {en:'Info Hygia by WhatsApp',pt:'Informações Hygia por WhatsApp',fr:'Info Hygia par WhatsApp',de:'Infos Hygia per WhatsApp',ru:'Информация о Хигии от WhatsApp',ar:'معلومات هيجيا عن طريق ال WhatsApp'},
+  hercules: {en:'Info Hercules by WhatsApp',pt:'Informações Hércules por WhatsApp',fr:'Infos Hercules par WhatsApp',de:'Infos Herkules per WhatsApp',ru:'Информация о Геркулесе по WhatsApp',ar:'معلومات هرقل عن طريق ال WhatsApp'},
+  pirajardin: {en:'Watch videos about pyramids and beekeeping',pt:'Assista a vídeos sobre pirâmides e apicultura',fr:'Regardez des vidéos sur les pyramides et l\'apiculture',de:'Sehen Sie sich Videos über Pyramiden und Imkerei an',ru:'Посмотрите видео о пирамидах и пчеловодстве',ar:'شاهد فيديوهات عن الأهرامات وتربية النحل'},
+  faraday: {en:'Info Ark Faraday by WhatsApp',pt:'Informações Arca Faraday por WhatsApp',fr:'Infos Arche Faraday par WhatsApp',de:'Infos zu Ark Faraday per WhatsApp',ru:'Информация Ковчег Фарадея от WhatsApp',ar:'معلومات ارك فاراداي عن طريق ال WhatsApp'},
+  mascotas: {en:'Piramascota Info by WhatsApp',pt:'Informações sobre Piramascota por WhatsApp',fr:'Informations sur Piramascota par WhatsApp',de:'Piramascota-Infos per WhatsApp',ru:'Информация о Пирамаскоте через WhatsApp',ar:'معلومات بيراماسكوتا عن طريق ال WhatsApp'},
+  vital: {en:'Vital Info by WhatsApp',pt:'Informações vitais por WhatsApp',fr:'Informations vitales par WhatsApp',de:'Wichtige Informationen per WhatsApp',ru:'Важная информация от WhatsApp',ar:'معلومات حيوية عن طريق الواتساب'},
+  piramide: {en:'See health benefits',pt:'Veja os benefícios para a saúde',fr:'Voir les bienfaits pour la santé',de:'Siehe gesundheitliche Vorteile',ru:'Посмотрите преимущества для здоровья',ar:'انظر الفوائد الصحية'},
+  efecto: {en:'See team presentation',pt:'Veja apresentação da equipe',fr:'Voir la présentation de l\'équipe',de:'Siehe Teampräsentation',ru:'Посмотреть презентацию команды',ar:'شاهد العرض التقديمي للفريق'},
+  salud: {en:'See treated diseases',pt:'Veja doenças tratadas',fr:'Voir les maladies traitées',de:'Siehe behandelte Krankheiten',ru:'См. вылеченные заболевания',ar:'انظر الأمراض المعالجة'},
+  testimonios: {en:'See testimonials',pt:'Veja depoimentos',fr:'Voir les témoignages',de:'Siehe Erfahrungsberichte',ru:'Посмотреть отзывы',ar:'انظر الشهادات'},
+  historia: {en:'See history of Piramicasa',pt:'Veja a história da Piramicasa',fr:'Voir l’histoire de Piramicasa',de:'Sehen Sie sich die Geschichte von Piramicasa an',ru:'Посмотреть историю Пирамикасы',ar:'انظر تاريخ بيراميكاسا'},
+  presentacion: {en:'See team presentation',pt:'Veja apresentação da equipe',fr:'Voir la présentation de l\'équipe',de:'Siehe Teampräsentation',ru:'Посмотреть презентацию команды',ar:'شاهد العرض التقديمي للفريق'},
+  construccion: {en:'Watch construction videos',pt:'Assista a vídeos de construção',fr:'Regarder des vidéos de construction',de:'Sehen Sie sich Bauvideos an',ru:'Посмотрите видео о строительстве',ar:'شاهد فيديوهات البناء'},
+  libros: {en:'See book catalog',pt:'Ver catálogo de livros',fr:'Voir le catalogue de livres',de:'Siehe Buchkatalog',ru:'Посмотреть каталог книг',ar:'انظر كتالوج الكتب'},
+  videos: {en:'Watch videos about pyramids',pt:'Assista a vídeos sobre pirâmides',fr:'Regardez des vidéos sur les pyramides',de:'Sehen Sie sich Videos über Pyramiden an',ru:'Посмотрите видео о пирамидах',ar:'شاهد فيديوهات عن الأهرامات'},
+  egipto: {en:'See trip to Egypt',pt:'Veja viagem ao Egito',fr:'Voir voyage en Egypte',de:'Siehe Reise nach Ägypten',ru:'Посмотреть поездку в Египет',ar:'شاهد الرحلة إلى مصر'},
+  centros: {en:'See therapy centers',pt:'Veja centros de terapia',fr:'Voir les centres de thérapie',de:'Siehe Therapiezentren',ru:'Посмотреть терапевтические центры',ar:'انظر مراكز العلاج'},
+  centro_karl: {en:'See Karl and Ania\'s profile',pt:'Veja o perfil de Karl e Ania',fr:'Voir le profil de Karl et Ania',de:'Sehen Sie sich das Profil von Karl und Ania an',ru:'Посмотреть профиль Карла и Ани',ar:'انظر الملف الشخصي لكارل وأنيا'},
+  centro_randall: {en:'See file of Randall Sánchez',pt:'Veja arquivo de Randall Sánchez',fr:'Voir le dossier de Randall Sánchez',de:'Siehe Akte von Randall Sánchez',ru:'См. досье Рэндалла Санчеса.',ar:'انظر ملف راندال سانشيز'},
+  centro_alfredo: {en:'See file of Alfredo Martín',pt:'Veja arquivo de Alfredo Martín',fr:'Voir le dossier d\'Alfredo Martín',de:'Siehe Akte von Alfredo Martín',ru:'См. досье Альфредо Мартина.',ar:'انظر ملف ألفريدو مارتن'},
+  centro_antahkarana: {en:'See Antahkarana\'s profile',pt:'Veja o perfil de Antahkarana',fr:'Voir le profil de Antahkarana',de:'Siehe Antahkaranas Profil',ru:'Посмотреть профиль Антакараны',ar:'انظر ملف Antahkarana الشخصي'},
+  centro_jacob: {en:'See Jacob Martín\'s profile',pt:'Veja o perfil de Jacob Martín',fr:'Voir le profil de Jacob Martin',de:'Siehe Jacob Martíns Profil',ru:'Посмотреть профиль Джейкоба Мартина',ar:'انظر الملف الشخصي لجاكوب مارتن'},
+  centro_tipi: {en:'See file of the T.I.P.I Center.',pt:'Ver arquivo do Centro T.I.P.I.',fr:'Voir dossier du Centre T.I.P.I.',de:'Siehe Datei des T.I.P.I Center.',ru:'См. файл Центра ТИПИ.',ar:'انظر ملف مركز T.I.P.I.'},
+  centro_sebastian: {en:'See Sebastián Viles\' profile',pt:'Veja o perfil de Sebastián Viles',fr:'Voir le profil de Sebastián Viles',de:'Sehen Sie sich das Profil von Sebastián Viles an',ru:'Посмотреть профиль Себастьяна Вайлса',ar:'انظر الملف الشخصي لـ Sebastián Viles'},
+  centro_juan: {en:'See profile of Juan Antonio López',pt:'Veja o perfil de Juan Antonio López',fr:'Voir le profil de Juan Antonio López',de:'Siehe Profil von Juan Antonio López',ru:'Посмотреть профиль Хуана Антонио Лопеса',ar:'انظر الملف الشخصي لخوان أنطونيو لوبيز'},
+  geobiologia: {en:'Geobiology info by WhatsApp',pt:'Informações de geobiologia por WhatsApp',fr:'Informations géobiologiques par WhatsApp',de:'Geobiologische Informationen per WhatsApp',ru:'Информация о геобиологии через WhatsApp',ar:'معلومات الجيولوجيا عن طريق WhatsApp'},
+  reich: {en:'Info by WhatsApp',pt:'Informações por WhatsApp',fr:'Infos par WhatsApp',de:'Infos per WhatsApp',ru:'Информация через WhatsApp',ar:'المعلومات عبر الواتساب'},
+  contacto: {en:'Contact by WhatsApp',pt:'Contato por WhatsApp',fr:'Contacter par WhatsApp',de:'Kontakt per WhatsApp',ru:'Связаться по WhatsApp',ar:'التواصل عبر الواتساب'},
+  cita: {en:'Schedule an appointment via WhatsApp',pt:'Agende um horário pelo WhatsApp',fr:'Prendre rendez-vous via WhatsApp',de:'Vereinbaren Sie einen Termin per WhatsApp',ru:'Запишитесь на прием через WhatsApp',ar:'تحديد موعد عبر الواتساب'},
+  critica: {en:'View critical document',pt:'Ver documento crítico',fr:'Afficher le document critique',de:'Kritisches Dokument anzeigen',ru:'Посмотреть критический документ',ar:'عرض الوثيقة الهامة'},
+  dossier: {en:'See basic dossier',pt:'Veja dossiê básico',fr:'Voir dossier de base',de:'Siehe Basisdossier',ru:'Посмотреть базовое досье',ar:'انظر الملف الأساسي'},
+  medico: {en:'Info by WhatsApp',pt:'Informações por WhatsApp',fr:'Infos par WhatsApp',de:'Infos per WhatsApp',ru:'Информация через WhatsApp',ar:'المعلومات عبر الواتساب'},
+  thanks: {en:'Contact by WhatsApp',pt:'Contato por WhatsApp',fr:'Contacter par WhatsApp',de:'Kontakt per WhatsApp',ru:'Связаться по WhatsApp',ar:'التواصل عبر الواتساب'},
+  joyas: {en:'Info Piramijoyas by WhatsApp',pt:'Informações Piramijoyas por WhatsApp',fr:'Informations Piramijoyas par WhatsApp',de:'Infos Piramijoyas per WhatsApp',ru:'Информация о Пирамихоясе от WhatsApp',ar:'معلومات بيراميجوياس عن طريق ال WhatsApp'},
+  avales: {en:'See conferences and endorsements',pt:'Veja conferências e endossos',fr:'Voir les conférences et les mentions',de:'Siehe Konferenzen und Empfehlungen',ru:'Посмотреть конференции и одобрения',ar:'انظر المؤتمرات والتصديقات'},
+  conferencias: {en:'View conferences',pt:'Ver conferências',fr:'Voir les conférences',de:'Konferenzen anzeigen',ru:'Посмотреть конференции',ar:'عرض المؤتمرات'},
+  datos_contacto: {en:'Contact by WhatsApp',pt:'Contato por WhatsApp',fr:'Contacter par WhatsApp',de:'Kontakt per WhatsApp',ru:'Связаться по WhatsApp',ar:'التواصل عبر الواتساب'},
+  envio_info: {en:'Check shipping by WhatsApp',pt:'Consulte frete pelo WhatsApp',fr:'Vérifiez l\'expédition par WhatsApp',de:'Überprüfen Sie den Versand per WhatsApp',ru:'Проверить доставку по WhatsApp',ar:'التحقق من الشحن عن طريق الواتساب'},
+  legal: {en:'See legal terms by WhatsApp',pt:'Consulte os termos legais pelo WhatsApp',fr:'Voir les mentions légales par WhatsApp',de:'Siehe rechtliche Bestimmungen von WhatsApp',ru:'Ознакомьтесь с юридическими условиями WhatsApp',ar:'راجع المصطلحات القانونية عبر WhatsApp'},
+};
+var PM_CB_QEXTRA = {
+  precios: {en:'See health benefits',pt:'Veja os benefícios para a saúde',fr:'Voir les bienfaits pour la santé',de:'Siehe gesundheitliche Vorteile',ru:'Посмотрите преимущества для здоровья',ar:'انظر الفوائد الصحية'},
+  piramicama: {en:'Info Piramicama by WhatsApp',pt:'Informações Piramicama por WhatsApp',fr:'Informations Piramicama par WhatsApp',de:'Infos Piramicama per WhatsApp',ru:'Информация Пирамикама от WhatsApp',ar:'معلومات بيراميكاما عن طريق ال WhatsApp'},
+  pirajardin: {en:'Info Pyramid Garden by WhatsApp',pt:'Informações Jardim Pirâmide por WhatsApp',fr:'Informations sur le jardin des pyramides par WhatsApp',de:'Infos Pyramid Garden per WhatsApp',ru:'Информация о саду пирамид от WhatsApp',ar:'المعلومات عن حديقة الهرم عبر الواتساب'},
+  efecto: {en:'See treated diseases',pt:'Veja doenças tratadas',fr:'Voir les maladies traitées',de:'Siehe behandelte Krankheiten',ru:'См. вылеченные заболевания',ar:'انظر الأمراض المعالجة'},
+  salud: {en:'See testimonials',pt:'Veja depoimentos',fr:'Voir les témoignages',de:'Siehe Erfahrungsberichte',ru:'Посмотреть отзывы',ar:'انظر الشهادات'},
+  testimonios: {en:'Watch testimonial videos',pt:'Assista a vídeos de depoimentos',fr:'Regardez des vidéos de témoignages',de:'Sehen Sie sich Testimonial-Videos an',ru:'Посмотрите видео-отзывы',ar:'شاهد فيديوهات الشهادة'},
+  egipto: {en:'Trip info via WhatsApp',pt:'Informações da viagem via WhatsApp',fr:'Informations sur le voyage via WhatsApp',de:'Reiseinfos per WhatsApp',ru:'Информация о поездке через WhatsApp',ar:'معلومات الرحلة عبر الواتس اب'},
+  critica: {en:'See team presentation',pt:'Veja apresentação da equipe',fr:'Voir la présentation de l\'équipe',de:'Siehe Teampräsentation',ru:'Посмотреть презентацию команды',ar:'شاهد العرض التقديمي للفريق'},
+};
+var PM_CB_A = {
+  precios: {en:'https://wa.me/34639284787?text=Hello%2C%20I%20would%20like%20to%20request%20a%20personalized%20quote%20for%20pyramids',pt:'https://wa.me/34639284787?text=Ol%C3%A1%2C%20gostaria%20de%20solicitar%20um%20or%C3%A7amento%20personalizado%20para%20pir%C3%A2mides',fr:'https://wa.me/34639284787?text=Bonjour%2C%20je%20souhaite%20demander%20un%20devis%20personnalis%C3%A9%20pour%20des%20pyramides',de:'https://wa.me/34639284787?text=Hallo%2C%20ich%20m%C3%B6chte%20ein%20individuelles%20Angebot%20f%C3%BCr%20Pyramiden%20anfordern',ru:'https://wa.me/34639284787?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%2C%20%D1%8F%20%D1%85%D0%BE%D1%82%D0%B5%D0%BB%20%D0%B1%D1%8B%20%D0%B7%D0%B0%D0%BF%D1%80%D0%BE%D1%81%D0%B8%D1%82%D1%8C%20%D0%BF%D0%B5%D1%80%D1%81%D0%BE%D0%BD%D0%B0%D0%BB%D1%8C%D0%BD%D1%83%D1%8E%20%D1%80%D0%B0%D1%81%D1%86%D0%B5%D0%BD%D0%BA%D1%83%20%D0%BD%D0%B0%20%D0%BF%D0%B8%D1%80%D0%B0%D0%BC%D0%B8%D0%B4%D1%8B',ar:'https://wa.me/34639284787?text=%D9%85%D8%B1%D8%AD%D8%A8%D9%8B%D8%A7%D8%8C%20%D8%A3%D9%88%D8%AF%20%D8%A3%D9%86%20%D8%A3%D8%B7%D9%84%D8%A8%20%D8%B9%D8%B1%D8%B6%20%D8%A3%D8%B3%D8%B9%D8%A7%D8%B1%20%D8%AE%D8%A7%D8%B5%D9%8B%D8%A7%20%D9%84%D8%B4%D8%B1%D9%83%D8%A9%20%D8%A8%D9%8A%D8%B1%D8%A7%D9%85%D9%8A%D8%AF%D8%B2'},
+  compra: {en:'https://wa.me/34639284787?text=Hello%2C%20I%20would%20like%20to%20buy%20a%20therapeutic%20pyramid',pt:'https://wa.me/34639284787?text=Ol%C3%A1%2C%20gostaria%20de%20comprar%20uma%20pir%C3%A2mide%20terap%C3%AAutica',fr:'https://wa.me/34639284787?text=Bonjour%2C%20je%20souhaite%20acheter%20une%20pyramide%20th%C3%A9rapeutique',de:'https://wa.me/34639284787?text=Hallo%2C%20ich%20m%C3%B6chte%20eine%20Therapiepyramide%20kaufen',ru:'https://wa.me/34639284787?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%2C%20%D1%85%D0%BE%D1%82%D0%B5%D0%BB%D0%B0%20%D0%B1%D1%8B%20%D0%BA%D1%83%D0%BF%D0%B8%D1%82%D1%8C%20%D0%BB%D0%B5%D1%87%D0%B5%D0%B1%D0%BD%D1%83%D1%8E%20%D0%BF%D0%B8%D1%80%D0%B0%D0%BC%D0%B8%D0%B4%D0%BA%D1%83.',ar:'https://wa.me/34639284787?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D8%8C%20%D8%A3%D8%B1%D8%BA%D8%A8%20%D9%81%D9%8A%20%D8%B4%D8%B1%D8%A7%D8%A1%20%D8%A7%D9%84%D9%87%D8%B1%D9%85%20%D8%A7%D9%84%D8%B9%D9%84%D8%A7%D8%AC%D9%8A'},
+  envios: {en:'https://wa.me/34639284787?text=Hello%2C%20I%20would%20like%20to%20know%20about%20shipping%20to%20my%20country',pt:'https://wa.me/34639284787?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20sobre%20o%20envio%20para%20o%20meu%20pa%C3%ADs',fr:'https://wa.me/34639284787?text=Bonjour%2C%20j%27aimerais%20conna%C3%AEtre%20les%20modalit%C3%A9s%20d%27exp%C3%A9dition%20vers%20mon%20pays',de:'https://wa.me/34639284787?text=Hallo%2C%20ich%20w%C3%BCrde%20gerne%20Informationen%20zum%20Versand%20in%20mein%20Land%20erhalten',ru:'https://wa.me/34639284787?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%2C%20%D1%8F%20%D1%85%D0%BE%D1%82%D0%B5%D0%BB%20%D0%B1%D1%8B%20%D1%83%D0%B7%D0%BD%D0%B0%D1%82%D1%8C%20%D0%BE%20%D0%B4%D0%BE%D1%81%D1%82%D0%B0%D0%B2%D0%BA%D0%B5%20%D0%B2%20%D0%BC%D0%BE%D1%8E%20%D1%81%D1%82%D1%80%D0%B0%D0%BD%D1%83.',ar:'https://wa.me/34639284787?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%D8%8C%20%D8%A3%D9%88%D8%AF%20%D8%A3%D9%86%20%D8%A3%D8%B9%D8%B1%D9%81%20%D8%B9%D9%86%20%D8%A7%D9%84%D8%B4%D8%AD%D9%86%20%D8%A5%D9%84%D9%89%20%D8%A8%D9%84%D8%AF%D9%8A'},
+  hygia: {en:'https://wa.me/34639284787?text=Hello%2C%20I%20would%20like%20information%20about%20the%20Hygia%20pyramid',pt:'https://wa.me/34639284787?text=Ol%C3%A1%2C%20gostaria%20de%20informa%C3%A7%C3%B5es%20sobre%20a%20pir%C3%A2mide%20H%C3%ADgia',fr:'https://wa.me/34639284787?text=Bonjour%2C%20je%20souhaite%20des%20informations%20sur%20la%20pyramide%20Hygia',de:'https://wa.me/34639284787?text=Hallo%2C%20ich%20h%C3%A4tte%20gerne%20Informationen%20zur%20Hygia-Pyramide',ru:'https://wa.me/34639284787?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%2C%20%D1%8F%20%D1%85%D0%BE%D1%82%D0%B5%D0%BB%20%D0%B1%D1%8B%20%D0%BF%D0%BE%D0%BB%D1%83%D1%87%D0%B8%D1%82%D1%8C%20%D0%B8%D0%BD%D1%84%D0%BE%D1%80%D0%BC%D0%B0%D1%86%D0%B8%D1%8E%20%D0%BE%20%D0%BF%D0%B8%D1%80%D0%B0%D0%BC%D0%B8%D0%B4%D0%B5%20%D0%A5%D0%B8%D0%B3%D0%B8%D0%B8.',ar:'https://wa.me/34639284787?text=%D9%85%D8%B1%D8%AD%D8%A8%D9%8B%D8%A7%D8%8C%20%D8%A3%D9%88%D8%AF%20%D8%A7%D9%84%D8%AD%D8%B5%D9%88%D9%84%20%D8%B9%D9%84%D9%89%20%D9%85%D8%B9%D9%84%D9%88%D9%85%D8%A7%D8%AA%20%D8%AD%D9%88%D9%84%20%D9%87%D8%B1%D9%85%20%D9%87%D9%8A%D8%AC%D9%8A%D8%A7'},
+  hercules: {en:'https://wa.me/34639284787?text=Hello%2C%20I%20would%20like%20information%20about%20the%20Hercules%20pyramid',pt:'https://wa.me/34639284787?text=Ol%C3%A1%2C%20gostaria%20de%20informa%C3%A7%C3%B5es%20sobre%20a%20pir%C3%A2mide%20de%20H%C3%A9rcules',fr:'https://wa.me/34639284787?text=Bonjour%2C%20je%20souhaite%20des%20informations%20sur%20la%20pyramide%20d%27Hercule',de:'https://wa.me/34639284787?text=Hallo%2C%20ich%20h%C3%A4tte%20gerne%20Informationen%20zur%20Herkulespyramide',ru:'https://wa.me/34639284787?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%2C%20%D1%85%D0%BE%D1%82%D0%B5%D0%BB%D0%BE%D1%81%D1%8C%20%D0%B1%D1%8B%20%D0%BF%D0%BE%D0%BB%D1%83%D1%87%D0%B8%D1%82%D1%8C%20%D0%B8%D0%BD%D1%84%D0%BE%D1%80%D0%BC%D0%B0%D1%86%D0%B8%D1%8E%20%D0%BE%20%D0%BF%D0%B8%D1%80%D0%B0%D0%BC%D0%B8%D0%B4%D0%B5%20%D0%93%D0%B5%D1%80%D0%BA%D1%83%D0%BB%D0%B5%D1%81%D0%B0.',ar:'https://wa.me/34639284787?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%D8%8C%20%D8%A3%D9%88%D8%AF%20%D8%A7%D9%84%D8%AD%D8%B5%D9%88%D9%84%20%D8%B9%D9%84%D9%89%20%D9%85%D8%B9%D9%84%D9%88%D9%85%D8%A7%D8%AA%20%D8%AD%D9%88%D9%84%20%D9%87%D8%B1%D9%85%20%D9%87%D8%B1%D9%82%D9%84'},
+  faraday: {en:'https://wa.me/34639284787?text=Hello%2C%20I%20would%20like%20information%20about%20the%20Faraday%20Ark',pt:'https://wa.me/34639284787?text=Ol%C3%A1%2C%20gostaria%20de%20informa%C3%A7%C3%B5es%20sobre%20a%20Arca%20de%20Faraday',fr:'https://wa.me/34639284787?text=Bonjour%2C%20je%20voudrais%20des%20informations%20sur%20l%27Arche%20de%20Faraday',de:'https://wa.me/34639284787?text=Hallo%2C%20ich%20h%C3%A4tte%20gerne%20Informationen%20%C3%BCber%20die%20Faraday-Arche',ru:'https://wa.me/34639284787?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%2C%20%D1%8F%20%D1%85%D0%BE%D1%82%D0%B5%D0%BB%20%D0%B1%D1%8B%20%D0%BF%D0%BE%D0%BB%D1%83%D1%87%D0%B8%D1%82%D1%8C%20%D0%B8%D0%BD%D1%84%D0%BE%D1%80%D0%BC%D0%B0%D1%86%D0%B8%D1%8E%20%D0%BE%20%D0%BA%D0%BE%D0%B2%D1%87%D0%B5%D0%B3%D0%B5%20%D0%A4%D0%B0%D1%80%D0%B0%D0%B4%D0%B5%D1%8F.',ar:'https://wa.me/34639284787?text=%D9%85%D8%B1%D8%AD%D8%A8%D9%8B%D8%A7%D8%8C%20%D8%A3%D9%88%D8%AF%20%D8%A7%D9%84%D8%AD%D8%B5%D9%88%D9%84%20%D8%B9%D9%84%D9%89%20%D9%85%D8%B9%D9%84%D9%88%D9%85%D8%A7%D8%AA%20%D8%AD%D9%88%D9%84%20%D8%B3%D9%81%D9%8A%D9%86%D8%A9%20%D9%81%D8%A7%D8%B1%D8%A7%D8%AF%D8%A7%D9%8A'},
+  mascotas: {en:'https://wa.me/34639284787?text=Hello%2C%20I%20would%20like%20information%20about%20Piramascota',pt:'https://wa.me/34639284787?text=Ol%C3%A1%2C%20gostaria%20de%20informa%C3%A7%C3%B5es%20sobre%20Piramascota',fr:'https://wa.me/34639284787?text=Bonjour%2C%20je%20voudrais%20des%20informations%20sur%20Piramascota',de:'https://wa.me/34639284787?text=Hallo%2C%20ich%20h%C3%A4tte%20gerne%20Informationen%20%C3%BCber%20Piramascota',ru:'https://wa.me/34639284787?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%2C%20%D1%8F%20%D1%85%D0%BE%D1%82%D0%B5%D0%BB%20%D0%B1%D1%8B%20%D0%BF%D0%BE%D0%BB%D1%83%D1%87%D0%B8%D1%82%D1%8C%20%D0%B8%D0%BD%D1%84%D0%BE%D1%80%D0%BC%D0%B0%D1%86%D0%B8%D1%8E%20%D0%BE%20%D0%9F%D0%B8%D1%80%D0%B0%D0%BC%D0%B0%D1%81%D0%BA%D0%BE%D1%82%D0%B5.',ar:'https://wa.me/34639284787?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%D8%8C%20%D8%A3%D9%88%D8%AF%20%D8%A7%D9%84%D8%AD%D8%B5%D9%88%D9%84%20%D8%B9%D9%84%D9%89%20%D9%85%D8%B9%D9%84%D9%88%D9%85%D8%A7%D8%AA%20%D8%AD%D9%88%D9%84%20%D8%A8%D9%8A%D8%B1%D8%A7%D9%85%D8%A7%D8%B3%D9%83%D9%88%D8%AA%D8%A7'},
+  vital: {en:'https://wa.me/34639284787?text=Hello%2C%20I%20would%20like%20information%20about%20Piramicasa%20Vital',pt:'https://wa.me/34639284787?text=Ol%C3%A1%2C%20gostaria%20de%20informa%C3%A7%C3%B5es%20sobre%20a%20Piramicasa%20Vital',fr:'https://wa.me/34639284787?text=Bonjour%2C%20je%20souhaite%20des%20informations%20sur%20Piramicasa%20Vital',de:'https://wa.me/34639284787?text=Hallo%2C%20ich%20h%C3%A4tte%20gerne%20Informationen%20zu%20Piramicasa%20Vital',ru:'https://wa.me/34639284787?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%2C%20%D1%8F%20%D1%85%D0%BE%D1%82%D0%B5%D0%BB%20%D0%B1%D1%8B%20%D0%BF%D0%BE%D0%BB%D1%83%D1%87%D0%B8%D1%82%D1%8C%20%D0%B8%D0%BD%D1%84%D0%BE%D1%80%D0%BC%D0%B0%D1%86%D0%B8%D1%8E%20%D0%BE%20Piramicasa%20Vital.',ar:'https://wa.me/34639284787?text=%D9%85%D8%B1%D8%AD%D8%A8%D9%8B%D8%A7%D8%8C%20%D8%A3%D9%88%D8%AF%20%D8%A7%D9%84%D8%AD%D8%B5%D9%88%D9%84%20%D8%B9%D9%84%D9%89%20%D9%85%D8%B9%D9%84%D9%88%D9%85%D8%A7%D8%AA%20%D8%AD%D9%88%D9%84%20Piramicasa%20Vital'},
+  geobiologia: {en:'https://wa.me/34639284787?text=Hello%2C%20I%20would%20like%20information%20about%20geobiology%20and%20pyramids',pt:'https://wa.me/34639284787?text=Ol%C3%A1%2C%20gostaria%20de%20informa%C3%A7%C3%B5es%20sobre%20geobiologia%20e%20pir%C3%A2mides',fr:'https://wa.me/34639284787?text=Bonjour%2C%20je%20souhaite%20des%20informations%20sur%20la%20g%C3%A9obiologie%20et%20les%20pyramides',de:'https://wa.me/34639284787?text=Hallo%2C%20ich%20h%C3%A4tte%20gerne%20Informationen%20%C3%BCber%20Geobiologie%20und%20Pyramiden',ru:'https://wa.me/34639284787?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%2C%20%D1%8F%20%D1%85%D0%BE%D1%82%D0%B5%D0%BB%20%D0%B1%D1%8B%20%D0%BF%D0%BE%D0%BB%D1%83%D1%87%D0%B8%D1%82%D1%8C%20%D0%B8%D0%BD%D1%84%D0%BE%D1%80%D0%BC%D0%B0%D1%86%D0%B8%D1%8E%20%D0%BE%20%D0%B3%D0%B5%D0%BE%D0%B1%D0%B8%D0%BE%D0%BB%D0%BE%D0%B3%D0%B8%D0%B8%20%D0%B8%20%D0%BF%D0%B8%D1%80%D0%B0%D0%BC%D0%B8%D0%B4%D0%B0%D1%85.',ar:'https://wa.me/34639284787?text=%D9%85%D8%B1%D8%AD%D8%A8%D9%8B%D8%A7%D8%8C%20%D8%A3%D9%88%D8%AF%20%D8%A7%D9%84%D8%AD%D8%B5%D9%88%D9%84%20%D8%B9%D9%84%D9%89%20%D9%85%D8%B9%D9%84%D9%88%D9%85%D8%A7%D8%AA%20%D8%AD%D9%88%D9%84%20%D8%A7%D9%84%D8%AC%D9%8A%D9%88%D9%84%D9%88%D8%AC%D9%8A%D8%A7%20%D9%88%D8%A7%D9%84%D8%A3%D9%87%D8%B1%D8%A7%D9%85%D8%A7%D8%AA'},
+  reich: {en:'https://wa.me/34639284787?text=Hello%2C%20I%20would%20like%20information%20about%20Wilhelm%20Reich%20and%20pyramids',pt:'https://wa.me/34639284787?text=Ol%C3%A1%2C%20gostaria%20de%20informa%C3%A7%C3%B5es%20sobre%20Wilhelm%20Reich%20e%20pir%C3%A2mides',fr:'https://wa.me/34639284787?text=Bonjour%2C%20je%20voudrais%20des%20informations%20sur%20Wilhelm%20Reich%20et%20les%20pyramides',de:'https://wa.me/34639284787?text=Hallo%2C%20ich%20h%C3%A4tte%20gerne%20Informationen%20%C3%BCber%20Wilhelm%20Reich%20und%20Pyramiden',ru:'https://wa.me/34639284787?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%2C%20%D1%8F%20%D1%85%D0%BE%D1%82%D0%B5%D0%BB%20%D0%B1%D1%8B%20%D0%BF%D0%BE%D0%BB%D1%83%D1%87%D0%B8%D1%82%D1%8C%20%D0%B8%D0%BD%D1%84%D0%BE%D1%80%D0%BC%D0%B0%D1%86%D0%B8%D1%8E%20%D0%BE%20%D0%92%D0%B8%D0%BB%D1%8C%D0%B3%D0%B5%D0%BB%D1%8C%D0%BC%D0%B5%20%D0%A0%D0%B0%D0%B9%D1%85%D0%B5%20%D0%B8%20%D0%BF%D0%B8%D1%80%D0%B0%D0%BC%D0%B8%D0%B4%D0%B0%D1%85.',ar:'https://wa.me/34639284787?text=%D9%85%D8%B1%D8%AD%D8%A8%D9%8B%D8%A7%D8%8C%20%D8%A3%D9%88%D8%AF%20%D8%A7%D9%84%D8%AD%D8%B5%D9%88%D9%84%20%D8%B9%D9%84%D9%89%20%D9%85%D8%B9%D9%84%D9%88%D9%85%D8%A7%D8%AA%20%D8%AD%D9%88%D9%84%20%D9%81%D9%8A%D9%84%D9%87%D9%84%D9%85%20%D8%B1%D8%A7%D9%8A%D8%AE%20%D9%88%D8%A7%D9%84%D8%A3%D9%87%D8%B1%D8%A7%D9%85%D8%A7%D8%AA'},
+  contacto: {en:'https://wa.me/34639284787?text=Hello%2C%20I%20would%20like%20to%20contact%20you',pt:'https://wa.me/34639284787?text=Ol%C3%A1%2C%20gostaria%20de%20entrar%20em%20contato%20com%20voc%C3%AA',fr:'https://wa.me/34639284787?text=Bonjour%2C%20je%20souhaite%20vous%20contacter',de:'https://wa.me/34639284787?text=Hallo%2C%20ich%20m%C3%B6chte%20mit%20Ihnen%20Kontakt%20aufnehmen',ru:'https://wa.me/34639284787?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%2C%20%D1%8F%20%D1%85%D0%BE%D1%82%D0%B5%D0%BB%20%D0%B1%D1%8B%20%D1%81%D0%B2%D1%8F%D0%B7%D0%B0%D1%82%D1%8C%D1%81%D1%8F%20%D1%81%20%D0%B2%D0%B0%D0%BC%D0%B8',ar:'https://wa.me/34639284787?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D8%8C%20%D8%A3%D9%88%D8%AF%20%D8%A7%D9%84%D8%A7%D8%AA%D8%B5%D8%A7%D9%84%20%D8%A8%D9%83'},
+  cita: {en:'https://wa.me/34639284787?text=Hello%2C%20I%20would%20like%20to%20schedule%20an%20appointment%20or%20advice',pt:'https://wa.me/34639284787?text=Ol%C3%A1%2C%20gostaria%20de%20agendar%20uma%20consulta%20ou%20aconselhamento',fr:'https://wa.me/34639284787?text=Bonjour%2C%20je%20souhaite%20prendre%20rendez-vous%20ou%20un%20conseil',de:'https://wa.me/34639284787?text=Hallo%2C%20ich%20m%C3%B6chte%20einen%20Termin%20oder%20eine%20Beratung%20vereinbaren',ru:'https://wa.me/34639284787?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%2C%20%D1%8F%20%D1%85%D0%BE%D1%82%D0%B5%D0%BB%20%D0%B1%D1%8B%20%D0%B7%D0%B0%D0%BF%D0%B8%D1%81%D0%B0%D1%82%D1%8C%D1%81%D1%8F%20%D0%BD%D0%B0%20%D0%BF%D1%80%D0%B8%D0%B5%D0%BC%20%D0%B8%D0%BB%D0%B8%20%D0%BF%D0%BE%D0%BB%D1%83%D1%87%D0%B8%D1%82%D1%8C%20%D0%BA%D0%BE%D0%BD%D1%81%D1%83%D0%BB%D1%8C%D1%82%D0%B0%D1%86%D0%B8%D1%8E.',ar:'https://wa.me/34639284787?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%D8%8C%20%D8%A3%D9%88%D8%AF%20%D8%AA%D8%AD%D8%AF%D9%8A%D8%AF%20%D9%85%D9%88%D8%B9%D8%AF%20%D8%A3%D9%88%20%D8%A7%D8%B3%D8%AA%D8%B4%D8%A7%D8%B1%D8%A9'},
+  medico: {en:'https://wa.me/34639284787?text=Hello%2C%20I%20would%20like%20information%20about%20pyramids%20and%20conventional%20medicine',pt:'https://wa.me/34639284787?text=Ol%C3%A1%2C%20gostaria%20de%20informa%C3%A7%C3%B5es%20sobre%20pir%C3%A2mides%20e%20medicina%20convencional',fr:'https://wa.me/34639284787?text=Bonjour%2C%20je%20souhaite%20des%20informations%20sur%20les%20pyramides%20et%20la%20m%C3%A9decine%20conventionnelle',de:'https://wa.me/34639284787?text=Hallo%2C%20ich%20h%C3%A4tte%20gerne%20Informationen%20zum%20Thema%20Pyramiden%20und%20Schulmedizin',ru:'https://wa.me/34639284787?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%2C%20%D0%BC%D0%BD%D0%B5%20%D1%85%D0%BE%D1%82%D0%B5%D0%BB%D0%BE%D1%81%D1%8C%20%D0%B1%D1%8B%20%D0%BF%D0%BE%D0%BB%D1%83%D1%87%D0%B8%D1%82%D1%8C%20%D0%B8%D0%BD%D1%84%D0%BE%D1%80%D0%BC%D0%B0%D1%86%D0%B8%D1%8E%20%D0%BE%20%D0%BF%D0%B8%D1%80%D0%B0%D0%BC%D0%B8%D0%B4%D0%B0%D1%85%20%D0%B8%20%D1%82%D1%80%D0%B0%D0%B4%D0%B8%D1%86%D0%B8%D0%BE%D0%BD%D0%BD%D0%BE%D0%B9%20%D0%BC%D0%B5%D0%B4%D0%B8%D1%86%D0%B8%D0%BD%D0%B5.',ar:'https://wa.me/34639284787?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%D8%8C%20%D8%A3%D9%88%D8%AF%20%D8%A7%D9%84%D8%AD%D8%B5%D9%88%D9%84%20%D8%B9%D9%84%D9%89%20%D9%85%D8%B9%D9%84%D9%88%D9%85%D8%A7%D8%AA%20%D8%AD%D9%88%D9%84%20%D8%A7%D9%84%D8%A3%D9%87%D8%B1%D8%A7%D9%85%D8%A7%D8%AA%20%D9%88%D8%A7%D9%84%D8%B7%D8%A8%20%D8%A7%D9%84%D8%AA%D9%82%D9%84%D9%8A%D8%AF%D9%8A'},
+  thanks: {en:'https://wa.me/34639284787?text=Hello%2C%20thanks%20for%20the%20information%2C%20I%20have%20a%20question',pt:'https://wa.me/34639284787?text=Ol%C3%A1%2C%20obrigado%20pela%20informa%C3%A7%C3%A3o%2C%20tenho%20uma%20d%C3%BAvida',fr:'https://wa.me/34639284787?text=Bonjour%2C%20merci%20pour%20l%27information%2C%20j%27ai%20une%20question',de:'https://wa.me/34639284787?text=Hallo%2C%20danke%20f%C3%BCr%20die%20Information%2C%20ich%20habe%20eine%20Frage',ru:'https://wa.me/34639284787?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%2C%20%D1%81%D0%BF%D0%B0%D1%81%D0%B8%D0%B1%D0%BE%20%D0%B7%D0%B0%20%D0%B8%D0%BD%D1%84%D0%BE%D1%80%D0%BC%D0%B0%D1%86%D0%B8%D1%8E%2C%20%D1%83%20%D0%BC%D0%B5%D0%BD%D1%8F%20%D0%B5%D1%81%D1%82%D1%8C%20%D0%B2%D0%BE%D0%BF%D1%80%D0%BE%D1%81',ar:'https://wa.me/34639284787?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D8%8C%20%D8%B4%D9%83%D8%B1%D8%A7%20%D8%B9%D9%84%D9%89%20%D8%A7%D9%84%D9%85%D8%B9%D9%84%D9%88%D9%85%D8%A7%D8%AA%D8%8C%20%D9%84%D8%AF%D9%8A%20%D8%B3%D8%A4%D8%A7%D9%84'},
+  joyas: {en:'https://wa.me/34639284787?text=Hello%2C%20I%20would%20like%20information%20about%20Piramijoyas',pt:'https://wa.me/34639284787?text=Ol%C3%A1%2C%20gostaria%20de%20informa%C3%A7%C3%B5es%20sobre%20Piramijoyas',fr:'https://wa.me/34639284787?text=Bonjour%2C%20je%20voudrais%20des%20informations%20sur%20Piramijoyas',de:'https://wa.me/34639284787?text=Hallo%2C%20ich%20h%C3%A4tte%20gerne%20Informationen%20%C3%BCber%20Piramijoyas',ru:'https://wa.me/34639284787?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%2C%20%D1%8F%20%D1%85%D0%BE%D1%82%D0%B5%D0%BB%20%D0%B1%D1%8B%20%D0%BF%D0%BE%D0%BB%D1%83%D1%87%D0%B8%D1%82%D1%8C%20%D0%B8%D0%BD%D1%84%D0%BE%D1%80%D0%BC%D0%B0%D1%86%D0%B8%D1%8E%20%D0%BE%20%D0%9F%D0%B8%D1%80%D0%B0%D0%BC%D0%B8%D1%85%D0%BE%D1%8F%D1%81.',ar:'https://wa.me/34639284787?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%D8%8C%20%D8%A3%D9%88%D8%AF%20%D8%A7%D9%84%D8%AD%D8%B5%D9%88%D9%84%20%D8%B9%D9%84%D9%89%20%D9%85%D8%B9%D9%84%D9%88%D9%85%D8%A7%D8%AA%20%D8%AD%D9%88%D9%84%20%D8%A8%D9%8A%D8%B1%D8%A7%D9%85%D9%8A%D8%AC%D9%88%D9%8A%D8%A7%D8%B3'},
+  envio_info: {en:'https://wa.me/34639284787?text=Hello%2C%20I%20would%20like%20to%20know%20the%20delivery%20time%20and%20cost%20to%20my%20location.',pt:'https://wa.me/34639284787?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20o%20prazo%20e%20custo%20de%20entrega%20para%20minha%20localidade.',fr:'https://wa.me/34639284787?text=Bonjour%2C%20j%27aimerais%20conna%C3%AEtre%20le%20d%C3%A9lai%20et%20le%20co%C3%BBt%20de%20livraison%20jusqu%27%C3%A0%20chez%20moi.',de:'https://wa.me/34639284787?text=Hallo%2C%20ich%20w%C3%BCrde%20gerne%20die%20Lieferzeit%20und%20die%20Kosten%20f%C3%BCr%20die%20Lieferung%20an%20meinen%20Standort%20erfahren.',ru:'https://wa.me/34639284787?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%2C%20%D1%85%D0%BE%D1%82%D0%B5%D0%BB%D0%BE%D1%81%D1%8C%20%D0%B1%D1%8B%20%D1%83%D0%B7%D0%BD%D0%B0%D1%82%D1%8C%20%D1%81%D1%80%D0%BE%D0%BA%D0%B8%20%D0%B8%20%D1%81%D1%82%D0%BE%D0%B8%D0%BC%D0%BE%D1%81%D1%82%D1%8C%20%D0%B4%D0%BE%D1%81%D1%82%D0%B0%D0%B2%D0%BA%D0%B8%20%D0%B4%D0%BE%20%D0%BC%D0%BE%D0%B5%D0%B3%D0%BE%20%D0%B3%D0%BE%D1%80%D0%BE%D0%B4%D0%B0.',ar:'https://wa.me/34639284787?text=%D8%A7%D9%84%D8%B3%D9%84%D8%A7%D9%85%20%D8%B9%D9%84%D9%8A%D9%83%D9%85%D8%8C%20%D8%A3%D9%88%D8%AF%20%D8%A3%D9%86%20%D8%A3%D8%B9%D8%B1%D9%81%20%D9%85%D8%AF%D8%A9%20%D8%A7%D9%84%D8%AA%D8%B3%D9%84%D9%8A%D9%85%20%D9%88%D8%A7%D9%84%D8%AA%D9%83%D9%84%D9%81%D8%A9%20%D9%84%D9%85%D9%88%D9%82%D8%B9%D9%8A.'},
+  legal: {en:'https://wa.me/34639284787?text=Hello%2C%20I%20would%20like%20to%20see%20the%20legal%20terms%20and%20conditions',pt:'https://wa.me/34639284787?text=Ol%C3%A1%2C%20gostaria%20de%20ver%20os%20termos%20e%20condi%C3%A7%C3%B5es%20legais',fr:'https://wa.me/34639284787?text=Bonjour%2C%20j%27aimerais%20voir%20les%20conditions%20l%C3%A9gales',de:'https://wa.me/34639284787?text=Hallo%2C%20ich%20m%C3%B6chte%20die%20rechtlichen%20Gesch%C3%A4ftsbedingungen%20einsehen',ru:'https://wa.me/34639284787?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%2C%20%D1%8F%20%D1%85%D0%BE%D1%82%D0%B5%D0%BB%20%D0%B1%D1%8B%20%D1%83%D0%B2%D0%B8%D0%B4%D0%B5%D1%82%D1%8C%20%D1%8E%D1%80%D0%B8%D0%B4%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B5%20%D1%83%D1%81%D0%BB%D0%BE%D0%B2%D0%B8%D1%8F',ar:'https://wa.me/34639284787?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%D8%8C%20%D8%A3%D9%88%D8%AF%20%D8%A3%D9%86%20%D8%A3%D8%B1%D9%89%20%D8%A7%D9%84%D8%B4%D8%B1%D9%88%D8%B7%20%D9%88%D8%A7%D9%84%D8%A3%D8%AD%D9%83%D8%A7%D9%85%20%D8%A7%D9%84%D9%82%D8%A7%D9%86%D9%88%D9%86%D9%8A%D8%A9'},
+};
+var PM_CB_AEXTRA = {
+  piramicama: {en:'https://wa.me/34639284787?text=Hello%2C%20I%20would%20like%20information%20about%20the%20Piramicama',pt:'https://wa.me/34639284787?text=Ol%C3%A1%2C%20gostaria%20de%20informa%C3%A7%C3%B5es%20sobre%20a%20Piramicama',fr:'https://wa.me/34639284787?text=Bonjour%2C%20je%20voudrais%20des%20informations%20sur%20le%20Piramicama',de:'https://wa.me/34639284787?text=Hallo%2C%20ich%20h%C3%A4tte%20gerne%20Informationen%20%C3%BCber%20die%20Piramicama',ru:'https://wa.me/34639284787?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%2C%20%D1%8F%20%D1%85%D0%BE%D1%82%D0%B5%D0%BB%20%D0%B1%D1%8B%20%D0%BF%D0%BE%D0%BB%D1%83%D1%87%D0%B8%D1%82%D1%8C%20%D0%B8%D0%BD%D1%84%D0%BE%D1%80%D0%BC%D0%B0%D1%86%D0%B8%D1%8E%20%D0%BE%20%D0%9F%D0%B8%D1%80%D0%B0%D0%BC%D0%B8%D0%BA%D0%B0%D0%BC%D0%B5.',ar:'https://wa.me/34639284787?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%D8%8C%20%D8%A3%D9%88%D8%AF%20%D8%A7%D9%84%D8%AD%D8%B5%D9%88%D9%84%20%D8%B9%D9%84%D9%89%20%D9%85%D8%B9%D9%84%D9%88%D9%85%D8%A7%D8%AA%20%D8%AD%D9%88%D9%84%20%D8%A8%D9%8A%D8%B1%D8%A7%D9%85%D9%8A%D9%83%D8%A7%D9%85%D8%A7'},
+  pirajardin: {en:'https://wa.me/34639284787?text=Hello%2C%20I%20would%20like%20information%20about%20the%20Garden%20Pyramid',pt:'https://wa.me/34639284787?text=Ol%C3%A1%2C%20gostaria%20de%20informa%C3%A7%C3%B5es%20sobre%20a%20Pir%C3%A2mide%20do%20Jardim',fr:'https://wa.me/34639284787?text=Bonjour%2C%20je%20souhaite%20des%20informations%20sur%20la%20Pyramide%20du%20Jardin',de:'https://wa.me/34639284787?text=Hallo%2C%20ich%20h%C3%A4tte%20gerne%20Informationen%20zur%20Gartenpyramide',ru:'https://wa.me/34639284787?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%2C%20%D1%8F%20%D1%85%D0%BE%D1%82%D0%B5%D0%BB%20%D0%B1%D1%8B%20%D0%BF%D0%BE%D0%BB%D1%83%D1%87%D0%B8%D1%82%D1%8C%20%D0%B8%D0%BD%D1%84%D0%BE%D1%80%D0%BC%D0%B0%D1%86%D0%B8%D1%8E%20%D0%BE%20%D0%A1%D0%B0%D0%B4%D0%BE%D0%B2%D0%BE%D0%B9%20%D0%BF%D0%B8%D1%80%D0%B0%D0%BC%D0%B8%D0%B4%D0%B5.',ar:'https://wa.me/34639284787?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%D8%8C%20%D8%A3%D9%88%D8%AF%20%D8%A7%D9%84%D8%AD%D8%B5%D9%88%D9%84%20%D8%B9%D9%84%D9%89%20%D9%85%D8%B9%D9%84%D9%88%D9%85%D8%A7%D8%AA%20%D8%AD%D9%88%D9%84%20%D9%87%D8%B1%D9%85%20%D8%A7%D9%84%D8%AD%D8%AF%D9%8A%D9%82%D8%A9'},
+  egipto: {en:'https://wa.me/34639284787?text=Hello%2C%20I%20would%20like%20information%20about%20the%20trip%20to%20Egypt',pt:'https://wa.me/34639284787?text=Ol%C3%A1%2C%20gostaria%20de%20informa%C3%A7%C3%B5es%20sobre%20a%20viagem%20ao%20Egito',fr:'https://wa.me/34639284787?text=Bonjour%2C%20je%20voudrais%20des%20informations%20sur%20le%20voyage%20en%20Egypte',de:'https://wa.me/34639284787?text=Hallo%2C%20ich%20h%C3%A4tte%20gerne%20Informationen%20zur%20Reise%20nach%20%C3%84gypten',ru:'https://wa.me/34639284787?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%2C%20%D1%85%D0%BE%D1%82%D0%B5%D0%BB%D0%BE%D1%81%D1%8C%20%D0%B1%D1%8B%20%D0%BF%D0%BE%D0%BB%D1%83%D1%87%D0%B8%D1%82%D1%8C%20%D0%B8%D0%BD%D1%84%D0%BE%D1%80%D0%BC%D0%B0%D1%86%D0%B8%D1%8E%20%D0%BE%20%D0%BF%D0%BE%D0%B5%D0%B7%D0%B4%D0%BA%D0%B5%20%D0%B2%20%D0%95%D0%B3%D0%B8%D0%BF%D0%B5%D1%82.',ar:'https://wa.me/34639284787?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%D8%8C%20%D8%A3%D9%88%D8%AF%20%D8%A7%D9%84%D8%AD%D8%B5%D9%88%D9%84%20%D8%B9%D9%84%D9%89%20%D9%85%D8%B9%D9%84%D9%88%D9%85%D8%A7%D8%AA%20%D8%AD%D9%88%D9%84%20%D8%A7%D9%84%D8%B1%D8%AD%D9%84%D8%A9%20%D8%A5%D9%84%D9%89%20%D9%85%D8%B5%D8%B1'},
+};
+var PM_CB_FALLBACK = {
+  en: ['I can help you with: prices, pyramid models, pyramid effect, health, testimonials, shipping, scheduling an appointment, endorsements, or contact.\n\nWhich of these topics do you want information on? You can also write to us directly on WhatsApp.','I don\'t have an exact answer for that, but I can connect you to our team. Write to us on WhatsApp and we will assist you personally.','I don\'t seem to have specific information on that. Try asking me about: prices, models (Piramicama, Hygia, Hércules), pyramid effect, health, testimonials, construction, books, videos, trip to Egypt, endorsements, or schedule an appointment.'],
+  pt: ['Posso te ajudar com: preços, modelos de pirâmide, efeito pirâmide, saúde, depoimentos, frete, agendamento de consulta, endossos ou contato.\n\nSobre quais destes tópicos você deseja informações? Você também pode nos escrever diretamente no WhatsApp.','Não tenho uma resposta exata para isso, mas posso conectar você à nossa equipe. Escreva-nos no WhatsApp e iremos atendê-lo pessoalmente.','Parece que não tenho informações específicas sobre isso. Experimente me perguntar sobre: ​​preços, modelos (Piramicama, Hygia, Hércules), efeito pirâmide, saúde, depoimentos, construção, livros, vídeos, viagem ao Egito, endossos, ou agende um horário.'],
+  fr: ['Je peux vous aider sur : les prix, les modèles pyramidaux, l\'effet pyramide, la santé, les témoignages, les frais d\'expédition, la prise de rendez-vous, les mentions ou le contact.\n\nSur lequel de ces sujets souhaitez-vous des informations ? Vous pouvez également nous écrire directement sur WhatsApp.','Je n\'ai pas de réponse exacte à cela, mais je peux vous mettre en contact avec notre équipe. Écrivez-nous sur WhatsApp et nous vous aiderons personnellement.','Je ne semble pas avoir d\'informations précises à ce sujet. Essayez de me poser des questions sur : les prix, les modèles (Piramicama, Hygia, Hércules), l\'effet pyramide, la santé, les témoignages, la construction, les livres, les vidéos, le voyage en Egypte, les recommandations ou prendre rendez-vous.'],
+  de: ['Ich kann Ihnen helfen bei: Preisen, Pyramidenmodellen, Pyramideneffekt, Gesundheit, Erfahrungsberichten, Versand, Terminvereinbarung, Empfehlungen oder Kontakt.\n\nZu welchen dieser Themen wünschen Sie Informationen? Sie können uns auch direkt über WhatsApp schreiben.','Darauf habe ich keine genaue Antwort, aber ich kann Sie mit unserem Team verbinden. Schreiben Sie uns auf WhatsApp und wir helfen Ihnen persönlich weiter.','Ich scheine dazu keine konkreten Informationen zu haben. Fragen Sie mich nach: Preisen, Modellen (Piramicama, Hygia, Hércules), Pyramideneffekt, Gesundheit, Erfahrungsberichten, Bau, Büchern, Videos, Reise nach Ägypten, Empfehlungen oder vereinbaren Sie einen Termin.'],
+  ru: ['Я могу помочь вам с: ценами, моделями пирамид, эффектом пирамиды, здоровьем, отзывами, доставкой, назначением встречи, одобрениями или контактами.\n\nПо какой из этих тем вам нужна информация? Вы также можете написать нам прямо в WhatsApp.','У меня нет точного ответа на этот вопрос, но я могу связать вас с нашей командой. Напишите нам в WhatsApp и мы поможем вам лично.','Кажется, у меня нет конкретной информации по этому поводу. Попробуйте спросить меня о: ценах, моделях (Пирамикама, Гигия, Геркулес), эффекте пирамиды, здоровье, отзывах, строительстве, книгах, видео, поездке в Египет, одобрениях или назначении встречи.'],
+  ar: ['يمكنني مساعدتك فيما يلي: الأسعار، النماذج الهرمية، التأثير الهرمي، الصحة، الشهادات، الشحن، تحديد موعد، الموافقات، أو الاتصال.\n\nأي من هذه المواضيع تريد معلومات عنها؟ يمكنك أيضًا مراسلتنا مباشرة على WhatsApp.','ليس لدي إجابة محددة لذلك، لكن يمكنني توصيلك بفريقنا. راسلنا على الواتساب وسنقوم بمساعدتك شخصيًا.','ويبدو أنه ليس لدي معلومات محددة عن ذلك. حاول أن تسألني عن: الأسعار، النماذج (Piramicama، Hygia، Hércules)، تأثير الهرم، الصحة، الشهادات، البناء، الكتب، مقاطع الفيديو، رحلة إلى مصر، التأييد، أو تحديد موعد.'],
+};
+var PM_CB_FALLBACK_Q = {
+  en:'Contact by WhatsApp',pt:'Contato por WhatsApp',fr:'Contacter par WhatsApp',de:'Kontakt per WhatsApp',ru:'Связаться по WhatsApp',ar:'التواصل عبر الواتساب',
 };
 
 // Expose dictionaries so chatbot.js can use them regardless of load order
 window.PM_CB_I18N = PM_CB_I18N;
 window.PM_CB_KEYWORDS = PM_CB_KEYWORDS;
 window.PM_CB_QUICK = PM_CB_QUICK;
+window.PM_CB_Q = PM_CB_Q;
+window.PM_CB_QEXTRA = PM_CB_QEXTRA;
+window.PM_CB_A = PM_CB_A;
+window.PM_CB_AEXTRA = PM_CB_AEXTRA;
+window.PM_CB_FALLBACK = PM_CB_FALLBACK;
+window.PM_CB_FALLBACK_Q = PM_CB_FALLBACK_Q;
+PM_CB_I18N.fallback = PM_CB_FALLBACK;
+PM_CB_I18N.fallbackBtn = PM_CB_FALLBACK_Q;
 
 // Patch chatbot to use translations
 function pmCbGetLang() {
@@ -455,6 +842,53 @@ function pmCbPatchAll() {
       },
       set: function(v) { this._origR = v; }
     });
+    // Localised action button label (q) and WhatsApp prefill link (a)
+    resp._origQ = resp.q;
+    resp._origA = resp.a;
+    if (resp.q !== undefined) Object.defineProperty(resp, "q", {
+      get: function() {
+        var l = pmCbGetLang();
+        if (l === "es") return this._origQ;
+        var t = PM_CB_Q[this.cat];
+        return (t && t[l]) || this._origQ;
+      },
+      set: function(v) { this._origQ = v; }
+    });
+    if (resp.a !== undefined && PM_CB_A[resp.cat]) Object.defineProperty(resp, "a", {
+      get: function() {
+        var l = pmCbGetLang();
+        if (l === "es") return this._origA;
+        var t = PM_CB_A[this.cat];
+        return (t && t[l]) || this._origA;
+      },
+      set: function(v) { this._origA = v; }
+    });
+    // Localised secondary action (extra.q / extra.a)
+    var ex = resp.extra;
+    if (ex && ex.q !== undefined && PM_CB_QEXTRA[resp.cat]) {
+      ex._origQ = ex.q;
+      Object.defineProperty(ex, "q", {
+        get: function() {
+          var l = pmCbGetLang();
+          if (l === "es") return this._origQ;
+          var t = PM_CB_QEXTRA[resp.cat];
+          return (t && t[l]) || this._origQ;
+        },
+        set: function(v) { this._origQ = v; }
+      });
+    }
+    if (ex && ex.a !== undefined && PM_CB_AEXTRA[resp.cat]) {
+      ex._origA = ex.a;
+      Object.defineProperty(ex, "a", {
+        get: function() {
+          var l = pmCbGetLang();
+          if (l === "es") return this._origA;
+          var t = PM_CB_AEXTRA[resp.cat];
+          return (t && t[l]) || this._origA;
+        },
+        set: function(v) { this._origA = v; }
+      });
+    }
   });
 
   // Add translated keywords for non-Spanish matching
