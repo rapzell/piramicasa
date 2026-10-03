@@ -809,17 +809,17 @@ var PM_CB_KW_EXTRA = {
     en: ['how do i contact','get in touch','reach you','talk to someone','speak to'],
     pt: ['como contacto','entrar em contato','falar convosco','falar com alguem'],
     fr: ['comment vous contacter','vous joindre','entrer en contact','parler a quelqu'],
-    de: ['wie kontaktieren','sie erreichen','in kontakt treten','mit jemandem sprechen'],
-    ru: ['связаться','как связаться','написать вам','позвонить вам','контакт с вами'],
-    ar: ['كيف أتصل','أتواصل معكم','التواصل','أتحدث مع','رقمكم'],
+    de: ['wie kontaktieren','sie erreichen','in kontakt treten','mit jemandem sprechen','kontaktieren','erreichen'],
+    ru: ['связаться','как связаться','написать вам','позвонить вам','контакт с вами','контакты','связи','написать'],
+    ar: ['كيف أتصل','أتواصل معكم','التواصل','أتحدث مع','رقمكم','أتصل','اتصال','تواصل'],
   },
   envios: {
-    en: ['ship','deliver','send abroad','ship to my country','postage'],
-    pt: ['enviam','entregam','mandam para','envio para o estrangeiro'],
-    fr: ['livrez','envoyez','expediez','livraison internationale','envoi a l'],
-    de: ['liefern','verschicken','ins ausland','versandkosten'],
-    ru: ['доставляете','отправляете','высылаете','доставка за границу','почтой'],
-    ar: ['تشحنون','ترسلون','شحن دولي','إلى بلدي'],
+    en: ['ship','deliver','send abroad','ship to my country','postage','worldwide','world'],
+    pt: ['enviam','entregam','mandam para','envio para o estrangeiro','mundo','mundo todo'],
+    fr: ['livrez','envoyez','expediez','livraison internationale','envoi a l','monde entier','international'],
+    de: ['liefern','verschicken','versenden','ins ausland','versandkosten','weltweit','ausland'],
+    ru: ['доставляете','отправляете','высылаете','доставка за границу','почтой','доставку','всему миру','заграницу','мир'],
+    ar: ['تشحنون','ترسلون','شحن دولي','إلى بلدي','الشحن','دوليا','عالميا','للخارج','العالم'],
   },
   cita: {
     en: ['book','appointment','schedule','consultation','session'],
@@ -887,11 +887,11 @@ var PM_CB_KW_EXTRA = {
   },
   libros: {
     en: ['book','books','read','publication','pdf'],
-    pt: ['livro','livros','ler','publicacao'],
+    pt: ['livro','livros','ler','leitura','publicacao'],
     fr: ['livre','livres','lire','publication'],
-    de: ['buch','bucher','lesen','publikation'],
-    ru: ['книга','книги','читать','публикация'],
-    ar: ['كتاب','كتب','قراءة','منشور'],
+    de: ['buch','bucher','büchern','lesen','lese','publikation'],
+    ru: ['книга','книги','книгах','книге','книгу','читать','почитать','публикация'],
+    ar: ['كتاب','كتب','الكتب','قراءة','القراءة','كتابي','منشور'],
   },
   egipto: {
     en: ['egypt','trip','travel','tour','giza'],
@@ -1039,7 +1039,13 @@ function pmCbPatchAll() {
       var base = list.slice();
       base.forEach(function(kw) {
         if (kw.indexOf(' ') === -1) {
-          ['s', 'e', 'es'].forEach(function(sfx) { if (list.indexOf(kw + sfx) === -1) list.push(kw + sfx); });
+          // inflection variants per script so flexed forms still match
+          var sfx = ['s', 'e', 'es', 'n', 'en', 'er', 'em', 'x', 'ez', 'ent'];
+          if (/[А-ӿ]/.test(kw)) sfx = sfx.concat(['а', 'у', 'е', 'и', 'ы', 'ой', 'ах', 'ам', 'ом', 'ов', 'ей', 'х']);
+          if (/[؀-ۿ]/.test(kw)) sfx = sfx.concat(['ة', 'ات', 'ين', 'ون', 'ان', 'ه', 'ي']);
+          sfx.forEach(function(sfx2) { if (list.indexOf(kw + sfx2) === -1) list.push(kw + sfx2); });
+          // Arabic definite article is a prefix: add ال + word variants
+          if (/[؀-ۿ]/.test(kw) && kw.indexOf('ال') !== 0 && list.indexOf('ال' + kw) === -1) list.push('ال' + kw);
           var stem = kw.replace(/(es|e|s)$/i, '');
           if (stem !== kw && stem.length >= 4 && list.indexOf(stem) === -1) list.push(stem);
         } else {
