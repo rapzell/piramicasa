@@ -417,18 +417,28 @@ var PM_CB_KEYWORDS = {
   },
 };
 
+// Expose dictionaries so chatbot.js can use them regardless of load order
+window.PM_CB_I18N = PM_CB_I18N;
+window.PM_CB_KEYWORDS = PM_CB_KEYWORDS;
+window.PM_CB_QUICK = PM_CB_QUICK;
+
 // Patch chatbot to use translations
 function pmCbGetLang() {
   var l = (typeof PM_lang !== "undefined" ? PM_lang : null) || (window.PM_lang) || "es";
   return l.split("-")[0];
 }
 
-// Override response text when non-Spanish
-if (typeof PM_I18N_RESPONSES !== "undefined") {
-  // Find the original responses array
-  var origMatch = PM_findResponse || null;
+// PM_I18N_RESPONSES / PM_I18N_QUICK are created by chatbot.js, which may load
+// after this file (dynamic scripts execute in download order). Retry until
+// they exist, then patch once.
+var pmCbPatchTries = 0;
+function pmCbPatchAll() {
+  if (typeof PM_I18N_RESPONSES === "undefined" || !PM_I18N_RESPONSES || !PM_I18N_RESPONSES.length) {
+    if (++pmCbPatchTries < 60) setTimeout(pmCbPatchAll, 250);
+    return;
+  }
 
-  // Patch each response object to check for translation
+  // Override response text when non-Spanish
   PM_I18N_RESPONSES.forEach(function(resp) {
     if (!resp || !resp.cat) return;
     var orig = resp._origR;
@@ -446,9 +456,8 @@ if (typeof PM_I18N_RESPONSES !== "undefined") {
       set: function(v) { this._origR = v; }
     });
   });
-}
-// Add translated keywords for non-Spanish matching
-if (typeof PM_I18N_RESPONSES !== "undefined") {
+
+  // Add translated keywords for non-Spanish matching
   PM_I18N_RESPONSES.forEach(function(resp) {
     if (!resp || !resp.cat) return;
     var extra = PM_CB_KEYWORDS[resp.cat];
@@ -456,46 +465,55 @@ if (typeof PM_I18N_RESPONSES !== "undefined") {
     var l = pmCbGetLang();
     if (extra[l] && resp._origK) {
       var merged = resp._origK.concat(extra[l]);
-      // deduplicate
       resp.k = merged.filter(function(v, i, a) { return a.indexOf(v) === i; });
     }
   });
+
+  pmCbTranslateButtons();
 }
-// Translate quick reply buttons
+pmCbPatchAll();
+
+// Translate quick reply buttons. The button click handlers in chatbot.js close
+// over the PM_I18N_QUICK item objects, so the items are mutated in place —
+// that localises both the labels and the text each button sends.
 function pmCbTranslateButtons() {
   var l = pmCbGetLang();
-  if (l === "es") return;
-  var btns = document.querySelectorAll(".pm-chatbot-quick-btn");
-  if (!btns || !btns.length) return;
   var labels = PM_CB_QUICK[l];
-  if (!labels) return;
-  btns.forEach(function(btn, i) {
-    if (i < labels.length) {
-      btn.textContent = labels[i].label;
-      btn.dataset.text = labels[i].text;
+  if (labels && typeof PM_I18N_QUICK !== "undefined" && PM_I18N_QUICK) {
+    for (var i = 0; i < PM_I18N_QUICK.length && i < labels.length; i++) {
+      PM_I18N_QUICK[i].label = labels[i].label;
+      PM_I18N_QUICK[i].text = labels[i].text;
     }
+  }
+  if (l === "es" || !labels) return;
+  var btns = document.querySelectorAll(".pm-chat-quick-btn");
+  if (!btns || !btns.length) return;
+  btns.forEach(function(btn, i) {
+    if (i < labels.length) btn.textContent = labels[i].label;
   });
 }
 
 // Re-run translation when language changes
-var origSetLang = PM_setLang;
-PM_setLang = function(code) {
+var origSetLang = window.PM_setLang;
+window.PM_setLang = function(code) {
   if (origSetLang) origSetLang(code);
   setTimeout(pmCbTranslateButtons, 300);
 };
 
-// Initial translation of quick buttons
+// Initial translation of quick buttons (chatbot creates them ~300ms after load)
 if (document.readyState === "loading") {
   document.addEventListener("DOMContentLoaded", function() {
     setTimeout(pmCbTranslateButtons, 1000);
+    setTimeout(pmCbTranslateButtons, 2500);
   });
 } else {
   setTimeout(pmCbTranslateButtons, 1000);
+  setTimeout(pmCbTranslateButtons, 2500);
 }
 
-// Also hook into when chatbot is opened to re-translate buttons
+// Also re-translate buttons when the chatbot is opened
 document.addEventListener("click", function(e) {
-  if (e.target && (e.target.id === "pm-chatbot-btn" || e.target.closest("#pm-chatbot-btn"))) {
+  if (e.target && e.target.closest && e.target.closest(".pm-chat-toggle")) {
     setTimeout(pmCbTranslateButtons, 200);
   }
 });

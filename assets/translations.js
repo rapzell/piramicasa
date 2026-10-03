@@ -1226,6 +1226,10 @@ window.PM_I18N = {
     'Centros': 'Centres',
     'Detalle visual del artículo': 'Visual detail of the article',
     'No se ha encontrado texto ampliado para este bloque.': 'No extended text was found for this block.',
+    'Escribe tu pregunta...': 'Type your question...',
+    'Asistente Piramicasa': 'Piramicasa Assistant',
+    'En línea · Responde al instante': 'Online · Replies instantly',
+    '1 notificacion - Abrir asistente Piramicasa': '1 notification - Open Piramicasa assistant',
   },
 
   pt: {
@@ -2449,6 +2453,10 @@ window.PM_I18N = {
     'Centros': 'Centros',
     'Detalle visual del artículo': 'Detalhe visual do artigo',
     'No se ha encontrado texto ampliado para este bloque.': 'Não foi encontrado texto ampliado para este bloco.',
+    'Escribe tu pregunta...': 'Escreva a sua pergunta...',
+    'Asistente Piramicasa': 'Assistente Piramicasa',
+    'En línea · Responde al instante': 'Online · Responde na hora',
+    '1 notificacion - Abrir asistente Piramicasa': '1 notificação - Abrir assistente Piramicasa',
   },
 
   fr: {
@@ -3672,6 +3680,10 @@ window.PM_I18N = {
     'Centros': 'Centres',
     'Detalle visual del artículo': 'Détail visuel de l\'article',
     'No se ha encontrado texto ampliado para este bloque.': 'Aucun texte détaillé n\'a été trouvé pour ce bloc.',
+    'Escribe tu pregunta...': 'Écrivez votre question...',
+    'Asistente Piramicasa': 'Assistant Piramicasa',
+    'En línea · Responde al instante': 'En ligne · Réponse immédiate',
+    '1 notificacion - Abrir asistente Piramicasa': "1 notification - Ouvrir l'assistant Piramicasa",
   },
 
   de: {
@@ -4895,6 +4907,10 @@ window.PM_I18N = {
     'Centros': 'Zentren',
     'Detalle visual del artículo': 'Visuelles Detail des Artikels',
     'No se ha encontrado texto ampliado para este bloque.': 'Für diesen Block wurde kein erweiterter Text gefunden.',
+    'Escribe tu pregunta...': 'Schreiben Sie Ihre Frage...',
+    'Asistente Piramicasa': 'Piramicasa-Assistent',
+    'En línea · Responde al instante': 'Online · Antwortet sofort',
+    '1 notificacion - Abrir asistente Piramicasa': '1 Benachrichtigung - Piramicasa-Assistenten öffnen',
   },
 
   ru: {
@@ -6118,6 +6134,10 @@ window.PM_I18N = {
     'Centros': 'Центры',
     'Detalle visual del artículo': 'Визуальная деталь статьи',
     'No se ha encontrado texto ampliado para este bloque.': 'Расширенный текст для этого блока не найден.',
+    'Escribe tu pregunta...': 'Напишите ваш вопрос...',
+    'Asistente Piramicasa': 'Ассистент Piramicasa',
+    'En línea · Responde al instante': 'В сети · Отвечает мгновенно',
+    '1 notificacion - Abrir asistente Piramicasa': '1 уведомление - Открыть ассистента Piramicasa',
   },
 
   ar: {
@@ -7341,6 +7361,10 @@ window.PM_I18N = {
     'Centros': 'المراكز',
     'Detalle visual del artículo': 'تفصيل بصري للمقال',
     'No se ha encontrado texto ampliado para este bloque.': 'لم يتم العثور على نص موسع لهذا القسم.',
+    'Escribe tu pregunta...': 'اكتب سؤالك...',
+    'Asistente Piramicasa': 'مساعد بيراميكاسا',
+    'En línea · Responde al instante': 'متصل · يرد فورًا',
+    '1 notificacion - Abrir asistente Piramicasa': 'إشعار واحد - فتح مساعد بيراميكاسا',
   },
 
 };
