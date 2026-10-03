@@ -233,7 +233,7 @@
       <div class="pm-tools-panel">
         <div class="pm-tools-row">
           <label class="pm-search-wrap" for="pm-articles-search">
-            <input id="pm-articles-search" class="pm-search-input" type="search" placeholder="Buscar por tema, enfermedad o producto..." autocomplete="off" />
+            <input id="pm-articles-search" class="pm-search-input" type="search" placeholder="Buscar por tema, enfermedad o producto..." autocomplete="off" data-i18n-attr="Buscar por tema, enfermedad o producto...|placeholder" />
             <span class="pm-search-icon">🔎</span>
           </label>
           <button type="button" class="pm-tools-btn" id="pm-search-clear">Limpiar</button>
@@ -243,7 +243,7 @@
       </div>
     </section>
 
-    <section class="pm-section pm-section-cream pm-articles-section">
+    <section class="pm-section pm-section-cream pm-articles-section" data-pm-cat="salud">
       <div class="pm-articles-wrap">
         <div class="pm-label">Salud</div>
         <h2>El efecto piramidal en la salud</h2>
@@ -260,7 +260,7 @@
       </div>
     </section>
 
-    <section class="pm-section pm-section-dark pm-articles-section pm-sacred-bg">
+    <section class="pm-section pm-section-dark pm-articles-section pm-sacred-bg" data-pm-cat="ciencia">
       <div class="pm-articles-wrap">
         <div class="pm-label" style="color:var(--pm-oro)">Ciencia</div>
         <h2 style="color:var(--pm-crema)">Ciencia y pirámides</h2>
@@ -278,7 +278,7 @@
       </div>
     </section>
 
-    <section class="pm-section pm-section-cream pm-articles-section">
+    <section class="pm-section pm-section-cream pm-articles-section" data-pm-cat="modelos">
       <div class="pm-articles-wrap">
         <div class="pm-label">Modelos y productos</div>
         <h2>Pirámides y productos especializados</h2>
@@ -299,7 +299,7 @@
       </div>
     </section>
 
-    <section class="pm-section pm-section-dark pm-articles-section pm-sacred-bg">
+    <section class="pm-section pm-section-dark pm-articles-section pm-sacred-bg" data-pm-cat="complementario">
       <div class="pm-articles-wrap">
         <div class="pm-label" style="color:var(--pm-oro)">Complementario</div>
         <h2 style="color:var(--pm-crema)">Recursos y temas adicionales</h2>
@@ -331,7 +331,7 @@
   <script>
     (function(){
       function loadingHtml(){
-        return '<div class="pm-loading"><span class="pm-loading-dot"></span><span class="pm-loading-dot"></span><span class="pm-loading-dot"></span><span>Cargando artículo completo...</span></div>';
+        return '<div class="pm-loading"><span class="pm-loading-dot"></span><span class="pm-loading-dot"></span><span class="pm-loading-dot"></span><span>'+tr('Cargando artículo completo...')+'</span></div>';
       }
 
       function esc(s){
@@ -395,16 +395,16 @@
 
       function renderSections(title, payload){
         if (!payload || !payload.sections || !payload.sections.length) {
-          return '<h3>'+esc(title)+'</h3><p class="pm-viewer-muted">Este contenido está en proceso de ampliación editorial interna.</p>';
+          return '<h3>'+esc(tr(title))+'</h3><p class="pm-viewer-muted">'+tr('Este contenido está en proceso de ampliación editorial interna.')+'</p>';
         }
 
         var html = '';
         payload.sections.forEach(function(section, idx){
           var block = '<article class="pm-article-block">';
           var subtitle = (section.sourceTitle || '').replace(/\s*-\s*Piramicasa\s*$/i, '').trim();
-          block += '<div class="pm-article-meta"><span class="pm-article-chip">Bloque '+esc(String(idx + 1))+'</span>';
+          block += '<div class="pm-article-meta"><span class="pm-article-chip">'+tr('Bloque')+' '+esc(String(idx + 1))+'</span>';
           if (section.sourceUrl) {
-            block += '<span class="pm-article-source">Fuente integrada</span>';
+            block += '<span class="pm-article-source">'+tr('Fuente integrada')+'</span>';
           }
           block += '</div>';
           if (subtitle) block += '<h4>'+esc(subtitle)+'</h4>';
@@ -452,7 +452,7 @@
 
           var imageIdx = 0;
           if (imgs.length) {
-            block += '<figure class="pm-inline-media pm-media-right">'+imgTag(imgs[0], 'Imagen relacionada con '+title, 720, 300)+'<figcaption>Imagen relacionada con el bloque</figcaption></figure>';
+            block += '<figure class="pm-inline-media pm-media-right">'+imgTag(imgs[0], tr('Imagen relacionada con')+' '+tr(title), 720, 300)+'<figcaption>'+tr('Imagen relacionada con el bloque')+'</figcaption></figure>';
             imageIdx = 1;
           }
 
@@ -513,8 +513,23 @@
         return articlesCache;
       }
 
+      // i18n helper: look up a Spanish source string in the active dictionary.
+      // Deferred scripts (translations.js/i18n.js) may not have run yet when this
+      // inline script executes, so tr() falls back to the key itself and the
+      // MutationObserver in i18n.js re-translates rendered nodes afterwards.
+      function tr(key){
+        var T = window.PM_I18N && window.PM_I18N[window.PM_lang || 'es'];
+        return (T && T[key]) || key;
+      }
+
       var cards = Array.prototype.slice.call(document.querySelectorAll('.pm-article-card'));
       var sections = Array.prototype.slice.call(document.querySelectorAll('.pm-articles-section'));
+      // Snapshot the original Spanish card titles now — once i18n translates the
+      // DOM, card text no longer matches the keys of articulos-content.json.
+      cards.forEach(function(card){
+        var tn = card.querySelector('.pm-card-title');
+        if (tn) card.setAttribute('data-pm-title-es', tn.textContent.trim());
+      });
       var searchInput = document.getElementById('pm-articles-search');
       var clearSearchBtn = document.getElementById('pm-search-clear');
       var searchMeta = document.getElementById('pm-search-meta');
@@ -539,7 +554,7 @@
         readingMode = !!enabled;
         viewer.classList.toggle('pm-reading-mode', readingMode);
         if (readingBtn) {
-          readingBtn.textContent = readingMode ? 'Modo normal' : 'Modo lectura';
+          readingBtn.textContent = tr(readingMode ? 'Modo normal' : 'Modo lectura');
           readingBtn.setAttribute('aria-pressed', readingMode ? 'true' : 'false');
         }
         try { localStorage.setItem('pm-reading-mode', readingMode ? '1' : '0'); } catch (e) {}
@@ -553,7 +568,7 @@
 
       var lightbox = document.createElement('div');
       lightbox.className = 'pm-lightbox';
-      lightbox.innerHTML = '<div class="pm-lightbox-panel"><button class="pm-lightbox-close" type="button" aria-label="Cerrar imagen">×</button><img loading="lazy" decoding="async" class="pm-lightbox-img" alt="" /><div class="pm-lightbox-caption"></div></div>';
+      lightbox.innerHTML = '<div class="pm-lightbox-panel"><button class="pm-lightbox-close" type="button" aria-label="Cerrar imagen" data-i18n-attr="Cerrar imagen|aria-label">×</button><img loading="lazy" decoding="async" class="pm-lightbox-img" alt="" /><div class="pm-lightbox-caption"></div></div>';
       document.body.appendChild(lightbox);
 
       var lightboxImg = lightbox.querySelector('.pm-lightbox-img');
@@ -563,8 +578,8 @@
       function openLightbox(src, alt){
         if (!src) return;
         lightboxImg.src = src;
-        lightboxImg.alt = alt || 'Imagen del artículo';
-        lightboxCaption.textContent = alt || 'Imagen del artículo';
+        lightboxImg.alt = alt || tr('Imagen del artículo');
+        lightboxCaption.textContent = alt || tr('Imagen del artículo');
         lightbox.classList.add('pm-open');
         document.body.style.overflow = 'hidden';
       }
@@ -587,7 +602,7 @@
         var img = ev.target && ev.target.closest ? ev.target.closest('.pm-inline-media img, .pm-article-gallery img') : null;
         if (!img) return;
         ev.preventDefault();
-        openLightbox(img.getAttribute('src'), img.getAttribute('alt') || 'Imagen del artículo');
+        openLightbox(img.getAttribute('src'), img.getAttribute('alt') || tr('Imagen del artículo'));
       });
 
       var activeTitle = null;
@@ -644,6 +659,11 @@
         var section = card && card.closest ? card.closest('.pm-articles-section') : null;
         var heading = section ? section.querySelector('h2') : null;
         var label = heading ? heading.textContent.trim() : 'Artículos';
+        var cat = section ? (section.getAttribute('data-pm-cat') || '') : '';
+        if (cat === 'salud') return { label: 'Salud', theme: 'pm-theme-salud' };
+        if (cat === 'ciencia') return { label: 'Ciencia', theme: 'pm-theme-ciencia' };
+        if (cat === 'modelos') return { label: 'Modelos y Productos', theme: 'pm-theme-modelos' };
+        if (cat === 'complementario') return { label: 'Complementario', theme: 'pm-theme-complementario' };
         var l = label.toLowerCase();
         if (l.indexOf('salud') > -1) return { label: 'Salud', theme: 'pm-theme-salud' };
         if (l.indexOf('ciencia') > -1) return { label: 'Ciencia', theme: 'pm-theme-ciencia' };
@@ -674,7 +694,7 @@
         viewerProgressBar.style.transform = 'scaleX(' + (pct / 100) + ')';
         if (viewerMeta && activeTitle) {
           var words = getWordsCount(viewerContent.textContent);
-          viewerMeta.textContent = estimateReadMinutes(words) + ' min · ' + pct + '% leído';
+          viewerMeta.textContent = estimateReadMinutes(words) + ' min · ' + pct + tr('% leído');
         }
       }
 
@@ -702,7 +722,7 @@
       async function openCard(card, fromHash){
         if (!card) return;
         var titleNode = card.querySelector('.pm-card-title');
-        var title = titleNode ? titleNode.textContent.trim() : 'Artículo';
+        var title = card.getAttribute('data-pm-title-es') || (titleNode ? titleNode.textContent.trim() : 'Artículo');
         var bodyHtml = '';
         var hash = card.getAttribute('href') || '';
 
@@ -722,15 +742,15 @@
 
         var category = resolveCategory(card);
         applyViewerTheme(category.theme);
-        if (viewerCategory) viewerCategory.textContent = category.label;
+        if (viewerCategory) viewerCategory.textContent = tr(category.label);
 
         card.insertAdjacentElement('afterend', viewer);
 
-        viewerTitle.textContent = title;
+        viewerTitle.textContent = tr(title);
         viewer.classList.remove('pm-viewer-hidden');
         beginViewerSwitch();
         viewerContent.innerHTML = loadingHtml();
-        if (viewerMeta) viewerMeta.textContent = 'Cargando…';
+        if (viewerMeta) viewerMeta.textContent = tr('Cargando…');
         resetViewerProgress();
         updateViewerNavState();
 
@@ -753,7 +773,7 @@
           endViewerSwitch();
           updateViewerProgress();
         } catch (err) {
-          viewerContent.innerHTML = '<h3>'+esc(title)+'</h3><p class="pm-viewer-muted">No se pudo cargar el contenido completo en este momento.</p>';
+          viewerContent.innerHTML = '<h3>'+esc(tr(title))+'</h3><p class="pm-viewer-muted">'+tr('No se pudo cargar el contenido completo en este momento.')+'</p>';
           endViewerSwitch();
           updateViewerProgress();
         }
@@ -770,10 +790,11 @@
       function setSearchMeta(visible, total, term){
         if (!searchMeta) return;
         if (!term) {
-          searchMeta.textContent = 'Mostrando todos los artículos.';
+          searchMeta.textContent = tr('Mostrando todos los artículos.');
           return;
         }
-        searchMeta.textContent = 'Resultados para "' + term + '": ' + visible + ' de ' + total + ' artículos.';
+        var _rt = (window.PM_I18N && window.PM_I18N[window.PM_lang || 'es'] && window.PM_I18N[window.PM_lang || 'es']['Resultados para "{t}": {v} de {n} artículos.']) || 'Resultados para "{t}": {v} de {n} artículos.';
+        searchMeta.textContent = _rt.replace('{t}', term).replace('{v}', visible).replace('{n}', total);
       }
 
       function applySearch(term){
@@ -782,7 +803,9 @@
 
         cards.forEach(function(card){
           var tNode = card.querySelector('.pm-card-title');
-          var text = tNode ? tNode.textContent.toLowerCase() : '';
+          // Search both the visible (possibly translated) title and the
+          // original Spanish title so Spanish keywords still work.
+          var text = ((tNode ? tNode.textContent : '') + ' ' + (card.getAttribute('data-pm-title-es') || '')).toLowerCase();
           var match = !query || text.indexOf(query) > -1;
           card.classList.toggle('pm-card-hidden', !match);
           if (match) visibleCount++;
@@ -862,12 +885,12 @@
           try {
             if (navigator.clipboard && navigator.clipboard.writeText) {
               await navigator.clipboard.writeText(url);
-              shareBtn.textContent = '¡Copiado!';
-              setTimeout(function(){ shareBtn.textContent = 'Copiar enlace'; }, 1400);
+              shareBtn.textContent = tr('¡Copiado!');
+              setTimeout(function(){ shareBtn.textContent = tr('Copiar enlace'); }, 1400);
             }
           } catch (e) {
-            shareBtn.textContent = 'No disponible';
-            setTimeout(function(){ shareBtn.textContent = 'Copiar enlace'; }, 1400);
+            shareBtn.textContent = tr('No disponible');
+            setTimeout(function(){ shareBtn.textContent = tr('Copiar enlace'); }, 1400);
           }
         });
       }
