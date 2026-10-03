@@ -804,6 +804,129 @@ var PM_CB_FALLBACK_Q = {
   en:'Contact by WhatsApp',pt:'Contato por WhatsApp',fr:'Contacter par WhatsApp',de:'Kontakt per WhatsApp',ru:'Связаться по WhatsApp',ar:'التواصل عبر الواتساب',
 };
 
+var PM_CB_KW_EXTRA = {
+  contacto: {
+    en: ['how do i contact','get in touch','reach you','talk to someone','speak to'],
+    pt: ['como contacto','entrar em contato','falar convosco','falar com alguem'],
+    fr: ['comment vous contacter','vous joindre','entrer en contact','parler a quelqu'],
+    de: ['wie kontaktieren','sie erreichen','in kontakt treten','mit jemandem sprechen'],
+    ru: ['связаться','как связаться','написать вам','позвонить вам','контакт с вами'],
+    ar: ['كيف أتصل','أتواصل معكم','التواصل','أتحدث مع','رقمكم'],
+  },
+  envios: {
+    en: ['ship','deliver','send abroad','ship to my country','postage'],
+    pt: ['enviam','entregam','mandam para','envio para o estrangeiro'],
+    fr: ['livrez','envoyez','expediez','livraison internationale','envoi a l'],
+    de: ['liefern','verschicken','ins ausland','versandkosten'],
+    ru: ['доставляете','отправляете','высылаете','доставка за границу','почтой'],
+    ar: ['تشحنون','ترسلون','شحن دولي','إلى بلدي'],
+  },
+  cita: {
+    en: ['book','appointment','schedule','consultation','session'],
+    pt: ['marcar','consulta','sessao','hora marcada'],
+    fr: ['rendez-vous','reserver','seance','consultation'],
+    de: ['termin','buchen','beratung','sitzung','vereinbaren'],
+    ru: ['записаться','приём','консультация','сеанс','встреча'],
+    ar: ['موعد','حجز','استشارة','جلسة','أحجز'],
+  },
+  efecto: {
+    en: ['how does it work','does it work','pyramid effect','energy','what does it do'],
+    pt: ['como funciona','funciona mesmo','efeito piramidal','energia','para que serve'],
+    fr: ['comment ca marche','est-ce que ca marche','effet pyramidal','energie','a quoi ca sert'],
+    de: ['wie funktioniert','funktioniert es','pyramideneffekt','energie','wofur'],
+    ru: ['как работает','работает ли','эффект пирамиды','энергия','для чего'],
+    ar: ['كيف يعمل','هل يعمل','تأثير الهرم','طاقة','لما يستخدم'],
+  },
+  precios: {
+    en: ['how much','cost','price','expensive','cheap'],
+    pt: ['quanto custa','preco','valor','caro'],
+    fr: ['combien','cout','prix','cher'],
+    de: ['wie viel','kosten','preis','teuer'],
+    ru: ['сколько стоит','цена','стоимость','дорого'],
+    ar: ['كم السعر','سعر','تكلفة','ثمن','غالي'],
+  },
+  piramicama: {
+    en: ['bed','pyramid bed','sleep','mattress'],
+    pt: ['cama','dormir','colchao','piramide de cama'],
+    fr: ['lit','dormir','matelas','pyramide de lit'],
+    de: ['bett','schlafen','matratze','bettpyramide'],
+    ru: ['кровать','спать','матрас','пирамида кровать'],
+    ar: ['سرير','نوم','مرتبة','هرم السرير'],
+  },
+  centros: {
+    en: ['center','centre','clinic','therapy center','where can i try','locations'],
+    pt: ['centro','clinica','onde experimentar','locais','terapeuta'],
+    fr: ['centre','clinique','ou essayer','endroits','therapeute'],
+    de: ['zentrum','klinik','wo ausprobieren','standorte','therapeut'],
+    ru: ['центр','клиника','где попробовать','адреса','терапевт'],
+    ar: ['مركز','عيادة','أين أجرب','أماكن','معالج'],
+  },
+  salud: {
+    en: ['health','disease','illness','pain','treatment','cure','arthritis','cancer'],
+    pt: ['saude','doenca','dor','tratamento','cura','artrite','cancer'],
+    fr: ['sante','maladie','douleur','traitement','guerison','arthrite','cancer'],
+    de: ['gesundheit','krankheit','schmerz','behandlung','heilung','arthritis','krebs'],
+    ru: ['здоровье','болезнь','боль','лечение','лечить','артрит','рак'],
+    ar: ['صحة','مرض','ألم','علاج','شفاء','التهاب','سرطان'],
+  },
+  testimonios: {
+    en: ['testimonial','review','experience','opinion','does it really work'],
+    pt: ['testemunho','avaliacao','experiencia','opiniao','funciona mesmo'],
+    fr: ['temoignage','avis','experience','opinion','ca marche vraiment'],
+    de: ['erfahrungsbericht','bewertung','erfahrung','meinung','wirkt es wirklich'],
+    ru: ['отзыв','опыт','мнение','действительно работает'],
+    ar: ['شهادة','رأي','تجربة','تقييم','هل يعمل حقاً'],
+  },
+  videos: {
+    en: ['video','watch','youtube','film'],
+    pt: ['video','assistir','filme'],
+    fr: ['video','regarder','film'],
+    de: ['video','ansehen','film'],
+    ru: ['видео','смотреть','фильм'],
+    ar: ['فيديو','مشاهدة','فيلم'],
+  },
+  libros: {
+    en: ['book','books','read','publication','pdf'],
+    pt: ['livro','livros','ler','publicacao'],
+    fr: ['livre','livres','lire','publication'],
+    de: ['buch','bucher','lesen','publikation'],
+    ru: ['книга','книги','читать','публикация'],
+    ar: ['كتاب','كتب','قراءة','منشور'],
+  },
+  egipto: {
+    en: ['egypt','trip','travel','tour','giza'],
+    pt: ['egito','viagem','tour','gize'],
+    fr: ['egypte','voyage','excursion','gizeh'],
+    de: ['agypten','reise','tour','gizeh'],
+    ru: ['египет','поездка','путешествие','тур','гиза'],
+    ar: ['مصر','رحلة','سفر','جولة','الجيزة'],
+  },
+  compra: {
+    en: ['buy','purchase','order','get one'],
+    pt: ['comprar','encomendar','adquirir'],
+    fr: ['acheter','commander','achetant'],
+    de: ['kaufen','bestellen','erwerben'],
+    ru: ['купить','заказать','приобрести'],
+    ar: ['شراء','أشتري','طلب','أطلب'],
+  },
+  greeting: {
+    en: ['hello','hi','hey','good morning'],
+    pt: ['ola','oi','bom dia','boa tarde'],
+    fr: ['bonjour','salut','bonsoir','coucou'],
+    de: ['hallo','guten tag','hi','servus'],
+    ru: ['привет','здравствуйте','добрый день'],
+    ar: ['مرحبا','أهلا','السلام عليكم','صباح الخير'],
+  },
+  construccion: {
+    en: ['build','construction','install','assembly','orient'],
+    pt: ['construir','construcao','instalar','montagem','orientar'],
+    fr: ['construire','construction','installer','montage','orienter'],
+    de: ['bauen','konstruktion','installieren','montage','ausrichten'],
+    ru: ['строить','строительство','установить','монтаж','ориентировать'],
+    ar: ['بناء','تركيب','تجميع','توجيه'],
+  },
+};
+
 // Expose dictionaries so chatbot.js can use them regardless of load order
 window.PM_CB_I18N = PM_CB_I18N;
 window.PM_CB_KEYWORDS = PM_CB_KEYWORDS;
@@ -907,13 +1030,23 @@ function pmCbPatchAll() {
     var extra = PM_CB_KEYWORDS[resp.cat];
     if (!extra) return;
     var l = pmCbGetLang();
-    if (extra[l]) {
-      var list = extra[l].slice();
-      extra[l].forEach(function(kw) {
+    var curated = (typeof PM_CB_KW_EXTRA !== "undefined" && PM_CB_KW_EXTRA[resp.cat]) || {};
+    if (extra[l] || curated[l]) {
+      var list = (extra[l] || []).concat(curated[l] || []);
+      // English keywords are universally understood — merge them into every
+      // non-Spanish language too
+      if (l !== 'en' && extra.en) list = list.concat(extra.en);
+      var base = list.slice();
+      base.forEach(function(kw) {
         if (kw.indexOf(' ') === -1) {
           ['s', 'e', 'es'].forEach(function(sfx) { if (list.indexOf(kw + sfx) === -1) list.push(kw + sfx); });
           var stem = kw.replace(/(es|e|s)$/i, '');
           if (stem !== kw && stem.length >= 4 && list.indexOf(stem) === -1) list.push(stem);
+        } else {
+          // individual words of phrases become standalone keywords too
+          kw.split(/[\s\-]+/).forEach(function(w) {
+            if (w.length >= 5 && list.indexOf(w) === -1) list.push(w);
+          });
         }
       });
       resp._i18nK = list;
