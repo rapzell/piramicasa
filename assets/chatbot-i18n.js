@@ -5,6 +5,14 @@
 "use strict";
 
 var PM_CB_I18N = {
+  pageLink: {
+    en: 'See more on the website',
+    pt: 'Ver mais no site',
+    fr: 'Voir plus sur le site',
+    de: 'Mehr auf der Website',
+    ru: 'Подробнее на сайте',
+    ar: 'المزيد على الموقع',
+  },
   greeting: {
     en: 'Hello! 👋 I am the virtual assistant of <strong>Piramicasa</strong>. I can guide you through our website and help you with:\n• 📋 Information about pyramids and models\n• 💰 Prices and quotes\n• 📅 Book a consultation or advice\n• 🔬 Science and research on the pyramid effect\n• 🏥 Pyramid therapy centers\n• 📹 Videos and testimonials\n• 📦 Shipping and contact\n\nHow can I help you? Type your question or use the buttons below.',
     pt: 'Olá! 👋 Sou o assistente virtual da <strong>Piramicasa</strong>. Posso guiá-lo pelo nosso site e ajudá-lo com:\n• 📋 Informações sobre pirâmides e modelos\n• 💰 Preços e orçamentos\n• 📅 Agendar uma consulta ou aconselhamento\n• 🔬 Ciência e pesquisa do efeito piramidal\n• 🏥 Centros de terapia piramidal\n• 📹 Vídeos e testemunhos\n• 📦 Envios e contacto\n\nEm que posso ajudar? Escreva a sua pergunta ou use os botões abaixo.',
@@ -891,15 +899,24 @@ function pmCbPatchAll() {
     }
   });
 
-  // Add translated keywords for non-Spanish matching
+  // Add translated keywords for non-Spanish matching. They go to resp._i18nK
+  // and are matched with word boundaries (+ inflection variants) so e.g. the
+  // French "livre" (book) can't match inside "livrez-vous" (deliver).
   PM_I18N_RESPONSES.forEach(function(resp) {
     if (!resp || !resp.cat) return;
     var extra = PM_CB_KEYWORDS[resp.cat];
     if (!extra) return;
     var l = pmCbGetLang();
-    if (extra[l] && resp._origK) {
-      var merged = resp._origK.concat(extra[l]);
-      resp.k = merged.filter(function(v, i, a) { return a.indexOf(v) === i; });
+    if (extra[l]) {
+      var list = extra[l].slice();
+      extra[l].forEach(function(kw) {
+        if (kw.indexOf(' ') === -1) {
+          ['s', 'e', 'es'].forEach(function(sfx) { if (list.indexOf(kw + sfx) === -1) list.push(kw + sfx); });
+          var stem = kw.replace(/(es|e|s)$/i, '');
+          if (stem !== kw && stem.length >= 4 && list.indexOf(stem) === -1) list.push(stem);
+        }
+      });
+      resp._i18nK = list;
     }
   });
 
