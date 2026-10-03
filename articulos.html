@@ -407,7 +407,7 @@
             block += '<span class="pm-article-source">'+tr('Fuente integrada')+'</span>';
           }
           block += '</div>';
-          if (subtitle) block += '<h4>'+esc(subtitle)+'</h4>';
+          if (subtitle) block += '<h4>'+esc(trArt(subtitle))+'</h4>';
 
           var imgs = Array.isArray(section.images) ? section.images : [];
 
@@ -425,18 +425,18 @@
           var firstBodyParagraph = true;
           paragraphs.forEach(function(p){
             if (isHeadingLike(p)) {
-              items.push({ type: 'heading', value: p });
+              items.push({ type: 'heading', value: trArt(p) });
               return;
             }
 
             var listItems = maybeListItems(p);
             if (listItems) {
-              items.push({ type: 'list', value: listItems });
+              items.push({ type: 'list', value: listItems.map(trArt) });
               firstBodyParagraph = false;
               return;
             }
 
-            splitLongParagraph(p).forEach(function(chunk){
+            splitLongParagraph(trArt(p)).forEach(function(chunk){
               items.push({ type: 'paragraph', value: chunk, lead: firstBodyParagraph });
               firstBodyParagraph = false;
             });
@@ -478,7 +478,7 @@
 
             if (imageIdx < imgs.length && textBlocks > 0 && textBlocks % 2 === 0) {
               var mediaClass = (imageIdx % 2 === 0) ? 'pm-inline-media pm-media-left' : 'pm-inline-media pm-media-right';
-              block += '<figure class="'+mediaClass+'">'+imgTag(imgs[imageIdx], 'Imagen relacionada con '+title, 720, 300)+'<figcaption>Detalle visual del artículo</figcaption></figure>';
+              block += '<figure class="'+mediaClass+'">'+imgTag(imgs[imageIdx], tr('Imagen relacionada con')+' '+tr(title), 720, 300)+'<figcaption>'+tr('Detalle visual del artículo')+'</figcaption></figure>';
               imageIdx++;
             }
           });
@@ -486,7 +486,7 @@
           if (imageIdx < imgs.length) {
             block += '<div class="pm-article-gallery">';
             imgs.slice(imageIdx).forEach(function(src){
-              block += imgTag(src, 'Imagen relacionada con '+title, 230, 160);
+              block += imgTag(src, tr('Imagen relacionada con')+' '+tr(title), 230, 160);
             });
             block += '</div>';
           }
@@ -494,7 +494,7 @@
           block += '</div>';
 
           if (!paragraphs.length) {
-            block += '<p class="pm-viewer-muted">No se ha encontrado texto ampliado para este bloque.</p>';
+            block += '<p class="pm-viewer-muted">'+tr('No se ha encontrado texto ampliado para este bloque.')+'</p>';
           }
 
           block += '</article>';
@@ -520,6 +520,30 @@
       function tr(key){
         var T = window.PM_I18N && window.PM_I18N[window.PM_lang || 'es'];
         return (T && T[key]) || key;
+      }
+
+      // Article-body translations: per-language JSON with every paragraph of
+      // articulos-content.json, loaded on demand only for this page.
+      var artI18n = null;
+      var artI18nPromise = null;
+      function getArtI18n(){
+        var lang = window.PM_lang || 'es';
+        if (lang === 'es') return Promise.resolve(null);
+        if (artI18n) return Promise.resolve(artI18n);
+        if (artI18nPromise) return artI18nPromise;
+        artI18nPromise = fetch('/piramicasa/assets/articulos-i18n-' + lang + '.json', { cache: 'force-cache' })
+          .then(function(r){ return r.ok ? r.json() : null; })
+          .then(function(j){ artI18n = j || {}; return artI18n; })
+          .catch(function(){ artI18n = {}; return artI18n; });
+        return artI18nPromise;
+      }
+      function trArt(s){
+        return (artI18n && artI18n[s]) || s;
+      }
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', function(){ getArtI18n(); });
+      } else {
+        getArtI18n();
       }
 
       var cards = Array.prototype.slice.call(document.querySelectorAll('.pm-article-card'));
@@ -767,6 +791,7 @@
 
         try {
           var data = await getArticlesData();
+          await getArtI18n();
           if (activeTitle !== title || activeCard !== card) return;
           bodyHtml = renderSections(title, data[title]);
           viewerContent.innerHTML = bodyHtml;

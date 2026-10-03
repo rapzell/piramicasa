@@ -1224,6 +1224,8 @@ window.PM_I18N = {
     'camas piramidales - pirámides': 'pyramidal beds - pyramids',
     'ÓRGANOS TRANSPLANTADOS': 'TRANSPLANTED ORGANS',
     'Centros': 'Centres',
+    'Detalle visual del artículo': 'Visual detail of the article',
+    'No se ha encontrado texto ampliado para este bloque.': 'No extended text was found for this block.',
   },
 
   pt: {
@@ -2445,6 +2447,8 @@ window.PM_I18N = {
     'camas piramidales - pirámides': 'camas piramidais - pirâmides',
     'ÓRGANOS TRANSPLANTADOS': 'ÓRGÃOS TRANSPLANTADOS',
     'Centros': 'Centros',
+    'Detalle visual del artículo': 'Detalhe visual do artigo',
+    'No se ha encontrado texto ampliado para este bloque.': 'Não foi encontrado texto ampliado para este bloco.',
   },
 
   fr: {
@@ -3666,6 +3670,8 @@ window.PM_I18N = {
     'camas piramidales - pirámides': 'lits pyramidaux - pyramides',
     'ÓRGANOS TRANSPLANTADOS': 'ORGANES TRANSPLANTÉS',
     'Centros': 'Centres',
+    'Detalle visual del artículo': 'Détail visuel de l\'article',
+    'No se ha encontrado texto ampliado para este bloque.': 'Aucun texte détaillé n\'a été trouvé pour ce bloc.',
   },
 
   de: {
@@ -4887,6 +4893,8 @@ window.PM_I18N = {
     'camas piramidales - pirámides': 'Pyramidenbetten - Pyramiden',
     'ÓRGANOS TRANSPLANTADOS': 'TRANSPLANTIERTE ORGANE',
     'Centros': 'Zentren',
+    'Detalle visual del artículo': 'Visuelles Detail des Artikels',
+    'No se ha encontrado texto ampliado para este bloque.': 'Für diesen Block wurde kein erweiterter Text gefunden.',
   },
 
   ru: {
@@ -6108,6 +6116,8 @@ window.PM_I18N = {
     'camas piramidales - pirámides': 'пирамидальные кровати - пирамиды',
     'ÓRGANOS TRANSPLANTADOS': 'ТРАНСПЛАНТИРОВАННЫЕ ОРГАНЫ',
     'Centros': 'Центры',
+    'Detalle visual del artículo': 'Визуальная деталь статьи',
+    'No se ha encontrado texto ampliado para este bloque.': 'Расширенный текст для этого блока не найден.',
   },
 
   ar: {
@@ -7329,6 +7339,8 @@ window.PM_I18N = {
     'camas piramidales - pirámides': 'أسرّة هرمية - أهرامات',
     'ÓRGANOS TRANSPLANTADOS': 'الأعضاء المزروعة',
     'Centros': 'المراكز',
+    'Detalle visual del artículo': 'تفصيل بصري للمقال',
+    'No se ha encontrado texto ampliado para este bloque.': 'لم يتم العثور على نص موسع لهذا القسم.',
   },
 
 };
