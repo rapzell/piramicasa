@@ -40,6 +40,15 @@
   window.PM_lang = current;
   window.PM_setLang = setLang;
 
+  // Set <html dir> and <html lang> for the active language (RTL for Arabic)
+  function applyDir(){
+    var de = document.documentElement;
+    if(!de) return;
+    de.setAttribute('dir', RTL.indexOf(current)!==-1 ? 'rtl' : 'ltr');
+    de.setAttribute('lang', current);
+  }
+  applyDir();
+
   /* ---- DOM translation engine ----
    * T[key] = translation for current language.
    * We walk text nodes and replace exact matches.
@@ -273,6 +282,7 @@
     switcherBuilt = !!document.getElementById('pm-lang-switcher');
   }
   function init(){
+    applyDir();
     buildSwitcher(false);
     switcherBuilt = !!document.getElementById('pm-lang-switcher');
     applyTranslations();
