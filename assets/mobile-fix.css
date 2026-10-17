@@ -300,3 +300,8 @@ html[dir="rtl"] .pm-chat-quick{text-align:right}
 html[dir="rtl"] .pm-msg-bot .pm-msg-text{text-align:right}
 html[dir="rtl"] .pm-msg-user .pm-msg-text{text-align:left}
 html[dir="rtl"] .pm-chat-input{text-align:right}
+
+/* Accordion content padding — the expanded panel had no padding,
+   text was glued to the card edges (Enfermedades, Salud pages) */
+.pm-accordion-content{padding:24px 28px 30px;border-top:1px solid var(--pm-border,rgba(0,0,0,.08))}
+@media (max-width:640px){.pm-accordion-content{padding:18px 18px 22px}}
