@@ -1249,6 +1249,8 @@ window.PM_I18N = {
     'Página': 'Page',
     'Ver en': 'View on',
     'Privacidad y cookies': 'Privacy & cookies',
+    'Configuración de cookies': 'Cookie settings',
+    'Aviso legal': 'Legal notice',
   },
 
   pt: {
@@ -2495,6 +2497,8 @@ window.PM_I18N = {
     'Página': 'Página',
     'Ver en': 'Ver no',
     'Privacidad y cookies': 'Privacidade e cookies',
+    'Configuración de cookies': 'Configuração de cookies',
+    'Aviso legal': 'Aviso legal',
   },
 
   fr: {
@@ -3741,6 +3745,8 @@ window.PM_I18N = {
     'Página': 'Page',
     'Ver en': 'Voir sur',
     'Privacidad y cookies': 'Confidentialité et cookies',
+    'Configuración de cookies': 'Paramètres des cookies',
+    'Aviso legal': 'Mentions légales',
   },
 
   de: {
@@ -4987,6 +4993,8 @@ window.PM_I18N = {
     'Página': 'Seite',
     'Ver en': 'Ansehen auf',
     'Privacidad y cookies': 'Datenschutz & Cookies',
+    'Configuración de cookies': 'Cookie-Einstellungen',
+    'Aviso legal': 'Impressum',
   },
 
   ru: {
@@ -6233,6 +6241,8 @@ window.PM_I18N = {
     'Página': 'Страница',
     'Ver en': 'Смотреть в',
     'Privacidad y cookies': 'Конфиденциальность и куки',
+    'Configuración de cookies': 'Настройки cookie',
+    'Aviso legal': 'Правовая информация',
   },
 
   ar: {
@@ -7479,6 +7489,8 @@ window.PM_I18N = {
     'Página': 'صفحة',
     'Ver en': 'عرض في',
     'Privacidad y cookies': 'الخصوصية وملفات تعريف الارتباط',
+    'Configuración de cookies': 'إعدادات ملفات تعريف الارتباط',
+    'Aviso legal': 'إشعار قانوني',
   },
 
 };
