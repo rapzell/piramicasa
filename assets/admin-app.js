@@ -1,44 +1,126 @@
 /* Piramicasa — Panel de administración (textos y artículos)
- * Habla con el Cloudflare Worker (_cms-setup/worker.js), que guarda los
- * cambios como commits en gh-pages usando un token que vive en el worker.
- * La clienta solo necesita la contraseña del panel.
+ * Dos modos:
+ *  - directo: el token de GitHub va cifrado en PM_ADMIN_VAULT; la contraseña
+ *    del panel lo descifra en el navegador (PBKDF2 600k + AES-GCM-256) y se
+ *    llama a api.github.com directamente. Sin servidor.
+ *  - servidor: si PM_ADMIN_API apunta a un worker propio, se usa su API.
  */
 (function(){
   'use strict';
   var API = window.PM_ADMIN_API || '';
+  var VAULT = window.PM_ADMIN_VAULT || null;
+  var DIRECT = !API && !!VAULT;
   var PW_KEY = 'pm-admin-pw';
+  var REPO = 'rapzell/piramicasa';
+  var BRANCH = 'gh-pages';
+  var GH = 'https://api.github.com';
   var FILES = { textos: 'content/overrides.json', articulos: 'content/articles.json' };
   var state = { overrides: {items:[], sha:null}, articles: {items:[], sha:null}, editing: -1 };
+  var TOKEN = null;
   var $ = function(id){ return document.getElementById(id); };
 
   function pw(){ try { return sessionStorage.getItem(PW_KEY) || ''; } catch(e){ return ''; } }
   function setPw(v){ try { sessionStorage.setItem(PW_KEY, v); } catch(e){} }
 
-  function api(path, opts){
-    opts = opts || {};
-    opts.headers = Object.assign({ 'Authorization': 'Bearer ' + pw() }, opts.headers || {});
-    if (opts.body && !opts.headers['Content-Type']) opts.headers['Content-Type'] = 'application/json';
-    return fetch(API + path, opts).then(function(r){
+  /* ---------- descifrado del token (modo directo) ---------- */
+  function b64(s){ return Uint8Array.from(atob(s), function(c){return c.charCodeAt(0);}); }
+  function unlock(password){
+    var blob = b64(VAULT.ct);
+    var ct = blob.slice(0, -16), tag = blob.slice(-16);
+    var both = new Uint8Array(ct.length + tag.length);
+    both.set(ct); both.set(tag, ct.length);
+    return crypto.subtle.importKey('raw', new TextEncoder().encode(password), 'PBKDF2', false, ['deriveKey'])
+      .then(function(k){
+        return crypto.subtle.deriveKey(
+          {name:'PBKDF2', salt: b64(VAULT.salt), iterations: 600000, hash:'SHA-256'},
+          k, {name:'AES-GCM', length:256}, false, ['decrypt']);
+      })
+      .then(function(key){
+        return crypto.subtle.decrypt({name:'AES-GCM', iv: b64(VAULT.iv)}, key, both.buffer);
+      })
+      .then(function(buf){ return new TextDecoder().decode(buf); });
+  }
+
+  /* ---------- capa API ---------- */
+  function ghApi(path, init){
+    init = init || {};
+    init.headers = Object.assign({
+      'Authorization': 'Bearer ' + TOKEN,
+      'Accept': 'application/vnd.github+json',
+      'X-GitHub-Api-Version': '2022-11-28'
+    }, init.headers || {});
+    return fetch(GH + path, init).then(function(r){
       return r.json().catch(function(){ return {}; }).then(function(j){
-        if (!r.ok) throw new Error(j.error || ('HTTP ' + r.status));
-        return j;
+        if (!r.ok && r.status !== 404) throw new Error(j.message || ('GitHub HTTP ' + r.status));
+        return { status: r.status, data: j };
       });
     });
   }
+  function b64u(str){
+    var bytes = new TextEncoder().encode(str), bin = '';
+    for (var i=0;i<bytes.length;i++) bin += String.fromCharCode(bytes[i]);
+    return btoa(bin);
+  }
+
+  function apiLogin(){
+    if (DIRECT) {
+      return ghApi('/user').then(function(r){
+        if (r.status !== 200) throw new Error('Token no válido');
+        return {ok:true};
+      });
+    }
+    return fetch(API + '/login', {method:'POST', headers:{'Authorization':'Bearer '+pw(),'Content-Type':'application/json'}, body:'{}'})
+      .then(function(r){ return r.json().then(function(j){ if(!r.ok) throw new Error(j.error||'Error'); return j; }); });
+  }
   function getFile(which){
-    return api('/api/file?path=' + encodeURIComponent(FILES[which])).then(function(r){
-      var j; try { j = JSON.parse(r.content || '{"items":[]}'); } catch(e){ j = {items:[]}; }
-      if (!j.items) j.items = [];
-      state[which === 'textos' ? 'overrides' : 'articles'] = { items: j.items, sha: r.sha };
-    });
+    var fp = FILES[which];
+    var done = function(j, sha){
+      var p; try { p = JSON.parse(j || '{"items":[]}'); } catch(e){ p = {items:[]}; }
+      if (!p.items) p.items = [];
+      state[which === 'textos' ? 'overrides' : 'articles'] = { items: p.items, sha: sha };
+    };
+    if (DIRECT) {
+      return ghApi('/repos/' + REPO + '/contents/' + encodeURIComponent(fp) + '?ref=' + BRANCH)
+        .then(function(r){
+          if (r.status === 404) return done('', null);
+          var raw = r.data.content ? atob(r.data.content.replace(/\n/g,'')) : '';
+          var bytes = Uint8Array.from(raw, function(c){return c.charCodeAt(0);});
+          return done(new TextDecoder().decode(bytes), r.data.sha);
+        });
+    }
+    return fetch(API + '/api/file?path=' + encodeURIComponent(fp), {headers:{'Authorization':'Bearer '+pw()}})
+      .then(function(r){ return r.json().then(function(j){ if(!r.ok) throw new Error(j.error||'Error'); return j; }); })
+      .then(function(j){ return done(j.content, j.sha); });
   }
   function putFile(which, msg){
     var s = state[which === 'textos' ? 'overrides' : 'articles'];
-    return api('/api/file', {
-      method: 'PUT',
-      body: JSON.stringify({ path: FILES[which], content: JSON.stringify({items: s.items}, null, 2), sha: s.sha, message: msg })
-    }).then(function(r){ s.sha = r.sha; });
+    var content = JSON.stringify({items: s.items}, null, 2);
+    if (DIRECT) {
+      return ghApi('/repos/' + REPO + '/contents/' + encodeURIComponent(FILES[which]), {
+        method: 'PUT',
+        body: JSON.stringify({ message: msg, content: b64u(content), sha: s.sha, branch: BRANCH })
+      }).then(function(r){ s.sha = r.data.content && r.data.content.sha; });
+    }
+    return fetch(API + '/api/file', {method:'PUT', headers:{'Authorization':'Bearer '+pw(),'Content-Type':'application/json'},
+      body: JSON.stringify({path: FILES[which], content: content, sha: s.sha, message: msg})})
+      .then(function(r){ return r.json().then(function(j){ if(!r.ok) throw new Error(j.error||'Error'); s.sha = j.sha; }); });
   }
+  function upload(name, dataUrl){
+    var safe = String(name||'').toLowerCase().replace(/[^a-z0-9._-]+/g,'-');
+    if (!/\.(png|jpe?g|webp|gif|svg)$/.test(safe)) return Promise.reject(new Error('Tipo de imagen no válido'));
+    var fp = 'assets/uploads/' + Date.now() + '-' + safe;
+    var b64data = String(dataUrl||'').replace(/^data:[^,]+,/, '');
+    if (DIRECT) {
+      return ghApi('/repos/' + REPO + '/contents/' + encodeURIComponent(fp), {
+        method: 'PUT',
+        body: JSON.stringify({ message:'Subida de imagen desde el panel', content: b64data, branch: BRANCH })
+      }).then(function(){ return {path:'/piramicasa/' + fp}; });
+    }
+    return fetch(API + '/api/upload', {method:'POST', headers:{'Authorization':'Bearer '+pw(),'Content-Type':'application/json'},
+      body: JSON.stringify({name: safe, data: dataUrl})})
+      .then(function(r){ return r.json().then(function(j){ if(!r.ok) throw new Error(j.error||'Error'); return j; }); });
+  }
+
   function esc(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
   function status(el, msg, ok){ el.textContent = msg; el.className = 'pm-status ' + (ok ? 'ok' : 'err'); }
 
@@ -51,16 +133,27 @@
   $('pm-login-form').addEventListener('submit', function(e){
     e.preventDefault();
     var btn = $('pm-login-btn'), err = $('pm-login-err');
-    btn.disabled = true; err.textContent = '';
-    setPw($('pm-pw').value);
-    api('/login', {method:'POST', body:'{}'})
-      .then(showApp)
-      .catch(function(x){ err.textContent = x.message; setPw(''); })
-      .then(function(){ btn.disabled = false; });
+    btn.disabled = true; err.textContent = 'Verificando…';
+    var password = $('pm-pw').value;
+    if (DIRECT) {
+      unlock(password)
+        .then(function(t){ TOKEN = t; setPw(password); })
+        .then(apiLogin).then(function(){ err.textContent=''; showApp(); })
+        .catch(function(){ err.textContent = 'Contraseña incorrecta'; setPw(''); TOKEN = null; })
+        .then(function(){ btn.disabled = false; });
+    } else {
+      setPw(password);
+      apiLogin().then(function(){ err.textContent=''; showApp(); })
+        .catch(function(x){ err.textContent = x.message; setPw(''); })
+        .then(function(){ btn.disabled = false; });
+    }
   });
-  $('pm-logout').addEventListener('click', function(){ setPw(''); location.reload(); });
-  if (pw()) {
-    api('/login', {method:'POST', body:'{}'}).then(showApp).catch(function(){ setPw(''); });
+  $('pm-logout').addEventListener('click', function(){ setPw(''); TOKEN = null; location.reload(); });
+  if (pw() && DIRECT) {
+    unlock(pw()).then(function(t){ TOKEN = t; }).then(apiLogin).then(showApp)
+      .catch(function(){ setPw(''); TOKEN = null; });
+  } else if (pw()) {
+    apiLogin().then(showApp).catch(function(){ setPw(''); });
   }
 
   /* ---------- TABS ---------- */
@@ -177,7 +270,6 @@
     if (state.editing === -1) state.articles.items.push(a); else state.articles.items[state.editing] = a;
     saveArts();
   });
-  // subir imagen (portada o en el cuerpo)
   function uploadImg(cb){
     var f = $('pm-art-file'); f.value = '';
     f.onchange = function(){
@@ -185,7 +277,7 @@
       var fr = new FileReader();
       fr.onload = function(){
         status($('pm-art-status'), 'Subiendo imagen…', true);
-        api('/api/upload', {method:'POST', body: JSON.stringify({name: f.files[0].name, data: fr.result})})
+        upload(f.files[0].name, fr.result)
           .then(function(r){ status($('pm-art-status'), 'Imagen subida ✓', true); cb(r.path); })
           .catch(function(x){ status($('pm-art-status'), 'Error: ' + x.message, false); });
       };

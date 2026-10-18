@@ -8,8 +8,10 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600;700&display=swap"/>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpolygon points='50,10 90,85 10,85' fill='%233D4A30'/%3E%3Cpolygon points='50,25 75,75 25,75' fill='%23C69C6D'/%3E%3C/svg%3E"/>
 <script>
-// URL del Cloudflare Worker — ver _cms-setup/LEEME.md (paso "último ajuste")
-window.PM_ADMIN_API = 'https://piramicasa-cms-auth.TU-SUBDOMINIO.workers.dev';
+// Token de GitHub cifrado con AES-GCM-256 + PBKDF2(600k) — solo se descifra
+// en el navegador con la contraseña del panel. Ver _cms-setup/LEEME.md.
+window.PM_ADMIN_API = ''; // opcional: URL de un worker propio si se prefiere modo servidor
+window.PM_ADMIN_VAULT = {"v":1,"salt":"ffzROKPb1Bd51cYvNv0qpg==","iv":"5zXYy9tZ+E9sP3Nj","ct":"3k4OZlERiz2lEBoqNNBHGEPjUSjR+uWXPkq4Gbmgq6ts3YJtygjGrmwn6b6H914bykOLJWJ7vl0="};
 </script>
 <style>
 :root{--vd:#3D4A30;--v:#5A6B4A;--oro:#C69C6D;--crema:#F7F4F0;--ink:#4A4A4A;--muted:#8A817A;--bd:#E0D9D0}
