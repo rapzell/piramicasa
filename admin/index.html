@@ -5,15 +5,148 @@
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <meta name="robots" content="noindex, nofollow"/>
 <title>Panel de administración — Piramicasa</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600;700&display=swap"/>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpolygon points='50,10 90,85 10,85' fill='%233D4A30'/%3E%3Cpolygon points='50,25 75,75 25,75' fill='%23C69C6D'/%3E%3C/svg%3E"/>
+<script>
+// URL del Cloudflare Worker — ver _cms-setup/LEEME.md (paso "último ajuste")
+window.PM_ADMIN_API = 'https://piramicasa-cms-auth.TU-SUBDOMINIO.workers.dev';
+</script>
 <style>
-  body{font-family:Inter,system-ui,sans-serif;background:#F7F4F0;margin:0}
-  .pm-admin-note{position:fixed;top:12px;right:16px;z-index:10;font-size:.8rem;color:#8A817A}
-  .pm-admin-note a{color:#5A6B4A}
+:root{--vd:#3D4A30;--v:#5A6B4A;--oro:#C69C6D;--crema:#F7F4F0;--ink:#4A4A4A;--muted:#8A817A;--bd:#E0D9D0}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:Inter,system-ui,sans-serif;background:var(--crema);color:#2B2B2B;min-height:100vh}
+.pm-login{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;padding:20px}
+.pm-login-card{background:#fff;border:1px solid var(--bd);border-radius:16px;padding:36px 34px;max-width:380px;width:100%;box-shadow:0 14px 40px rgba(61,74,48,.1);text-align:center}
+.pm-login-card h1{font-family:'Playfair Display',serif;font-size:1.4rem;color:var(--vd);margin-bottom:6px}
+.pm-login-card .sub{font-size:.82rem;color:var(--muted);margin-bottom:22px}
+.pm-login input{width:100%;padding:12px 14px;border:1px solid var(--bd);border-radius:10px;font-size:.95rem;font-family:inherit;margin-bottom:12px}
+.pm-login input:focus{outline:2px solid var(--oro);border-color:var(--oro)}
+.pm-btn{cursor:pointer;border:none;border-radius:10px;padding:12px 20px;font-family:inherit;font-size:.9rem;font-weight:600;background:var(--vd);color:#fff;transition:background .2s}
+.pm-btn:hover{background:#2c3623}
+.pm-btn:disabled{opacity:.55;cursor:default}
+.pm-btn-ghost{background:#fff;color:var(--vd);border:1px solid var(--bd)}
+.pm-btn-ghost:hover{background:var(--crema)}
+.pm-btn-danger{background:#fff;color:#a33;border:1px solid #e0baba;font-size:.78rem;padding:7px 12px}
+.pm-btn-danger:hover{background:#fdf0f0}
+.pm-login .pm-btn{width:100%}
+.pm-login-err{color:#a33;font-size:.8rem;margin-top:10px;min-height:1em}
+.pm-back{display:block;margin-top:18px;font-size:.8rem;color:var(--v);text-decoration:none}
+#pm-app{display:none;max-width:1100px;margin:0 auto;padding:26px 20px 80px}
+.pm-top{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:20px}
+.pm-top h1{font-family:'Playfair Display',serif;font-size:1.5rem;color:var(--vd)}
+.pm-top-right{display:flex;gap:8px;align-items:center;font-size:.8rem;color:var(--muted)}
+.pm-tabs{display:flex;gap:6px;margin-bottom:22px;border-bottom:2px solid var(--bd)}
+.pm-tab{cursor:pointer;border:none;background:none;font-family:inherit;font-size:.9rem;font-weight:600;color:var(--muted);padding:10px 18px;border-bottom:2px solid transparent;margin-bottom:-2px}
+.pm-tab.on{color:var(--vd);border-bottom-color:var(--oro)}
+.pm-panel{display:none}
+.pm-panel.on{display:block}
+.pm-hint{font-size:.8rem;color:var(--muted);margin-bottom:16px;line-height:1.5}
+.pm-row{background:#fff;border:1px solid var(--bd);border-radius:12px;padding:14px 16px;margin-bottom:10px}
+.pm-row-head{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.pm-row-head .t{font-size:.9rem;font-weight:600;color:var(--vd);flex:1}
+.pm-row-fields{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
+.pm-row-fields label{display:block;font-size:.68rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin-bottom:4px}
+.pm-row input,.pm-row textarea{width:100%;padding:9px 11px;border:1px solid var(--bd);border-radius:8px;font-size:.85rem;font-family:inherit}
+.pm-row textarea{min-height:90px;resize:vertical}
+.pm-row input:focus,.pm-row textarea:focus{outline:2px solid var(--oro);border-color:var(--oro)}
+.pm-langs{display:none;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px;padding-top:10px;border-top:1px dashed var(--bd)}
+.pm-row.expanded .pm-langs{display:grid}
+.pm-more{background:none;border:none;cursor:pointer;font-size:.75rem;color:var(--v);text-decoration:underline;font-family:inherit}
+.pm-actions{display:flex;gap:10px;margin:20px 0;flex-wrap:wrap;align-items:center}
+.pm-status{font-size:.82rem;min-height:1.2em}
+.pm-status.ok{color:#3a7a3a}
+.pm-status.err{color:#a33}
+.pm-art-form{display:none}
+.pm-art-form.on{display:block}
+.pm-form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px}
+.pm-form-grid .full{grid-column:1/-1}
+label.pm-fl{display:block;font-size:.72rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin-bottom:4px}
+input.pm-fi,textarea.pm-ft{width:100%;padding:10px 12px;border:1px solid var(--bd);border-radius:8px;font-size:.9rem;font-family:inherit}
+textarea.pm-ft{min-height:220px;resize:vertical;line-height:1.6}
+input.pm-fi:focus,textarea.pm-ft:focus{outline:2px solid var(--oro);border-color:var(--oro)}
+.pm-toolbar{display:flex;gap:6px;margin-bottom:8px;flex-wrap:wrap}
+.pm-toolbar button{cursor:pointer;background:#fff;border:1px solid var(--bd);border-radius:7px;padding:6px 10px;font-size:.78rem;font-family:inherit;color:var(--ink)}
+.pm-toolbar button:hover{border-color:var(--oro);color:var(--vd)}
+@media(max-width:700px){.pm-row-fields,.pm-langs,.pm-form-grid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
-<div class="pm-admin-note"><a href="/piramicasa/">← Volver a la web</a></div>
-<script src="https://unpkg.com/decap-cms@3.16.3/dist/decap-cms.js"></script>
+
+<!-- ===== LOGIN ===== -->
+<div class="pm-login" id="pm-login">
+  <div class="pm-login-card">
+    <svg width="54" height="44" viewBox="0 0 100 85" aria-hidden="true"><polygon points="50,8 92,80 8,80" fill="#3D4A30"/><polygon points="50,26 74,72 26,72" fill="#C69C6D"/></svg>
+    <h1>Panel Piramicasa</h1>
+    <p class="sub">Edición de textos y artículos de la web</p>
+    <form id="pm-login-form">
+      <input type="password" id="pm-pw" placeholder="Contraseña" autocomplete="current-password" required/>
+      <button class="pm-btn" type="submit" id="pm-login-btn">Entrar</button>
+    </form>
+    <p class="pm-login-err" id="pm-login-err"></p>
+    <a class="pm-back" href="/piramicasa/">← Volver a la web</a>
+  </div>
+</div>
+
+<!-- ===== APP ===== -->
+<div id="pm-app">
+  <div class="pm-top">
+    <h1>Panel Piramicasa</h1>
+    <div class="pm-top-right">
+      <a href="/piramicasa/" style="color:var(--v)">Ver la web</a>
+      <button class="pm-btn-ghost pm-btn" id="pm-logout" type="button">Salir</button>
+    </div>
+  </div>
+  <div class="pm-tabs">
+    <button class="pm-tab on" data-tab="textos" type="button">Textos de la web</button>
+    <button class="pm-tab" data-tab="articulos" type="button">Artículos</button>
+  </div>
+
+  <div class="pm-panel on" id="pm-panel-textos">
+    <p class="pm-hint">Cambia cualquier texto visible de la web: copia en «Texto actual» el texto tal como aparece ahora y escribe el nuevo. Los demás idiomas son opcionales. Al pulsar «Publicar» el cambio tarda ~1 minuto en verse.</p>
+    <div id="pm-tx-list"></div>
+    <div class="pm-actions">
+      <button class="pm-btn pm-btn-ghost" id="pm-tx-add" type="button">+ Añadir cambio de texto</button>
+      <button class="pm-btn" id="pm-tx-save" type="button">Publicar cambios</button>
+      <span class="pm-status" id="pm-tx-status"></span>
+    </div>
+  </div>
+
+  <div class="pm-panel" id="pm-panel-articulos">
+    <p class="pm-hint">Los artículos aparecen en la página de Artículos de la web. «Nuevo artículo» para crear uno, o pulsa uno de la lista para editarlo.</p>
+    <div id="pm-art-list"></div>
+    <div class="pm-actions">
+      <button class="pm-btn pm-btn-ghost" id="pm-art-new" type="button">+ Nuevo artículo</button>
+      <span class="pm-status" id="pm-art-status"></span>
+    </div>
+    <div class="pm-art-form pm-row" id="pm-art-form">
+      <div class="pm-form-grid">
+        <div class="full"><label class="pm-fl">Título</label><input class="pm-fi" id="pm-art-title"/></div>
+        <div><label class="pm-fl">URL corta (slug)</label><input class="pm-fi" id="pm-art-slug" placeholder="ej: curso-verano-2026"/></div>
+        <div><label class="pm-fl">Fecha</label><input class="pm-fi" id="pm-art-date" type="date"/></div>
+        <div class="full"><label class="pm-fl">Resumen</label><input class="pm-fi" id="pm-art-excerpt"/></div>
+        <div class="full"><label class="pm-fl">Imagen de portada</label>
+          <div style="display:flex;gap:8px"><input class="pm-fi" id="pm-art-image" placeholder="/piramicasa/assets/uploads/…" style="flex:1"/><button class="pm-btn pm-btn-ghost" id="pm-art-upload" type="button">Subir…</button><input type="file" id="pm-art-file" accept="image/*" hidden/></div>
+        </div>
+        <div class="full"><label class="pm-fl">Contenido</label>
+          <div class="pm-toolbar">
+            <button type="button" data-md="**texto**"><b>B</b></button>
+            <button type="button" data-md="*texto*"><i>I</i></button>
+            <button type="button" data-md="## Título">H2</button>
+            <button type="button" data-md="- elemento">Lista</button>
+            <button type="button" data-md="[texto](https://…)">Enlace</button>
+            <button type="button" id="pm-art-imgbody">Imagen</button>
+          </div>
+          <textarea class="pm-ft" id="pm-art-body"></textarea>
+        </div>
+      </div>
+      <div class="pm-actions">
+        <button class="pm-btn" id="pm-art-save" type="button">Publicar artículo</button>
+        <button class="pm-btn pm-btn-ghost" id="pm-art-cancel" type="button">Cancelar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="/piramicasa/assets/admin-app.js?v=20261018a"></script>
 </body>
 </html>
