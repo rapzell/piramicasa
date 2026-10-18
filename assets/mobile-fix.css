@@ -305,3 +305,39 @@ html[dir="rtl"] .pm-chat-input{text-align:right}
    text was glued to the card edges (Enfermedades, Salud pages) */
 .pm-accordion-content{padding:24px 28px 30px;border-top:1px solid var(--pm-border,rgba(0,0,0,.08))}
 @media (max-width:640px){.pm-accordion-content{padding:18px 18px 22px}}
+
+/* === Carrusel videos redes sociales === */
+.pm-social-carousel{background:var(--pm-crema,#F7F4F0);padding:64px 24px 72px;border-top:1px solid var(--pm-border,#E0D9D0)}
+.pm-social-head{max-width:1200px;margin:0 auto 32px;text-align:center;position:relative}
+.pm-social-kicker{display:inline-block;font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;color:var(--pm-oro,#C69C6D);font-weight:700;margin-bottom:10px}
+.pm-social-h2{font-family:"Playfair Display",serif;font-size:clamp(1.5rem,3vw,2.1rem);color:var(--pm-verde-deep,#3D4A30);margin:0 0 10px}
+.pm-social-sub{color:var(--pm-muted,#8A817A);font-size:.95rem;margin:0 0 16px}
+.pm-social-links{display:flex;gap:10px;justify-content:center}
+.pm-social-links a{display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:50%;background:var(--pm-verde-deep,#3D4A30);color:var(--pm-crema,#F7F4F0);transition:transform .2s,background .2s}
+.pm-social-links a:hover{background:var(--pm-oro,#C69C6D);transform:translateY(-2px)}
+.pm-social-viewport{position:relative;max-width:1200px;margin:0 auto}
+.pm-social-track{display:flex;gap:20px;overflow-x:auto;scroll-snap-type:x mandatory;padding:4px 4px 16px;scrollbar-width:none;-ms-overflow-style:none}
+.pm-social-track::-webkit-scrollbar{display:none}
+.pm-social-slide{flex:0 0 min(300px,78vw);scroll-snap-align:start;background:var(--pm-white,#fff);border-radius:14px;overflow:hidden;box-shadow:var(--pm-shadow,0 4px 24px rgba(0,0,0,.08));border:1px solid var(--pm-border,#E0D9D0)}
+.pm-social-thumb{position:relative;display:block;width:100%;aspect-ratio:16/9;padding:0;border:0;cursor:pointer;background:#000}
+.pm-social-thumb img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .3s}
+.pm-social-thumb:hover img{transform:scale(1.03)}
+.pm-social-play{position:absolute;inset:0;margin:auto;width:56px;height:56px;border-radius:50%;background:rgba(61,74,48,.92);color:#fff;display:flex;align-items:center;justify-content:center;transition:transform .2s,background .2s}
+.pm-social-thumb:hover .pm-social-play{background:var(--pm-oro,#C69C6D);transform:scale(1.1)}
+.pm-social-src{position:absolute;top:8px;left:8px;background:rgba(0,0,0,.65);color:#fff;font-size:.62rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:3px 8px;border-radius:20px}
+.pm-social-iframe{display:block;width:100%;aspect-ratio:16/9;border:0}
+.pm-social-title{font-size:.82rem;color:var(--pm-ink,#4A4A4A);padding:12px 14px 14px;line-height:1.45;height:3.4em;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+.pm-social-btn{position:absolute;top:calc(50% - 30px);transform:translateY(-50%);z-index:2;width:44px;height:44px;border-radius:50%;border:0;background:var(--pm-verde-deep,#3D4A30);color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:var(--pm-shadow);transition:background .2s,transform .2s}
+.pm-social-btn:hover{background:var(--pm-oro,#C69C6D);transform:translateY(-50%) scale(1.08)}
+.pm-social-prev{left:-14px}
+.pm-social-next{right:-14px}
+.pm-social-dots{display:flex;gap:8px;justify-content:center;margin-top:8px}
+.pm-social-dot{width:9px;height:9px;border-radius:50%;border:0;background:var(--pm-border,#E0D9D0);cursor:pointer;padding:0;transition:background .2s,transform .2s}
+.pm-social-dot-on{background:var(--pm-oro,#C69C6D);transform:scale(1.3)}
+html[dir="rtl"] .pm-social-prev svg,html[dir="rtl"] .pm-social-next svg{transform:scaleX(-1)}
+@media(max-width:640px){
+  .pm-social-carousel{padding:48px 16px 56px}
+  .pm-social-prev{left:4px}
+  .pm-social-next{right:4px}
+  .pm-social-btn{width:38px;height:38px}
+}

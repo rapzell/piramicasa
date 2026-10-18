@@ -1240,6 +1240,13 @@ window.PM_I18N = {
     'Dossier Básico Informativo': 'Basic Information Dossier',
     'Solicitar Dossier Completo ➤': 'Request Full Dossier ➤',
     'Piramicasa investiga el efecto piramidal desde 1972. Con más de 50 años de experiencia, fabricamos pirámides terapéuticas con las proporciones exactas de Keops. Este dossier ofrece una visión general de nuestra empresa, productos e investigación.': 'Piramicasa has been researching the pyramid effect since 1972. With over 50 years of experience, we manufacture therapeutic pyramids with the exact proportions of Cheops. This dossier offers an overview of our company, products and research.',
+    'Contenido fresco': 'Fresh content',
+    'Síguenos en redes': 'Follow us',
+    'Los últimos vídeos de nuestras redes sociales': 'The latest videos from our social channels',
+    'Reproducir vídeo': 'Play video',
+    'Vídeos anteriores': 'Previous videos',
+    'Vídeos siguientes': 'Next videos',
+    'Página': 'Page',
   },
 
   pt: {
@@ -2477,6 +2484,13 @@ window.PM_I18N = {
     'Dossier Básico Informativo': 'Dossiê Básico Informativo',
     'Solicitar Dossier Completo ➤': 'Solicitar Dossiê Completo ➤',
     'Piramicasa investiga el efecto piramidal desde 1972. Con más de 50 años de experiencia, fabricamos pirámides terapéuticas con las proporciones exactas de Keops. Este dossier ofrece una visión general de nuestra empresa, productos e investigación.': 'A Piramicasa investiga o efeito piramidal desde 1972. Com mais de 50 anos de experiência, fabricamos pirâmides terapêuticas com as proporções exatas de Keops. Este dossiê oferece uma visão geral da nossa empresa, produtos e investigação.',
+    'Contenido fresco': 'Conteúdo novo',
+    'Síguenos en redes': 'Siga-nos nas redes',
+    'Los últimos vídeos de nuestras redes sociales': 'Os últimos vídeos das nossas redes sociais',
+    'Reproducir vídeo': 'Reproduzir vídeo',
+    'Vídeos anteriores': 'Vídeos anteriores',
+    'Vídeos siguientes': 'Vídeos siguientes',
+    'Página': 'Página',
   },
 
   fr: {
@@ -3714,6 +3728,13 @@ window.PM_I18N = {
     'Dossier Básico Informativo': 'Dossier Informatif de Base',
     'Solicitar Dossier Completo ➤': 'Demander le Dossier Complet ➤',
     'Piramicasa investiga el efecto piramidal desde 1972. Con más de 50 años de experiencia, fabricamos pirámides terapéuticas con las proporciones exactas de Keops. Este dossier ofrece una visión general de nuestra empresa, productos e investigación.': 'Piramicasa étudie l\'effet pyramidal depuis 1972. Avec plus de 50 ans d\'expérience, nous fabriquons des pyramides thérapeutiques aux proportions exactes de Khéops. Ce dossier offre un aperçu de notre entreprise, de nos produits et de nos recherches.',
+    'Contenido fresco': 'Contenu récent',
+    'Síguenos en redes': 'Suivez-nous',
+    'Los últimos vídeos de nuestras redes sociales': 'Les dernières vidéos de nos réseaux sociaux',
+    'Reproducir vídeo': 'Lire la vidéo',
+    'Vídeos anteriores': 'Vidéos précédentes',
+    'Vídeos siguientes': 'Vidéos suivantes',
+    'Página': 'Page',
   },
 
   de: {
@@ -4951,6 +4972,13 @@ window.PM_I18N = {
     'Dossier Básico Informativo': 'Basis-Informationsdossier',
     'Solicitar Dossier Completo ➤': 'Vollständiges Dossier anfordern ➤',
     'Piramicasa investiga el efecto piramidal desde 1972. Con más de 50 años de experiencia, fabricamos pirámides terapéuticas con las proporciones exactas de Keops. Este dossier ofrece una visión general de nuestra empresa, productos e investigación.': 'Piramicasa erforscht den Pyramiden-Effekt seit 1972. Mit über 50 Jahren Erfahrung stellen wir therapeutische Pyramiden mit den exakten Cheops-Proportionen her. Dieses Dossier bietet einen Überblick über unser Unternehmen, unsere Produkte und unsere Forschung.',
+    'Contenido fresco': 'Neue Inhalte',
+    'Síguenos en redes': 'Folgen Sie uns',
+    'Los últimos vídeos de nuestras redes sociales': 'Die neuesten Videos aus unseren sozialen Netzwerken',
+    'Reproducir vídeo': 'Video abspielen',
+    'Vídeos anteriores': 'Vorherige Videos',
+    'Vídeos siguientes': 'Nächste Videos',
+    'Página': 'Seite',
   },
 
   ru: {
@@ -6188,6 +6216,13 @@ window.PM_I18N = {
     'Dossier Básico Informativo': 'Базовое информационное досье',
     'Solicitar Dossier Completo ➤': 'Запросить полное досье ➤',
     'Piramicasa investiga el efecto piramidal desde 1972. Con más de 50 años de experiencia, fabricamos pirámides terapéuticas con las proporciones exactas de Keops. Este dossier ofrece una visión general de nuestra empresa, productos e investigación.': 'Piramicasa исследует пирамидальный эффект с 1972 года. Обладая более чем 50-летним опытом, мы производим терапевтические пирамиды с точными пропорциями Хеопса. Это досье даёт общее представление о нашей компании, продукции и исследованиях.',
+    'Contenido fresco': 'Свежий контент',
+    'Síguenos en redes': 'Мы в соцсетях',
+    'Los últimos vídeos de nuestras redes sociales': 'Последние видео из наших соцсетей',
+    'Reproducir vídeo': 'Смотреть видео',
+    'Vídeos anteriores': 'Предыдущие видео',
+    'Vídeos siguientes': 'Следующие видео',
+    'Página': 'Страница',
   },
 
   ar: {
@@ -7425,6 +7460,13 @@ window.PM_I18N = {
     'Dossier Básico Informativo': 'الملف الإعلامي الأساسي',
     'Solicitar Dossier Completo ➤': 'اطلب الملف الكامل ➤',
     'Piramicasa investiga el efecto piramidal desde 1972. Con más de 50 años de experiencia, fabricamos pirámides terapéuticas con las proporciones exactas de Keops. Este dossier ofrece una visión general de nuestra empresa, productos e investigación.': 'تبحث Piramicasa في تأثير الهرم منذ عام 1972. وبخبرة تزيد عن 50 عامًا، نصنع أهرامات علاجية بنسب خوفو الدقيقة. يقدم هذا الملف نظرة عامة على شركتنا ومنتجاتنا وأبحاثنا.',
+    'Contenido fresco': 'محتوى جديد',
+    'Síguenos en redes': 'تابعنا على الشبكات',
+    'Los últimos vídeos de nuestras redes sociales': 'أحدث الفيديوهات من قنواتنا الاجتماعية',
+    'Reproducir vídeo': 'تشغيل الفيديو',
+    'Vídeos anteriores': 'الفيديوهات السابقة',
+    'Vídeos siguientes': 'الفيديوهات التالية',
+    'Página': 'صفحة',
   },
 
 };
