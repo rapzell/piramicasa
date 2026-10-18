@@ -1248,6 +1248,7 @@ window.PM_I18N = {
     'Vídeos siguientes': 'Next videos',
     'Página': 'Page',
     'Ver en': 'View on',
+    'Privacidad y cookies': 'Privacy & cookies',
   },
 
   pt: {
@@ -2493,6 +2494,7 @@ window.PM_I18N = {
     'Vídeos siguientes': 'Vídeos siguientes',
     'Página': 'Página',
     'Ver en': 'Ver no',
+    'Privacidad y cookies': 'Privacidade e cookies',
   },
 
   fr: {
@@ -3738,6 +3740,7 @@ window.PM_I18N = {
     'Vídeos siguientes': 'Vidéos suivantes',
     'Página': 'Page',
     'Ver en': 'Voir sur',
+    'Privacidad y cookies': 'Confidentialité et cookies',
   },
 
   de: {
@@ -4983,6 +4986,7 @@ window.PM_I18N = {
     'Vídeos siguientes': 'Nächste Videos',
     'Página': 'Seite',
     'Ver en': 'Ansehen auf',
+    'Privacidad y cookies': 'Datenschutz & Cookies',
   },
 
   ru: {
@@ -6228,6 +6232,7 @@ window.PM_I18N = {
     'Vídeos siguientes': 'Следующие видео',
     'Página': 'Страница',
     'Ver en': 'Смотреть в',
+    'Privacidad y cookies': 'Конфиденциальность и куки',
   },
 
   ar: {
@@ -7473,6 +7478,7 @@ window.PM_I18N = {
     'Vídeos siguientes': 'الفيديوهات التالية',
     'Página': 'صفحة',
     'Ver en': 'عرض في',
+    'Privacidad y cookies': 'الخصوصية وملفات تعريف الارتباط',
   },
 
 };
