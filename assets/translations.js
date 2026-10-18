@@ -1251,6 +1251,11 @@ window.PM_I18N = {
     'Privacidad y cookies': 'Privacy & cookies',
     'Configuración de cookies': 'Cookie settings',
     'Aviso legal': 'Legal notice',
+    'Novedades': 'New',
+    'Últimos artículos': 'Latest articles',
+    'Artículo no encontrado.': 'Article not found.',
+    'No se pudo cargar el artículo.': 'Could not load the article.',
+    'Cargando artículo…': 'Loading article…',
   },
 
   pt: {
@@ -2499,6 +2504,11 @@ window.PM_I18N = {
     'Privacidad y cookies': 'Privacidade e cookies',
     'Configuración de cookies': 'Configuração de cookies',
     'Aviso legal': 'Aviso legal',
+    'Novedades': 'Novidades',
+    'Últimos artículos': 'Últimos artigos',
+    'Artículo no encontrado.': 'Artigo não encontrado.',
+    'No se pudo cargar el artículo.': 'Não foi possível carregar o artigo.',
+    'Cargando artículo…': 'A carregar artigo…',
   },
 
   fr: {
@@ -3747,6 +3757,11 @@ window.PM_I18N = {
     'Privacidad y cookies': 'Confidentialité et cookies',
     'Configuración de cookies': 'Paramètres des cookies',
     'Aviso legal': 'Mentions légales',
+    'Novedades': 'Nouveautés',
+    'Últimos artículos': 'Derniers articles',
+    'Artículo no encontrado.': 'Article introuvable.',
+    'No se pudo cargar el artículo.': "Impossible de charger l’article.",
+    'Cargando artículo…': "Chargement de l’article…",
   },
 
   de: {
@@ -4995,6 +5010,11 @@ window.PM_I18N = {
     'Privacidad y cookies': 'Datenschutz & Cookies',
     'Configuración de cookies': 'Cookie-Einstellungen',
     'Aviso legal': 'Impressum',
+    'Novedades': 'Neuigkeiten',
+    'Últimos artículos': 'Neueste Artikel',
+    'Artículo no encontrado.': 'Artikel nicht gefunden.',
+    'No se pudo cargar el artículo.': 'Der Artikel konnte nicht geladen werden.',
+    'Cargando artículo…': 'Artikel wird geladen…',
   },
 
   ru: {
@@ -6243,6 +6263,11 @@ window.PM_I18N = {
     'Privacidad y cookies': 'Конфиденциальность и куки',
     'Configuración de cookies': 'Настройки cookie',
     'Aviso legal': 'Правовая информация',
+    'Novedades': 'Новости',
+    'Últimos artículos': 'Последние статьи',
+    'Artículo no encontrado.': 'Статья не найдена.',
+    'No se pudo cargar el artículo.': 'Не удалось загрузить статью.',
+    'Cargando artículo…': 'Загрузка статьи…',
   },
 
   ar: {
@@ -7491,6 +7516,11 @@ window.PM_I18N = {
     'Privacidad y cookies': 'الخصوصية وملفات تعريف الارتباط',
     'Configuración de cookies': 'إعدادات ملفات تعريف الارتباط',
     'Aviso legal': 'إشعار قانوني',
+    'Novedades': 'جديدنا',
+    'Últimos artículos': 'أحدث المقالات',
+    'Artículo no encontrado.': 'المقال غير موجود.',
+    'No se pudo cargar el artículo.': 'تعذر تحميل المقال.',
+    'Cargando artículo…': 'جارٍ تحميل المقال…',
   },
 
 };

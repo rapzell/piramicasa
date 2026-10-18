@@ -1,0 +1,106 @@
+backend:
+  name: github
+  repo: rapzell/piramicasa
+  branch: gh-pages
+  # OAuth endpoint (Cloudflare Worker gratuito) — ver _cms-setup/LEEME.md
+  base_url: https://piramicasa-cms-auth.TU-SUBDOMINIO.workers.dev
+  auth_endpoint: /auth
+
+site_url: https://rapzell.github.io/piramicasa/
+logo_url: /piramicasa/assets/og-default.svg
+media_folder: assets/uploads
+public_folder: /piramicasa/assets/uploads
+locale: es
+
+publish_mode: simple
+
+collections:
+  - name: textos
+    label: "Textos de la web"
+    icon: edit
+    description: "Cambia cualquier texto visible de la web. Copia el texto tal como aparece hoy en «Texto actual» y escribe el nuevo en «Nuevo texto»."
+    files:
+      - label: "Textos editados"
+        name: textos
+        file: content/overrides.json
+        format: json
+        description: "Cada entrada sustituye un texto de la web por otro. Las traducciones son opcionales: si solo rellenas el español, los demás idiomas conservan su texto actual."
+        fields:
+          - label: "Textos modificados"
+            name: items
+            label_singular: "texto"
+            widget: list
+            summary: "{{fields.es}}"
+            minimize_collapsed: true
+            fields:
+              - label: "Texto actual (cópialo tal cual aparece en la web)"
+                name: original
+                widget: string
+              - label: "Nuevo texto (español)"
+                name: es
+                widget: string
+              - label: "Inglés (opcional)"
+                name: en
+                widget: string
+                required: false
+              - label: "Portugués (opcional)"
+                name: pt
+                widget: string
+                required: false
+              - label: "Francés (opcional)"
+                name: fr
+                widget: string
+                required: false
+              - label: "Alemán (opcional)"
+                name: de
+                widget: string
+                required: false
+              - label: "Ruso (opcional)"
+                name: ru
+                widget: string
+                required: false
+              - label: "Árabe (opcional)"
+                name: ar
+                widget: string
+                required: false
+
+  - name: articulos
+    label: "Artículos"
+    icon: article
+    description: "Crea y edita artículos. Aparecen automáticamente en la sección Artículos de la web al guardar."
+    files:
+      - label: "Artículos del blog"
+        name: articulos
+        file: content/articles.json
+        format: json
+        fields:
+          - label: "Artículos"
+            name: items
+            label_singular: "artículo"
+            widget: list
+            summary: "{{fields.title}}"
+            minimize_collapsed: true
+            fields:
+              - label: "Título"
+                name: title
+                widget: string
+              - label: "URL corta (solo letras, números y guiones — ej. curso-verano-2026)"
+                name: slug
+                widget: string
+                pattern: ['^[a-z0-9]+(?:-[a-z0-9]+)*$', "Solo minúsculas, números y guiones"]
+              - label: "Fecha"
+                name: date
+                widget: datetime
+                date_format: "YYYY-MM-DD"
+                time_format: false
+                format: "YYYY-MM-DD"
+              - label: "Resumen (aparece en el listado)"
+                name: excerpt
+                widget: text
+              - label: "Imagen de portada (opcional)"
+                name: image
+                widget: image
+                required: false
+              - label: "Contenido"
+                name: body
+                widget: markdown

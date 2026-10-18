@@ -1,0 +1,106 @@
+/* Piramicasa — Content overrides
+ * Aplica los cambios de texto que la clienta guarda desde el panel /admin
+ * (Decap CMS -> content/overrides.json -> commit -> GitHub Pages).
+ * Para cada item {original, es, en, pt, fr, de, ru, ar}:
+ *   - en español: el texto "original" se sustituye por "es"
+ *   - en otro idioma: si el item trae traducción, se sustituye la versión
+ *     traducida actual (o el original si no la tenía); si no la trae,
+ *     se conserva la traducción antigua.
+ */
+(function(){
+  'use strict';
+  var URL = '/piramicasa/content/overrides.json';
+  var SKIP = ['SCRIPT','STYLE','NOSCRIPT','CODE','PRE','TEXTAREA','INPUT'];
+  var data = null;
+  var mapCache = null;
+
+  function lang(){
+    var l = null;
+    try { l = localStorage.getItem('pm_lang'); } catch(e){}
+    if(!l) l = document.documentElement.getAttribute('lang') || 'es';
+    return String(l).toLowerCase().slice(0,2);
+  }
+
+  function buildMap(){
+    var L = lang();
+    var dict = (window.PM_I18N && window.PM_I18N[L]) || {};
+    var m = {};
+    (data.items || []).forEach(function(it){
+      if(!it || !it.original) return;
+      var val = null;
+      if(L === 'es'){
+        val = it.es || null;
+        if(val) m[it.original] = val;
+      } else {
+        // en otros idiomas solo aplicamos si el item trae traducción propia
+        if(it[L]){
+          val = it[L];
+          m[dict[it.original] || it.original] = val;  // texto traducido actual -> nuevo
+          m[it.original] = val;                        // por si no estaba traducido
+        }
+      }
+    });
+    return m;
+  }
+
+  function apply(){
+    if(!data) return;
+    if(!mapCache || mapCache.lang !== lang()) mapCache = {lang: lang(), m: buildMap()};
+    var M = mapCache.m;
+    var keys = Object.keys(M).sort(function(a,b){return b.length-a.length});
+    if(!keys.length) return;
+    var LETTER = /[A-Za-zÁÉÍÓÚÜÑáéíóúüñÀ-öø-ÿА-яЁё]/;
+    var walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, {
+      acceptNode: function(node){
+        var p = node.parentNode;
+        if(!p || SKIP.indexOf(p.tagName) !== -1) return NodeFilter.FILTER_REJECT;
+        if(p.closest && p.closest('#pm-consent,#pm-lang-menu,.pm-logo,[translate="no"],.notranslate')) return NodeFilter.FILTER_REJECT;
+        if(!node.textContent.trim()) return NodeFilter.FILTER_REJECT;
+        return NodeFilter.FILTER_ACCEPT;
+      }
+    });
+    var node;
+    while(node = walker.nextNode()){
+      var t = node.textContent;
+      var trimmed = t.trim();
+      if(M[trimmed]){ node.textContent = t.replace(trimmed, M[trimmed]); continue; }
+      for(var i=0;i<keys.length;i++){
+        var k = keys[i];
+        if(k.length < 12 || M[k] === k) continue;
+        var idx = t.indexOf(k);
+        if(idx === -1) continue;
+        var before = idx>0 ? t.charAt(idx-1) : ' ';
+        var after = idx+k.length < t.length ? t.charAt(idx+k.length) : ' ';
+        if(!LETTER.test(before) && !LETTER.test(after)){
+          node.textContent = t.substring(0, idx) + M[k] + t.substring(idx+k.length);
+          break;
+        }
+      }
+    }
+  }
+
+  var timer = null;
+  function schedule(){
+    if(timer) clearTimeout(timer);
+    timer = setTimeout(apply, 120);
+  }
+
+  fetch(URL, {cache:'no-store'})
+    .then(function(r){ return r.ok ? r.json() : null; })
+    .then(function(j){
+      data = j || {items:[]};
+      if(document.readyState === 'loading'){
+        document.addEventListener('DOMContentLoaded', apply);
+      }
+      apply();
+      var deb;
+      var obs = new MutationObserver(function(){
+        clearTimeout(deb); deb = setTimeout(schedule, 300);
+      });
+      obs.observe(document.documentElement, {childList:true, subtree:true});
+      // re-apply when language changes (i18n reloads page, but keep safe)
+      var orig = window.PM_setLang;
+      window.PM_setLang = function(){ mapCache = null; if(orig) return orig.apply(this, arguments); };
+    })
+    .catch(function(){ /* sin overrides: nada que hacer */ });
+})();
