@@ -50,15 +50,26 @@
       });
       s.appendChild(b);
     } else {
-      var a = el("a", "pm-social-ext");
+      var a = el("a", "pm-social-thumb pm-social-ext");
       a.href = v.url;
       a.target = "_blank";
       a.rel = "noopener";
+      a.setAttribute("aria-label", t("Ver en") + " " + (v.source || "social") + ": " + v.title);
+      if (v.thumb) {
+        var img = el("img");
+        img.src = v.thumb;
+        img.alt = v.title;
+        img.loading = "lazy";
+        img.decoding = "async";
+        img.addEventListener("error", function () { img.style.display = "none"; });
+        a.appendChild(img);
+      }
+      a.appendChild(el("span", "pm-social-play", "<svg viewBox='0 0 24 24' width='26' height='26' fill='currentColor' aria-hidden='true'><path d='M8 5v14l11-7z'/></svg>"));
       a.appendChild(el("span", "pm-social-src", v.source || "Social"));
       s.appendChild(a);
     }
     var cap = el("p", "pm-social-title");
-    cap.textContent = v.title;
+    cap.textContent = v.title && v.title !== "Video" ? v.title : (v.source || "Video");
     cap.title = v.title;
     s.appendChild(cap);
     return s;

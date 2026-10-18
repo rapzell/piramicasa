@@ -1247,6 +1247,7 @@ window.PM_I18N = {
     'Vídeos anteriores': 'Previous videos',
     'Vídeos siguientes': 'Next videos',
     'Página': 'Page',
+    'Ver en': 'View on',
   },
 
   pt: {
@@ -2491,6 +2492,7 @@ window.PM_I18N = {
     'Vídeos anteriores': 'Vídeos anteriores',
     'Vídeos siguientes': 'Vídeos siguientes',
     'Página': 'Página',
+    'Ver en': 'Ver no',
   },
 
   fr: {
@@ -3735,6 +3737,7 @@ window.PM_I18N = {
     'Vídeos anteriores': 'Vidéos précédentes',
     'Vídeos siguientes': 'Vidéos suivantes',
     'Página': 'Page',
+    'Ver en': 'Voir sur',
   },
 
   de: {
@@ -4979,6 +4982,7 @@ window.PM_I18N = {
     'Vídeos anteriores': 'Vorherige Videos',
     'Vídeos siguientes': 'Nächste Videos',
     'Página': 'Seite',
+    'Ver en': 'Ansehen auf',
   },
 
   ru: {
@@ -6223,6 +6227,7 @@ window.PM_I18N = {
     'Vídeos anteriores': 'Предыдущие видео',
     'Vídeos siguientes': 'Следующие видео',
     'Página': 'Страница',
+    'Ver en': 'Смотреть в',
   },
 
   ar: {
@@ -7467,6 +7472,7 @@ window.PM_I18N = {
     'Vídeos anteriores': 'الفيديوهات السابقة',
     'Vídeos siguientes': 'الفيديوهات التالية',
     'Página': 'صفحة',
+    'Ver en': 'عرض في',
   },
 
 };
