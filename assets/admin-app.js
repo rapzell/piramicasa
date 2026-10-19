@@ -11,6 +11,7 @@
   var VAULT = window.PM_ADMIN_VAULT || null;
   var DIRECT = !API && !!VAULT;
   var PW_KEY = 'pm-admin-pw';
+  var TOK_KEY = 'pm-admin-token';
   var REPO = 'rapzell/piramicasa';
   var BRANCH = 'gh-pages';
   var GH = 'https://api.github.com';
@@ -137,7 +138,7 @@
     var password = $('pm-pw').value;
     if (DIRECT) {
       unlock(password)
-        .then(function(t){ TOKEN = t; setPw(password); })
+        .then(function(t){ TOKEN = t; setPw(password); try{sessionStorage.setItem(TOK_KEY, t);}catch(e){} })
         .then(apiLogin).then(function(){ err.textContent=''; showApp(); })
         .catch(function(){ err.textContent = 'Contraseña incorrecta'; setPw(''); TOKEN = null; })
         .then(function(){ btn.disabled = false; });
@@ -148,9 +149,18 @@
         .then(function(){ btn.disabled = false; });
     }
   });
-  $('pm-logout').addEventListener('click', function(){ setPw(''); TOKEN = null; location.reload(); });
+  $('pm-edit-site').addEventListener('click', function(){
+    if (TOKEN) { try{sessionStorage.setItem(TOK_KEY, TOKEN);}catch(e){} }
+    // handoff a la pestaña nueva: sessionStorage no cruza pestañas,
+    // así que pasamos el token por localStorage con caducidad de 5 min
+    // (edit-mode lo mueve a sessionStorage y lo borra de localStorage)
+    if (TOKEN) { try{ localStorage.setItem('pm-edit-handoff', JSON.stringify({t:TOKEN, ts:Date.now()})); }catch(e){} }
+    try{ sessionStorage.setItem('pm-edit', '1'); }catch(e){}
+    window.open('/piramicasa/?pm_edit=1', '_blank');
+  });
+  $('pm-logout').addEventListener('click', function(){ setPw(''); TOKEN = null; try{sessionStorage.removeItem(TOK_KEY);sessionStorage.removeItem('pm-edit');}catch(e){} location.reload(); });
   if (pw() && DIRECT) {
-    unlock(pw()).then(function(t){ TOKEN = t; }).then(apiLogin).then(showApp)
+    unlock(pw()).then(function(t){ TOKEN = t; try{sessionStorage.setItem(TOK_KEY, t);}catch(e){} }).then(apiLogin).then(showApp)
       .catch(function(){ setPw(''); TOKEN = null; });
   } else if (pw()) {
     apiLogin().then(showApp).catch(function(){ setPw(''); });

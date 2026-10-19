@@ -85,6 +85,34 @@
     timer = setTimeout(apply, 120);
   }
 
+  /* modo edición visual: si la clienta abrió la web desde el panel
+   * (?pm_edit=1, flag en sessionStorage, o handoff localStorage
+   * de un solo uso), cargar edit-mode.js */
+  try {
+    var editOn = sessionStorage.getItem('pm-edit') === '1' ||
+      (typeof URLSearchParams !== 'undefined' && new URLSearchParams(location.search).has('pm_edit'));
+    var hand = null;
+    try { hand = localStorage.getItem('pm-edit-handoff'); } catch(e1){}
+    if (hand) {
+      try { localStorage.removeItem('pm-edit-handoff'); } catch(e1){}
+      try {
+        var h = JSON.parse(hand);
+        if (h && h.t && Date.now() - h.ts < 300000) {
+          sessionStorage.setItem('pm-admin-token', h.t);
+          sessionStorage.setItem('pm-edit', '1');
+          editOn = true;
+        }
+      } catch(e1){}
+    }
+    if (editOn) {
+      try { sessionStorage.setItem('pm-edit', '1'); } catch(e2){}
+      var es = document.createElement('script');
+      es.src = '/piramicasa/assets/edit-mode.js?v=20261019a';
+      es.defer = true;
+      (document.body || document.documentElement).appendChild(es);
+    }
+  } catch(e){}
+
   fetch(URL, {cache:'no-store'})
     .then(function(r){ return r.ok ? r.json() : null; })
     .then(function(j){
