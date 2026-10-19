@@ -59,6 +59,7 @@
 
   function exit(){
     try{ sessionStorage.removeItem('pm-edit'); }catch(e){}
+    try{ localStorage.removeItem('pm-edit'); }catch(e){}
     var b=document.getElementById(BAR_ID); if(b)b.remove();
     var p=document.getElementById(POP_ID); if(p)p.remove();
     document.removeEventListener('click', onClick, true);

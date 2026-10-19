@@ -90,6 +90,7 @@
    * de un solo uso), cargar edit-mode.js */
   try {
     var editOn = sessionStorage.getItem('pm-edit') === '1' ||
+      localStorage.getItem('pm-edit') === '1' ||
       (typeof URLSearchParams !== 'undefined' && new URLSearchParams(location.search).has('pm_edit'));
     var hand = null;
     try { hand = localStorage.getItem('pm-edit-handoff'); } catch(e1){}
@@ -106,8 +107,9 @@
     }
     if (editOn) {
       try { sessionStorage.setItem('pm-edit', '1'); } catch(e2){}
+      try { localStorage.setItem('pm-edit', '1'); } catch(e2){}
       var es = document.createElement('script');
-      es.src = '/piramicasa/assets/edit-mode.js?v=20261019e';
+      es.src = '/piramicasa/assets/edit-mode.js?v=20261019f';
       es.defer = true;
       (document.body || document.documentElement).appendChild(es);
     }

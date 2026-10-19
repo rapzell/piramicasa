@@ -155,7 +155,7 @@
     // así que pasamos el token por localStorage con caducidad de 5 min
     // (edit-mode lo mueve a sessionStorage y lo borra de localStorage)
     if (TOKEN) { try{ localStorage.setItem('pm-edit-handoff', JSON.stringify({t:TOKEN, ts:Date.now()})); }catch(e){} }
-    try{ sessionStorage.setItem('pm-edit', '1'); }catch(e){}
+    try{ sessionStorage.setItem('pm-edit', '1'); localStorage.setItem('pm-edit', '1'); }catch(e){}
     window.open('/piramicasa/?pm_edit=1', '_blank');
   });
   $('pm-logout').addEventListener('click', function(){ setPw(''); TOKEN = null; try{sessionStorage.removeItem(TOK_KEY);sessionStorage.removeItem('pm-edit');}catch(e){} location.reload(); });
