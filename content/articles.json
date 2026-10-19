@@ -1,12 +1,3 @@
 {
-  "items": [
-    {
-      "title": "prueba",
-      "slug": "prueba",
-      "date": "2026-10-19",
-      "excerpt": "Hablemos de algo",
-      "image": "/piramicasa/assets/uploads/1792436443128-visor-arquitectos-plataforma-de-an-lisis-urban-stico-de-galicia.webp",
-      "body": "Hola, esto es una prueba, a ver como sale"
-    }
-  ]
+  "items": []
 }
