@@ -46,12 +46,11 @@
       '<button class="pm-pub" type="button">Publicar (0)</button>' +
       '<button class="pm-exit" type="button">Salir</button></span>';
     document.body.appendChild(el);
-    // React hydration puede eliminar nodos ajenos al DOM: si la barra
-    // desaparece, la volvemos a anclar automáticamente
-    var guard = new MutationObserver(function(){
-      if(!el.parentNode) document.body.appendChild(el);
-    });
-    guard.observe(document.body, {childList:true});
+    // por si algo la quita tras inyectarla: re-anclar unos segundos
+    var n = 0, iv = setInterval(function(){
+      if(el.parentNode){ if(++n >= 6) clearInterval(iv); }
+      else document.body.appendChild(el);
+    }, 700);
     el.querySelector('.pm-arm').addEventListener('click', function(){
       armed = !armed;
       this.classList.toggle('on', armed);
@@ -194,19 +193,35 @@
     d.style.cssText='position:fixed;top:14px;left:50%;transform:translateX(-50%);z-index:2147483002;background:#a33;color:#fff;padding:10px 18px;border-radius:10px;font:600 .82rem Inter;box-shadow:0 8px 24px rgba(0,0,0,.3)';
     d.textContent=msg; document.body.appendChild(d); setTimeout(function(){d.remove();},5000);
   }
+  // Inyectar nodos ajenos mientras React hidrata provoca "client-side
+  // exception": esperar a que el árbol deje de mutar antes de montar la barra.
+  function whenSettled(cb){
+    var root = document.getElementById('__next');
+    if(!root){ cb(); return; }   // páginas legacy sin React: al instante
+    var done = false, t, obs = null;
+    function fire(){ if(done) return; done = true; if(obs) obs.disconnect(); cb(); }
+    try {
+      obs = new MutationObserver(function(){ clearTimeout(t); t = setTimeout(fire, 400); });
+      obs.observe(root, {childList:true, subtree:true});
+    } catch(e){}
+    t = setTimeout(fire, 1200);       // DOM ya tranquilo / sin mutaciones
+    setTimeout(fire, 2600);           // tope duro: nunca esperar más
+  }
+
   function init(){
     var L='es'; try{L=(localStorage.getItem('pm_lang')||'es').slice(0,2);}catch(e){}
     if(L!=='es'){ warn('Modo edición: cambia el idioma a Español para editar textos'); return; }
-    var b = bar();
-    if(!TOKEN){
-      // sin sesión: mostrar la barra con aviso en vez de desaparecer en silencio
-      var s = b.querySelector('span');
-      if(s) s.innerHTML = '⚠️ <b>Sin sesión de edición</b> — abre la web desde «Editar la web» en /admin/';
-      ['.pm-arm','.pm-pub'].forEach(function(q){var x=b.querySelector(q); if(x)x.style.display='none';});
-      return;
-    }
-    document.addEventListener('mouseover', onOver, true);
-    document.addEventListener('click', onClick, true);
+    whenSettled(function(){
+      var b = bar();
+      if(!TOKEN){
+        // sin sesión: mostrar la barra con aviso en vez de desaparecer en silencio
+        var s = b.querySelector('span');
+        if(s) s.innerHTML = '⚠️ <b>Sin sesión de edición</b> — abre la web desde «Editar la web» en /admin/';
+        ['.pm-arm','.pm-pub'].forEach(function(q){var x=b.querySelector(q); if(x)x.style.display='none';});
+        return;
+      }
+      document.addEventListener('mouseover', onOver, true);
+      document.addEventListener('click', onClick, true);
     // propagar ?pm_edit=1 en los enlaces internos: si la pestaña pierde
     // sessionStorage/localStorage, la flag viaja en la propia URL
     document.addEventListener('click', function(e){
@@ -217,6 +232,7 @@
       if(/^(https?:|mailto:|tel:|javascript:)/i.test(h)) return;
       a.setAttribute('href', h + (h.indexOf('?')>-1 ? '&' : '?') + 'pm_edit=1');
     }, true);
+    });
   }
   if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', init); else init();
 })();
