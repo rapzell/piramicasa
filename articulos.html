@@ -966,7 +966,7 @@ if(!items.length)return;
 g.innerHTML=items.map(function(a){
 if(!a||!a.slug)return'';
 var fecha=a.date?new Date(a.date+'T12:00:00').toLocaleDateString('es-ES',{year:'numeric',month:'short',day:'numeric'}):'';
-return '<a class="pm-article-card" href="/piramicasa/articulo.html?a='+encodeURIComponent(a.slug)+'"><span class="pm-icon">📄</span><span class="pm-card-title">'+esc(a.title)+(fecha?' <span style="display:block;font-size:.68rem;color:#8A817A;font-weight:400">'+fecha+'</span>':'')+'</span><span class="pm-card-cta">Ver</span></a>';}).join('');
-document.getElementById('pm-cms-articles').hidden=false;}).catch(function(){});})();</script>
+return '<a class="pm-article-card" data-pm-title-es="'+esc(a.title)+'" href="/piramicasa/articulo.html?a='+encodeURIComponent(a.slug)+'"><span class="pm-icon">📄</span><span class="pm-card-title">'+esc(a.title)+(fecha?' <span style="display:block;font-size:.68rem;color:#8A817A;font-weight:400">'+fecha+'</span>':'')+'</span><span class="pm-card-cta">Ver</span></a>';}).join('');
+var sec=document.getElementById('pm-cms-articles');sec.hidden=false;sec.classList.remove('pm-section-hidden');}).catch(function(){});})();</script>
 </body>
 </html>
