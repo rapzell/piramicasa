@@ -190,8 +190,14 @@
   function init(){
     var L='es'; try{L=(localStorage.getItem('pm_lang')||'es').slice(0,2);}catch(e){}
     if(L!=='es'){ warn('Modo edición: cambia el idioma a Español para editar textos'); return; }
-    if(!TOKEN){ warn('Modo edición: inicia sesión primero en /admin/'); return; }
-    bar();
+    var b = bar();
+    if(!TOKEN){
+      // sin sesión: mostrar la barra con aviso en vez de desaparecer en silencio
+      var s = b.querySelector('span');
+      if(s) s.innerHTML = '⚠️ <b>Sin sesión de edición</b> — abre la web desde «Editar la web» en /admin/';
+      ['.pm-arm','.pm-pub'].forEach(function(q){var x=b.querySelector(q); if(x)x.style.display='none';});
+      return;
+    }
     document.addEventListener('mouseover', onOver, true);
     document.addEventListener('click', onClick, true);
   }
