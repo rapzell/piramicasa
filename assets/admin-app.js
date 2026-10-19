@@ -97,10 +97,18 @@
     var s = state[which === 'textos' ? 'overrides' : 'articles'];
     var content = JSON.stringify({items: s.items}, null, 2);
     if (DIRECT) {
-      return ghApi('/repos/' + REPO + '/contents/' + encodeURIComponent(FILES[which]), {
-        method: 'PUT',
-        body: JSON.stringify({ message: msg, content: b64u(content), sha: s.sha, branch: BRANCH })
-      }).then(function(r){ s.sha = r.data.content && r.data.content.sha; });
+      // Pedir siempre el SHA fresco antes de escribir: evita el error
+      // "does not match" cuando el archivo cambió entre carga y guardado.
+      var path = '/repos/' + REPO + '/contents/' + encodeURIComponent(FILES[which]);
+      function write(sha){
+        return ghApi(path, {
+          method: 'PUT',
+          body: JSON.stringify({ message: msg, content: b64u(content), sha: sha || undefined, branch: BRANCH })
+        });
+      }
+      return ghApi(path + '?ref=' + BRANCH)
+        .then(function(r){ return write(r.status === 200 ? r.data.sha : null); })
+        .then(function(r){ s.sha = r.data.content && r.data.content.sha; });
     }
     return fetch(API + '/api/file', {method:'PUT', headers:{'Authorization':'Bearer '+pw(),'Content-Type':'application/json'},
       body: JSON.stringify({path: FILES[which], content: content, sha: s.sha, message: msg})})
