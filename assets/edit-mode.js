@@ -46,6 +46,12 @@
       '<button class="pm-pub" type="button">Publicar (0)</button>' +
       '<button class="pm-exit" type="button">Salir</button></span>';
     document.body.appendChild(el);
+    // React hydration puede eliminar nodos ajenos al DOM: si la barra
+    // desaparece, la volvemos a anclar automáticamente
+    var guard = new MutationObserver(function(){
+      if(!el.parentNode) document.body.appendChild(el);
+    });
+    guard.observe(document.body, {childList:true});
     el.querySelector('.pm-arm').addEventListener('click', function(){
       armed = !armed;
       this.classList.toggle('on', armed);
