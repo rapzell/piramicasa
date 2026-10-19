@@ -176,55 +176,6 @@
     });
   });
 
-  /* ---------- TEXTOS ---------- */
-  var LANGS = [['es','Nuevo texto (español)'],['en','Inglés'],['pt','Portugués'],['fr','Francés'],['de','Alemán'],['ru','Ruso'],['ar','Árabe']];
-  function renderTextos(){
-    var list = $('pm-tx-list');
-    list.innerHTML = state.overrides.items.map(function(it, i){
-      var fields = '<div><label>Texto actual (tal cual aparece)</label><input data-k="original" value="'+esc(it.original)+'"></div>' +
-        '<div><label>Nuevo texto (español)</label><input data-k="es" value="'+esc(it.es)+'"></div>';
-      var langs = LANGS.slice(1).map(function(l){
-        return '<div><label>'+l[1]+'</label><input data-k="'+l[0]+'" value="'+esc(it[l[0]])+'"></div>';
-      }).join('');
-      return '<div class="pm-row" data-i="'+i+'">' +
-        '<div class="pm-row-head"><span class="t">'+esc(it.original || '(vacío)')+' → '+esc(it.es || '…')+'</span>' +
-        '<button class="pm-more" type="button">+ idiomas</button>' +
-        '<button class="pm-btn pm-btn-danger" type="button">Eliminar</button></div>' +
-        '<div class="pm-row-fields">'+fields+'</div>' +
-        '<div class="pm-langs">'+langs+'</div></div>';
-    }).join('') || '<p class="pm-hint">Todavía no hay textos modificados.</p>';
-  }
-  function collectTextos(){
-    document.querySelectorAll('#pm-tx-list .pm-row').forEach(function(row){
-      var i = +row.dataset.i;
-      row.querySelectorAll('input').forEach(function(inp){
-        var k = inp.dataset.k;
-        if (inp.value) state.overrides.items[i][k] = inp.value; else delete state.overrides.items[i][k];
-      });
-    });
-  }
-  $('pm-tx-list').addEventListener('click', function(e){
-    var row = e.target.closest('.pm-row'); if(!row) return;
-    if (e.target.classList.contains('pm-btn-danger')) {
-      collectTextos(); state.overrides.items.splice(+row.dataset.i, 1); renderTextos();
-    } else if (e.target.classList.contains('pm-more')) {
-      row.classList.toggle('expanded');
-    }
-  });
-  $('pm-tx-add').addEventListener('click', function(){
-    collectTextos(); state.overrides.items.push({original:'', es:''}); renderTextos();
-  });
-  $('pm-tx-save').addEventListener('click', function(){
-    var st = $('pm-tx-status'), btn = $('pm-tx-save');
-    collectTextos();
-    state.overrides.items = state.overrides.items.filter(function(it){ return it.original && it.es; });
-    btn.disabled = true; status(st, 'Publicando…', true);
-    putFile('textos', 'Cambios de texto desde el panel')
-      .then(function(){ status(st, 'Publicado ✓ visible en ~1 minuto', true); renderTextos(); })
-      .catch(function(x){ status(st, 'Error: ' + x.message, false); })
-      .then(function(){ btn.disabled = false; });
-  });
-
   /* ---------- ARTÍCULOS ---------- */
   function slugify(s){ return String(s||'').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'').slice(0,60); }
   function renderArts(){
@@ -310,9 +261,8 @@
   /* ---------- CARGA ---------- */
   function loadAll(){
     Promise.all([getFile('textos'), getFile('articulos')])
-      .then(function(){ renderTextos(); renderArts(); })
+      .then(function(){ renderArts(); })
       .catch(function(x){
-        status($('pm-tx-status'), 'Error cargando datos: ' + x.message, false);
         status($('pm-art-status'), 'Error cargando datos: ' + x.message, false);
       });
   }

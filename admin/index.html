@@ -33,10 +33,10 @@ body{font-family:Inter,system-ui,sans-serif;background:var(--crema);color:#2B2B2
 .pm-login .pm-btn{width:100%}
 .pm-login-err{color:#a33;font-size:.8rem;margin-top:10px;min-height:1em}
 .pm-back{display:block;margin-top:18px;font-size:.8rem;color:var(--v);text-decoration:none}
-#pm-app{display:none;max-width:1100px;margin:0 auto;padding:26px 20px 80px}
-.pm-top{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:20px}
+#pm-app{display:none;max-width:860px;margin:0 auto;padding:26px 20px 80px}
+.pm-top{display:flex;flex-direction:column;align-items:center;gap:14px;margin-bottom:26px;text-align:center}
 .pm-top h1{font-family:'Playfair Display',serif;font-size:1.5rem;color:var(--vd)}
-.pm-top-right{display:flex;gap:8px;align-items:center;font-size:.8rem;color:var(--muted)}
+.pm-top-right{display:flex;gap:10px;align-items:center;font-size:.8rem;color:var(--muted);flex-wrap:wrap;justify-content:center}
 .pm-tabs{display:flex;gap:6px;margin-bottom:22px;border-bottom:2px solid var(--bd)}
 .pm-tab{cursor:pointer;border:none;background:none;font-family:inherit;font-size:.9rem;font-weight:600;color:var(--muted);padding:10px 18px;border-bottom:2px solid transparent;margin-bottom:-2px}
 .pm-tab.on{color:var(--vd);border-bottom-color:var(--oro)}
@@ -94,27 +94,15 @@ input.pm-fi:focus,textarea.pm-ft:focus{outline:2px solid var(--oro);border-color
   <div class="pm-top">
     <h1>Panel Piramicasa</h1>
     <div class="pm-top-right">
-      <button class="pm-btn" id="pm-edit-site" type="button" style="background:var(--oro);color:#2B2B2B">✏️ Editar la web (modo visual)</button>
+      <button class="pm-btn" id="pm-edit-site" type="button" style="background:var(--oro);color:#2B2B2B">✏️ Editar texto en la web</button>
       <a href="/piramicasa/" style="color:var(--v)">Ver la web</a>
       <button class="pm-btn-ghost pm-btn" id="pm-logout" type="button">Salir</button>
     </div>
   </div>
-  <div class="pm-tabs">
-    <button class="pm-tab on" data-tab="textos" type="button">Textos de la web</button>
-    <button class="pm-tab" data-tab="articulos" type="button">Artículos</button>
-  </div>
 
-  <div class="pm-panel on" id="pm-panel-textos">
-    <p class="pm-hint">Cambia cualquier texto visible de la web: copia en «Texto actual» el texto tal como aparece ahora y escribe el nuevo. Los demás idiomas son opcionales. Al pulsar «Publicar» el cambio tarda ~1 minuto en verse.</p>
-    <div id="pm-tx-list"></div>
-    <div class="pm-actions">
-      <button class="pm-btn pm-btn-ghost" id="pm-tx-add" type="button">+ Añadir cambio de texto</button>
-      <button class="pm-btn" id="pm-tx-save" type="button">Publicar cambios</button>
-      <span class="pm-status" id="pm-tx-status"></span>
-    </div>
-  </div>
+  <h2 style="font-family:'Playfair Display',serif;font-size:1.15rem;color:var(--vd);margin-bottom:14px;text-align:center">Artículos</h2>
 
-  <div class="pm-panel" id="pm-panel-articulos">
+  <div class="pm-panel on" id="pm-panel-articulos">
     <p class="pm-hint">Los artículos aparecen en la página de Artículos de la web. «Nuevo artículo» para crear uno, o pulsa uno de la lista para editarlo.</p>
     <div id="pm-art-list"></div>
     <div class="pm-actions">
@@ -150,6 +138,6 @@ input.pm-fi:focus,textarea.pm-ft:focus{outline:2px solid var(--oro);border-color
   </div>
 </div>
 
-<script src="/piramicasa/assets/admin-app.js?v=20261019a"></script>
+<script src="/piramicasa/assets/admin-app.js?v=20261019b"></script>
 </body>
 </html>
