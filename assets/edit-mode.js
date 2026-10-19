@@ -14,7 +14,10 @@
   var pending = [];            // {original, es}
   var pendingEls = new WeakSet(); // elementos ya marcados
   var SKIP = ['SCRIPT','STYLE','NOSCRIPT','TEXTAREA','INPUT','CODE','PRE','SVG','PATH','IMG','VIDEO','IFRAME','SELECT','OPTION'];
-  var TEXTY = ['P','H1','H2','H3','H4','H5','H6','LI','A','SPAN','BUTTON','LABEL','TD','TH','STRONG','EM','B','I','BLOCKQUOTE','FIGCAPTION','SMALL','SUMMARY','DIV'];
+  // Solo texto de contenido: párrafos, listas, citas, celdas, descripciones.
+  // Titulares (H*), navegación, enlaces, botones y nombres de secciones NO son editables.
+  var TEXTY = ['P','LI','BLOCKQUOTE','TD','DT','DD','FIGCAPTION','Q','CITE'];
+  var NO_ZONE = '#'+BAR_ID+',#'+POP_ID+',.pm-logo,[data-pm-consent-open],#pm-consent,.pm-chatbot-widget,header,nav,footer,.pm-header,.pm-nav,.pm-dropdown,.pm-footer,.pm-mobile-bar,.pm-mobile-drawer,.pm-mobile-overlay,#pm-lang-switcher,#pm-lang-banner,#pm-lang-menu,.pm-toolbar';
 
   /* ---------- toolbar ---------- */
   function bar(){
@@ -58,7 +61,7 @@
     var el = t && t.nodeType === 1 ? t : t && t.parentElement;
     while(el && el !== document.body){
       if (SKIP.indexOf(el.tagName) !== -1) return null;
-      if (el.closest('#'+BAR_ID+',#'+POP_ID+',.pm-logo,[data-pm-consent-open],#pm-consent,.pm-chatbot-widget')) return null;
+      if (el.closest(NO_ZONE)) return null;
       if (TEXTY.indexOf(el.tagName) !== -1){
         var txt = (el.textContent||'').trim();
         if (txt && txt.length <= 500) return el;

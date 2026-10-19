@@ -107,7 +107,7 @@
     if (editOn) {
       try { sessionStorage.setItem('pm-edit', '1'); } catch(e2){}
       var es = document.createElement('script');
-      es.src = '/piramicasa/assets/edit-mode.js?v=20261019a';
+      es.src = '/piramicasa/assets/edit-mode.js?v=20261019b';
       es.defer = true;
       (document.body || document.documentElement).appendChild(es);
     }
