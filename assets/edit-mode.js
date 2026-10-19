@@ -13,6 +13,7 @@
   var REPO = 'rapzell/piramicasa', BRANCH = 'gh-pages';
   var pending = [];            // {original, es}
   var pendingEls = new WeakSet(); // elementos ya marcados
+  var armed = false;           // la web navega normal hasta pulsar "Editar"
   var SKIP = ['SCRIPT','STYLE','NOSCRIPT','TEXTAREA','INPUT','CODE','PRE','SVG','PATH','IMG','VIDEO','IFRAME','SELECT','OPTION'];
   // Solo texto de contenido: párrafos, listas, citas, celdas, descripciones.
   // Titulares (H*), navegación, enlaces, botones y nombres de secciones NO son editables.
@@ -28,6 +29,8 @@
       '#'+BAR_ID+' .pm-eb{margin-left:auto;display:flex;gap:8px}' +
       '#'+BAR_ID+' button{cursor:pointer;border:none;border-radius:8px;padding:7px 14px;font:600 12px Inter,sans-serif}' +
       '#'+BAR_ID+' .pm-pub{background:#C69C6D;color:#2B2B2B}' +
+      '#'+BAR_ID+' .pm-arm{background:#B3261E;color:#fff;transition:all .2s}' +
+      '#'+BAR_ID+' .pm-arm.on{background:#E03A2E;box-shadow:0 0 0 3px rgba(224,58,46,.45),0 0 16px rgba(224,58,46,.9)}' +
       '#'+BAR_ID+' .pm-exit{background:transparent;color:#F7F4F0;border:1px solid rgba(255,255,255,.4)}' +
       '#'+POP_ID+'{position:fixed;z-index:2147483001;background:#fff;border:1px solid #E0D9D0;border-radius:14px;box-shadow:0 18px 50px rgba(0,0,0,.28);padding:16px;width:min(420px,92vw);font-family:Inter,sans-serif}' +
       '#'+POP_ID+' label{display:block;font-size:.68rem;text-transform:uppercase;letter-spacing:.05em;color:#8A817A;margin:8px 0 3px}' +
@@ -38,10 +41,17 @@
       '#'+POP_ID+' .ok{background:#3D4A30;color:#fff}#'+POP_ID+' .no{background:#f0ece6;color:#4A4A4A}' +
       '.pm-edit-hover{outline:2px dashed #C69C6D !important;outline-offset:2px;cursor:pointer !important}' +
       '.pm-edit-done{outline:2px solid #5A6B4A !important;outline-offset:2px}</style>' +
-      '<span>✏️ <b>Modo edición</b> — haz clic en cualquier texto para cambiarlo</span>' +
-      '<span class="pm-eb"><button class="pm-pub" type="button">Publicar (0)</button>' +
+      '<span>📝 <b>Modo edición</b> — pulsa «Editar» y luego clic en un texto</span>' +
+      '<span class="pm-eb"><button class="pm-arm" type="button">✏️ Editar</button>' +
+      '<button class="pm-pub" type="button">Publicar (0)</button>' +
       '<button class="pm-exit" type="button">Salir</button></span>';
     document.body.appendChild(el);
+    el.querySelector('.pm-arm').addEventListener('click', function(){
+      armed = !armed;
+      this.classList.toggle('on', armed);
+      this.textContent = armed ? '🛑 Dejar de editar' : '✏️ Editar';
+      if(!armed && lastHover){ lastHover.classList.remove('pm-edit-hover'); lastHover = null; }
+    });
     el.querySelector('.pm-pub').addEventListener('click', publish);
     el.querySelector('.pm-exit').addEventListener('click', exit);
     return el;
@@ -73,6 +83,7 @@
 
   var lastHover = null;
   function onOver(e){
+    if (!armed) return;
     var el = pickEl(e.target);
     if (lastHover && lastHover !== el) lastHover.classList.remove('pm-edit-hover');
     lastHover = el;
@@ -81,6 +92,7 @@
 
   function onClick(e){
     if (e.target.closest('#'+BAR_ID+',#'+POP_ID)) return;
+    if (!armed) return; // sin armar: la web navega como un usuario normal
     var el = pickEl(e.target);
     if (!el) return;
     e.preventDefault(); e.stopPropagation();
