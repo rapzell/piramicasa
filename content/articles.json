@@ -1,14 +1,6 @@
 {
   "items": [
     {
-      "title": "Bienvenida al panel de Piramicasa",
-      "slug": "bienvenida-panel",
-      "date": "2026-10-19",
-      "excerpt": "Artículo de ejemplo creado para probar que el panel funciona. Se puede editar o eliminar desde /admin/.",
-      "image": "",
-      "body": "Este artículo se ha creado como **prueba** del panel de administración.\n\n## Cómo funciona\n\n- Escribes el artículo en el panel\n- Pulsas «Publicar artículo»\n- En ~1 minuto aparece en la web\n\nPuedes editarlo o eliminarlo desde el panel."
-    },
-    {
       "title": "prueba",
       "slug": "prueba",
       "date": "2026-10-19",
