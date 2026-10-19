@@ -201,6 +201,16 @@
     }
     document.addEventListener('mouseover', onOver, true);
     document.addEventListener('click', onClick, true);
+    // propagar ?pm_edit=1 en los enlaces internos: si la pestaña pierde
+    // sessionStorage/localStorage, la flag viaja en la propia URL
+    document.addEventListener('click', function(e){
+      var a = e.target && e.target.closest ? e.target.closest('a[href]') : null;
+      if(!a) return;
+      var h = a.getAttribute('href') || '';
+      if(!h || h.charAt(0)==='#' || h.indexOf('pm_edit')!==-1) return;
+      if(/^(https?:|mailto:|tel:|javascript:)/i.test(h)) return;
+      a.setAttribute('href', h + (h.indexOf('?')>-1 ? '&' : '?') + 'pm_edit=1');
+    }, true);
   }
   if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', init); else init();
 })();

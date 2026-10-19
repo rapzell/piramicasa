@@ -109,7 +109,7 @@
       try { sessionStorage.setItem('pm-edit', '1'); } catch(e2){}
       try { localStorage.setItem('pm-edit', '1'); } catch(e2){}
       var es = document.createElement('script');
-      es.src = '/piramicasa/assets/edit-mode.js?v=20261019f';
+      es.src = '/piramicasa/assets/edit-mode.js?v=20261019g';
       es.defer = true;
       (document.body || document.documentElement).appendChild(es);
     }
