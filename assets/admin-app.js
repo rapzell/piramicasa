@@ -159,7 +159,14 @@
     window.open('/piramicasa/?pm_edit=1', '_blank');
   });
   $('pm-logout').addEventListener('click', function(){ setPw(''); TOKEN = null; try{sessionStorage.removeItem(TOK_KEY);sessionStorage.removeItem('pm-edit');}catch(e){} location.reload(); });
-  if (pw() && DIRECT) {
+  // Auto-login si la pestaña ya tiene el token (p. ej. al volver del
+  // modo edición con el botón «Panel» de la barra de edición)
+  var storedTok = null;
+  try { storedTok = sessionStorage.getItem(TOK_KEY); } catch(e){}
+  if (storedTok && DIRECT) {
+    TOKEN = storedTok;
+    apiLogin().then(showApp).catch(function(){ TOKEN = null; });
+  } else if (pw() && DIRECT) {
     unlock(pw()).then(function(t){ TOKEN = t; try{sessionStorage.setItem(TOK_KEY, t);}catch(e){} }).then(apiLogin).then(showApp)
       .catch(function(){ setPw(''); TOKEN = null; });
   } else if (pw()) {

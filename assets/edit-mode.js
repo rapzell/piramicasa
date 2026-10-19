@@ -44,6 +44,7 @@
       '<span>📝 <b>Modo edición</b> — pulsa «Editar» y luego clic en un texto</span>' +
       '<span class="pm-eb"><button class="pm-arm" type="button">✏️ Editar</button>' +
       '<button class="pm-pub" type="button">Publicar (0)</button>' +
+      '<button class="pm-exit pm-gopanel" type="button">Panel</button>' +
       '<button class="pm-exit" type="button">Salir</button></span>';
     document.body.appendChild(el);
     // por si algo la quita tras inyectarla: re-anclar unos segundos
@@ -58,7 +59,10 @@
       if(!armed && lastHover){ lastHover.classList.remove('pm-edit-hover'); lastHover = null; }
     });
     el.querySelector('.pm-pub').addEventListener('click', publish);
-    el.querySelector('.pm-exit').addEventListener('click', exit);
+    el.querySelector('.pm-gopanel').addEventListener('click', function(){
+      location.href = '/piramicasa/admin/';
+    });
+    el.querySelector('.pm-exit:not(.pm-gopanel)').addEventListener('click', exit);
     return el;
   }
 
