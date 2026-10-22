@@ -213,17 +213,18 @@
   }
 
   function init(){
+    // Sin sesión (token solo vive en la pestaña que abrió el modo edición):
+    // la web se muestra totalmente normal, sin barra ni avisos, y limpiamos
+    // la flag para que no siga intentando activar el modo en cada página.
+    if(!TOKEN){
+      try{ sessionStorage.removeItem('pm-edit'); }catch(e){}
+      try{ localStorage.removeItem('pm-edit'); }catch(e){}
+      return;
+    }
     var L='es'; try{L=(localStorage.getItem('pm_lang')||'es').slice(0,2);}catch(e){}
     if(L!=='es'){ warn('Modo edición: cambia el idioma a Español para editar textos'); return; }
     whenSettled(function(){
-      var b = bar();
-      if(!TOKEN){
-        // sin sesión: mostrar la barra con aviso en vez de desaparecer en silencio
-        var s = b.querySelector('span');
-        if(s) s.innerHTML = '⚠️ <b>Sin sesión de edición</b> — abre la web desde «Editar la web» en /admin/';
-        ['.pm-arm','.pm-pub'].forEach(function(q){var x=b.querySelector(q); if(x)x.style.display='none';});
-        return;
-      }
+      bar();
       document.addEventListener('mouseover', onOver, true);
       document.addEventListener('click', onClick, true);
     // propagar ?pm_edit=1 en los enlaces internos: si la pestaña pierde
