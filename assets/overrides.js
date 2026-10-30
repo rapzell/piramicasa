@@ -232,3 +232,20 @@ document.addEventListener("click",function(e){
 setInterval(checkHash,400);
 if(location.hash)setTimeout(checkHash,200);
 })();
+
+/* pm-st-refresh: recalcular triggers de scroll cuando el layout se asienta */
+(function(){
+  var last=0;
+  function kick(){
+    var n=Date.now();if(n-last<400)return;last=n;
+    try{window.dispatchEvent(new Event("resize"))}catch(e){}
+  }
+  window.addEventListener("load",function(){
+    [300,900,2000,4000,7000].forEach(function(m){setTimeout(kick,m)});
+  });
+  document.addEventListener("load",function(e){
+    if(e.target&&e.target.tagName&&/^(IMG|IFRAME|VIDEO)$/.test(e.target.tagName))kick();
+  },true);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(function(){setTimeout(kick,60)});
+  if(document.fonts&&document.fonts.addEventListener)document.fonts.addEventListener("loadingdone",kick);
+})();
