@@ -149,7 +149,7 @@ function watch(id){
   if(!id)return;
   if(cur){cur.stop=true;cur=null}
   var w={stop:false};cur=w;
-  var stable=0,n=0,urlDone=false;
+  var stable=0,n=0,urlDone=false,tabDone=false;
   function cancel(){w.stop=true}
   window.addEventListener("wheel",cancel,{once:true,passive:true});
   window.addEventListener("touchmove",cancel,{once:true,passive:true});
@@ -158,6 +158,19 @@ function watch(id){
     var el=document.getElementById(id);
     if(!el)return;
     if(!urlDone){urlDone=true;fixUrl(id)}
+    if(id==="productos"&&!tabDone){
+      try{
+        var v=sessionStorage.getItem("pm-tab");
+        if(v){
+          sessionStorage.removeItem("pm-tab");
+          var p=v.split("|"),n=+p[0],ts=+p[1]||0;
+          if(Date.now()-ts<60000){
+            var btns=el.querySelectorAll(".pm-tabs .pm-tab, .pm-tabs button");
+            if(btns&&btns[n]){btns[n].click();tabDone=true}
+          }else tabDone=true;
+        }else tabDone=true;
+      }catch(e){tabDone=true}
+    }
     var anchor=el.querySelector(".pm-label")||el.querySelector("h1,h2")||el;
     var ty=0;
     try{var m=getComputedStyle(anchor).transform;if(m&&m!=="none")ty=(new DOMMatrixReadOnly(m)).m42||0}catch(e){}
@@ -206,6 +219,13 @@ document.addEventListener("click",function(e){
   if(!id)return;
   lastHash="#"+id;
   try{sessionStorage.setItem("pm-h",id+"|"+Date.now())}catch(_){}
+  if(id==="productos"){
+    try{
+      var nm=(a.textContent||"").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"").trim();
+      var mt={"camas piramidales":0,"piramides menores":1,"casas y bungalows":2,"piramide jardin":3,"piramide faraday":2,"piramascota":4};
+      if(mt[nm]!=null)sessionStorage.setItem("pm-tab",mt[nm]+"|"+Date.now());
+    }catch(_){}
+  }
   setTimeout(function(){watch(id)},120);
   setTimeout(function(){watch(id)},700);
 },true);
