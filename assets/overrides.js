@@ -159,10 +159,12 @@ function watch(id){
     if(!el)return;
     if(!urlDone){urlDone=true;fixUrl(id)}
     var anchor=el.querySelector(".pm-label")||el.querySelector("h1,h2")||el;
-    var d=anchor.getBoundingClientRect().top-offY();
+    var ty=0;
+    try{var m=getComputedStyle(anchor).transform;if(m&&m!=="none")ty=(new DOMMatrixReadOnly(m)).m42||0}catch(e){}
+    var d=anchor.getBoundingClientRect().top-ty-offY();
     if(Math.abs(d)>24){
       stable=0;
-      try{window.scrollTo({top:anchor.getBoundingClientRect().top+window.scrollY-offY(),behavior:"smooth"})}
+      try{window.scrollTo({top:anchor.getBoundingClientRect().top-ty+window.scrollY-offY(),behavior:"smooth"})}
       catch(e){el.scrollIntoView()}
     }
     else if(++stable>=4&&n>=20){clearInterval(t);if(cur===w)cur=null}
