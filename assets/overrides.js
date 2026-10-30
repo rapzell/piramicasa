@@ -138,7 +138,7 @@
 /* pm-hash-scroll v4 */
 (function(){
 var cur=null,lastHash="";
-function offY(){var h=document.querySelector(".pm-header")||document.querySelector("header");return ((h&&h.offsetHeight)||80)+26}
+function offY(){var h=document.querySelector(".pm-header")||document.querySelector("header");return ((h&&h.offsetHeight)||80)+14}
 function fixUrl(id){
   try{
     if(location.hash==="#"+id)return;
@@ -158,10 +158,11 @@ function watch(id){
     var el=document.getElementById(id);
     if(!el)return;
     if(!urlDone){urlDone=true;fixUrl(id)}
-    var d=el.getBoundingClientRect().top-offY();
+    var anchor=el.querySelector(".pm-label")||el.querySelector("h1,h2")||el;
+    var d=anchor.getBoundingClientRect().top-offY();
     if(Math.abs(d)>24){
       stable=0;
-      try{window.scrollTo({top:el.getBoundingClientRect().top+window.scrollY-offY(),behavior:"smooth"})}
+      try{window.scrollTo({top:anchor.getBoundingClientRect().top+window.scrollY-offY(),behavior:"smooth"})}
       catch(e){el.scrollIntoView()}
     }
     else if(++stable>=4&&n>=20){clearInterval(t);if(cur===w)cur=null}
