@@ -6,6 +6,9 @@
  */
 window.PM_I18N = {
   en: {
+    'Ver PDF': 'View PDF',
+    'Descargar': 'Download',
+    'Vista previa en la página': 'Preview on this page',
     'Inicio': 'Home',
     'Pirámides': 'Pyramids',
     'Ciencia': 'Science',
@@ -1289,6 +1292,9 @@ window.PM_I18N = {
   },
 
   pt: {
+    'Ver PDF': 'Ver PDF',
+    'Descargar': 'Baixar',
+    'Vista previa en la página': 'Pré-visualização nesta página',
     'Inicio': 'Início',
     'Pirámides': 'Pirâmides',
     'Ciencia': 'Ciência',
@@ -2572,6 +2578,9 @@ window.PM_I18N = {
   },
 
   fr: {
+    'Ver PDF': 'Voir le PDF',
+    'Descargar': 'Télécharger',
+    'Vista previa en la página': 'Aperçu sur cette page',
     'Inicio': 'Accueil',
     'Pirámides': 'Pyramides',
     'Ciencia': 'Science',
@@ -3855,6 +3864,9 @@ window.PM_I18N = {
   },
 
   de: {
+    'Ver PDF': 'PDF ansehen',
+    'Descargar': 'Herunterladen',
+    'Vista previa en la página': 'Vorschau auf dieser Seite',
     'Inicio': 'Startseite',
     'Pirámides': 'Pyramiden',
     'Ciencia': 'Wissenschaft',
@@ -5138,6 +5150,9 @@ window.PM_I18N = {
   },
 
   ru: {
+    'Ver PDF': 'Открыть PDF',
+    'Descargar': 'Скачать',
+    'Vista previa en la página': 'Предпросмотр на странице',
     'Inicio': 'Главная',
     'Pirámides': 'Пирамиды',
     'Ciencia': 'Наука',
@@ -6421,6 +6436,9 @@ window.PM_I18N = {
   },
 
   ar: {
+    'Ver PDF': 'عرض PDF',
+    'Descargar': 'تنزيل',
+    'Vista previa en la página': 'معاينة في الصفحة',
     'Inicio': 'الرئيسية',
     'Pirámides': 'الأهرامات',
     'Ciencia': 'العلم',
