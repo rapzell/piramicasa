@@ -587,7 +587,7 @@
         if (lang === 'es') return Promise.resolve(null);
         if (artI18n) return Promise.resolve(artI18n);
         if (artI18nPromise) return artI18nPromise;
-        artI18nPromise = fetch('/piramicasa/assets/articulos-i18n-' + lang + '.json', { cache: 'force-cache' })
+        artI18nPromise = fetch('/piramicasa/assets/articulos-i18n-' + lang + '.json?v=20261030a', { cache: 'force-cache' })
           .then(function(r){ return r.ok ? r.json() : null; })
           .then(function(j){ artI18n = j || {}; return artI18n; })
           .catch(function(){ artI18n = {}; return artI18n; });
