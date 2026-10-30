@@ -74,3 +74,4 @@
 }
 /* ===== END MOBILE MENU FIX ===== */
 .pm-stats .pm-stat-num{white-space:pre-line;display:flex;align-items:flex-end;justify-content:center;min-height:2.05em;line-height:1.02;text-align:center}.pm-stats .pm-stat-label{margin-top:.12rem}.pm-stats .pm-stat:nth-child(3) .pm-stat-label{margin-top:.12rem}
+#beneficios,#avales,#estudios,#faq,#productos,#contacto,#inicio,#nosotros,#ciencia{scroll-margin-top:110px}

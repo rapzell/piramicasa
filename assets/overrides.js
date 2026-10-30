@@ -150,7 +150,7 @@ function watch(id){
     if(!el)return;
     var d=el.getBoundingClientRect().top-offY();
     if(Math.abs(d)>24){stable=0;try{window.scrollTo({top:el.getBoundingClientRect().top+window.scrollY-offY(),behavior:"smooth"})}catch(e){el.scrollIntoView()}}
-    else if(++stable>=4){clearInterval(t)}
+    else if(++stable>=4&&n>=20){clearInterval(t)}
   },300);
 }
 function fire(){
