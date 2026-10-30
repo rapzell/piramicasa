@@ -145,7 +145,8 @@ function fixUrl(id){
     history.replaceState(history.state,"",location.pathname+location.search+"#"+id);
   }catch(e){}
 }
-function watch(id){
+function np(p){return (p||"").replace(/\/index\.html$/i,"").replace(/\/+$/,"")||"/"}
+function watch(id,path){
   if(!id)return;
   if(cur){cur.stop=true;cur=null}
   var w={stop:false};cur=w;
@@ -155,6 +156,7 @@ function watch(id){
   window.addEventListener("touchmove",cancel,{once:true,passive:true});
   var t=setInterval(function(){
     if(w.stop||++n>60){clearInterval(t);if(cur===w)cur=null;return}
+    if(path&&np(location.pathname)!==np(path)){w.stop=true;clearInterval(t);if(cur===w)cur=null;return}
     var el=document.getElementById(id);
     if(!el)return;
     if(!urlDone){urlDone=true;fixUrl(id)}
@@ -184,22 +186,24 @@ function watch(id){
   },300);
 }
 function pendingFlag(){
-  var id=null;
+  var r=null;
   try{
     var v=sessionStorage.getItem("pm-h");
     if(v){
       sessionStorage.removeItem("pm-h");
       var p=v.split("|"),ts=+p[1]||0;
-      if(Date.now()-ts<60000)id=p[0];
+      if(Date.now()-ts<60000)r={id:p[0],path:p[2]||""};
     }
   }catch(e){}
-  return id;
+  return r;
 }
 function checkHash(){
   var h="";try{h=decodeURIComponent(location.hash||"")}catch(e){}
   if(h.length<2){
-    var pid=pendingFlag();
-    if(pid&&pid!==lastHash){lastHash="#"+pid;watch(pid)}
+    var pf=pendingFlag();
+    if(pf&&pf.id&&pf.id!==lastHash&&(!pf.path||np(location.pathname)===np(pf.path))){
+      lastHash="#"+pf.id;watch(pf.id,pf.path)
+    }
     return;
   }
   if(h===lastHash)return;
@@ -218,7 +222,9 @@ document.addEventListener("click",function(e){
   var id="";try{id=decodeURIComponent(h.slice(1))}catch(_){id=h.slice(1)}
   if(!id)return;
   lastHash="#"+id;
-  try{sessionStorage.setItem("pm-h",id+"|"+Date.now())}catch(_){}
+  var tp="";
+  try{tp=new URL(a.getAttribute("href"),location.href).pathname||location.pathname}catch(_){tp=location.pathname}
+  try{sessionStorage.setItem("pm-h",id+"|"+Date.now()+"|"+tp)}catch(_){}
   if(id==="productos"){
     try{
       var nm=(a.textContent||"").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"").trim();
@@ -226,8 +232,8 @@ document.addEventListener("click",function(e){
       if(mt[nm]!=null)sessionStorage.setItem("pm-tab",mt[nm]+"|"+Date.now());
     }catch(_){}
   }
-  setTimeout(function(){watch(id)},120);
-  setTimeout(function(){watch(id)},700);
+  setTimeout(function(){watch(id,tp)},120);
+  setTimeout(function(){watch(id,tp)},700);
 },true);
 setInterval(checkHash,400);
 if(location.hash)setTimeout(checkHash,200);
