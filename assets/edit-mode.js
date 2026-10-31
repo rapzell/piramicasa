@@ -12,6 +12,8 @@
   var BAR_ID = 'pm-edit-bar', POP_ID = 'pm-edit-pop';
   var REPO = 'rapzell/piramicasa', BRANCH = 'gh-pages';
   var pending = [];            // {original, es}
+  try { pending = JSON.parse(sessionStorage.getItem('pm-edit-pending') || '[]') || []; } catch(e){ pending = []; }
+  function savePending(){ try{ sessionStorage.setItem('pm-edit-pending', JSON.stringify(pending)); }catch(e){} }
   var pendingEls = new WeakSet(); // elementos ya marcados
   var armed = false;           // la web navega normal hasta pulsar "Editar"
   var SKIP = ['SCRIPT','STYLE','NOSCRIPT','TEXTAREA','INPUT','CODE','PRE','SVG','PATH','IMG','VIDEO','IFRAME','SELECT','OPTION'];
@@ -41,9 +43,9 @@
       '#'+POP_ID+' .ok{background:#3D4A30;color:#fff}#'+POP_ID+' .no{background:#f0ece6;color:#4A4A4A}' +
       '.pm-edit-hover{outline:2px dashed #C69C6D !important;outline-offset:2px;cursor:pointer !important}' +
       '.pm-edit-done{outline:2px solid #5A6B4A !important;outline-offset:2px}</style>' +
-      '<span>📝 <b>Modo edición</b> — pulsa «Editar» y luego clic en un texto</span>' +
+      '<span>📝 <b>Modo edición</b> — pulsa «Editar», clic en un texto y luego «Publicar»</span>' +
       '<span class="pm-eb"><button class="pm-arm" type="button">✏️ Editar</button>' +
-      '<button class="pm-pub" type="button">Publicar (0)</button>' +
+      '<button class="pm-pub" type="button">Publicar (' + pending.length + ')</button>' +
       '<button class="pm-exit pm-gopanel" type="button">Panel</button>' +
       '<button class="pm-exit" type="button">Salir</button></span>';
     document.body.appendChild(el);
@@ -63,10 +65,13 @@
       location.href = '/piramicasa/admin/';
     });
     el.querySelector('.pm-exit:not(.pm-gopanel)').addEventListener('click', exit);
+    if (pending.length) warn('Tienes ' + pending.length + ' cambio(s) sin publicar — pulsa «Publicar» para guardarlos');
     return el;
   }
 
   function exit(){
+    if (pending.length && !confirm('Hay ' + pending.length + ' cambio(s) SIN PUBLICAR. Si sales ahora se perderán.\n\n¿Salir de todos modos?')) return;
+    pending.length = 0; savePending();
     try{ sessionStorage.removeItem('pm-edit'); }catch(e){}
     try{ localStorage.removeItem('pm-edit'); }catch(e){}
     var b=document.getElementById(BAR_ID); if(b)b.remove();
@@ -135,6 +140,7 @@
       if (nv && nv !== original){
         for (var i=pending.length-1;i>=0;i--) if(pending[i].original===original) pending.splice(i,1);
         pending.push({original:original, es:nv});
+        savePending();
         pendingEls.add(el); el.classList.remove('pm-edit-hover'); el.classList.add('pm-edit-done');
         el.textContent = nv; // previsualización inmediata
         var pub = document.querySelector('#'+BAR_ID+' .pm-pub');
@@ -180,7 +186,7 @@
         });
       })
       .then(function(){
-        pending.length = 0;
+        pending.length = 0; savePending();
         pub.textContent = 'Publicar (0)'; pub.disabled = false;
         alert('✓ Cambios publicados. Visibles en la web en ~1 minuto.');
         document.querySelectorAll('.pm-edit-done').forEach(function(x){x.classList.remove('pm-edit-done');});
@@ -227,6 +233,9 @@
       bar();
       document.addEventListener('mouseover', onOver, true);
       document.addEventListener('click', onClick, true);
+      window.addEventListener('beforeunload', function(e){
+        if (pending.length){ e.preventDefault(); e.returnValue = ''; }
+      });
     // propagar ?pm_edit=1 en los enlaces internos: si la pestaña pierde
     // sessionStorage/localStorage, la flag viaja en la propia URL
     document.addEventListener('click', function(e){
