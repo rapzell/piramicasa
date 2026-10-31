@@ -23,51 +23,6 @@
 
 
 
-<!-- Piramicasa Contact Form -->
-<div id="pm-contact-form" style="max-width:560px;margin:48px auto;padding:32px;background:#fff;border-radius:16px;box-shadow:0 4px 24px rgba(0,0,0,.08);border:1px solid #E0D9D0">
-  <h2 style="font-family:'Playfair Display',serif;font-size:1.6rem;color:#3D4A30;margin-bottom:8px;text-align:center">Solicita Información</h2>
-  <p style="text-align:center;color:#8A817A;font-size:.9rem;margin-bottom:24px">Te responderemos en menos de 24 horas. Sin compromiso.</p>
-  <form name="contacto" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/piramicasa/gracias" style="display:flex;flex-direction:column;gap:14px">
-    <input type="hidden" name="form-name" value="contacto" />
-    <p style="display:none"><label>No llenar: <input name="bot-field" /></label></p>
-    <div style="display:flex;gap:14px;flex-wrap:wrap">
-      <div style="flex:1;min-width:200px">
-        <label style="display:block;font-size:.8rem;font-weight:600;color:#3D4A30;margin-bottom:4px">Nombre *</label>
-        <input type="text" name="nombre" required style="width:100%;padding:10px 14px;border:1px solid #E0D9D0;border-radius:8px;font-size:14px;box-sizing:border-box;outline:none" onfocus="this.style.borderColor='#C69C6D'" onblur="this.style.borderColor='#E0D9D0'" />
-      </div>
-      <div style="flex:1;min-width:200px">
-        <label style="display:block;font-size:.8rem;font-weight:600;color:#3D4A30;margin-bottom:4px">Teléfono</label>
-        <input type="tel" name="telefono" style="width:100%;padding:10px 14px;border:1px solid #E0D9D0;border-radius:8px;font-size:14px;box-sizing:border-box;outline:none" onfocus="this.style.borderColor='#C69C6D'" onblur="this.style.borderColor='#E0D9D0'" />
-      </div>
-    </div>
-    <div>
-      <label style="display:block;font-size:.8rem;font-weight:600;color:#3D4A30;margin-bottom:4px">Email *</label>
-      <input type="email" name="email" required style="width:100%;padding:10px 14px;border:1px solid #E0D9D0;border-radius:8px;font-size:14px;box-sizing:border-box;outline:none" onfocus="this.style.borderColor='#C69C6D'" onblur="this.style.borderColor='#E0D9D0'" />
-    </div>
-    <div>
-      <label style="display:block;font-size:.8rem;font-weight:600;color:#3D4A30;margin-bottom:4px">¿Qué producto te interesa?</label>
-      <select name="producto" style="width:100%;padding:10px 14px;border:1px solid #E0D9D0;border-radius:8px;font-size:14px;box-sizing:border-box;outline:none;background:#fff" onfocus="this.style.borderColor='#C69C6D'" onblur="this.style.borderColor='#E0D9D0'">
-        <option value="">Selecciona una opción...</option>
-        <option value="Piramicama">Piramicama (cama piramidal)</option>
-        <option value="Hygia">Pirámide Hygia</option>
-        <option value="Hercules">Pirámide Hércules</option>
-        <option value="Pirajardin">Pirajardín</option>
-        <option value="Faraday">Arcones Faraday</option>
-        <option value="Vital">Piramicasa Vital (portátil)</option>
-        <option value="Piramascotas">Piramascotas</option>
-        <option value="Otro">Otro / No estoy seguro</option>
-      </select>
-    </div>
-    <div>
-      <label style="display:block;font-size:.8rem;font-weight:600;color:#3D4A30;margin-bottom:4px">Mensaje *</label>
-      <textarea name="mensaje" required rows="4" style="width:100%;padding:10px 14px;border:1px solid #E0D9D0;border-radius:8px;font-size:14px;box-sizing:border-box;outline:none;resize:vertical" onfocus="this.style.borderColor='#C69C6D'" onblur="this.style.borderColor='#E0D9D0'" placeholder="Cuéntanos qué necesitas..."></textarea>
-    </div>
-    <button type="submit" style="padding:14px 32px;background:linear-gradient(135deg,#3D4A30,#5A6B4A);color:#fff;border:none;border-radius:10px;font-size:1rem;font-weight:600;cursor:pointer;transition:transform .2s,box-shadow .2s">Enviar Solicitud ➤</button>
-  </form>
-  <p style="text-align:center;font-size:.75rem;color:#8A817A;margin-top:16px">Al enviar este formulario aceptas nuestra política de privacidad. No compartimos tus datos.</p>
-</div>
-<!-- End Contact Form -->
-<div class="pm-legal-disclaimer"><strong>Aviso legal:</strong> Las pirámides terapéuticas Piramicasa son productos de bienestar y complemento de salud. No sustituyen ningún tratamiento médico. La información de esta web es divulgativa y no prescribe tratamientos. Consulta siempre con tu médico.</div>
 <script id="pm-defer-noncritical">(function(){var u=["/piramicasa/assets/chatbot.js?v=20261104i","/piramicasa/assets/chatbot-i18n.js?v=20261104i","/piramicasa/assets/sacred-grid.js?v=20261017b"];if(!u||!u.length)return;var d={};function l(s){if(!s||d[s])return;d[s]=1;var el=document.createElement("script");el.src=s;el.defer=true;document.body.appendChild(el)}function r(){u.forEach(l)}if("requestIdleCallback" in window){requestIdleCallback(r,{timeout:1600})}else{setTimeout(r,1100)}window.addEventListener("load",function(){setTimeout(r,400)},{once:true});window.addEventListener("pointerdown",r,{once:true,passive:true});window.addEventListener("keydown",r,{once:true});})();</script><script id="pm-home-a11y">(function(){var ran=false;var timer=null;function ensureMain(){var ex=document.querySelector("main#pm-main-content");var host=ex||document.querySelector(".pm-page");if(!host)return;if(!host.id)host.id="pm-main-content";if(!host.hasAttribute("role"))host.setAttribute("role","main");if(!host.hasAttribute("aria-label"))host.setAttribute("aria-label","Contenido principal");if(host.tagName!=="MAIN"&&!host.hasAttribute("tabindex"))host.setAttribute("tabindex","-1");}function fixEmptyLinks(){var links=document.querySelectorAll("a");for(var i=0;i<links.length;i++){var a=links[i];var txt=(a.textContent||"").trim();var hasAriaLabel=a.hasAttribute("aria-label");var hasAriaHidden=a.hasAttribute("aria-hidden");var hasImg=a.querySelector("img,svg");if(!txt&&!hasAriaLabel&&!hasAriaHidden&&!hasImg){a.setAttribute("aria-hidden","true");a.setAttribute("tabindex","-1");}else if(!txt&&!hasAriaLabel&&hasImg){var imgEl=a.querySelector("img");if(imgEl&&!imgEl.getAttribute("alt")){imgEl.setAttribute("alt","Enlace");}if(!hasAriaLabel){a.setAttribute("aria-label","Enlace");}}}}function fixSocialLinks(){var map={"IG":"Instagram","YT":"YouTube","X":"X (Twitter)","FB":"Facebook","TW":"Twitter","IN":"LinkedIn"};var links=document.querySelectorAll("a");for(var i=0;i<links.length;i++){var a=links[i];var txt=(a.textContent||"").trim().toUpperCase();if(map[txt]&&!a.hasAttribute("aria-label")){a.setAttribute("aria-label",map[txt]);}}}function fixSkipLink(){var sl=document.querySelector(".pm-skip-link");if(sl&&!sl.getAttribute("data-pm-bound")){sl.setAttribute("data-pm-bound","1");sl.addEventListener("click",function(e){e.preventDefault();var m=document.getElementById("pm-main-content");if(m){m.setAttribute("tabindex","-1");m.focus();m.scrollIntoView();}});}}function normalize(){var scope=document.querySelector(".pm-page")||document.body;if(!scope)return;var list=scope.querySelectorAll("h1,h2,h3,h4,h5,h6");var last=0;for(var i=0;i<list.length;i++){var el=list[i];var lv=parseInt(el.tagName.slice(1),10);if(last&&lv-last>1){el.setAttribute("aria-level",String(Math.min(6,last+1)));}last=lv;}}function run(){ensureSkipLinkEl();ensureMain();normalize();fixEmptyLinks();fixSocialLinks();fixSkipLink();}function ensureSkipLinkEl(){if(document.querySelector(".pm-skip-link"))return;var a=document.createElement("a");a.href="#pm-main-content";a.className="pm-skip-link";a.textContent="Saltar al contenido principal";if(document.body)document.body.insertBefore(a,document.body.firstChild);}function scheduleRun(){if(timer)clearTimeout(timer);timer=setTimeout(function(){run();},50);}if(document.readyState==="loading"){document.addEventListener("DOMContentLoaded",function(){scheduleRun();},{once:true});}scheduleRun();window.addEventListener("load",function(){scheduleRun();},{once:true});if("MutationObserver" in window){var ob=new MutationObserver(function(muts){var hasNav=false;for(var i=0;i<muts.length;i++){var m=muts[i];if(m.addedNodes&&m.addedNodes.length){hasNav=true;break;}}if(hasNav){scheduleRun();}});ob.observe(document.documentElement,{childList:true,subtree:true});setTimeout(function(){ob.disconnect();},15000);}setInterval(function(){if(document.querySelector("a:not([aria-label]):not([aria-hidden])")){scheduleRun();}},2000);})();</script><script id="pm-img-dims">(function(){function a(img){if(!img||img.hasAttribute("width")||img.hasAttribute("height")||(img.style&&(img.style.width||img.style.height)))return;var w=img.naturalWidth||0,h=img.naturalHeight||0;if(w>0&&h>0){img.setAttribute("width",String(w));img.setAttribute("height",String(h));}}function s(root){(root||document).querySelectorAll("img").forEach(function(img){if(img.complete)a(img);else img.addEventListener("load",function(){a(img)},{once:true});});}if(document.readyState==="loading"){document.addEventListener("DOMContentLoaded",function(){s(document);});}s(document);if("MutationObserver" in window){var o=new MutationObserver(function(m){m.forEach(function(x){x.addedNodes&&x.addedNodes.forEach&&x.addedNodes.forEach(function(n){if(n&&n.nodeType===1){if(n.tagName==="IMG")s(n.parentNode||document);else s(n);}});});});o.observe(document.documentElement,{childList:true,subtree:true});}})();</script><script src="/piramicasa/assets/translations.js" defer></script>
 <script src="/piramicasa/assets/i18n.js" defer></script>
 </body></html>
