@@ -57,7 +57,7 @@
       acceptNode: function(node){
         var p = node.parentNode;
         if(!p || SKIP.indexOf(p.tagName) !== -1) return NodeFilter.FILTER_REJECT;
-        if(p.closest && p.closest('#pm-consent,#pm-lang-menu,.pm-logo,[translate="no"],.notranslate')) return NodeFilter.FILTER_REJECT;
+        if(p.closest && p.closest('#pm-consent,#pm-lang-menu,.pm-logo,[translate="no"],.notranslate,[data-pm-edit]')) return NodeFilter.FILTER_REJECT;
         if(!node.textContent.trim()) return NodeFilter.FILTER_REJECT;
         return NodeFilter.FILTER_ACCEPT;
       }
@@ -114,7 +114,7 @@
       try { sessionStorage.setItem('pm-edit', '1'); } catch(e2){}
       try { localStorage.setItem('pm-edit', '1'); } catch(e2){}
       var es = document.createElement('script');
-      es.src = '/piramicasa/assets/edit-mode.js?v=20261104b';
+      es.src = '/piramicasa/assets/edit-mode.js?v=20261104c';
       es.defer = true;
       (document.body || document.documentElement).appendChild(es);
     }

@@ -79,6 +79,7 @@
     document.removeEventListener('click', onClick, true);
     document.removeEventListener('mouseover', onOver, true);
     document.querySelectorAll('.pm-edit-hover,.pm-edit-done').forEach(function(x){x.classList.remove('pm-edit-hover','pm-edit-done');});
+    document.querySelectorAll('[data-pm-edit]').forEach(function(x){x.removeAttribute('data-pm-edit');});
   }
 
   /* ---------- selección de texto ---------- */
@@ -142,6 +143,7 @@
         pending.push({original:original, es:nv});
         savePending();
         pendingEls.add(el); el.classList.remove('pm-edit-hover'); el.classList.add('pm-edit-done');
+        el.setAttribute('data-pm-edit','1');   // overrides.js no re-aplica sobre previews
         el.textContent = nv; // previsualización inmediata
         var pub = document.querySelector('#'+BAR_ID+' .pm-pub');
         if(pub) pub.textContent = 'Publicar ('+pending.length+')';
@@ -177,9 +179,15 @@
         if(!j.items) j.items=[];
         pending.forEach(function(p){
           var hit=false;
-          j.items.forEach(function(it){ if(it.original===p.original){ it.es=p.es; hit=true; } });
+          j.items.forEach(function(it){
+            // 'original' es el texto VISIBLE al editar: coincide con it.original
+            // (texto base) o con it.es (texto ya sobreescrito que se reedita)
+            if(it.original===p.original || it.es===p.original){ it.es=p.es; hit=true; }
+          });
           if(!hit) j.items.push({original:p.original, es:p.es});
         });
+        // restaurar un texto a su original = borrar el override (evita ciclos A→B→A)
+        j.items = j.items.filter(function(it){ return it.es && it.es !== it.original; });
         return gh('/repos/'+REPO+'/contents/'+encodeURIComponent(fp),{
           method:'PUT',
           body: JSON.stringify({message:'Edición visual desde el panel', content:b64u(JSON.stringify(j,null,2)), sha:r.status===200?r.data.sha:undefined, branch:BRANCH})
