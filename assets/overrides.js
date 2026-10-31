@@ -43,8 +43,11 @@
     return m;
   }
 
+  var applying = false;
   function apply(){
-    if(!data) return;
+    if(!data || applying) return;
+    applying = true;
+    try{
     if(!mapCache || mapCache.lang !== lang()) mapCache = {lang: lang(), m: buildMap()};
     var M = mapCache.m;
     var keys = Object.keys(M).sort(function(a,b){return b.length-a.length});
@@ -67,6 +70,7 @@
       for(var i=0;i<keys.length;i++){
         var k = keys[i];
         if(k.length < 12 || M[k] === k) continue;
+        if(t.indexOf(M[k]) !== -1) continue;   // el nodo ya contiene el reemplazo: no duplicar
         var idx = t.indexOf(k);
         if(idx === -1) continue;
         var before = idx>0 ? t.charAt(idx-1) : ' ';
@@ -77,6 +81,7 @@
         }
       }
     }
+    } finally { applying = false; }
   }
 
   var timer = null;
@@ -125,6 +130,7 @@
       apply();
       var deb;
       var obs = new MutationObserver(function(){
+        if(applying) return;   // mutaciones propias de apply(): ignorar
         clearTimeout(deb); deb = setTimeout(schedule, 300);
       });
       obs.observe(document.documentElement, {childList:true, subtree:true});
