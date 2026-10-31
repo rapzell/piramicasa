@@ -154,6 +154,8 @@ function watch(id,path){
   function cancel(){w.stop=true}
   window.addEventListener("wheel",cancel,{once:true,passive:true});
   window.addEventListener("touchmove",cancel,{once:true,passive:true});
+  window.addEventListener("pointerdown",cancel,{once:true,passive:true});
+  window.addEventListener("keydown",cancel,{once:true});
   var t=setInterval(function(){
     if(w.stop||++n>60){clearInterval(t);if(cur===w)cur=null;return}
     if(path&&np(location.pathname)!==np(path)){w.stop=true;clearInterval(t);if(cur===w)cur=null;return}
