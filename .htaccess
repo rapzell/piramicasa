@@ -11,8 +11,8 @@ RedirectMatch 404 \.(tar\.gz|zip|sql|bak|log|env|sh|py|md|yml|yaml|json\.lock)$
 RedirectMatch 404 /(LEEME|README|GUIA-TECNICA)[^/]*$
 RedirectMatch 404 /ftp-deploy-sync-state
 
-# Sin listado de directorios
-Options -Indexes
+# Sin listado de directorios (IndexIgnore funciona aunque Options esté restringido)
+IndexIgnore *
 
 # Compresión
 <IfModule mod_deflate.c>
@@ -37,12 +37,6 @@ Options -Indexes
   Header always set X-Frame-Options "SAMEORIGIN"
   Header always set Referrer-Policy "strict-origin-when-cross-origin"
   Header always set Permissions-Policy "geolocation=(), microphone=(), camera=(), payment=()"
-
-  <LocationMatch "^/admin/">
-    Header always set X-Robots-Tag "noindex, nofollow, noarchive"
-    Header always set Cache-Control "no-store, no-cache, must-revalidate"
-    Header always set Pragma "no-cache"
-  </LocationMatch>
 </IfModule>
 
 # Caché de estáticos
