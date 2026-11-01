@@ -96,7 +96,7 @@
     bar.id = 'pm-consent';
     bar.setAttribute('role','dialog');
     bar.setAttribute('aria-label', t.title);
-    var policyHref = '/piramicasa/es/terminos_y_condiciones_avisos_legales_derechos_de_autor.htm.html#cookies';
+    var policyHref = '/es/terminos_y_condiciones_avisos_legales_derechos_de_autor.htm.html#cookies';
     bar.innerHTML =
       '<div class="pm-consent-in">' +
         '<div class="pm-consent-txt">' +

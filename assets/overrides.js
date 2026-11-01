@@ -9,7 +9,7 @@
  */
 (function(){
   'use strict';
-  var URL = '/piramicasa/content/overrides.json';
+  var URL = '/content/overrides.json';
   var SKIP = ['SCRIPT','STYLE','NOSCRIPT','CODE','PRE','TEXTAREA','INPUT'];
   var data = null;
   var mapCache = null;
@@ -114,7 +114,7 @@
       try { sessionStorage.setItem('pm-edit', '1'); } catch(e2){}
       try { localStorage.setItem('pm-edit', '1'); } catch(e2){}
       var es = document.createElement('script');
-      es.src = '/piramicasa/assets/edit-mode.js?v=20261104c';
+      es.src = '/assets/edit-mode.js?v=20261104c';
       es.defer = true;
       (document.body || document.documentElement).appendChild(es);
     }

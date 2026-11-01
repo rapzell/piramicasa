@@ -169,7 +169,7 @@ body{padding-top:50px!important}
 
 /* Improve visibility for the health benefits CTA button */
 a.pm-btn.pm-btn-outline[href="/salud"],
-a.pm-btn.pm-btn-outline[href="/piramicasa/salud"]{
+a.pm-btn.pm-btn-outline[href="/salud"]{
 background:linear-gradient(135deg,#E8D8BF,#DDBE95)!important;
 color:#6E4D24!important;
 border:2px solid #C69C6D!important;
@@ -177,7 +177,7 @@ box-shadow:0 8px 24px rgba(198,156,109,.28);
 font-weight:700;
 }
 a.pm-btn.pm-btn-outline[href="/salud"]:hover,
-a.pm-btn.pm-btn-outline[href="/piramicasa/salud"]:hover{
+a.pm-btn.pm-btn-outline[href="/salud"]:hover{
 transform:translateY(-2px);
 filter:brightness(1.03);
 }

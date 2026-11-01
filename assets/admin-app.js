@@ -123,7 +123,7 @@
       return ghApi('/repos/' + REPO + '/contents/' + encodeURIComponent(fp), {
         method: 'PUT',
         body: JSON.stringify({ message:'Subida de imagen desde el panel', content: b64data, branch: BRANCH })
-      }).then(function(){ return {path:'/piramicasa/' + fp}; });
+      }).then(function(){ return {path:'/' + fp}; });
     }
     return fetch(API + '/api/upload', {method:'POST', headers:{'Authorization':'Bearer '+pw(),'Content-Type':'application/json'},
       body: JSON.stringify({name: safe, data: dataUrl})})
@@ -164,7 +164,7 @@
     // (edit-mode lo mueve a sessionStorage y lo borra de localStorage)
     if (TOKEN) { try{ localStorage.setItem('pm-edit-handoff', JSON.stringify({t:TOKEN, ts:Date.now()})); }catch(e){} }
     try{ sessionStorage.setItem('pm-edit', '1'); localStorage.setItem('pm-edit', '1'); }catch(e){}
-    window.open('/piramicasa/?pm_edit=1', '_blank');
+    window.open('/?pm_edit=1', '_blank');
   });
   $('pm-logout').addEventListener('click', function(){ setPw(''); TOKEN = null; try{sessionStorage.removeItem(TOK_KEY);sessionStorage.removeItem('pm-edit');}catch(e){} location.reload(); });
   // Auto-login si la pestaña ya tiene el token (p. ej. al volver del

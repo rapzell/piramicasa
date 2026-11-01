@@ -155,7 +155,7 @@
     if (document.querySelector(".pm-social-carousel")) return true;
     var anchor = document.querySelector("footer, .pm-footer, .pm-legal-disclaimer");
     if (!anchor) return false;
-    fetch("/piramicasa/assets/social-videos.json")
+    fetch("/assets/social-videos.json")
       .then(function (r) { return r.json(); })
       .then(function (d) {
         if (!d || !d.videos || !d.videos.length) return;

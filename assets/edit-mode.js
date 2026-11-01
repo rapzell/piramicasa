@@ -62,7 +62,7 @@
     });
     el.querySelector('.pm-pub').addEventListener('click', publish);
     el.querySelector('.pm-gopanel').addEventListener('click', function(){
-      location.href = '/piramicasa/admin/';
+      location.href = '/admin/';
     });
     el.querySelector('.pm-exit:not(.pm-gopanel)').addEventListener('click', exit);
     if (pending.length) warn('Tienes ' + pending.length + ' cambio(s) sin publicar — pulsa «Publicar» para guardarlos');
