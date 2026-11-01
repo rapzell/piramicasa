@@ -1,4 +1,7 @@
 User-Agent: *
 Allow: /
+Disallow: /admin/
+Disallow: /_cms-setup/
+Disallow: /content/
 
 Sitemap: https://www.piramicasa.com/sitemap.xml

@@ -1,0 +1,48 @@
+name: Deploy a piramicasa.com (SSH/rsync)
+
+on:
+  push:
+    branches: [gh-pages]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Validar contenido publicado (anti-XSS)
+        run: |
+          node -e '
+            const fs = require("fs");
+            const files = ["content/overrides.json", "content/articles.json"];
+            const bad = /<script|javascript:|onerror=|onload=|onclick=|onfocus=|<iframe|<object|<embed|data:text\/html/i;
+            let fail = false;
+            for (const f of files) {
+              if (!fs.existsSync(f)) continue;
+              const txt = fs.readFileSync(f, "utf8");
+              const m = txt.match(bad);
+              if (m) { console.error("Contenido sospechoso en " + f + ": " + m[0]); fail = true; }
+            }
+            if (fail) process.exit(1);
+            console.log("Contenido limpio");
+          '
+
+      - name: Instalar sshpass + rsync
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq sshpass rsync
+
+      - name: Deploy por SSH/rsync a /html/ (canal cifrado)
+        run: |
+          sshpass -p "$SSH_PASSWORD" rsync -az --delete --checksum \
+            -e "ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null" \
+            --exclude ".git*" \
+            --exclude ".github/" \
+            --exclude "_cms-setup/" \
+            --exclude "_*.py" \
+            --exclude "_*.js" \
+            --exclude "_*.txt" \
+            --exclude "*.tar.gz" \
+            ./ "${SSH_USERNAME}@piramicasa.com:/html/"
+        env:
+          SSH_USERNAME: ${{ secrets.SSH_USERNAME }}
+          SSH_PASSWORD: ${{ secrets.SSH_PASSWORD }}
