@@ -341,3 +341,12 @@ html[dir="rtl"] .pm-social-prev svg,html[dir="rtl"] .pm-social-next svg{transfor
   .pm-social-next{right:4px}
   .pm-social-btn{width:38px;height:38px}
 }
+
+/* Perf: no renderizar secciones fuera de pantalla (móvil + desktop) */
+.pm-section, .pm-social-carousel, footer {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 480px;
+}
+@media (prefers-reduced-motion: no-preference) {
+  html { scroll-behavior: smooth; }
+}
