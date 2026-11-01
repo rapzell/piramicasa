@@ -7,6 +7,7 @@
   'use strict';
   var KEY = 'pm-consent-v1';
   var GTM_ID = 'GTM-MPS65G9X';
+  var GA4_ID = 'G-TXN4W7B6WE';   // GA4 directo vía gtag.js (sin depender del contenedor GTM)
 
   var T = {
     es:{title:'Tu privacidad',text:'Utilizamos cookies propias necesarias para el funcionamiento de la web y, solo con tu consentimiento, cookies de analítica (Google Analytics) para mejorar nuestros contenidos. Puedes aceptar, rechazar o configurar tu elección.',accept:'Aceptar todas',reject:'Rechazar',config:'Configurar',save:'Guardar preferencias',nec:'Necesarias',necD:'Imprescindibles para el funcionamiento básico de la web (sesión de acceso, preferencias). No requieren consentimiento.',always:'Siempre activas',ana:'Analítica',anaD:'Google Tag Manager / Google Analytics. Miden el uso de la web de forma anónima. Solo se activan si las aceptas.',note:'Puedes cambiar o retirar tu consentimiento en cualquier momento desde el enlace «Configuración de cookies» del pie de página.',policy:'Más información en nuestra política de cookies',apply:'Los cambios se aplican en la próxima carga de página.',open:'Configuración de cookies'},
@@ -46,6 +47,17 @@
     j.src = 'https://www.googletagmanager.com/gtm.js?id=' + GTM_ID + '&l=dataLayer';
     var f = document.getElementsByTagName('script')[0];
     (f && f.parentNode) ? f.parentNode.insertBefore(j, f) : document.head.appendChild(j);
+    // GA4 directo (gtag.js): no depende de configurar el contenedor GTM.
+    // Si luego se añade un tag GA4 dentro de GTM, usar UNA sola vía (quitar esta o el tag).
+    if (/^G-[0-9A-Z]{6,}$/.test(GA4_ID)) {
+      window.gtag = window.gtag || function(){ window.dataLayer.push(arguments); };
+      window.gtag('js', new Date());
+      window.gtag('config', GA4_ID, { anonymize_ip: true });
+      var g = document.createElement('script');
+      g.async = true;
+      g.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(GA4_ID) + '&l=dataLayer';
+      document.head.appendChild(g);
+    }
   }
 
   var CSS = '#pm-consent{position:fixed;left:0;right:0;bottom:0;z-index:100000;background:#fff;border-top:1px solid #E0D9D0;box-shadow:0 -8px 30px rgba(0,0,0,.12);font-family:Inter,system-ui,sans-serif;color:#2B2B2B;animation:pmConsentUp .4s ease}' +
