@@ -1,4 +1,4 @@
-name: Deploy a piramicasa.com (SSH/rsync)
+name: Deploy a piramicasa.com (SFTP)
 
 on:
   push:
@@ -28,21 +28,24 @@ jobs:
             console.log("Contenido limpio");
           '
 
-      - name: Instalar sshpass + rsync
-        run: sudo apt-get update -qq && sudo apt-get install -y -qq sshpass rsync
+      - name: Instalar lftp
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq lftp
 
-      - name: Deploy por SSH/rsync a /html/ (canal cifrado)
+      - name: Deploy por SFTP a /html/ (canal cifrado)
         run: |
-          sshpass -p "$SSH_PASSWORD" rsync -az --delete --checksum \
-            -e "ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null" \
-            --exclude ".git*" \
-            --exclude ".github/" \
-            --exclude "_cms-setup/" \
-            --exclude "_*.py" \
-            --exclude "_*.js" \
-            --exclude "_*.txt" \
-            --exclude "*.tar.gz" \
-            ./ "${SSH_USERNAME}@piramicasa.com:/html/"
+          lftp -u "$SSH_USERNAME","$SSH_PASSWORD" sftp://piramicasa.com -e "
+            set sftp:auto-confirm yes;
+            mirror --reverse --delete --verbose --parallel=4
+              --exclude-glob '.git/**'
+              --exclude-glob '.github/**'
+              --exclude-glob '.git*'
+              --exclude-glob '_cms-setup/**'
+              --exclude-glob '_*.py'
+              --exclude-glob '_*.js'
+              --exclude-glob '_*.txt'
+              --exclude-glob '*.tar.gz'
+              ./ /html/;
+            quit"
         env:
           SSH_USERNAME: ${{ secrets.SSH_USERNAME }}
           SSH_PASSWORD: ${{ secrets.SSH_PASSWORD }}
