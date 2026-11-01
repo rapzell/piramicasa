@@ -39,7 +39,7 @@ body{font-family:'Inter',system-ui,sans-serif;background:var(--pm-crema);color:#
 </style>
 </head>
 <body>
-<script id="pm-auth-preredirect">(function(){var p=window.location.pathname;var isAccess=/\/acceso(?:\.html)?$/.test(p);if(isAccess)return;var pmEdit=!1;try{pmEdit=sessionStorage.getItem("pm-edit")==="1"||/[?&]pm_edit=/.test(window.location.search)}catch(e){}if(pmEdit)return;var allowed=!1;var hasAuthCookie=!1;try{allowed=sessionStorage.getItem("pm-auth-flow-ok")==="1"}catch(e){}try{hasAuthCookie=document.cookie.split("; ").some(function(x){return x.indexOf("pm-auth=")===0&&x.split("=")[1]==="piramicasa2026"})}catch(e){}if(allowed){try{sessionStorage.removeItem("pm-auth-flow-ok")}catch(e){}}if(allowed||hasAuthCookie)return;var base=p.startsWith("/piramicasa")?"/piramicasa":"";window.location.replace(base+"/acceso.html");})();</script>
+
 <div class="pm-page" role="main">
   <header class="pm-header">
       <div class="pm-header-left">
