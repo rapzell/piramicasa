@@ -357,3 +357,11 @@ html[dir="rtl"] .pm-social-prev svg,html[dir="rtl"] .pm-social-next svg{transfor
 .pm-aval-paused{position:absolute;top:12px;right:12px;z-index:3;background:rgba(0,0,0,.68);color:#fff;padding:6px 14px;border-radius:999px;font-size:.78rem;letter-spacing:.05em;pointer-events:none}
 html[dir="rtl"] .pm-aval-paused{right:auto;left:12px}
 @media (max-width:640px){.pm-aval-main{height:min(58vh,460px)}}
+
+/* Ficha de producto en móvil: título → imagen → resto (la foto deja de quedar al final) */
+@media (max-width:1024px){
+  .pm-product-showcase{display:flex;flex-direction:column}
+  .pm-product-info{display:contents}
+  .pm-product-info h3{order:-2}
+  .pm-product-image{order:-1}
+}
