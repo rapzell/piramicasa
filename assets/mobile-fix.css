@@ -350,3 +350,10 @@ html[dir="rtl"] .pm-social-prev svg,html[dir="rtl"] .pm-social-next svg{transfor
 @media (prefers-reduced-motion: no-preference) {
   html { scroll-behavior: smooth; }
 }
+
+/* Carrusel de avales: caja de altura fija (la sección no salta) + pausa */
+.pm-aval-main{height:min(62vh,540px);display:flex;align-items:center;justify-content:center}
+.pm-aval-main img{max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain}
+.pm-aval-paused{position:absolute;top:12px;right:12px;z-index:3;background:rgba(0,0,0,.68);color:#fff;padding:6px 14px;border-radius:999px;font-size:.78rem;letter-spacing:.05em;pointer-events:none}
+html[dir="rtl"] .pm-aval-paused{right:auto;left:12px}
+@media (max-width:640px){.pm-aval-main{height:min(58vh,460px)}}
