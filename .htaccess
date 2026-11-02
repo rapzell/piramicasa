@@ -22,6 +22,10 @@ IndexIgnore *
 # Forzar HTTPS + URLs limpias (/salud -> /salud.html)
 <IfModule mod_rewrite.c>
   RewriteEngine On
+  # Canonical www: apex -> www (evita contenido duplicado en buscadores)
+  RewriteCond %{HTTP_HOST} ^piramicasa\.com$ [NC]
+  RewriteRule ^ https://www.piramicasa.com%{REQUEST_URI} [L,R=301]
+  # Forzar HTTPS
   RewriteCond %{HTTPS} !=on
   RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
