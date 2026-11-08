@@ -41,14 +41,10 @@
     if (window.__pmGtmLoaded) return;
     window.__pmGtmLoaded = true;
     window.dataLayer = window.dataLayer || [];
-    window.dataLayer.push({'gtm.start': new Date().getTime(), event:'gtm.js'});
-    var j = document.createElement('script');
-    j.async = true;
-    j.src = 'https://www.googletagmanager.com/gtm.js?id=' + GTM_ID + '&l=dataLayer';
-    var f = document.getElementsByTagName('script')[0];
-    (f && f.parentNode) ? f.parentNode.insertBefore(j, f) : document.head.appendChild(j);
-    // GA4 directo (gtag.js): no depende de configurar el contenedor GTM.
-    // Si luego se añade un tag GA4 dentro de GTM, usar UNA sola vía (quitar esta o el tag).
+    // GA4 mide por gtag.js directo. El contenedor GTM-MPS65G9X está vacío:
+    // no se carga gtm.js (ahorra ~30KB por visita y evita el falso aviso
+    // "etiqueta sin datos" de Tag Manager). Si se configura GTM con tags
+    // reales, reactivar su <script> y usar UNA sola vía de medición.
     if (/^G-[0-9A-Z]{6,}$/.test(GA4_ID)) {
       window.gtag = window.gtag || function(){ window.dataLayer.push(arguments); };
       window.gtag('js', new Date());
