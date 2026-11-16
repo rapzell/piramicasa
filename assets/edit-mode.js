@@ -27,22 +27,22 @@
     var el = document.createElement('div');
     el.id = BAR_ID;
     el.innerHTML =
-      '<style>#'+BAR_ID+'{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);z-index:2147483000;background:rgba(31,42,40,.96);color:#f6f1e7;display:flex;align-items:center;gap:14px;padding:10px 18px;border-radius:16px;font:600 13px Inter,system-ui,sans-serif;box-shadow:0 10px 34px rgba(0,0,0,.35);backdrop-filter:blur(6px);max-width:94vw;white-space:nowrap}' +
+      '<style>#'+BAR_ID+'{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);z-index:2147483000;background:rgba(61,74,48,.96);color:#F7F4F0;display:flex;align-items:center;gap:14px;padding:10px 18px;border-radius:16px;font:600 13px Inter,system-ui,sans-serif;box-shadow:0 10px 34px rgba(0,0,0,.35);backdrop-filter:blur(6px);max-width:94vw;white-space:nowrap}' +
       '#'+BAR_ID+' .pm-eb{display:flex;gap:8px}' +
       '#'+BAR_ID+' button{cursor:pointer;border:none;border-radius:8px;padding:7px 14px;font:600 12px Inter,sans-serif}' +
-      '#'+BAR_ID+' .pm-pub{background:#8a5f1a;color:#1f2a28}' +
+      '#'+BAR_ID+' .pm-pub{background:#C69C6D;color:#2B2B2B}' +
       '#'+BAR_ID+' .pm-arm{background:#B3261E;color:#fff;transition:all .2s}' +
       '#'+BAR_ID+' .pm-arm.on{background:#E03A2E;box-shadow:0 0 0 3px rgba(224,58,46,.45),0 0 16px rgba(224,58,46,.9)}' +
-      '#'+BAR_ID+' .pm-exit{background:transparent;color:#f6f1e7;border:1px solid rgba(255,255,255,.4)}' +
-      '#'+POP_ID+'{position:fixed;z-index:2147483001;background:#fff;border:1px solid #d9cfb8;border-radius:14px;box-shadow:0 18px 50px rgba(0,0,0,.28);padding:16px;width:min(420px,92vw);font-family:Inter,sans-serif}' +
-      '#'+POP_ID+' label{display:block;font-size:.68rem;text-transform:uppercase;letter-spacing:.05em;color:#4a5754;margin:8px 0 3px}' +
-      '#'+POP_ID+' textarea{width:100%;padding:9px 11px;border:1px solid #d9cfb8;border-radius:8px;font:400 .9rem Inter;min-height:64px;resize:vertical}' +
-      '#'+POP_ID+' textarea:focus{outline:2px solid #8a5f1a}' +
+      '#'+BAR_ID+' .pm-exit{background:transparent;color:#F7F4F0;border:1px solid rgba(255,255,255,.4)}' +
+      '#'+POP_ID+'{position:fixed;z-index:2147483001;background:#fff;border:1px solid #E0D9D0;border-radius:14px;box-shadow:0 18px 50px rgba(0,0,0,.28);padding:16px;width:min(420px,92vw);font-family:Inter,sans-serif}' +
+      '#'+POP_ID+' label{display:block;font-size:.68rem;text-transform:uppercase;letter-spacing:.05em;color:#8A817A;margin:8px 0 3px}' +
+      '#'+POP_ID+' textarea{width:100%;padding:9px 11px;border:1px solid #E0D9D0;border-radius:8px;font:400 .9rem Inter;min-height:64px;resize:vertical}' +
+      '#'+POP_ID+' textarea:focus{outline:2px solid #C69C6D}' +
       '#'+POP_ID+' .pm-pops{display:flex;gap:8px;margin-top:12px}' +
       '#'+POP_ID+' button{flex:1;cursor:pointer;border:none;border-radius:8px;padding:10px;font:600 .82rem Inter}' +
-      '#'+POP_ID+' .ok{background:#1f2a28;color:#fff}#'+POP_ID+' .no{background:#f6f1e7;color:#4a5754}' +
-      '.pm-edit-hover{outline:2px dashed #8a5f1a !important;outline-offset:2px;cursor:pointer !important}' +
-      '.pm-edit-done{outline:2px solid #4a7c75 !important;outline-offset:2px}</style>' +
+      '#'+POP_ID+' .ok{background:#3D4A30;color:#fff}#'+POP_ID+' .no{background:#f0ece6;color:#4A4A4A}' +
+      '.pm-edit-hover{outline:2px dashed #C69C6D !important;outline-offset:2px;cursor:pointer !important}' +
+      '.pm-edit-done{outline:2px solid #5A6B4A !important;outline-offset:2px}</style>' +
       '<span>📝 <b>Modo edición</b> — pulsa «Editar», clic en un texto y luego «Publicar»</span>' +
       '<span class="pm-eb"><button class="pm-arm" type="button">✏️ Editar</button>' +
       '<button class="pm-pub" type="button">Publicar (' + pending.length + ')</button>' +

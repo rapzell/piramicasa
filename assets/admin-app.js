@@ -197,7 +197,7 @@
     var list = $('pm-art-list');
     list.innerHTML = state.articles.items.map(function(a, i){
       return '<div class="pm-row"><div class="pm-row-head"><span class="t">'+esc(a.title||'(sin título)')+
-        (a.date?' <span style="font-weight:400;color:#4a5754">· '+esc(a.date)+'</span>':'')+'</span>' +
+        (a.date?' <span style="font-weight:400;color:#8A817A">· '+esc(a.date)+'</span>':'')+'</span>' +
         '<button class="pm-btn pm-btn-ghost" data-act="edit" type="button" style="font-size:.78rem;padding:7px 12px">Editar</button>' +
         '<button class="pm-btn pm-btn-danger" data-act="del" type="button">Eliminar</button></div></div>';
     }).join('') || '<p class="pm-hint">Todavía no hay artículos.</p>';

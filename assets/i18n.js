@@ -85,7 +85,7 @@
         if(!node.textContent.trim()) return NodeFilter.FILTER_REJECT;
         // Never translate brand names / explicitly excluded regions
         // (e.g. logo "Pirami<span>casa</span>" must not become "PiramiHaus").
-        if(p.closest && p.closest('.pm-logo,.pm-mobile-logo,.pm-brand-link,.pm-brand-seal,[translate="no"],.notranslate')) return NodeFilter.FILTER_REJECT;
+        if(p.closest && p.closest('.pm-logo,[translate="no"],.notranslate')) return NodeFilter.FILTER_REJECT;
         return NodeFilter.FILTER_ACCEPT;
       }
     });
@@ -173,18 +173,18 @@
     btn.id = 'pm-lang-btn';
     btn.setAttribute('aria-label','Select language');
     btn.setAttribute('aria-expanded','false');
-    btn.style.cssText = 'background:var(--pm-verde-deep,#1f2a28);border:1.5px solid var(--pm-oro,#8a5f1a);border-radius:6px;padding:'+(floating?'7px 12px':'5px 10px')+';cursor:pointer;font-size:1.2rem;line-height:1;color:var(--pm-crema,#f6f1e7);display:flex;align-items:center;gap:4px;box-shadow:0 2px 8px rgba(0,0,0,.4);';
+    btn.style.cssText = 'background:var(--pm-verde-deep,#3D4A30);border:1.5px solid var(--pm-oro,#C69C6D);border-radius:6px;padding:'+(floating?'7px 12px':'5px 10px')+';cursor:pointer;font-size:1.2rem;line-height:1;color:var(--pm-crema,#F7F4F0);display:flex;align-items:center;gap:4px;box-shadow:0 2px 8px rgba(0,0,0,.4);';
     btn.innerHTML = FLAGS[current] + ' <span style="font-size:0.75rem">\u25bc</span>';
 
     var menu = document.createElement('div');
     menu.id = 'pm-lang-menu';
     menu.setAttribute('role','menu');
-    menu.style.cssText = 'position:absolute;top:100%;right:0;margin-top:6px;background:var(--pm-verde-deep,#1f2a28);border:1.5px solid var(--pm-oro,#8a5f1a);border-radius:8px;box-shadow:0 8px 24px rgba(0,0,0,.35);display:none;min-width:160px;z-index:9999;padding:4px 0;';
+    menu.style.cssText = 'position:absolute;top:100%;right:0;margin-top:6px;background:var(--pm-verde-deep,#3D4A30);border:1.5px solid var(--pm-oro,#C69C6D);border-radius:8px;box-shadow:0 8px 24px rgba(0,0,0,.35);display:none;min-width:160px;z-index:9999;padding:4px 0;';
 
     SUPPORTED.forEach(function(code){
       var item = document.createElement('button');
       item.setAttribute('role','menuitem');
-      item.style.cssText = 'display:flex;align-items:center;gap:8px;width:100%;padding:8px 14px;background:none;border:none;color:'+(code===current?'var(--pm-oro,#8a5f1a)':'var(--pm-crema,#f6f1e7)')+';cursor:pointer;font-size:0.9rem;text-align:left;';
+      item.style.cssText = 'display:flex;align-items:center;gap:8px;width:100%;padding:8px 14px;background:none;border:none;color:'+(code===current?'var(--pm-oro,#C69C6D)':'var(--pm-crema,#F7F4F0)')+';cursor:pointer;font-size:0.9rem;text-align:left;';
       item.innerHTML = FLAGS[code] + ' ' + NAMES[code];
       if(code===current) item.style.fontWeight='600';
       item.addEventListener('click',function(){
@@ -233,7 +233,7 @@
 
     var banner = document.createElement('div');
     banner.id = 'pm-lang-banner';
-    banner.style.cssText = 'position:fixed;bottom:16px;left:50%;transform:translateX(-50%);background:var(--pm-verde-deep,#1f2a28);color:var(--pm-crema,#f6f1e7);padding:12px 20px;border-radius:10px;box-shadow:0 4px 16px rgba(0,0,0,.3);z-index:10000;display:flex;align-items:center;gap:12px;font-size:0.9rem;max-width:90vw;';
+    banner.style.cssText = 'position:fixed;bottom:16px;left:50%;transform:translateX(-50%);background:var(--pm-verde-deep,#3D4A30);color:var(--pm-crema,#F7F4F0);padding:12px 20px;border-radius:10px;box-shadow:0 4px 16px rgba(0,0,0,.3);z-index:10000;display:flex;align-items:center;gap:12px;font-size:0.9rem;max-width:90vw;';
     var msg = {
       en:'This page is available in English. Switch?',
       pt:'Esta p\u00e1gina est\u00e1 dispon\u00edvel em Portugu\u00eas. Mudar?',
@@ -245,14 +245,14 @@
     banner.innerHTML = '<span>'+(msg[current]||msg.en)+'</span>';
     var btnYes = document.createElement('button');
     btnYes.textContent = {en:'Yes',pt:'Sim',fr:'Oui',de:'Ja',ru:'\u0414\u0430',ar:'\u0646\u0639\u0645'}[current]||'Yes';
-    btnYes.style.cssText = 'background:var(--pm-oro,#8a5f1a);color:var(--pm-verde-deep,#1f2a28);border:none;padding:6px 14px;border-radius:6px;cursor:pointer;font-weight:600;font-size:0.85rem;';
+    btnYes.style.cssText = 'background:var(--pm-oro,#C69C6D);color:var(--pm-verde-deep,#3D4A30);border:none;padding:6px 14px;border-radius:6px;cursor:pointer;font-weight:600;font-size:0.85rem;';
     btnYes.addEventListener('click',function(){
       setLang(current);
       banner.remove();
     });
     var btnNo = document.createElement('button');
     btnNo.textContent = {en:'No, stay in Spanish',pt:'N\u00e3o, ficar em espanhol',fr:'Non, rester en espagnol',de:'Nein, auf Spanisch bleiben',ru:'\u041d\u0435\u0442, \u043e\u0441\u0442\u0430\u0432\u0438\u0442\u044c \u043d\u0430 \u0438\u0441\u043f\u0430\u043d\u0441\u043a\u043e\u043c',ar:'\u0644\u0627\u060c \u0627\u0628\u0642 \u0628\u0627\u0644\u0625\u0633\u0628\u0627\u0646\u064a\u0629'}[current]||'No';
-    btnNo.style.cssText = 'background:none;color:var(--pm-crema,#f6f1e7);border:1px solid rgba(255,255,255,.3);padding:6px 14px;border-radius:6px;cursor:pointer;font-size:0.85rem;';
+    btnNo.style.cssText = 'background:none;color:var(--pm-crema,#F7F4F0);border:1px solid rgba(255,255,255,.3);padding:6px 14px;border-radius:6px;cursor:pointer;font-size:0.85rem;';
     btnNo.addEventListener('click',function(){
       try{ localStorage.setItem(STORAGE_KEY,'es'); }catch(e){}
       banner.remove();
