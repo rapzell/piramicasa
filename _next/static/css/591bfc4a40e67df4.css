@@ -100,3 +100,10 @@ a.pm-contact-row:hover{background:#f6f1e7}
 @media (max-width:900px){.pm-subpage-gallery{grid-template-columns:repeat(2,1fr)}}
 @media (max-width:600px){.pm-subpage-gallery{grid-template-columns:1fr}.pm-subpage-gallery img{height:210px}}
 [dir="rtl"] .pm-subpage-gallery{direction:rtl}
+/* === logo en grande (heros) + retrato director === */
+.pm-hero-logo-img{display:block;width:min(140px,32vw);height:auto;margin:0 auto 20px;filter:drop-shadow(0 6px 24px rgba(0,0,0,.35))}
+.pm-logo-seal{width:120px;height:120px}
+@media (max-width:768px){.pm-logo-seal{width:84px;height:84px}}
+.pm-portrait-fig{margin:28px auto 8px;max-width:420px;text-align:center}
+.pm-portrait-img{width:100%;border-radius:16px;box-shadow:var(--pm-shadow-lg);display:block}
+.pm-portrait-fig figcaption{margin-top:10px;font:500 .85rem/1.5 Inter,sans-serif;color:var(--pm-muted)}

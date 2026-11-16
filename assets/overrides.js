@@ -57,7 +57,7 @@
       acceptNode: function(node){
         var p = node.parentNode;
         if(!p || SKIP.indexOf(p.tagName) !== -1) return NodeFilter.FILTER_REJECT;
-        if(p.closest && p.closest('#pm-consent,#pm-lang-menu,.pm-logo,[translate="no"],.notranslate,[data-pm-edit]')) return NodeFilter.FILTER_REJECT;
+        if(p.closest && p.closest('#pm-consent,#pm-lang-menu,.pm-logo,.pm-mobile-logo,.pm-brand-link,.pm-brand-seal,[translate="no"],.notranslate,[data-pm-edit]')) return NodeFilter.FILTER_REJECT;
         if(!node.textContent.trim()) return NodeFilter.FILTER_REJECT;
         return NodeFilter.FILTER_ACCEPT;
       }

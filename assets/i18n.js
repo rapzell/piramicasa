@@ -85,7 +85,7 @@
         if(!node.textContent.trim()) return NodeFilter.FILTER_REJECT;
         // Never translate brand names / explicitly excluded regions
         // (e.g. logo "Pirami<span>casa</span>" must not become "PiramiHaus").
-        if(p.closest && p.closest('.pm-logo,[translate="no"],.notranslate')) return NodeFilter.FILTER_REJECT;
+        if(p.closest && p.closest('.pm-logo,.pm-mobile-logo,.pm-brand-link,.pm-brand-seal,[translate="no"],.notranslate')) return NodeFilter.FILTER_REJECT;
         return NodeFilter.FILTER_ACCEPT;
       }
     });
