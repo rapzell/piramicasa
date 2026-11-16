@@ -107,3 +107,13 @@ a.pm-contact-row:hover{background:#f6f1e7}
 .pm-portrait-fig{margin:28px auto 8px;max-width:420px;text-align:center}
 .pm-portrait-img{width:100%;border-radius:16px;box-shadow:var(--pm-shadow-lg);display:block}
 .pm-portrait-fig figcaption{margin-top:10px;font:500 .85rem/1.5 Inter,sans-serif;color:var(--pm-muted)}
+/* === testimonios home === */
+.pm-container{max-width:1180px;margin:0 auto}
+.pm-quotes-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin:36px 0 24px}
+.pm-quote-card{margin:0;background:var(--pm-oro-light);border-radius:16px;padding:28px;box-shadow:var(--pm-shadow);border-top:4px solid var(--pm-oro);display:flex;flex-direction:column;gap:14px}
+.pm-quote-card blockquote{margin:0;font:400 1rem/1.65 Inter,sans-serif;color:var(--pm-carbon);font-style:italic}
+.pm-quote-card blockquote:before{content:"“";display:block;font-family:Fraunces,serif;font-size:2.6rem;line-height:.6;color:var(--pm-oro);margin-bottom:10px}
+.pm-quote-card figcaption{font:600 .85rem Inter,sans-serif;color:var(--pm-verde)}
+.pm-quote-note{font:500 .82rem/1.5 Inter,sans-serif;color:var(--pm-muted);max-width:640px;margin:0 auto 20px;text-align:center}
+@media (max-width:900px){.pm-quotes-grid{grid-template-columns:1fr}}
+[dir="rtl"] .pm-quotes-grid{direction:rtl}
